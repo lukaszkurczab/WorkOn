@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: primaryColor,
   },
-  button: {
+  button: {},
+  buttonIcon: {
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 25,

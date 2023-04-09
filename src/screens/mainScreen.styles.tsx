@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: textColor,
   },
+  image: {
+    height: 250,
+    width: 200
+  }
 });
 
 export default styles;

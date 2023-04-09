@@ -12,17 +12,29 @@ const Navigation = ({ children }: Props) => {
     <>
       {children}
       <View style={styles.container}>
-        <TouchableOpacity >
-          <Icon name="question-circle" style={styles.button} />
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => console.log('Button 1 pressed')}
+        >
+          <Icon name="question-circle" style={styles.buttonIcon} />
         </TouchableOpacity >
-        <TouchableOpacity >
-          <Icon name="bar-chart" style={styles.button} />
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => console.log('Button 1 pressed')}
+        >
+          <Icon name="bar-chart" style={styles.buttonIcon} />
         </TouchableOpacity >
-        <TouchableOpacity >
-          <Icon name="calendar" style={styles.button} />
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => console.log('Button 1 pressed')}
+        >
+          <Icon name="calendar" style={styles.buttonIcon} />
         </TouchableOpacity >
-        <TouchableOpacity >
-          <Icon name="user" style={styles.button} />
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => console.log('Button 1 pressed')}
+        >
+          <Icon name="user" style={styles.buttonIcon} />
         </TouchableOpacity >
       </View>
     </>
