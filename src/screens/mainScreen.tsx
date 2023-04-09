@@ -9,9 +9,6 @@ const MainScreen = () => {
         <Text style={styles.title}>Welcome to MyFitnessApp</Text>
         <Text style={styles.subtitle}>Plan your training and diet, and monitor your progress.</Text>
       </View>
-      <View>
-       <Text>Nav</Text>
-      </View>
     </View>
   );
 };
