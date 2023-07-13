@@ -1,28 +1,38 @@
 import { StyleSheet } from 'react-native';
+import { fillColor, secondaryColor, primaryColor, accentColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: fillColor,
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
+    borderColor: primaryColor,
+    borderWidth: 2,
+    borderLeftWidth: 0,
+    padding: 5,
+    paddingRight: 30,
+    height: 150,
+    width: '95%',
+  },
+  icon: {
+    letterSpacing: 20,
   },
   imageContainer: {
-    flex: 1,
+    width: 100,
+    marginRight: 20,
   },
   image: {
     width: '100%',
     height: 100,
+    resizeMode: 'contain',
   },
   buttonContainer: {
     flex: 1,
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
   buttonText: {
-    color: 'white',
+    color: accentColor,
     textAlign: 'center',
   },
   buttonRow: {
@@ -30,18 +40,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   buttonHalf: {
-    backgroundColor: 'green',
     padding: 10,
     borderRadius: 5,
     flex: 1,
     marginRight: 5,
-  },
-  buttonRed: {
-    backgroundColor: 'red',
-    padding: 10,
-    borderRadius: 5,
-    flex: 1,
-    marginLeft: 5,
   },
 });
 
