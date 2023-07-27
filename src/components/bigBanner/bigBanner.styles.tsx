@@ -19,15 +19,6 @@ const styles = StyleSheet.create({
   icon: {
     letterSpacing: 20,
   },
-  imageContainer: {
-    width: 100,
-    marginRight: 20,
-  },
-  image: {
-    width: '100%',
-    height: 100,
-    resizeMode: 'contain',
-  },
   buttonContainer: {
     flex: 1,
   },

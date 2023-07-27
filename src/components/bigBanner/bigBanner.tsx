@@ -7,12 +7,6 @@ import styles from './bigBanner.styles';
 const BigBanner = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image
-            source={require('../../assets/work.png')}
-            style={styles.image}
-          />
-      </View>
       <View style={styles.buttonContainer}>
         <ButtonBig >
           Start
@@ -27,7 +21,7 @@ const BigBanner = () => {
           <TouchableOpacity
             onPress={() => console.log('Button 3 pressed')}
           >
-            <Text style={styles.buttonText}>Button 3</Text>
+            <Text style={styles.buttonText}>Preview</Text>
           </TouchableOpacity>
         </View>
       </View>
