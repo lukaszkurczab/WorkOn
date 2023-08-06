@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { fillColor, secondaryColor, primaryColor, accentColor } from '../../styles/colors';
+import { fillColor, secondaryColor, primaryColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: fillColor,
-    borderTopRightRadius: 30,
-    borderBottomRightRadius: 30,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
     borderColor: primaryColor,
     borderWidth: 2,
     borderLeftWidth: 0,
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonText: {
-    color: accentColor,
     textAlign: 'center',
   },
   buttonRow: {

@@ -16,12 +16,12 @@ const BigBanner = () => {
           <TouchableOpacity
             onPress={() => console.log('Button 2 pressed')}
           >
-            <Text style={styles.buttonText}>Move</Text>
+            <Text style={styles.buttonText}>Skip</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => console.log('Button 3 pressed')}
           >
-            <Text style={styles.buttonText}>Preview</Text>
+            <Text style={styles.buttonText}>Change</Text>
           </TouchableOpacity>
         </View>
       </View>

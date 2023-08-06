@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   text: {
-    resizeMode: 'contain',
     color: 'white',
     fontWeight: '700',
     fontSize: 36,
