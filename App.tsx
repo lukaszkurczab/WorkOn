@@ -8,6 +8,7 @@ import PlanTableScreen from './src/screens/planTableScreen/planTableScreen';
 import PlansListScreen from './src/screens/plansListScreen/plansListScreen';
 import ArticlesSelectScreen from './src/screens/articlesSelectScreen/articlesSelectScreen';
 import ArticlesListScreen from './src/screens/articlesListScreen/articlesListScreen';
+import AtlasScreen from './src/screens/atlasScreen/atlasScreen';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,11 @@ const App = () => {
           <Stack.Screen
             name="ArticlesListScreen"
             component={ArticlesListScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AtlasScreen"
+            component={AtlasScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
