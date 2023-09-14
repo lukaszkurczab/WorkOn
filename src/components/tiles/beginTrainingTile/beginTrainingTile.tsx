@@ -1,11 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './beginTrainingTile.styles';
 import BeginTrainingDropdown from './beginTrainingDropdown/beginTrainingDropdown';
 
 const BeginTrainingTile = () => {
-  const [selected, setSelected] = React.useState("");
+  const navigation = useNavigation();
+
+  const handleStartPress = () => {
+    navigation.navigate('WorkoutScreen' as never);
+  };
 
   return(
   <View style={styles.container}>
@@ -13,9 +18,9 @@ const BeginTrainingTile = () => {
       <Text style={styles.text}>Begin training</Text>
       <BeginTrainingDropdown />
     </View>
-    <View style={styles.iconWrapper}>
+    <TouchableOpacity style={styles.iconWrapper} onPress={handleStartPress}>
       <Icon name='play' size={45} style={styles.icon} />
-    </View>
+    </TouchableOpacity>
   </View>
   )
 };
