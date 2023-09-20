@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   imageContainer: {
-    marginRight: 10,
+    marginRight: 30,
   },
   text: {
     color: 'white',
