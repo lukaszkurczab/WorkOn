@@ -10,8 +10,10 @@ const initialState: initialState = {
   exercises: [{
     id: "1",
     name: "string",
-    descripion: "string",
-    group: MusclesGroup.back,
+    focusPoints: "string",
+    startPosition: "",
+    process: "",
+    groups: [MusclesGroup.back],
     muscleMain: [Muscles.quadriceps],
     muscleAdditional: [Muscles.quadriceps],
     image: "",

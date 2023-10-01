@@ -53,6 +53,31 @@ export enum Muscles {
   popliteus = "popliteus muscle",
   tibialisAnterior = "tibialis anterior muscle",
   flexorHallucisLongus = "flexor hallucis longus muscle",
+  erectorSpinae = "erectorSpinae",
+  hamstrings = "hamstrings",
+  glutes = "glutes",
+  abdominals = "abdominals",
+  trapezius = "trapezius",
+  splenius = "splenius",
+  triceps = "triceps",
+  chest = "chest",
+  lats = "lats",
+  back = "back",
+  forearms = "forearms",
+  brachialis = "brachialis",
+
+  //to remove
+  chestUpper = "chestUpper",
+  chestLower = "chestLower",
+  obliques = "obliques",
+  innerThighs = "innerThighs",
+  innerThigh = "innerThigh",
+  lowerBack = "lowerBack",
+  upperBack = "upperBack",
+  calves = "calves",
+  lateralDeltoids = "lateralDeltoids",
+  deltoidRear = "deltoidRear",
+  deltoidLateral = "deltoidLateral"
 }
 
 export enum MusclesGroup {
@@ -64,5 +89,9 @@ export enum MusclesGroup {
   stomach = "stomach",
   thigh = "thigh",
   calves = "calves",
-  shoulders = "shoulders"
+  shoulders = "shoulders",
+  trapezius = "trapezius",
+  neck = "neck",
+  abs = "abs",
+  legs = "legs"
 }
