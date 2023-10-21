@@ -6,34 +6,43 @@ const styles = StyleSheet.create({
     marginTop: 80,
     marginBottom: 60,
     backgroundColor: fillColor,
-    alignItems: 'center',
-    justifyContent: 'center',
     flexGrow: 1,
     position: 'relative'
   },
   title: {
     color: primaryColor,
     fontSize: 32,
-    marginTop: 15,
-    fontWeight: '700'
+    marginBottom: 35,
+    fontWeight: '700',
+    alignSelf: 'center'
   },
-  image:{
-    width: 300,
-    height: 300,
-    borderRadius: 15
+  seriesWrapper:{
+    gap: 10
   },
-  icon:{
-    color: primaryColor
+  timers:{
+    flexDirection: 'row',
+    gap: 50,
+    justifyContent: 'center',
+    position: 'relative',
+    top: -60
   },
-  navigationWrapper:{
-    flexDirection:'row',
-    alignItems: 'center',
-    marginTop: 5,
-    gap: 30
-  },
-  reps: {
+  timersText: {
     color: primaryColor,
-    fontSize: 28,
+    fontSize: 24,
+    marginBottom: 5
+  },
+  descWrapper: {
+    marginHorizontal: 30,
+    marginTop: 40,
+    gap: 15
+  },
+  descTitle: {
+    color: primaryColor,
+    fontSize: 24
+  },
+  descText: {
+    color: primaryColor,
+    fontSize: 16
   }
 });
 

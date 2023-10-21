@@ -1,4 +1,5 @@
 import { PayloadAction, Reducer } from "@reduxjs/toolkit";
+import { exercises } from "../db/exerciseList";
 import { Exercise } from "../../types/exercise";
 import { Muscles, MusclesGroup } from "../../types/muscles";
 
@@ -7,17 +8,7 @@ interface initialState {
 }
 
 const initialState: initialState = {
-  exercises: [{
-    id: "1",
-    name: "string",
-    focusPoints: "string",
-    startPosition: "",
-    process: "",
-    groups: [MusclesGroup.back],
-    muscleMain: [Muscles.quadriceps],
-    muscleAdditional: [Muscles.quadriceps],
-    image: "",
-  }],
+  exercises: exercises,
 };
 
 const exerciseReducer: Reducer<initialState, any> = (state = initialState, action: PayloadAction<Exercise>) => {

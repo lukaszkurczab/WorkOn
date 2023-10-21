@@ -4,9 +4,7 @@ import { primaryColor, secondaryColor, backgroundColor } from '../../styles/colo
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-    flex: 1,
     backgroundColor: backgroundColor,
-    zIndex: -1
   },
   articlesNavigation: {
     flexDirection: 'row',
@@ -26,9 +24,10 @@ const styles = StyleSheet.create({
     fontSize: 36,
     marginBottom: 20
   },
-  articlesWrapper: {
+  atlasWrapper: {
     marginTop: 30,
     gap: 15,
+    marginBottom: 100,
   },
 });
 

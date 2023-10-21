@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
-    top: -25,
-    left: 25,
   },
   text: {
     color: primaryColor,

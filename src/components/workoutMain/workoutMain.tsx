@@ -1,23 +1,32 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
+import RepeatRow from './repeatRow/repeatRow';
 import styles from './workoutMain.styles';
 
 const WorkoutMain = () => {
   return (
     <View style={styles.container}>
-      <WorkoutTimer/>
-      <Image source={require('../../assets/exercise_placeholder.jpg')} style={styles.image}/>
+      <View style={styles.timers}>
+        <View>
+          <Text style={styles.timersText}>Total</Text>
+          <WorkoutTimer/>
+        </View>
+        <View>
+          <Text style={styles.timersText}>Rest</Text>
+          <WorkoutTimer/>
+        </View>
+      </View>
       <Text style={styles.title}>Bench Press</Text>
-      <View style={styles.navigationWrapper}>
-        <TouchableOpacity>
-          <Icon name='cancel'  size={70} style={styles.icon} />
-        </TouchableOpacity>
-        <Text style={styles.reps}>3 x 50 kg</Text>
-        <TouchableOpacity>
-          <Icon name='check-circle' size={70} style={styles.icon} />
-        </TouchableOpacity>
+      <View style={styles.seriesWrapper}>
+        <RepeatRow reps={10} weight={40}/>
+        <RepeatRow reps={10} weight={40}/>
+        <RepeatRow reps={10} weight={40}/>
+      </View>
+      <View style={styles.descWrapper}>
+        <Text style={styles.descTitle}>Short description</Text>
+        <Text style={styles.descText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime provident eius ea eum tempora impedit voluptates, sunt qui recusandae doloremque modi? Voluptates repellat totam necessitatibus dolore vitae error iste doloremque!</Text>
       </View>
     </View>
   );

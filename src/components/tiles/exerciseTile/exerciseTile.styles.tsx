@@ -4,40 +4,40 @@ import { backgroundColor, fillColor, primaryColor } from '../../../styles/colors
 const styles = StyleSheet.create({
   container: {
     borderRadius: 12,
-    alignItems: 'flex-end',
     flexDirection: 'row',
-    flexGrow: 1,
     marginBottom: 5,
+    overflow: 'hidden',
+    alignItems: 'center',
   },
   image:{
-    width: 120,
-    height: 90,
+    width: 80,
+    height: 60,
     borderRadius: 15,
   },
   textWrapper:{
     marginLeft: 15,
-    alignSelf: 'flex-start'
+    flexShrink: 1
   },
   title: {
     color: primaryColor,
-    fontSize: 22,
-    fontWeight: '600'
+    fontSize: 16,
+    fontWeight: '600',
   },
   heading: {
     color: primaryColor,
-    fontSize: 18,
+    fontSize: 14,
   },
   chip: {
     backgroundColor: fillColor,
-    paddingVertical: 3,
-    paddingHorizontal: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 12,
     borderRadius: 15,
     justifyContent: 'center',
     alignSelf: 'flex-start'
   },
   chipText: {
     color: primaryColor,
-    fontSize: 18,
+    fontSize: 12,
   }
 });
 
