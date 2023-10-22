@@ -2,6 +2,258 @@ import { Exercise } from "../../types/exercise";
 import { Muscles, MusclesGroup } from "../../types/muscles";
 
 export const exercises: Exercise[] = [{
+  id: "1001",
+  name: "Bench Press (positive bench)",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1002",
+  name: "Rowing with dumbbells (positive bench)",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1003",
+  name: "Seated dumbbell shoulder press",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1004",
+  name: "Seated Machine Flyes",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1005",
+  name: "Facepull (lying)",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1006",
+  name: "Triceps on a one-arm pulley",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1007",
+  name: "Biceps with dumbbell lying (incline bench)",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1008",
+  name: "Cuban press",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1009",
+  name: "Bulgarian sit-ups",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1010",
+  name: "Romanian deadlift with barbell",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1011",
+  name: "Glute bridge",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1012",
+  name: "Seated toe raises",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1013",
+  name: "Double-headed machine curls",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1014",
+  name: "Quadriceps extensions",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1015",
+  name: "Standing toe raises",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1016",
+  name: "Dips",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1017",
+  name: "Dumbbell press on the chest (incline bench)",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1018",
+  name: "Pull-downs on the back machine",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1019",
+  name: "Paddling tight",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1020",
+  name: "Shoulder press on the machine",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1021",
+  name: "Paddling wide",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1022",
+  name: "Standing dumbbell raises",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1023",
+  name: "Reverse flyes on the machine",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1024",
+  name: "Biceps with dumbbells on the preacher bar",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},{
+  id: "1025",
+  name: "Triceps with dumbbells lying down",
+  focusPoints: "",
+  startPosition: "",
+  process: "",
+  groups: [],
+  muscleMain: [],
+  muscleAdditional: [],
+  image: ""
+},
+/* -----------------------------------------------------------------------------------------*/
+{
   id: "1",
   name: "Lat Pulldown (Wide Grip)",
   focusPoints: "Keep your back straight, pull the bar down to upper chest, engage your lats",

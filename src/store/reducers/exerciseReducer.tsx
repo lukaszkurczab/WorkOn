@@ -1,7 +1,6 @@
 import { PayloadAction, Reducer } from "@reduxjs/toolkit";
 import { exercises } from "../db/exerciseList";
 import { Exercise } from "../../types/exercise";
-import { Muscles, MusclesGroup } from "../../types/muscles";
 
 interface initialState {
   exercises: Exercise[]
