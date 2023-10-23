@@ -3,12 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './repeatRow.styles'
 
-interface Props {
-  reps: number,
-  weight: number,
-}
 
-const RepeatRow = ({reps, weight}: Props) => {
+const RepeatRow = ({reps, weight}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.reps}>{reps} x {weight} kg</Text>

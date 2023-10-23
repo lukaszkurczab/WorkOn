@@ -3,11 +3,7 @@ import { View, Text, Image } from 'react-native';
 import styles from './exerciseTile.styles';
 import { Exercise } from '../../../types/exercise';
 
-interface Props {
-  exercise: Exercise
-}
-
-const ExerciseTile = ({exercise}: Props) => {
+const ExerciseTile = ({exercise}) => {
 
   return(
     <View style={styles.container}>
@@ -15,7 +11,7 @@ const ExerciseTile = ({exercise}: Props) => {
       <View style={styles.textWrapper}>
         <Text style={styles.title}>{exercise.name}</Text>
         <Text style={styles.heading}>Main muscle part:</Text>
-        {exercise.muscleMain.map((muscleMain: string)=>(
+        {exercise.muscleMain.map((muscleMain)=>(
         <View style={styles.chip} key={muscleMain}>
           <Text style={styles.chipText}>{muscleMain}</Text>
         </View>
