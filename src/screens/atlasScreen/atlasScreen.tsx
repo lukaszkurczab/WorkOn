@@ -7,8 +7,6 @@ import ExerciseTile from '../../components/tiles/exerciseTile/exerciseTile';
 import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
 import { Exercise } from '../../types/exercise';
 
-
-
 const AtlasScreen = () => {
   const { exercises } = useSelector((store: RootState) => store.exercises);
 
