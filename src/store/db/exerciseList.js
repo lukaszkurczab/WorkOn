@@ -1,7 +1,6 @@
-import { Exercise } from "../../types/exercise";
-import { Muscles, MusclesGroup } from "../../types/muscles";
+import { MusclesGroup, Muscles } from "../../types/muscles";
 
-export const exercises: Exercise[] = [{
+export const exercises = [{
   id: "1001",
   name: "Bench Press (positive bench)",
   focusPoints: "",

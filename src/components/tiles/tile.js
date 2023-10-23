@@ -4,19 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './tile.styles';
 
-interface Props {
-  text: string,
-  icon: string,
-  path: string,
-  version: 'icon' | 'image'
-}
-
-interface ImageProps {
-  name: string;
-  path: any;
-}
-
-  const TileImage: Array<ImageProps> = [
+  const TileImage = [
     {
       name: 'articles_calisthenic.jpg',
       path: require('../../assets/articles_calisthenic.jpg'),
@@ -44,16 +32,16 @@ interface ImageProps {
   ];
 
   
-  const getImage = (name: string) => {
+  const getImage = (name) => {
     const found = TileImage.find(e => e.name === name);
     return found ? found.path : null;
   };
 
-const Tile = ({ text, icon, path, version}: Props) => {
+const Tile = ({ text, icon, path, version}) => {
   const navigation = useNavigation();
 
   const handleTilePress = () => {
-    navigation.navigate(path as never);
+    navigation.navigate(path);
   };
 
   const tileImage = getImage(icon);

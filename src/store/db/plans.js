@@ -1,8 +1,7 @@
-import { Plan } from "../../types/plan";
-
-export const plans: Plan[] = [{
+export const plans = [
+  {
   id: "1",
-  name: "string",
+  name: "Gym workout",
   img: "string",
   planType: "weekly",
   days: [{
@@ -140,4 +139,11 @@ export const plans: Plan[] = [{
       weight: 0,
     },]
   }]
-}]
+  },{
+    id: "2",
+    name: "Home workout",
+    img: "string",
+    planType: "weekly",
+    days: []
+  }
+]
