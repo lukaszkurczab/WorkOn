@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
@@ -6,16 +6,26 @@ import RepeatRow from './repeatRow/repeatRow';
 import styles from './workoutMain.styles';
 
 const WorkoutMain = () => {
+  const [totalTime, setTotalTime] = useState(0);
+
+  useEffect(() => {
+    const totalInterval = setInterval(() => {
+      setTotalTime(totalTime => totalTime + 1)
+    }, 1000);
+
+    return () => clearInterval(totalInterval)
+  },[])
+
   return (
     <View style={styles.container}>
       <View style={styles.timers}>
         <View>
           <Text style={styles.timersText}>Total</Text>
-          <WorkoutTimer/>
+          <WorkoutTimer time={totalTime} />
         </View>
         <View>
           <Text style={styles.timersText}>Rest</Text>
-          <WorkoutTimer/>
+          <WorkoutTimer time={totalTime} />
         </View>
       </View>
       <Text style={styles.title}>Bench Press</Text>
