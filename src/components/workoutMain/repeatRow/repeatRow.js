@@ -4,15 +4,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './repeatRow.styles'
 
 
-const RepeatRow = ({reps, weight}) => {
+const RepeatRow = ({reps, weight, onSuccess, onFail}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.reps}>{reps} x {weight} kg</Text>
       <View style={styles.iconsWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onFail()}> 
           <Icon name='cancel' size={30} style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onSuccess()}>
           <Icon name='check-circle' size={30} style={styles.icon} />
         </TouchableOpacity>
       </View>

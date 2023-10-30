@@ -7,14 +7,24 @@ import styles from './workoutMain.styles';
 
 const WorkoutMain = () => {
   const [totalTime, setTotalTime] = useState(0);
+  const [restTime, setRestTime] = useState(0);
 
   useEffect(() => {
     const totalInterval = setInterval(() => {
       setTotalTime(totalTime => totalTime + 1)
+      setRestTime(restTime => restTime + 1)
     }, 1000);
 
     return () => clearInterval(totalInterval)
   },[])
+
+  const handleSuccess = ()=>{
+    setRestTime(0)
+  }
+
+  const handleFail = ()=>{
+    setRestTime(0)
+  }
 
   return (
     <View style={styles.container}>
@@ -25,14 +35,14 @@ const WorkoutMain = () => {
         </View>
         <View>
           <Text style={styles.timersText}>Rest</Text>
-          <WorkoutTimer time={totalTime} />
+          <WorkoutTimer time={restTime} />
         </View>
       </View>
       <Text style={styles.title}>Bench Press</Text>
       <View style={styles.seriesWrapper}>
-        <RepeatRow reps={10} weight={40}/>
-        <RepeatRow reps={10} weight={40}/>
-        <RepeatRow reps={10} weight={40}/>
+        <RepeatRow reps={10} weight={40} onSuccess={()=>handleSuccess} onFail={()=>handleSuccess}/>
+        <RepeatRow reps={10} weight={40} onSuccess={()=>handleSuccess} onFail={()=>handleSuccess}/>
+        <RepeatRow reps={10} weight={40} onSuccess={()=>handleSuccess} onFail={()=>handleSuccess}/>
       </View>
       <View style={styles.descWrapper}>
         <Text style={styles.descTitle}>Short description</Text>
