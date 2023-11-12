@@ -21,12 +21,8 @@ const plans = createSlice({
       state.plans = [...state.plans, action.payload];
     },
     SET_SELECTED_PLAN: (state, action) => {
-      state.selectedPlan = {
-        id: action.payload.id,
-        name: action.payload.name,
-        img: action.payload.img
-      }
-    },
+      state.selectedPlan = {...action.payload}
+    }
   }
 });
 

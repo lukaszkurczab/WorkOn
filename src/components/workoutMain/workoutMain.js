@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View, Text } from 'react-native';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
-import RepeatRow from './repeatRow/repeatRow';
+import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
+import { useGetPlan } from '../../utils/hooks';
+import { settings } from '../../store/db/settings';
 
 const WorkoutMain = () => {
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
+  const [selectedExerciseIndex, setSelectedEcerciseIndex] = useState(0)
+  const plan = useGetPlan(settings.selectedPlan.id);
 
   useEffect(() => {
     const totalInterval = setInterval(() => {
@@ -18,11 +21,7 @@ const WorkoutMain = () => {
     return () => clearInterval(totalInterval)
   },[])
 
-  const handleSuccess = ()=>{
-    setRestTime(0)
-  }
-
-  const handleFail = ()=>{
+  const handleResetRestTime = ()=>{
     setRestTime(0)
   }
 
@@ -38,16 +37,7 @@ const WorkoutMain = () => {
           <WorkoutTimer time={restTime} />
         </View>
       </View>
-      <Text style={styles.title}>Bench Press</Text>
-      <View style={styles.seriesWrapper}>
-        <RepeatRow reps={10} weight={40} onSuccess={()=>handleSuccess} onFail={()=>handleSuccess}/>
-        <RepeatRow reps={10} weight={40} onSuccess={()=>handleSuccess} onFail={()=>handleSuccess}/>
-        <RepeatRow reps={10} weight={40} onSuccess={()=>handleSuccess} onFail={()=>handleSuccess}/>
-      </View>
-      <View style={styles.descWrapper}>
-        <Text style={styles.descTitle}>Short description</Text>
-        <Text style={styles.descText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime provident eius ea eum tempora impedit voluptates, sunt qui recusandae doloremque modi? Voluptates repellat totam necessitatibus dolore vitae error iste doloremque!</Text>
-      </View>
+      <ExerciseView clearRestTime={handleResetRestTime} exercise={plan.days[0].exercises[selectedExerciseIndex]} />
     </View>
   );
 };

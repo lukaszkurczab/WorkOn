@@ -3,7 +3,7 @@ import { MusclesGroup, Muscles } from "../../types/muscles";
 export const exercises = [{
   id: "1001",
   name: "Bench Press (positive bench)",
-  focusPoints: "",
+  focusPoints: "Focus points",
   startPosition: "",
   process: "",
   groups: [],

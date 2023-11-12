@@ -8,9 +8,9 @@ export const plans = [
     name: "Monday",
     exercises: [{
       id: "1001",
-      series: 1,
-      reps: 0,
-      weight: 0,
+      series: 3,
+      reps: 10,
+      weight: 60,
     },{
       id: "1002",
       series: 1,
