@@ -1,12 +1,8 @@
-import React, { Children, ReactNode } from 'react';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
+import React from 'react';
+import { TouchableOpacity, Text } from 'react-native';
 import styles from './buttonBig.styles';
 
-interface Props {
-  children: ReactNode
-}
-
-const ButtonBig = ({children}: Props) => {
+const ButtonBig = ({children}) => {
   return (
     <TouchableOpacity
       style={[styles.button]}

@@ -5,11 +5,14 @@ import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import { useGetPlan } from '../../utils/hooks';
 import { settings } from '../../store/db/settings';
+import MenuButton from '../buttons/menuButton/menuButton';
+import ExercisesList from './exercisesList/exercisesList';
 
 const WorkoutMain = () => {
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
-  const [selectedExerciseIndex, setSelectedEcerciseIndex] = useState(0)
+  const [selectedExerciseIndex, setSelectedEcerciseIndex] = useState(0);
+  const [showExercisesList, setShowExercisesList] = useState(false);
   const plan = useGetPlan(settings.selectedPlan.id);
 
   useEffect(() => {
@@ -21,8 +24,12 @@ const WorkoutMain = () => {
     return () => clearInterval(totalInterval)
   },[])
 
-  const handleResetRestTime = ()=>{
+  const handleResetRestTime = () => {
     setRestTime(0)
+  }
+
+  const handleToggleShowExerciseList = () => {
+    setShowExercisesList(!showExercisesList)
   }
 
   return (
@@ -37,6 +44,10 @@ const WorkoutMain = () => {
           <WorkoutTimer time={restTime} />
         </View>
       </View>
+      <View style={styles.buttonWrapper}>
+        <MenuButton onClick={handleToggleShowExerciseList}/>
+      </View>
+      <ExercisesList exercises={plan.days[0].exercises} display={showExercisesList}/>
       <ExerciseView clearRestTime={handleResetRestTime} exercise={plan.days[0].exercises[selectedExerciseIndex]} />
     </View>
   );

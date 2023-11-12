@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
   descText: {
     color: primaryColor,
     fontSize: 16
+  },
+  buttonWrapper: {
+    position: 'absolute',
+    right: 20,
+    top: 88
   }
 });
 

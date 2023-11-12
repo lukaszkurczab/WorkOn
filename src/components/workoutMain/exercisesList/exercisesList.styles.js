@@ -1,13 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor } from '../../../styles/colors';
+import { primaryColor, fillColor, backgroundColor } from '../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexGrow: 1,
-    marginHorizontal: 50
+    position: 'absolute'
   },
   iconsWrapper: {
     gap: 15,
