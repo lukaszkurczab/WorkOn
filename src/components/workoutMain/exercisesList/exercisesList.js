@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useGetExerciseName } from '../../../utils/hooks';
+import { useGetExercise } from '../../../utils/hooks';
 import styles from './exercisesList.styles'
 
 
-const ExercisesList = ({ exercises, display }) => {
+const ExercisesList = ({ exercises, display, onClick }) => {
   return (
     display && <View style={styles.container} >
       {exercises.map((exercise => {
-        const exerciseName = useGetExerciseName(exercise.id)
-        return <Text key={exercise.id}>{exerciseName}</Text>
+        const exerciseName = useGetExercise(exercise.id)
+        return <TouchableOpacity style={styles.exerciseRow} key={exercise.id} onPress={() => onClick(exercise.id)}>
+                  <Text style={styles.rowText}>{exerciseName.name}</Text>
+                </TouchableOpacity>
       }))}
     </View>
   );

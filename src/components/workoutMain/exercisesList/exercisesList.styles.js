@@ -3,21 +3,26 @@ import { primaryColor, fillColor, backgroundColor } from '../../../styles/colors
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    position: 'absolute'
+    position: 'absolute',
+    backgroundColor: primaryColor,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    zIndex: 10,
+    alignSelf: 'center',
+    top: 85,
+    width: '80%',
+    borderWidth: 2,
+    borderColor: backgroundColor,
+    borderRadius: 5
   },
-  iconsWrapper: {
-    gap: 15,
-    flexDirection: 'row'
+  rowText:{
+    fontSize: 16, 
+    fontWeight: '500',
+    color: fillColor
   },
-  icon:{
-    color: primaryColor,
-  },
-  reps: {
-    color: primaryColor,
-    fontSize: 24,
-    width: '60%'
-  },
+  exerciseRow: {
+    paddingVertical: 5
+  }
 });
 
 export default styles;

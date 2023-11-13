@@ -12,9 +12,3 @@ export const useGetExercise = (exerciseId) => {
 
   return exercise
 }
-
-export const useGetExerciseName = (exerciseId) => {
-  const exercise = exercises.find(exercise => exercise.id === exerciseId)
-
-  return exercise.name
-}

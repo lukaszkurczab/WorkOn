@@ -32,6 +32,13 @@ const WorkoutMain = () => {
     setShowExercisesList(!showExercisesList)
   }
 
+  const handleSelectNewExercase = (id) => {
+    const newExerciseIndex = plan.days[0].exercises.map((x) => x.id).indexOf(id)
+
+    setSelectedEcerciseIndex(newExerciseIndex)
+    setShowExercisesList(false)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.timers}>
@@ -47,7 +54,7 @@ const WorkoutMain = () => {
       <View style={styles.buttonWrapper}>
         <MenuButton onClick={handleToggleShowExerciseList}/>
       </View>
-      <ExercisesList exercises={plan.days[0].exercises} display={showExercisesList}/>
+      <ExercisesList exercises={plan.days[0].exercises} display={showExercisesList} onClick={handleSelectNewExercase}/>
       <ExerciseView clearRestTime={handleResetRestTime} exercise={plan.days[0].exercises[selectedExerciseIndex]} />
     </View>
   );
