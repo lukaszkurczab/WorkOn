@@ -7,10 +7,26 @@ const training = createSlice({
   },
   reducers: {
     START_TRAINING: (state, action) => {
-        state.ongoingTraining = action.payload;
+      const newTraining = action.payload.map(exercise => (
+        {
+          id: exercise.id,
+          series: exercise.series.map(i => ({...i, status: 'onTrack'}))
+        }
+      ))
+
+      state.ongoingTraining = newTraining;
     },
     UPDATE_PROGRESS: (state, action) => {
-        state.ongoingTraining = action.payload;
+      const elementToUpdateIndex = state.ongoingTraining.findIndex(i => i.id === action.payload.id)
+      const seriesIndex = action.payload.index
+      const finalReps = action.payload.reps
+      const finalWeight = action.payload.weight
+
+      state.ongoingTraining[elementToUpdateIndex].series[seriesIndex] = {
+        reps: finalReps,
+        weight: finalWeight,
+        status: 'finished'
+      }
     },
     FINISH_TRAINING: (state) => {
         state.ongoingTraining = {}
@@ -19,7 +35,9 @@ const training = createSlice({
 });
 
 export const {
-  START_TRAINING
+  START_TRAINING,
+  UPDATE_PROGRESS,
+  FINISH_TRAINING
 } = training.actions;
 
 export default training.reducer
