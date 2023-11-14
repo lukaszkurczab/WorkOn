@@ -4,16 +4,17 @@ import RepeatRow from '../repeatRow/repeatRow';
 import styles from './exerciseView.styles';
 import { useGetExercise } from '../../../utils/hooks';
 
-const ExerciseView = ({ clearRestTime, exercise }) => {
+const ExerciseView = ({ clearRestTime, exercise, onFailed }) => {
   const exerciseData = useGetExercise(exercise.id);
   const repeatRows = []
 
   const handleSuccess = ()=>{
-    clearRestTime(0)
+    clearRestTime()
   }
 
   const handleFail = ()=>{
-    clearRestTime(0)
+    clearRestTime()
+    onFailed()
   }
 
   for (let i = 0; i < exercise.series; i++) {

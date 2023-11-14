@@ -6,9 +6,13 @@ const exercise = createSlice({
   initialState: exercises,
   reducers: {
     ADD_EXERCISE: (state, action) => {
-      state.environment = [...state.environment, action.payload];
+      state.exercises = [...state.exercises, action.payload];
     },
   }
 });
+
+export const {
+  ADD_EXERCISE
+} = exercise.actions;
 
 export default exercise.reducer

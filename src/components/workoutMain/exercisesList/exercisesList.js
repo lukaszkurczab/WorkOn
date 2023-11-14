@@ -4,9 +4,9 @@ import { useGetExercise } from '../../../utils/hooks';
 import styles from './exercisesList.styles'
 
 
-const ExercisesList = ({ exercises, display, onClick }) => {
+const ExercisesList = ({ exercises, onClick }) => {
   return (
-    display && <View style={styles.container} >
+    <View style={styles.container} >
       {exercises.map((exercise => {
         const exerciseName = useGetExercise(exercise.id)
         return <TouchableOpacity style={styles.exerciseRow} key={exercise.id} onPress={() => onClick(exercise.id)}>

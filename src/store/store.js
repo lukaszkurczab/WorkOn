@@ -1,18 +1,20 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import exerciseReducer from './reducers/exerciseReducer';
 import planReducer from './reducers/planReducer';
+import trainingReducer from "./reducers/trainingReducer";
 
 const rootReducer = combineReducers({ 
   exercises: exerciseReducer,
-  plans: planReducer
+  plans: planReducer,
+  training: trainingReducer,
 })
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

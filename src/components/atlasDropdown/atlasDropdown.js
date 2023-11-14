@@ -3,24 +3,19 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './atlasDropdown.styles';
 
-interface DataProps {
-  key: string,
-  name: string
-}
-
-const data: DataProps[] = [
+const data = [
   {key:'1', name:'Back'},
   {key:'2', name:'Chest'}
 ]
 
 const AtlasDropdown = () => {
   const [visible, setVisible] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<DataProps>(data[0]);
+  const [selectedPlan, setSelectedPlan] = useState(data[0]);
 
   const openMenu = () => setVisible(!visible);
   const closeMenu = () => setVisible(false);
 
-  const handleMenuItemSelect = (item: DataProps) => {
+  const handleMenuItemSelect = (item) => {
     setSelectedPlan(item);
     closeMenu();
   };

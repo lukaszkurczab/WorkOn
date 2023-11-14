@@ -1,16 +1,24 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useGetPlan } from '../../../utils/hooks';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './beginTrainingTile.styles';
 import BeginTrainingDropdown from './beginTrainingDropdown/beginTrainingDropdown';
+import {
+  START_TRAINING
+} from "../../../store/reducers/trainingReducer"
 
 const BeginTrainingTile = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const selectedPlan = useSelector((store) => store.plans.selectedPlan)
 
   const handleStartPress = () => {
+    const newTraining = useGetPlan(selectedPlan.id)
+
+    dispatch(START_TRAINING(newTraining))
     navigation.navigate('WorkoutScreen');
   };
 

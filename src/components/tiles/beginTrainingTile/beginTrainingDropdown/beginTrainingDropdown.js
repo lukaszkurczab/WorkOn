@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import styles from './beginTrainingDropdown.styles';import {
+import styles from './beginTrainingDropdown.styles';
+import {
   SET_SELECTED_PLAN
 } from "../../../../store/reducers/planReducer"
 
