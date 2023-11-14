@@ -6,14 +6,12 @@ import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
-import FailedSeriesModal from "./failedSeriesModal/failedSeriesModal";
 
 const WorkoutMain = () => {
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
   const [selectedExerciseIndex, setSelectedEcerciseIndex] = useState(0);
   const [showExercisesList, setShowExercisesList] = useState(false);
-  const [showFailedSeriesModal, setShowFailedSeriesModal] = useState(false);
   const plan = useSelector((store) => store.training.ongoingTraining)
 
   useEffect(() => {
@@ -24,14 +22,6 @@ const WorkoutMain = () => {
 
     return () => clearInterval(totalInterval)
   }, [])
-  
-  const handleFailedSeries = () => {
-    setShowFailedSeriesModal(true)
-  }
-
-  const handleFailedSeriesConfirm = () => {
-    setShowFailedSeriesModal(false)
-  }
 
   const handleResetRestTime = () => {
     setRestTime(0)
@@ -66,10 +56,8 @@ const WorkoutMain = () => {
       <ExerciseView
         clearRestTime={handleResetRestTime}
         exercise={plan[selectedExerciseIndex]}
-        onFailed={handleFailedSeries}
       />
       {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
-      {showFailedSeriesModal && <FailedSeriesModal onConfirm={handleFailedSeriesConfirm} />}
     </View>
   );
 };

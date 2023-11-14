@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     marginBottom: 60,
     backgroundColor: fillColor,
     flexGrow: 1,
-    position: 'relative'
   },
   title: {
     color: primaryColor,

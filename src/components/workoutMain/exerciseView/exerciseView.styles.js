@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 35,
     fontWeight: '700',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   seriesWrapper:{
     gap: 10
