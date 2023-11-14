@@ -38,7 +38,7 @@ const WorkoutMain = () => {
   }
 
   const handleSelectNewExercase = (id) => {
-    const newExerciseIndex = plan.days[0].exercises.map((x) => x.id).indexOf(id)
+    const newExerciseIndex = plan.map((x) => x.id).indexOf(id)
 
     setSelectedEcerciseIndex(newExerciseIndex)
     setShowExercisesList(false)
@@ -65,10 +65,10 @@ const WorkoutMain = () => {
       </View>
       <ExerciseView
         clearRestTime={handleResetRestTime}
-        exercise={plan.days[0].exercises[selectedExerciseIndex]}
+        exercise={plan[selectedExerciseIndex]}
         onFailed={handleFailedSeries}
       />
-      {showExercisesList && <ExercisesList exercises={plan.days[0].exercises} onClick={handleSelectNewExercase} />}
+      {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
       {showFailedSeriesModal && <FailedSeriesModal onConfirm={handleFailedSeriesConfirm} />}
     </View>
   );

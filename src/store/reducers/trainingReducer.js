@@ -7,10 +7,10 @@ const training = createSlice({
   },
   reducers: {
     START_TRAINING: (state, action) => {
-      state.ongoingTraining = action.payload;
+        state.ongoingTraining = action.payload;
     },
     UPDATE_PROGRESS: (state, action) => {
-      state.ongoingTraining = action.payload;
+        state.ongoingTraining = action.payload;
     },
     FINISH_TRAINING: (state) => {
         state.ongoingTraining = {}

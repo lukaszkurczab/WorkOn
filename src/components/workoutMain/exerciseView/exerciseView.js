@@ -6,7 +6,7 @@ import { useGetExercise } from '../../../utils/hooks';
 
 const ExerciseView = ({ clearRestTime, exercise, onFailed }) => {
   const exerciseData = useGetExercise(exercise.id);
-  const repeatRows = []
+  const repeatRows = [];
 
   const handleSuccess = ()=>{
     clearRestTime()

@@ -18,7 +18,7 @@ const BeginTrainingTile = () => {
   const handleStartPress = () => {
     const newTraining = useGetPlan(selectedPlan.id)
 
-    dispatch(START_TRAINING(newTraining))
+    dispatch(START_TRAINING(newTraining.days[0].exercises))
     navigation.navigate('WorkoutScreen');
   };
 
