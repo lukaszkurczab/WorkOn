@@ -8,21 +8,36 @@ const RepeatRow = ({ reps, weight, onSuccess, onFail, index, status }) => {
   const [iconsComponent, setIconsComponent] = useState(<></>)
 
   useEffect(() => {
-    if(status === 'onTrack') {
+    switch(status) {
+      case 'onTrack':
         setIconsComponent(
           <>
             <TouchableOpacity onPress={() => onFail(index, reps, weight)}>
               <Icon name='cancel' size={30} style={styles.icon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => onSuccess()}>
+            <TouchableOpacity onPress={() => onSuccess(index, reps, weight)}>
               <Icon name='check-circle' size={30} style={styles.icon} />
             </TouchableOpacity>
           </>
         )
-    } else {
-      setIconsComponent(
-        <Text>Finished</Text>
-      )
+        break;
+      case 'inQueue':
+        setIconsComponent(
+          <>
+            <View>
+              <Icon name='cancel' size={30} style={styles.disabledIcon} />
+            </View>
+            <View>
+              <Icon name='check-circle' size={30} style={styles.disabledIcon} />
+            </View>
+          </>
+        )
+        break;
+      default:
+        setIconsComponent(
+          <Text style={styles.finishText}>Finished</Text>
+        )
+        break;
     }
   }, [status])
     

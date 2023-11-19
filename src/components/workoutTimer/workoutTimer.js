@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './workoutTimer.styles';
 
 const WorkoutTimer = ({ time }) => {

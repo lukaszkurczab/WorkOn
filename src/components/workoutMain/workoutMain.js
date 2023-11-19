@@ -38,6 +38,10 @@ const WorkoutMain = () => {
     setShowExercisesList(!showExercisesList)
   }
 
+  const handleNextExercise = () => {
+    setSelectedEcerciseIndex(selectedExerciseIndex + 1)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.timers}>
@@ -56,6 +60,7 @@ const WorkoutMain = () => {
       <ExerciseView
         clearRestTime={handleResetRestTime}
         exercise={plan[selectedExerciseIndex]}
+        handleNextExercise={handleNextExercise}
       />
       {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
     </View>

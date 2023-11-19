@@ -5,7 +5,9 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'column',
     gap: 3,
-    zIndex: 10
+    zIndex: 10,
+    width: 20,
+    alignItems: 'center'
   },
   dot: {
     borderRadius: 4,
