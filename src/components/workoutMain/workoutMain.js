@@ -6,8 +6,11 @@ import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
+import { MARK_EXERCISE_AS_FINISHED } from "../../store/reducers/trainingReducer";
+import { useDispatch } from "react-redux";
 
 const WorkoutMain = () => {
+  const dispatch = useDispatch();
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
   const [selectedExerciseIndex, setSelectedEcerciseIndex] = useState(0);
@@ -39,6 +42,9 @@ const WorkoutMain = () => {
   }
 
   const handleNextExercise = () => {
+    dispatch(MARK_EXERCISE_AS_FINISHED({
+      index: selectedExerciseIndex
+    }));
     setSelectedEcerciseIndex(selectedExerciseIndex + 1)
   }
 

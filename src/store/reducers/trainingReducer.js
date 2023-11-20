@@ -10,7 +10,8 @@ const training = createSlice({
       const newTraining = action.payload.map(exercise => (
         {
           id: exercise.id,
-          series: exercise.series.map(i => ({...i, status: 'onTrack'}))
+          series: exercise.series.map(i => ({ ...i, status: 'onTrack' })),
+          finished: false
         }
       ))
 
@@ -27,6 +28,10 @@ const training = createSlice({
         weight: finalWeight,
         status: 'finished'
       }
+      state.ongoingTraining[elementToUpdateIndex].finished = action.payload.finished
+    },
+    MARK_EXERCISE_AS_FINISHED: (state, action) => {
+      state.ongoingTraining[action.payload.index].finished = true
     },
     FINISH_TRAINING: (state) => {
         state.ongoingTraining = {}
@@ -37,6 +42,7 @@ const training = createSlice({
 export const {
   START_TRAINING,
   UPDATE_PROGRESS,
+  MARK_EXERCISE_AS_FINISHED,
   FINISH_TRAINING
 } = training.actions;
 

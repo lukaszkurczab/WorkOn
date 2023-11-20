@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useDispatch } from "react-redux";
 import RepeatRow from '../repeatRow/repeatRow';
@@ -13,7 +13,6 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
   const [failedSeriesIndex, setFailedSeriesIndex] = useState();
   const [failedReps, setFailedReps] = useState(0);
   const [failedWeight, setFailderWeight] = useState(0);
-  const [finishedSeries, setFinishedSeries] = useState(0);
   const exerciseData = useGetExercise(exercise.id);
   const repeatRows = [];
 
@@ -22,12 +21,11 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
       id: exercise.id,
       index: index,
       reps: reps,
-      weight: weight
+      weight: weight,
+      finished: exercise.series.filter(i => i.status === 'finished').length === exercise.series.length
     }))
-    setFinishedSeries(finishedSeries + 1)
     clearRestTime()
-    if (finishedSeries >= exercise.series.length - 1) {
-      setFinishedSeries(0)
+    if (exercise.series.filter(i => i.status === 'finished').length === exercise.series.length - 1) {
       handleNextExercise()
     }
   }
@@ -45,19 +43,16 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
       id: exercise.id,
       index: failedSeriesIndex,
       reps: reps,
-      weight: weight
+      weight: weight,
+      finished: exercise.series.filter(i => i.status === 'finished').length === exercise.series.length
     }))
     setShowFailedSeriesModal(false)
-    setFinishedSeries(finishedSeries + 1)
     setFailedSeriesIndex()
-    if (finishedSeries >= exercise.series.length - 1) {
-      setFinishedSeries(0)
-      handleNextExercise()
-    }
+    if (exercise.series.filter(i => i.status === 'finished').length === exercise.series.length - 1) handleNextExercise()
   }
 
   for (let i = 0; i < exercise.series.length; i++) {
-    const status = finishedSeries < i ? 'inQueue' : exercise.series[i].status
+    const status = exercise.series.filter(i => i.status === 'finished').length < i ? 'inQueue' : exercise.series[i].status
     repeatRows.push(
       <RepeatRow
         reps={exercise.series[i].reps}
