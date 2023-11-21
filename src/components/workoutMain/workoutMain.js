@@ -6,6 +6,7 @@ import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
+import FinishWorkoutModal from "./finishWotkoutModal/finishWorkoutModal";
 import { MARK_EXERCISE_AS_FINISHED } from "../../store/reducers/trainingReducer";
 import { useDispatch } from "react-redux";
 
@@ -13,8 +14,9 @@ const WorkoutMain = () => {
   const dispatch = useDispatch();
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
-  const [selectedExerciseIndex, setSelectedEcerciseIndex] = useState(0);
+  const [selectedExerciseIndex, setSelectedExcerciseIndex] = useState(0);
   const [showExercisesList, setShowExercisesList] = useState(false);
+  const [showFinishWorkoutModel, setShowFinishWorkoutModel] = useState(false);
   const plan = useSelector((store) => store.training.ongoingTraining)
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const WorkoutMain = () => {
   const handleSelectNewExercase = (id) => {
     const newExerciseIndex = plan.map((x) => x.id).indexOf(id)
 
-    setSelectedEcerciseIndex(newExerciseIndex)
+    setSelectedExcerciseIndex(newExerciseIndex)
     setShowExercisesList(false)
   }
 
@@ -41,11 +43,23 @@ const WorkoutMain = () => {
     setShowExercisesList(!showExercisesList)
   }
 
+  const handleFinishTraining = () => {
+    setShowFinishWorkoutModel(true)
+  }
+
   const handleNextExercise = () => {
     dispatch(MARK_EXERCISE_AS_FINISHED({
       index: selectedExerciseIndex
     }));
-    setSelectedEcerciseIndex(selectedExerciseIndex + 1)
+    for (let i = 0; i < plan.length + 1; i++) {
+      if (i == plan.length) {
+        handleFinishTraining()
+        break;
+      } else if (!plan[i].finished && i != selectedExerciseIndex) {
+        setSelectedExcerciseIndex(i)
+        break;
+      }
+    }
   }
 
   return (
@@ -69,6 +83,7 @@ const WorkoutMain = () => {
         handleNextExercise={handleNextExercise}
       />
       {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
+      {showFinishWorkoutModel && <FinishWorkoutModal />}
     </View>
   );
 };

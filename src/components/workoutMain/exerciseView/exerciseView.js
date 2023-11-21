@@ -1,54 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useDispatch } from "react-redux";
 import RepeatRow from '../repeatRow/repeatRow';
-import FailedSeriesModal from "../failedSeriesModal/failedSeriesModal";
+import SeriesModal from "../seriesModal/seriesModal";
 import styles from './exerciseView.styles';
 import { useGetExercise } from '../../../utils/hooks';
 import { UPDATE_PROGRESS } from "../../../store/reducers/trainingReducer";
 
 const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
   const dispatch = useDispatch();
-  const [showFailedSeriesModal, setShowFailedSeriesModal] = useState(false);
-  const [failedSeriesIndex, setFailedSeriesIndex] = useState();
-  const [failedReps, setFailedReps] = useState(0);
-  const [failedWeight, setFailderWeight] = useState(0);
+  const [showSeriesModal, setShowSeriesModal] = useState(false);
+  const [modalSeriesIndex, setModalSeriesIndex] = useState();
+  const [modalReps, setModalReps] = useState(0);
+  const [modalWeight, setModalWeight] = useState(0);
   const exerciseData = useGetExercise(exercise.id);
   const repeatRows = [];
 
-  const handleSuccess = (index, reps, weight) => {
-    dispatch(UPDATE_PROGRESS({
-      id: exercise.id,
-      index: index,
-      reps: reps,
-      weight: weight,
-      finished: exercise.series.filter(i => i.status === 'finished').length === exercise.series.length
-    }))
+  const handleSuccess = (index, initReps, initWiegth) => {
+    setShowSeriesModal(true)
+    setModalSeriesIndex(index)
+    setModalReps(initReps)
+    setModalWeight(initWiegth)
     clearRestTime()
-    if (exercise.series.filter(i => i.status === 'finished').length === exercise.series.length - 1) {
-      handleNextExercise()
-    }
   }
 
   const handleFail = (index, initReps, initWiegth) => {
-    setShowFailedSeriesModal(true)
-    setFailedSeriesIndex(index)
-    setFailedReps(initReps)
-    setFailderWeight(initWiegth)
+    setShowSeriesModal(true)
+    setModalSeriesIndex(index)
+    setModalReps(initReps)
+    setModalWeight(initWiegth)
     clearRestTime()
   }
   
-  const handleFailedSeriesConfirm = ( reps, weight) => {
+  const handleSeriesConfirm = ( reps, weight) => {
     dispatch(UPDATE_PROGRESS({
       id: exercise.id,
-      index: failedSeriesIndex,
+      index: modalSeriesIndex,
       reps: reps,
       weight: weight,
-      finished: exercise.series.filter(i => i.status === 'finished').length === exercise.series.length
+      finished: exercise.series.filter(i => i.status === 'finished').length === (exercise.series.length - 1)
     }))
-    setShowFailedSeriesModal(false)
-    setFailedSeriesIndex()
-    if (exercise.series.filter(i => i.status === 'finished').length === exercise.series.length - 1) handleNextExercise()
+    setShowSeriesModal(false)
+    setModalSeriesIndex()
+    if (exercise.series.filter(i => i.status === 'finished').length === exercise.series.length - 1) {
+      handleNextExercise()
+    }
   }
 
   for (let i = 0; i < exercise.series.length; i++) {
@@ -78,7 +74,7 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
         <Text style={styles.descTitle}>Short description</Text>
         <Text style={styles.descText}>{exerciseData.focusPoints}</Text>
       </View>
-      {showFailedSeriesModal && <FailedSeriesModal onConfirm={handleFailedSeriesConfirm} failedReps={failedReps} failedWeight={failedWeight} />}
+      {showSeriesModal && <SeriesModal onConfirm={handleSeriesConfirm} initReps={modalReps} initWeight={modalWeight} />}
     </ScrollView>
   );
 };

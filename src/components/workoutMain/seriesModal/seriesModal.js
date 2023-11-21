@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import styles from './failedSeriesModal.styles'
+import styles from './seriesModal.styles'
 import { TextInput } from "react-native-gesture-handler";
 
 
-const FailedSeriesModal = ({ onConfirm, failedReps, failedWeight }) => {
-  const [reps, setReps] = useState(failedReps.toString())
-  const [weight, setWeight] = useState(failedWeight.toString())
+const SeriesModal = ({ onConfirm, initReps, initWeight }) => {
+  const [reps, setReps] = useState(initReps.toString())
+  const [weight, setWeight] = useState(initWeight.toString())
 
   return (
     <View style={styles.container} >
@@ -40,4 +40,4 @@ const FailedSeriesModal = ({ onConfirm, failedReps, failedWeight }) => {
   );
 };
 
-export default FailedSeriesModal;
+export default SeriesModal;
