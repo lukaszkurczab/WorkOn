@@ -1,38 +1,37 @@
-import React, { ReactNode } from 'react';
-import { Text, View, TouchableOpacity  } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 import styles from './navigation.styles';
 
-interface Props {
-  children: ReactNode
-}
+const Navigation = ({ children }) => {
+  const navigation = useNavigation();
 
-const Navigation = ({ children }: Props) => {
   return (
     <>
       {children}
       <View style={styles.container}>
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => console.log('Button 1 pressed')}
+          onPress={() => navigation.navigate('MainScreen')}
         >
-          <Icon name="question-circle" style={styles.buttonIcon} />
+          <Icon name="home" style={styles.buttonIcon} />
         </TouchableOpacity >
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => console.log('Button 1 pressed')}
+          onPress={() => {}}
         >
           <Icon name="bar-chart" style={styles.buttonIcon} />
         </TouchableOpacity >
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => console.log('Button 1 pressed')}
+          onPress={() => {}}
         >
           <Icon name="calendar" style={styles.buttonIcon} />
         </TouchableOpacity >
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => console.log('Button 1 pressed')}
+          onPress={() => {}}
         >
           <Icon name="user" style={styles.buttonIcon} />
         </TouchableOpacity >
