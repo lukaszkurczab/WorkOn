@@ -5,11 +5,13 @@ import thunk from 'redux-thunk';
 import exerciseReducer from './reducers/exerciseReducer';
 import planReducer from './reducers/planReducer';
 import trainingReducer from "./reducers/trainingReducer";
+import trainingSummaryReducer from "./reducers/trainingSummaryReducer";
 
 const rootReducer = combineReducers({ 
   exercises: exerciseReducer,
   plans: planReducer,
   training: trainingReducer,
+  trainingSummary: trainingSummaryReducer,
 })
 
 const persistConfig = {

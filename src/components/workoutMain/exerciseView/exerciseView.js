@@ -5,7 +5,7 @@ import RepeatRow from '../repeatRow/repeatRow';
 import SeriesModal from "../seriesModal/seriesModal";
 import styles from './exerciseView.styles';
 import { useGetExercise } from '../../../utils/hooks';
-import { UPDATE_PROGRESS } from "../../../store/reducers/trainingReducer";
+import { MARK_EXERCISE_AS_FINISHED, UPDATE_PROGRESS } from "../../../store/reducers/trainingReducer";
 
 const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
   const dispatch = useDispatch();
@@ -38,6 +38,9 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
     setShowSeriesModal(false)
     setModalSeriesIndex()
     if (exercise.series.filter(i => i.status === 'finished').length === exercise.series.length - 1) {
+      dispatch(MARK_EXERCISE_AS_FINISHED({
+        index: exercise.series.length - 1
+      }));
       handleNextExercise()
     }
   }

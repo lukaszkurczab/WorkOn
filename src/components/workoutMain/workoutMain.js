@@ -7,7 +7,7 @@ import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
-import { MARK_EXERCISE_AS_FINISHED } from "../../store/reducers/trainingReducer";
+import { SET_TRAINING_SUMMARY } from "../../store/reducers/trainingSummaryReducer";
 import { useDispatch } from "react-redux";
 
 const WorkoutMain = () => {
@@ -44,13 +44,13 @@ const WorkoutMain = () => {
   }
 
   const handleFinishTraining = () => {
+    dispatch(SET_TRAINING_SUMMARY({
+      training: plan
+    }));
     navigation.navigate('WorkoutSummaryScreen');
   }
 
   const handleNextExercise = () => {
-    dispatch(MARK_EXERCISE_AS_FINISHED({
-      index: selectedExerciseIndex
-    }));
     for (let i = 0; i < plan.length + 1; i++) {
       if (i == plan.length) {
         handleFinishTraining()

@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const training = createSlice({
   name: "training",
   initialState: {
-    ongoingTraining: {}
+    ongoingTraining: {},
+    onGoingTrainingName: ''
   },
   reducers: {
     START_TRAINING: (state, action) => {
