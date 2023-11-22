@@ -4,17 +4,20 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './planBanner.styles';
 
-interface Props {
-  planName: string,
-  img: string,
-}
-
-const PlanBanner = ({planName, img}: Props) => {
+const PlanBanner = ({planName, planId, img}) => {
   const navigation = useNavigation();
 
-  const handleTilePress = (path: string) => {
-    navigation.navigate(path as never);
+  const handleTilePress = (path) => {
+    navigation.navigate(path);
   };
+
+  const handleEdit = () => {
+    console.log('edit' + planId)
+  }
+
+  const handleDelete = () => {
+    console.log('remove' + planId)
+  }
 
   return (
     <TouchableOpacity onPress={()=>handleTilePress('PlanTableScreen')}>
@@ -24,10 +27,10 @@ const PlanBanner = ({planName, img}: Props) => {
           style={styles.image}
           />
         <Text style={styles.text}>{planName}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleEdit}>
           <Icon name='edit' size={30} style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleDelete}>
           <Icon name='trash' size={30} style={styles.icon} />
         </TouchableOpacity>
       </View>
