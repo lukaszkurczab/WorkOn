@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
 import { View, Text } from 'react-native';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
 import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
-import FinishWorkoutModal from "./finishWotkoutModal/finishWorkoutModal";
 import { MARK_EXERCISE_AS_FINISHED } from "../../store/reducers/trainingReducer";
 import { useDispatch } from "react-redux";
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
   const [selectedExerciseIndex, setSelectedExcerciseIndex] = useState(0);
   const [showExercisesList, setShowExercisesList] = useState(false);
-  const [showFinishWorkoutModel, setShowFinishWorkoutModel] = useState(false);
   const plan = useSelector((store) => store.training.ongoingTraining)
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const WorkoutMain = () => {
   }
 
   const handleFinishTraining = () => {
-    setShowFinishWorkoutModel(true)
+    navigation.navigate('WorkoutSummaryScreen');
   }
 
   const handleNextExercise = () => {
@@ -83,7 +83,6 @@ const WorkoutMain = () => {
         handleNextExercise={handleNextExercise}
       />
       {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
-      {showFinishWorkoutModel && <FinishWorkoutModal />}
     </View>
   );
 };

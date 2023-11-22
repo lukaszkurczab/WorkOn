@@ -13,6 +13,7 @@ import ArticlesSelectScreen from './src/screens/articlesSelectScreen/articlesSel
 import ArticlesListScreen from './src/screens/articlesListScreen/articlesListScreen';
 import AtlasScreen from './src/screens/atlasScreen/atlasScreen';
 import WorkoutScreen from './src/screens/workoutScreen/workoutScreen';
+import WorkoutSummaryScreen from './src/screens/workoutSummaryScreen/workoutSummaryScreen';
 
 const Stack = createStackNavigator();
 
@@ -57,6 +58,11 @@ const App = () => {
               <Stack.Screen
                 name="WorkoutScreen"
                 component={WorkoutScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="WorkoutSummaryScreen"
+                component={WorkoutSummaryScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>
