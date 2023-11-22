@@ -2,11 +2,11 @@ import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import styles from './buttonBig.styles';
 
-const ButtonBig = ({children}) => {
+const ButtonBig = ({children, additionalStyles, theme, onClick}) => {
   return (
     <TouchableOpacity
-      style={[styles.button]}
-      onPress={() => console.log('Button 1 pressed')}
+      style={[styles.button, styles[theme], additionalStyles]}
+      onPress={() => onClick()}
     >
       <Text style={styles.text}>
         {children}

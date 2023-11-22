@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
 import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
@@ -17,7 +17,8 @@ const WorkoutMain = () => {
   const [restTime, setRestTime] = useState(0);
   const [selectedExerciseIndex, setSelectedExcerciseIndex] = useState(0);
   const [showExercisesList, setShowExercisesList] = useState(false);
-  const plan = useSelector((store) => store.training.ongoingTraining)
+  const plan = useSelector((store) => store.training.ongoingTraining);
+  const planName = useSelector((store) => store.training.ongoingTrainingName)
 
   useEffect(() => {
     const totalInterval = setInterval(() => {
@@ -45,7 +46,9 @@ const WorkoutMain = () => {
 
   const handleFinishTraining = () => {
     dispatch(SET_TRAINING_SUMMARY({
-      training: plan
+      training: plan,
+      name: planName,
+      time: totalTime
     }));
     navigation.navigate('WorkoutSummaryScreen');
   }
@@ -83,6 +86,7 @@ const WorkoutMain = () => {
         handleNextExercise={handleNextExercise}
       />
       {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
+      <TouchableOpacity onPress={handleFinishTraining}><Text>Go to summary</Text></TouchableOpacity>
     </View>
   );
 };

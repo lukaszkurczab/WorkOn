@@ -4,11 +4,14 @@ const trainingSummary = createSlice({
   name: "trainingSummary",
   initialState: {
     trainingSummary: {},
-    trainingName: ''
+    trainingName: '',
+    trainingTime: 0
   },
   reducers: {
     SET_TRAINING_SUMMARY: (state, action) => {
       state.trainingSummary = action.payload.training;
+      state.trainingName = action.payload.name;
+      state.trainingTime = action.payload.time;
     }
   }
 });

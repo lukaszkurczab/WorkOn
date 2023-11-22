@@ -3,50 +3,40 @@ import { primaryColor, fillColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 80,
     marginBottom: 60,
     backgroundColor: fillColor,
     flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 30
   },
   title: {
     color: primaryColor,
-    fontSize: 32,
-    marginBottom: 35,
-    fontWeight: '700',
-    alignSelf: 'center'
-  },
-  seriesWrapper:{
-    gap: 10
-  },
-  timers:{
-    flexDirection: 'row',
-    gap: 50,
-    justifyContent: 'center',
-    position: 'relative',
-    top: -60
-  },
-  timersText: {
-    color: primaryColor,
-    fontSize: 24,
+    fontWeight: '600',
+    fontSize: 26,
     marginBottom: 5
   },
-  descWrapper: {
-    marginHorizontal: 30,
-    marginTop: 40,
-    gap: 15
-  },
-  descTitle: {
+  time: {
     color: primaryColor,
-    fontSize: 24
+    fontSize: 14,
+    marginBottom: 25
   },
-  descText: {
+  listTitle: {
     color: primaryColor,
-    fontSize: 16
+    fontWeight: '600',
+    fontSize: 22,
+    marginBottom: 5
   },
-  buttonWrapper: {
-    position: 'absolute',
-    right: 20,
-    top: 88
+  listWrapper: {
+    gap: 10
+  },
+  timeText: {
+    color: primaryColor,
+    fontSize: 22,
+    marginVertical: 25
+  },
+  button: {
+    marginBottom: 60,
+    alignSelf: 'center'
   }
 });
 

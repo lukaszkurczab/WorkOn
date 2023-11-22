@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     letterSpacing: .8,
-  }
+  },
+  light: {
+    backgroundColor: primaryColor,
+    borderColor: accentColor,
+  },
 });
 
 export default styles;

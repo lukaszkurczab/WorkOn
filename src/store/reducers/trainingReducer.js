@@ -4,11 +4,11 @@ const training = createSlice({
   name: "training",
   initialState: {
     ongoingTraining: {},
-    onGoingTrainingName: ''
+    ongoingTrainingName: ''
   },
   reducers: {
     START_TRAINING: (state, action) => {
-      const newTraining = action.payload.map(exercise => (
+      const newTraining = action.payload.plan.map(exercise => (
         {
           id: exercise.id,
           series: exercise.series.map(i => ({ ...i, status: 'onTrack', success: false })),
@@ -17,6 +17,7 @@ const training = createSlice({
       ))
 
       state.ongoingTraining = newTraining;
+      state.ongoingTrainingName = action.payload.planName;
     },
     UPDATE_PROGRESS: (state, action) => {
       const elementToUpdateIndex = state.ongoingTraining.findIndex(i => i.id === action.payload.id)
