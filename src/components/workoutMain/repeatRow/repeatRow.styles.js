@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
   finishText: {
     color: primaryColor,
     fontSize: 16,
+  },
+  finishWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10
   }
 });
 

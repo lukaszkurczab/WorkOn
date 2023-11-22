@@ -13,22 +13,16 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
   const [modalSeriesIndex, setModalSeriesIndex] = useState();
   const [modalReps, setModalReps] = useState(0);
   const [modalWeight, setModalWeight] = useState(0);
+  const [seriesSuccess, setSeriesSuccess] = useState(false);
   const exerciseData = useGetExercise(exercise.id);
   const repeatRows = [];
 
-  const handleSuccess = (index, initReps, initWiegth) => {
+  const handleSeriesFinish = (index, initReps, initWiegth, success) => {
     setShowSeriesModal(true)
     setModalSeriesIndex(index)
     setModalReps(initReps)
     setModalWeight(initWiegth)
-    clearRestTime()
-  }
-
-  const handleFail = (index, initReps, initWiegth) => {
-    setShowSeriesModal(true)
-    setModalSeriesIndex(index)
-    setModalReps(initReps)
-    setModalWeight(initWiegth)
+    setSeriesSuccess(success)
     clearRestTime()
   }
   
@@ -38,7 +32,8 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
       index: modalSeriesIndex,
       reps: reps,
       weight: weight,
-      finished: exercise.series.filter(i => i.status === 'finished').length === (exercise.series.length - 1)
+      finished: exercise.series.filter(i => i.status === 'finished').length === (exercise.series.length - 1),
+      success: seriesSuccess
     }))
     setShowSeriesModal(false)
     setModalSeriesIndex()
@@ -54,10 +49,10 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
         reps={exercise.series[i].reps}
         weight={exercise.series[i].weight}
         status={status}
-        onSuccess={handleSuccess}
-        onFail={handleFail}
+        onFinish={handleSeriesFinish}
         index={i}
         key={i}
+        finishedWithSuccess={exercise.series[i].success}
       />
     )
   }

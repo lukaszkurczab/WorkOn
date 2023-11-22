@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './repeatRow.styles'
 
 
-const RepeatRow = ({ reps, weight, onSuccess, onFail, index, status }) => {
+const RepeatRow = ({ reps, weight, onFinish, index, status, finishedWithSuccess }) => {
   const [iconsComponent, setIconsComponent] = useState(<></>)
 
   useEffect(() => {
@@ -12,10 +12,10 @@ const RepeatRow = ({ reps, weight, onSuccess, onFail, index, status }) => {
       case 'onTrack':
         setIconsComponent(
           <>
-            <TouchableOpacity onPress={() => onFail(index, reps, weight)}>
+            <TouchableOpacity onPress={() => onFinish(index, reps, weight, false)}>
               <Icon name='cancel' size={30} style={styles.icon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => onSuccess(index, reps, weight)}>
+            <TouchableOpacity onPress={() => onFinish(index, reps, weight, true)}>
               <Icon name='check-circle' size={30} style={styles.icon} />
             </TouchableOpacity>
           </>
@@ -35,7 +35,16 @@ const RepeatRow = ({ reps, weight, onSuccess, onFail, index, status }) => {
         break;
       default:
         setIconsComponent(
-          <Text style={styles.finishText}>Finished</Text>
+          <View style={styles.finishWrapper}>
+            <Text style={styles.finishText}>Finished</Text>
+            {
+              finishedWithSuccess ? (
+                <Icon name='check-circle' size={30} style={styles.disabledIcon} />  
+              ): (
+                <Icon name='cancel' size={30} style={styles.disabledIcon} />
+              )
+            }
+          </View>
         )
         break;
     }
