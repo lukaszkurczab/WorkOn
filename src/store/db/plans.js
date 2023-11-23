@@ -5,7 +5,8 @@ export const plans = [
   img: "string",
   planType: "weekly",
   days: [{
-    name: "Monday",
+    name: "MON",
+    restDay: false,
     exercises: [{
       id: "1001",
       series: [
@@ -134,9 +135,14 @@ export const plans = [
           weight: 60
         },
       ]
-    },]
+    }]
   },{
-    name: "Wednesday",
+    name: "TUE",
+    restDay: true,
+    exercises: []
+  },{
+    name: "WED",
+    restDay: false,
     exercises: [{
       id: "1009",
       series: [
@@ -249,9 +255,14 @@ export const plans = [
           weight: 60
         },
       ]
-    },]
+    }]
   },{
-    name: "Friday",
+    name: "THU",
+    restDay: true,
+    exercises: []
+  },{
+    name: "FRI",
+    restDay: false,
     exercises: [{
       id: "1016",
       series: [
@@ -412,7 +423,15 @@ export const plans = [
           weight: 60
         },
       ]
-    },]
+    }]
+  },{
+    name: "SAT",
+    restDay: true,
+    exercises: []
+  },{
+    name: "SUN",
+    restDay: true,
+    exercises: []
   }]
   },{
     id: "2",

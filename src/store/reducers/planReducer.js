@@ -7,18 +7,20 @@ const plans = createSlice({
   initialState: {
     plans: plansDB,
     selectedPlan: settings.selectedPlan,
+    planToEdit: {}
   },
   reducers: {
     ADD_PLAN: (state, action) => {
       state.plans = [...state.plans, action.payload];
     },
     DELETE_PLAN: (state, action) => {
-      state.plans = state.plans.filter((plan) => {
-        return plan.id !== action.payload;
-      });
+      state.plans = state.plans.filter((plan) => plan.id !== action.payload);
     },
     EDIT_PLAN: (state, action) => {
       state.plans = [...state.plans, action.payload];
+    },
+    SET_PLAN_TO_EDIT: (state, action) => {
+      state.planToEdit = state.plans.find((plan) => plan.id == action.payload)
     },
     SET_SELECTED_PLAN: (state, action) => {
       state.selectedPlan = {...action.payload}
@@ -27,7 +29,8 @@ const plans = createSlice({
 });
 
 export const {
-  SET_SELECTED_PLAN
+  SET_SELECTED_PLAN,
+  SET_PLAN_TO_EDIT
 } = plans.actions;
 
 export default plans.reducer

@@ -1,18 +1,18 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from "react-redux";
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { SET_PLAN_TO_EDIT } from '../../store/reducers/planReducer';
 import styles from './planBanner.styles';
 
 const PlanBanner = ({planName, planId, img}) => {
   const navigation = useNavigation();
-
-  const handleTilePress = (path) => {
-    navigation.navigate(path);
-  };
+  const dispatch = useDispatch();
 
   const handleEdit = () => {
-    console.log('edit' + planId)
+    dispatch(SET_PLAN_TO_EDIT(planId))
+    navigation.navigate('PlanEditScreen')
   }
 
   const handleDelete = () => {
@@ -20,7 +20,7 @@ const PlanBanner = ({planName, planId, img}) => {
   }
 
   return (
-    <TouchableOpacity onPress={()=>handleTilePress('PlanTableScreen')}>
+    <TouchableOpacity onPress={() => navigation.navigate('PlanTableScreen')}>
       <View style={styles.container}>
         <Image 
           source={require('../../assets/planImg.jpg')}
