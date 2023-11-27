@@ -15,6 +15,8 @@ import AtlasScreen from './src/screens/atlasScreen/atlasScreen';
 import WorkoutScreen from './src/screens/workoutScreen/workoutScreen';
 import WorkoutSummaryScreen from './src/screens/workoutSummaryScreen/workoutSummaryScreen';
 import PlanEditScreen from './src/screens/planEditScreen/planEditScreen';
+import ExerciseScreen from "./src/screens/exerciseScreen/exerciseScreen";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
@@ -72,6 +74,11 @@ const App = () => {
               <Stack.Screen
                 name="PlanEditScreen"
                 component={PlanEditScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="ExerciseScreen"
+                component={ExerciseScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

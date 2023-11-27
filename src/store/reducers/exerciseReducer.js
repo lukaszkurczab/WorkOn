@@ -6,7 +6,8 @@ const exercises = createSlice({
   initialState: {
     exercises: exercisesList,
     selectedGroup: 'back',
-    selectedExercises: exercisesList.filter((exercise) => exercise.groups.includes('back'))
+    selectedExercises: exercisesList.filter((exercise) => exercise.groups.includes('back')),
+    selectedExercise: exercisesList[0]
   },
   reducers: {
     ADD_EXERCISE: (state, action) => {
@@ -16,12 +17,16 @@ const exercises = createSlice({
       state.selectedGroup = action.payload.group
       state.selectedExercises = exercisesList.filter((exercise) => exercise.groups.includes(action.payload.group.toLowerCase()))
     },
+    SET_SELECTED_EXERCISE: (state, action) => {
+      state.selectedExercise = state.exercises.find((exercise) => exercise.id == action.payload)
+    }
   }
 });
 
 export const {
   ADD_EXERCISE,
-  SET_SELECTED_GROUP
+  SET_SELECTED_GROUP,
+  SET_SELECTED_EXERCISE
 } = exercises.actions;
 
 export default exercises.reducer
