@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './exerciseTile.styles';
-import { Exercise } from '../../../types/exercise';
 
 const ExerciseTile = ({exercise}) => {
 

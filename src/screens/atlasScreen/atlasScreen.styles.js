@@ -5,6 +5,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 24,
     backgroundColor: backgroundColor,
+    height: '100%',
+    paddingBottom: 60
   },
   articlesNavigation: {
     flexDirection: 'row',
@@ -27,7 +29,6 @@ const styles = StyleSheet.create({
   atlasWrapper: {
     marginTop: 30,
     gap: 15,
-    marginBottom: 100,
   },
 });
 

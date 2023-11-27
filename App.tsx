@@ -15,12 +15,12 @@ import AtlasScreen from './src/screens/atlasScreen/atlasScreen';
 import WorkoutScreen from './src/screens/workoutScreen/workoutScreen';
 import WorkoutSummaryScreen from './src/screens/workoutSummaryScreen/workoutSummaryScreen';
 import PlanEditScreen from './src/screens/planEditScreen/planEditScreen';
-//import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  //AsyncStorage.clear();
+  AsyncStorage.clear();
   
   return (
     <Provider store={store}>
