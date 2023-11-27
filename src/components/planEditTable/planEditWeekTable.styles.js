@@ -3,14 +3,18 @@ import { primaryColor, secondaryColor, backgroundColor, fillColor } from '../../
 
 const styles = StyleSheet.create({
   container: { 
-    flex: 1,
+    backgroundColor: backgroundColor,
+    borderWidth: 2,
+    borderColor: secondaryColor,
     marginTop: 30,
-    backgroundColor: secondaryColor
+    paddingBottom: 10,
+    height: '70%'
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 2,
+    borderBottomWidth: 2,
+    backgroundColor: secondaryColor,
     borderColor: secondaryColor,
     gap: 2,
   },
@@ -30,8 +34,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: backgroundColor,
     flexGrow: 1,
-    borderWidth: 2,
-    borderColor: secondaryColor,
+    marginBottom: 15
   }
 });
 

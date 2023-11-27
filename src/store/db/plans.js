@@ -12,15 +12,18 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 3
         },
       ]
     },{
@@ -28,15 +31,18 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 3
         },
       ]
     },{
@@ -44,15 +50,18 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 3
         },
       ]
     },{
@@ -60,15 +69,18 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60,
+          id: 3
         },
       ]
     },{
@@ -76,15 +88,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -92,15 +104,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -108,15 +120,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -124,15 +136,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     }]
@@ -148,15 +160,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -164,15 +176,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -180,15 +192,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -196,15 +208,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -212,15 +224,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -228,15 +240,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -244,15 +256,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     }]
@@ -268,15 +280,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -284,15 +296,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -300,15 +312,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -316,15 +328,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -332,15 +344,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -348,15 +360,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -364,15 +376,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -380,15 +392,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -396,15 +408,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     },{
@@ -412,15 +424,15 @@ export const plans = [
       series: [
         {
           reps: 6,
-          weight: 60
+          weight: 60,id: 1
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id:2
         },
         {
           reps: 6,
-          weight: 60
+          weight: 60, id: 3
         },
       ]
     }]

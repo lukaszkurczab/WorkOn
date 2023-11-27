@@ -34,7 +34,7 @@ const SeriesModal = ({ onConfirm, initReps, initWeight }) => {
           </TextInput>
         </View>
         <TouchableOpacity onPress={() => onConfirm(reps, weight)} style={styles.button}>
-            <Text style={styles.buttonText}>Potwierdź</Text>
+            <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>
     </View>
   );
