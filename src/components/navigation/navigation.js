@@ -25,7 +25,7 @@ const Navigation = ({ children }) => {
         </TouchableOpacity >
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => {}}
+          onPress={() => navigation.navigate('CalendarScreen')}
         >
           <Icon name="calendar" style={styles.buttonIcon} />
         </TouchableOpacity >

@@ -14,7 +14,7 @@ const MainScreen = () => {
       <View style={styles.tilesWrapper}>
         <Tile text='Your plans' icon="dumbbell" path="PlansListScreen" version='icon'></Tile>
         <Tile text='Exercise atlas' icon="list-ul" path="AtlasScreen" version='icon'></Tile>
-        <Tile text='History' icon="chart-bar" path="MainScreen" version='icon'></Tile>
+        <Tile text='History' icon="chart-bar" path="CalendarScreen" version='icon'></Tile>
         <Tile text='Articles' icon="book" path="ArticlesSelectScreen" version='icon'></Tile>
       </View>
     </View>
