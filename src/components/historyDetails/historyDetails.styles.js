@@ -1,33 +1,34 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, secondaryColor, backgroundColor } from '../../styles/colors';
+import { primaryColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    flex: 1,
-    backgroundColor: backgroundColor,
+    marginTop: 25,
+    marginBottom: 60
   },
-  articlesNavigation: {
-    flexDirection: 'row',
-    flexGrow: 0
+  headingWrapper: {
+    paddingHorizontal: 24,
+    paddingVertical: 5,
+    borderRadius: 5,
+    backgroundColor: primaryColor,
   },
-  navigationText: {
-    color: primaryColor,
+  name: {
+    color: backgroundColor,
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 5
+  },
+  date: {
+    color: backgroundColor,
+    fontSize: 16
+  },
+  text: {
+    color: backgroundColor,
     fontSize: 18,
-    paddingHorizontal: 10,
-    borderBottomColor: secondaryColor,
-    borderBottomWidth: 1,
-    height: 35,
+    marginTop: 10
   },
-  title: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 36,
-    marginBottom: 20
-  },
-  articlesWrapper: {
-    marginTop: 30,
-    gap: 15
+  listWrapper: {
+    maxHeight: 200,
   },
 });
 

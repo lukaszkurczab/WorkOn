@@ -24,7 +24,7 @@ const WorkoutSummary = () => {
       <Text style={styles.time}>{date}</Text>
       <Text style={styles.listTitle}>Exercises:</Text>
       <View style={styles.listWrapper}>
-        {summary.map((exercise, id) => (
+        {summary.map((exercise) => (
           <WorkoutSummaryListItem exercise={exercise} key={exercise.id} />
         ))}
       </View>
