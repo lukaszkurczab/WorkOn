@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "WorkOn",
-    "slug": "WorkOn",
+    "slug": "workon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +26,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a89380d1-fc6c-4188-9a42-e32498c9ea88"
+      }
+    },
+    "owner": "lkurczab"
   }
 }
