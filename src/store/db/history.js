@@ -146,7 +146,7 @@ export const history = [
         ]
     }]
     },{
-        id: "1",
+        id: "2",
         date: '2023-11-27',
         name: "Gym workout",
         time: '3500',
@@ -292,7 +292,7 @@ export const history = [
         ]
     }]
     },{
-        id: "1",
+        id: "3",
         date: '2023-11-26',
         name: "Gym workout",
         time: '3400',
@@ -438,7 +438,7 @@ export const history = [
             ]
         }]
     },{
-        id: "1",
+        id: "4",
         date: '2023-11-25',
         name: "Gym workout",
         time: '3300',

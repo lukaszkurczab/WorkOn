@@ -25,11 +25,18 @@ const styles = StyleSheet.create({
   text: {
     color: backgroundColor,
     fontSize: 18,
-    marginTop: 10
+    marginTop: 10,
+    marginRight: 30
   },
   listWrapper: {
     maxHeight: 200,
   },
+  iconWrapper: {
+    position: 'absolute',
+    right: 25,
+    top: 5,
+    zIndex: 10
+  }
 });
 
 export default styles;
