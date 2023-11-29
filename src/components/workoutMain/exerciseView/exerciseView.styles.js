@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor } from '../../../styles/colors';
+import { primaryColor, accentColor } from '../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +31,24 @@ const styles = StyleSheet.create({
     maxWidth: '70%',
     alignSelf: 'center',
     position: 'relative'
+  },
+  buttonWrapper: {
+    borderColor: accentColor,
+    backgroundColor: primaryColor,
+    borderWidth: 2,
+    padding: 5,
+    borderRadius: 10,
+    marginTop: 20,
+    marginRight: 20,
+    width: 160,
+    alignSelf: 'flex-end'
+  },
+  buttonText: {
+    color: accentColor,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '500',
+    letterSpacing: .8,
   }
 });
 
