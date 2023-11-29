@@ -9,28 +9,34 @@ import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
 import { SET_TRAINING_SUMMARY } from "../../store/reducers/trainingSummaryReducer";
 import { useDispatch } from "react-redux";
+import { useFormatTime } from "../../utils/hooks";
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [totalTime, setTotalTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
+  const [restStart, setRestStart] = useState(Date.now());
   const [selectedExerciseIndex, setSelectedExcerciseIndex] = useState(0);
   const [showExercisesList, setShowExercisesList] = useState(false);
   const plan = useSelector((store) => store.training.ongoingTraining);
-  const planName = useSelector((store) => store.training.ongoingTrainingName)
+  const planName = useSelector((store) => store.training.ongoingTrainingName);
+  const trainingStart = useSelector((store) => store.training.startTraining);
 
   useEffect(() => {
     const totalInterval = setInterval(() => {
-      setTotalTime(totalTime => totalTime + 1)
-      setRestTime(restTime => restTime + 1)
+      setTotalTime(Date.now() - trainingStart)
     }, 1000);
 
     return () => clearInterval(totalInterval)
   }, [])
+  
+  useEffect(() => {
+    setRestTime(Date.now() - restStart)
+  }, [totalTime])
 
   const handleResetRestTime = () => {
-    setRestTime(0)
+    setRestStart(Date.now())
   }
 
   const handleSelectNewExercase = (id) => {
@@ -48,7 +54,6 @@ const WorkoutMain = () => {
     dispatch(SET_TRAINING_SUMMARY({
       training: plan,
       name: planName,
-      time: totalTime
     }));
     navigation.navigate('WorkoutSummaryScreen');
   }

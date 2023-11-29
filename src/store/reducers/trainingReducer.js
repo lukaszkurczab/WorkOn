@@ -4,7 +4,8 @@ const training = createSlice({
   name: "training",
   initialState: {
     ongoingTraining: {},
-    ongoingTrainingName: ''
+    ongoingTrainingName: '',
+    startTraining: Date.now(),
   },
   reducers: {
     START_TRAINING: (state, action) => {
@@ -18,6 +19,7 @@ const training = createSlice({
 
       state.ongoingTraining = newTraining;
       state.ongoingTrainingName = action.payload.planName;
+      state.startTraining = Date.now();
     },
     UPDATE_PROGRESS: (state, action) => {
       const elementToUpdateIndex = state.ongoingTraining.findIndex(i => i.id === action.payload.id)
@@ -46,7 +48,7 @@ export const {
   START_TRAINING,
   UPDATE_PROGRESS,
   MARK_EXERCISE_AS_FINISHED,
-  FINISH_TRAINING
+  FINISH_TRAINING,
 } = training.actions;
 
 export default training.reducer

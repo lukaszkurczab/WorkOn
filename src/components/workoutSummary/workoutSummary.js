@@ -11,7 +11,7 @@ const WorkoutSummary = () => {
   const navigation = useNavigation();
   const summary = useSelector((store) => store.trainingSummary.trainingSummary);
   const trainingName = useSelector((store) => store.trainingSummary.trainingName);
-  const trainingTime = useSelector((store) => store.trainingSummary.trainingTime);
+  const trainingTime = Date.now() - useSelector((store) => store.training.startTraining);
   const date = new Date().toLocaleDateString('pl-PL')
 
   const handleFinish = () => {
@@ -28,7 +28,7 @@ const WorkoutSummary = () => {
           <WorkoutSummaryListItem exercise={exercise} key={exercise.id} />
         ))}
       </View>
-      <Text style={styles.timeText}>Total time: {useFormatTime(trainingTime)}</Text>
+      <Text style={styles.timeText}>Total time: {useFormatTime((trainingTime/1000).toFixed())}</Text>
       <ButtonBig additionalStyles={{alignSelf: 'center'}} theme={'light'} onClick={handleFinish}>
         <Text>FINISH</Text>
       </ButtonBig>

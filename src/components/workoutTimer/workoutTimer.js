@@ -7,7 +7,7 @@ const WorkoutTimer = ({ time }) => {
   const [timeConverted, setTimeConverted] = useState('')
 
   useEffect(() => {
-    setTimeConverted(useFormatTime(time))
+    setTimeConverted(useFormatTime((time / 1000).toFixed()))
   },[time])
 
   return (
