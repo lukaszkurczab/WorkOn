@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 35,
     width: '100%',
+    zIndex: 10
   },
   itemsWrapper__hidden: {
     display: 'none'

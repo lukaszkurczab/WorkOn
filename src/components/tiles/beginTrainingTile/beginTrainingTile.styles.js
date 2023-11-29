@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textWrapper: {
-    gap: 20
+    gap: 10
   }
 });
 

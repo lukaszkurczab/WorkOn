@@ -5,7 +5,7 @@ export const plans = [
   img: "string",
   planType: "weekly",
   days: [{
-    name: "MON",
+    name: "Monday",
     restDay: false,
     exercises: [{
       id: "1001",
@@ -149,11 +149,11 @@ export const plans = [
       ]
     }]
   },{
-    name: "TUE",
+    name: "Tuesday",
     restDay: true,
     exercises: []
   },{
-    name: "WED",
+    name: "Wednesday",
     restDay: false,
     exercises: [{
       id: "1009",
@@ -269,11 +269,11 @@ export const plans = [
       ]
     }]
   },{
-    name: "THU",
+    name: "Thursday",
     restDay: true,
     exercises: []
   },{
-    name: "FRI",
+    name: "Friday",
     restDay: false,
     exercises: [{
       id: "1016",
@@ -437,11 +437,11 @@ export const plans = [
       ]
     }]
   },{
-    name: "SAT",
+    name: "Saturday",
     restDay: true,
     exercises: []
   },{
-    name: "SUN",
+    name: "Sunday",
     restDay: true,
     exercises: []
   }]
@@ -450,6 +450,274 @@ export const plans = [
     name: "Home workout",
     img: "string",
     planType: "weekly",
-    days: []
+    days: [{
+      name: "Day A",
+      restDay: false,
+      exercises: [{
+        id: "1001",
+        series: [
+          {
+            reps: 6,
+            weight: 60,
+            id: 1
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 2
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 3
+          },
+        ]
+      },{
+        id: "1002",
+        series: [
+          {
+            reps: 6,
+            weight: 60,
+            id: 1
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 2
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 3
+          },
+        ]
+      },{
+        id: "1003",
+        series: [
+          {
+            reps: 6,
+            weight: 60,
+            id: 1
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 2
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 3
+          },
+        ]
+      },{
+        id: "1004",
+        series: [
+          {
+            reps: 6,
+            weight: 60,
+            id: 1
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 2
+          },
+          {
+            reps: 6,
+            weight: 60,
+            id: 3
+          },
+        ]
+      },{
+        id: "1005",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1006",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1007",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1008",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      }]
+    },{
+      name: "Rest day",
+      restDay: true,
+      exercises: []
+    },{
+      name: "Day B",
+      restDay: false,
+      exercises: [{
+        id: "1009",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1010",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1011",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1012",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1013",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1014",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      },{
+        id: "1015",
+        series: [
+          {
+            reps: 6,
+            weight: 60,id: 1
+          },
+          {
+            reps: 6,
+            weight: 60, id:2
+          },
+          {
+            reps: 6,
+            weight: 60, id: 3
+          },
+        ]
+      }]
+    },{
+      name: "Rest day",
+      restDay: true,
+      exercises: []
+    }]
   }
 ]
