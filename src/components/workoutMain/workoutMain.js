@@ -8,8 +8,8 @@ import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
 import { SET_TRAINING_SUMMARY } from "../../store/reducers/trainingSummaryReducer";
+import { ADD_TO_HISTORY } from "../../store/reducers/historyReducer";
 import { useDispatch } from "react-redux";
-import { useFormatTime } from "../../utils/hooks";
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
@@ -54,6 +54,12 @@ const WorkoutMain = () => {
     dispatch(SET_TRAINING_SUMMARY({
       training: plan,
       name: planName,
+    }));
+    
+    dispatch(ADD_TO_HISTORY({
+      name: planName,
+      totalTime: totalTime,
+      exercises: plan
     }));
     navigation.navigate('WorkoutSummaryScreen');
   }
