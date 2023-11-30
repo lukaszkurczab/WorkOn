@@ -449,7 +449,7 @@ export const plans = [
     id: "2",
     name: "Home workout",
     img: "string",
-    planType: "weekly",
+    planType: "daily",
     days: [{
       name: "Day A",
       restDay: false,
@@ -595,11 +595,11 @@ export const plans = [
         ]
       }]
     },{
-      name: "Rest day",
+      name: "Day B",
       restDay: true,
       exercises: []
     },{
-      name: "Day B",
+      name: "Day C",
       restDay: false,
       exercises: [{
         id: "1009",
@@ -715,7 +715,7 @@ export const plans = [
         ]
       }]
     },{
-      name: "Rest day",
+      name: "Day D",
       restDay: true,
       exercises: []
     }]

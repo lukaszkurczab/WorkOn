@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import PlanEditTable from "../../components/planEditTable/planEditTable";
+import { CHANGE_PLAN_TYPE } from "../../store/reducers/planReducer"
 import styles from './planEditScreen.styles';
-import PlanEditWeekTable from "../../components/planEditTable/planEditWeekTable";
 
 const PlanEditScreen = () => {
+    const dispatch = useDispatch();
     const [editablePlanName, setEditablePlanName] = useState(false);
-    const [selectedPlanType, setSelectedPlanType] = useState(useSelector((store) => store.plans.planToEdit.planType));
     const [selectedPlanName, setSelectedPlanName] = useState(useSelector((store) => store.plans.planToEdit.name));
-    const selectedPlan = useSelector((store) => store.plans.planToEdit.days);
+    const selectedPlan = useSelector((store) => store.plans.planToEdit);
 
     return(
         <View style={styles.container}>
@@ -25,18 +26,18 @@ const PlanEditScreen = () => {
             </View>
             <View style={styles.rowWrapper}>
                 <Text style={styles.planType}>Plan type</Text>
-                <View style={[styles.planTypeButton, selectedPlanType === 'weekly' ? styles.planTypeButtonActive : null]}>
-                    <TouchableOpacity onPress={() => setSelectedPlanType('weekly')}>
-                        <Text style={[styles.planTypeButtonText, selectedPlanType === 'weekly' ? styles.planTypeButtonTextActive : null]}>weekly</Text>
+                <View style={[styles.planTypeButton, selectedPlan.planType === 'weekly' ? styles.planTypeButtonActive : null]}>
+                    <TouchableOpacity onPress={() => dispatch(CHANGE_PLAN_TYPE('weekly'))}>
+                        <Text style={[styles.planTypeButtonText, selectedPlan.planType == 'weekly' ? styles.planTypeButtonTextActive : null]}>weekly</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.planTypeButton, selectedPlanType === 'daily' ? styles.planTypeButtonActive : null]}>
-                    <TouchableOpacity onPress={() => setSelectedPlanType('daily')}>
-                        <Text style={[styles.planTypeButtonText, selectedPlanType === 'daily' ? styles.planTypeButtonTextActive : null]}>daily</Text>
+                <View style={[styles.planTypeButton, selectedPlan.planType === 'daily' ? styles.planTypeButtonActive : null]}>
+                    <TouchableOpacity onPress={() => dispatch(CHANGE_PLAN_TYPE('daily'))}>
+                        <Text style={[styles.planTypeButtonText, selectedPlan.planType == 'daily' ? styles.planTypeButtonTextActive : null]}>daily</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            <PlanEditWeekTable plan={selectedPlan} />
+            <PlanEditTable plan={selectedPlan} />
         </View>
     )
 };

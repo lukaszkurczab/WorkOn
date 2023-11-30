@@ -5,7 +5,7 @@ const training = createSlice({
   initialState: {
     ongoingTraining: {},
     ongoingTrainingName: '',
-    startTraining: Date.now(),
+    startTraining: Date.now(), //to jest obiekt, spróbuj przypisac number
   },
   reducers: {
     START_TRAINING: (state, action) => {
