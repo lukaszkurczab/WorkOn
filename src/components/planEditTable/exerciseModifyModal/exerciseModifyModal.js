@@ -1,4 +1,4 @@
-import React, { useState, useId } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useGetExercise } from "../../../utils/hooks";
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -39,9 +39,6 @@ const ExerciseModifyModal = ({ onConfirm, exercise }) => {
         <ScrollView style={styles.container} >
             <View style={styles.row}>
                 <Text style={styles.title}>{useGetExercise(exercise.id).name}</Text>
-                <TouchableOpacity>
-                    <Icon name='sync' size={18} style={styles.icon} />
-                </TouchableOpacity>
             </View>
             {modifiedExercise.series.map((i, index) => (
                 <View key={i.id} style={styles.serieWrapper}>
@@ -78,7 +75,7 @@ const ExerciseModifyModal = ({ onConfirm, exercise }) => {
             <TouchableOpacity onPress={handleAddSerie}>
                 <Text style={styles.inputLabel}>Add serie</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => onConfirm()} style={styles.button}>
+            <TouchableOpacity onPress={() => onConfirm(modifiedExercise)} style={styles.button}>
                 <Text style={styles.buttonText}>Confirm</Text>
             </TouchableOpacity>
         </ScrollView>

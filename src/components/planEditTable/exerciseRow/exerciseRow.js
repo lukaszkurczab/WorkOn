@@ -5,7 +5,7 @@ import { useGetExercise } from "../../../utils/hooks";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './exerciseRow.styles';
 
-const ExerciseRow = ({ exercise, onEdit }) => {
+const ExerciseRow = ({ exercise, onEdit, exerciseIndex }) => {
     const [expandDropdown, setExpandDropdown] = useState(false)
 
     const handleDelete = () => { }
@@ -16,7 +16,7 @@ const ExerciseRow = ({ exercise, onEdit }) => {
                 <View style={styles.headingWrapper}>
                     <Text style={styles.text}>{useGetExercise(exercise.id).name}</Text>
                     <View style={styles.iconsWrapper}>
-                        <TouchableOpacity onPress={() => onEdit(exercise)}>
+                        <TouchableOpacity onPress={() => onEdit(exerciseIndex)}>
                             <Icon name='edit' size={24} style={styles.icon} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handleDelete}>

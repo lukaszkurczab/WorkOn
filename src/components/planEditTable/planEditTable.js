@@ -6,7 +6,7 @@ import ExerciseRow from "./exerciseRow/exerciseRow";
 import ExerciseModifyModal from "./exerciseModifyModal/exerciseModifyModal";
 import WeeklyTableHeading from "./weeklyTableHeading/weeklyTableHeading";
 import DailyTableHeading from "./dailyTableHeading/dailyTableHeading";
-import { ADD_DAY, REMOVE_DAY } from "../../store/reducers/planReducer";
+import { ADD_DAY, REMOVE_DAY, EDIT_PLAN } from "../../store/reducers/planReducer";
 import styles from './planEditTable.styles';
 
 const PlanEditTable = ({ plan }) => {
@@ -14,7 +14,7 @@ const PlanEditTable = ({ plan }) => {
     const [activeDay, setActiveDay] = useState(plan.days[0].name);
     const [daysPlanToEdit, setDaysPlanToEdit] = useState(plan.days.filter((day) => day.name === activeDay)[0].exercises)
     const [showEditModal, setShowEditModla] = useState(false)
-    const [exerciseToEdit, setExerciseToEdit] = useState({})
+    const [exerciseIndexToEdit, setExerciseIndexToEdit] = useState()
 
     useEffect(() => {
         setDaysPlanToEdit(plan.days.filter((day) => day.name === activeDay)[0].exercises)
@@ -34,9 +34,17 @@ const PlanEditTable = ({ plan }) => {
         setActiveDay(newDay)
     }
 
-    const handleEdit = (exercise) => {
-        setExerciseToEdit(exercise)
+    const handleSelectToEdit = (exerciseIndex) => {
+        setExerciseIndexToEdit(exerciseIndex)
         setShowEditModla(true)
+    }
+
+    const handleEditExercise = (updatedExercise) => {  
+        const x = { ...plan } 
+        x.days[0].exercises[0] = 0
+        console.log(x.days[0].exercises[0])
+        //dispatch(editedPlan)
+        setShowEditModla(false)
     }
 
     return (
@@ -54,15 +62,15 @@ const PlanEditTable = ({ plan }) => {
             )}
             <ScrollView>
                 <View style={styles.body}>
-                    {daysPlanToEdit.map((exercise) => (
-                        <ExerciseRow exercise={exercise} key={exercise.id} onEdit={handleEdit} />
+                    {daysPlanToEdit.map((exercise, index) => (
+                        <ExerciseRow exercise={exercise} key={exercise.id} onEdit={handleSelectToEdit} exerciseIndex={index} />
                     ))}
                 </View>
                 <ButtonBig additionalStyles={{alignSelf: 'center'}} theme={'light'} onClick={handleAdd}>
                     <Text>Add</Text>
                 </ButtonBig>
             </ScrollView>
-            {showEditModal && <ExerciseModifyModal exercise={exerciseToEdit} onConfirm={() => setShowEditModla(false)} />}
+            {showEditModal && <ExerciseModifyModal exercise={daysPlanToEdit[exerciseIndexToEdit]} onConfirm={handleEditExercise} />}
         </View>
     )
 };
