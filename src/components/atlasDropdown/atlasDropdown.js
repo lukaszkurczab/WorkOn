@@ -7,7 +7,7 @@ import styles from './atlasDropdown.styles';
 
 const data = [
   {key: '1', name:'Back'},
-  {key: '2', name: 'Chest' },
+  {key: '2', name: 'Chest'},
   {key: '3', name: "Triceps"},
   {key: '4', name: "Biceps"},
   {key: '5', name: "Forearms"},
@@ -27,23 +27,22 @@ const AtlasDropdown = () => {
   const [selectedPlan, setSelectedPlan] = useState(data[0]);
 
   const openMenu = () => setVisible(!visible);
-  const closeMenu = () => setVisible(false);
 
   const handleMenuItemSelect = (item) => {
-    setSelectedPlan(item);
+    setSelectedPlan(item)
     dispatch(SET_SELECTED_GROUP({
       group: item.name.toLowerCase(),
-    }));
-    closeMenu()
-  };
+    }))
+    setVisible(false)
+  }
 
   return (
       <View style={styles.dropdownWrapper}>
         <TouchableOpacity onPress={openMenu}>
-          <View style={styles.dropdownButton}>
-            <Text style={styles.dropdownButtonText}>{selectedPlan.name}</Text>
-            <Icon style={styles.dropdownButtonIcon} name="chevron-down" size={24} />
-          </View>
+        <View style={styles.dropdownButton}>
+          <Text style={styles.dropdownButtonText}>{selectedPlan.name}</Text>
+          <Icon style={styles.dropdownButtonIcon} name="chevron-down" size={24} />
+        </View>
         </TouchableOpacity>
         <View style={visible ? styles.itemsWrapper : styles.itemsWrapper__hidden}>
           {data.map((item) => (
