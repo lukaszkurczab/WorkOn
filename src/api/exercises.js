@@ -1,8 +1,6 @@
-import BACKEND_PORT from '../../.env'
-
 export const fetchExercises = async () => {
   try {
-    const response = await fetch(`${BACKEND_PORT}/exercises`);
+    const response = await fetch('https://workon-backend.azurewebsites.net/exercises');
     const data = await response.json();
     return data;
   } catch (error) {

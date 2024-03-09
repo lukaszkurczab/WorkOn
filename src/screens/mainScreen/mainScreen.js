@@ -4,14 +4,11 @@ import Header from '../../components/header/header';
 import styles from './mainScreen.styles';
 import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
-import { fetchExercises } from '../../api/exercises'
 
-const MainScreen = async () => {
-  const exercises = await fetchExercises()
-  console.log(exercises)
+const MainScreen = () => {
   return (
     <View style={styles.container}>
-      <Header/>
+      <Header />
       <BeginTrainingTile />
       <Text style={styles.tilesHeading}>Choose your workout plan</Text>
       <View style={styles.tilesWrapper}>
