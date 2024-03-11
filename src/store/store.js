@@ -1,31 +1,33 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import exercisesReducer from './reducers/exerciseReducer';
 import planReducer from './reducers/planReducer';
-import trainingReducer from "./reducers/trainingReducer";
-import trainingSummaryReducer from "./reducers/trainingSummaryReducer";
-import historyReducer from "./reducers/historyReducer";
+import trainingReducer from './reducers/trainingReducer';
+import trainingSummaryReducer from './reducers/trainingSummaryReducer';
+import historyReducer from './reducers/historyReducer';
+import userSlice from './slice/userSlice';
 
-const rootReducer = combineReducers({ 
+const rootReducer = combineReducers({
   exercises: exercisesReducer,
   plans: planReducer,
   training: trainingReducer,
   trainingSummary: trainingSummaryReducer,
   history: historyReducer,
-})
+  user: userSlice,
+});
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-}
+};
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [thunk]
+  middleware: [thunk],
 });
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import Header from '../../components/header/header';
 import styles from './mainScreen.styles';
 import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
+import { getUser } from '../../store/slice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const MainScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser('1'));
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header />
       <BeginTrainingTile />
       <Text style={styles.tilesHeading}>Choose your workout plan</Text>
       <View style={styles.tilesWrapper}>
-        <Tile text='Your plans' icon="dumbbell" path="PlansListScreen" version='icon'></Tile>
-        <Tile text='Exercise atlas' icon="list-ul" path="AtlasScreen" version='icon'></Tile>
-        <Tile text='History' icon="chart-bar" path="CalendarScreen" version='icon'></Tile>
-        <Tile text='Articles' icon="book" path="ArticlesSelectScreen" version='icon'></Tile>
+        <Tile text='Your plans' icon='dumbbell' path='PlansListScreen' version='icon'></Tile>
+        <Tile text='Exercise atlas' icon='list-ul' path='AtlasScreen' version='icon'></Tile>
+        <Tile text='History' icon='chart-bar' path='CalendarScreen' version='icon'></Tile>
+        <Tile text='Articles' icon='book' path='ArticlesSelectScreen' version='icon'></Tile>
       </View>
     </View>
   );

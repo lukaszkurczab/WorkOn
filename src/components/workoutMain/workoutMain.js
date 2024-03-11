@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity } from 'react-native';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
@@ -9,7 +9,6 @@ import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
 import { SET_TRAINING_SUMMARY } from "../../store/reducers/trainingSummaryReducer";
 import { ADD_TO_HISTORY } from "../../store/reducers/historyReducer";
-import { useDispatch } from "react-redux";
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
