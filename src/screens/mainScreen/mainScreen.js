@@ -5,6 +5,7 @@ import styles from './mainScreen.styles';
 import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
 import { getUser } from '../../store/slice/userSlice';
+import { getExercises } from '../../store/slice/exercisesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MainScreen = () => {
@@ -12,6 +13,7 @@ const MainScreen = () => {
 
   useEffect(() => {
     dispatch(getUser('1'));
+    dispatch(getExercises('1.0'));
   }, []);
 
   return (

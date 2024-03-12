@@ -27,26 +27,26 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <StatusBar barStyle='dark-content' />
-          <Navigation>
-            <Stack.Navigator initialRouteName='MainScreen'>
-              <Stack.Screen name='MainScreen' component={MainScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='PlansListScreen' component={PlansListScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='PlanTableScreen' component={PlanTableScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='ArticlesSelectScreen' component={ArticlesSelectScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='ArticlesListScreen' component={ArticlesListScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='AtlasScreen' component={AtlasScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='WorkoutScreen' component={WorkoutScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='WorkoutSummaryScreen' component={WorkoutSummaryScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='PlanEditScreen' component={PlanEditScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='ExerciseScreen' component={ExerciseScreen} options={{ headerShown: false }} />
-              <Stack.Screen name='CalendarScreen' component={CalendarScreen} options={{ headerShown: false }} />
-            </Stack.Navigator>
-          </Navigation>
-        </NavigationContainer>
-      </PersistGate>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <NavigationContainer>
+        <StatusBar barStyle='dark-content' />
+        <Navigation>
+          <Stack.Navigator initialRouteName='MainScreen'>
+            <Stack.Screen name='MainScreen' component={MainScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='PlansListScreen' component={PlansListScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='PlanTableScreen' component={PlanTableScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='ArticlesSelectScreen' component={ArticlesSelectScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='ArticlesListScreen' component={ArticlesListScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='AtlasScreen' component={AtlasScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='WorkoutScreen' component={WorkoutScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='WorkoutSummaryScreen' component={WorkoutSummaryScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='PlanEditScreen' component={PlanEditScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='ExerciseScreen' component={ExerciseScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='CalendarScreen' component={CalendarScreen} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </Navigation>
+      </NavigationContainer>
+      {/* </PersistGate> */}
     </Provider>
   );
 };

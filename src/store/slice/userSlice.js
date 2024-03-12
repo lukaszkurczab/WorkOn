@@ -11,6 +11,7 @@ const userSlice = createSlice({
   initialState: {
     isLoading: false,
     data: [],
+    selectedWorkoutId: '',
     isError: false,
   },
   extraReducers: builder => {
