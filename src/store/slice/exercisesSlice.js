@@ -13,6 +13,12 @@ const exercisesSlice = createSlice({
     data: [],
     version: '1.0',
     isError: false,
+    selectedExercise: '',
+  },
+  reducers: {
+    SET_SELECTED_EXERCISE: (state, action) => {
+      state.selectedExercise = state.data.find(exercise => exercise.id == action.payload);
+    },
   },
   extraReducers: builder => {
     builder.addCase(getExercises.pending, (state, action) => {
@@ -28,5 +34,7 @@ const exercisesSlice = createSlice({
     });
   },
 });
+
+export const { SET_SELECTED_EXERCISE } = exercisesSlice.actions;
 
 export default exercisesSlice.reducer;

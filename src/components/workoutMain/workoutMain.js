@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity } from 'react-native';
 import WorkoutTimer from '../workoutTimer/workoutTimer';
@@ -7,8 +7,8 @@ import ExerciseView from './exerciseView/exerciseView';
 import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
-import { SET_TRAINING_SUMMARY } from "../../store/reducers/trainingSummaryReducer";
-import { ADD_TO_HISTORY } from "../../store/reducers/historyReducer";
+import { SET_TRAINING_SUMMARY } from '../../store/reducers/trainingSummaryReducer';
+import { ADD_TO_HISTORY } from '../../store/reducers/historyReducer';
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
@@ -18,62 +18,66 @@ const WorkoutMain = () => {
   const [restStart, setRestStart] = useState(Date.now());
   const [selectedExerciseIndex, setSelectedExcerciseIndex] = useState(0);
   const [showExercisesList, setShowExercisesList] = useState(false);
-  const plan = useSelector((store) => store.training.ongoingTraining);
-  const planName = useSelector((store) => store.training.ongoingTrainingName);
-  const trainingStart = useSelector((store) => store.training.startTraining);
+  const plan = useSelector(store => store.training.ongoingTraining);
+  const planName = useSelector(store => store.training.ongoingTrainingName);
+  const trainingStart = useSelector(store => store.training.startTraining);
 
   useEffect(() => {
     const totalInterval = setInterval(() => {
-      setTotalTime(Date.now() - trainingStart)
+      setTotalTime(Date.now() - trainingStart);
     }, 1000);
 
-    return () => clearInterval(totalInterval)
-  }, [])
-  
+    return () => clearInterval(totalInterval);
+  }, []);
+
   useEffect(() => {
-    setRestTime(Date.now() - restStart)
-  }, [totalTime])
+    setRestTime(Date.now() - restStart);
+  }, [totalTime]);
 
   const handleResetRestTime = () => {
-    setRestStart(Date.now())
-  }
+    setRestStart(Date.now());
+  };
 
-  const handleSelectNewExercase = (id) => {
-    const newExerciseIndex = plan.map((x) => x.id).indexOf(id)
+  const handleSelectNewExercase = id => {
+    const newExerciseIndex = plan.map(x => x.id).indexOf(id);
 
-    setSelectedExcerciseIndex(newExerciseIndex)
-    setShowExercisesList(false)
-  }
+    setSelectedExcerciseIndex(newExerciseIndex);
+    setShowExercisesList(false);
+  };
 
   const handleToggleShowExerciseList = () => {
-    setShowExercisesList(!showExercisesList)
-  }
+    setShowExercisesList(!showExercisesList);
+  };
 
   const handleFinishTraining = () => {
-    dispatch(SET_TRAINING_SUMMARY({
-      training: plan,
-      name: planName,
-    }));
-    
-    dispatch(ADD_TO_HISTORY({
-      name: planName,
-      totalTime: totalTime,
-      exercises: plan
-    }));
+    dispatch(
+      SET_TRAINING_SUMMARY({
+        training: plan,
+        name: planName,
+      }),
+    );
+
+    dispatch(
+      ADD_TO_HISTORY({
+        name: planName,
+        totalTime: totalTime,
+        exercises: plan,
+      }),
+    );
     navigation.navigate('WorkoutSummaryScreen');
-  }
+  };
 
   const handleNextExercise = () => {
     for (let i = 0; i < plan.length + 1; i++) {
       if (i == plan.length) {
-        handleFinishTraining()
+        handleFinishTraining();
         break;
       } else if (!plan[i].finished && i != selectedExerciseIndex) {
-        setSelectedExcerciseIndex(i)
+        setSelectedExcerciseIndex(i);
         break;
       }
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -88,15 +92,10 @@ const WorkoutMain = () => {
         </View>
       </View>
       <View style={styles.buttonWrapper}>
-        <MenuButton onClick={handleToggleShowExerciseList}/>
+        <MenuButton onClick={handleToggleShowExerciseList} />
       </View>
-      <ExerciseView
-        clearRestTime={handleResetRestTime}
-        exercise={plan[selectedExerciseIndex]}
-        handleNextExercise={handleNextExercise}
-      />
+      <ExerciseView clearRestTime={handleResetRestTime} exercise={plan[selectedExerciseIndex]} handleNextExercise={handleNextExercise} />
       {showExercisesList && <ExercisesList exercises={plan} onClick={handleSelectNewExercase} />}
-      <TouchableOpacity onPress={handleFinishTraining}><Text>Go to summary</Text></TouchableOpacity>
     </View>
   );
 };

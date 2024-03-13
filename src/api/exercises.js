@@ -8,7 +8,6 @@ export const fetchExercises = async version => {
       body: JSON.stringify({ version: '1.0' }),
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching exercises:', error);

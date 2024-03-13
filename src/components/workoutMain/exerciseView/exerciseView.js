@@ -5,6 +5,7 @@ import RepeatRow from '../repeatRow/repeatRow';
 import SeriesModal from '../seriesModal/seriesModal';
 import styles from './exerciseView.styles';
 import { useGetExercise } from '../../../utils/hooks';
+import { SET_SELECTED_EXERCISE } from '../../../store/slice/exercisesSlice';
 import { MARK_EXERCISE_AS_FINISHED, UPDATE_PROGRESS } from '../../../store/reducers/trainingReducer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -53,7 +54,7 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
   };
 
   const handleShowMore = () => {
-    // dispatch(SET_SELECTED_EXERCISE(exercise.id))
+    dispatch(SET_SELECTED_EXERCISE(exercise.id));
     navigation.navigate('ExerciseScreen');
   };
 

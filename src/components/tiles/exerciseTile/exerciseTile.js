@@ -4,13 +4,14 @@ import styles from './exerciseTile.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import { SET_SELECTED_EXERCISE } from '../../../store/slice/exercisesSlice';
 
 const ExerciseTile = ({ exercise }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const handlePress = () => {
-    console.log('dispatch(SET_SELECTED_EXERCISE(exercise.id))');
+    dispatch(SET_SELECTED_EXERCISE(exercise.id));
     navigation.navigate('ExerciseScreen');
   };
 

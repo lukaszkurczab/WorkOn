@@ -11,16 +11,26 @@ const userSlice = createSlice({
   initialState: {
     isLoading: false,
     data: [],
-    selectedWorkoutId: '',
+    selectedWorkout: undefined,
     isError: false,
+  },
+  reducers: {
+    SET_SELECTED_PLAN: (state, action) => {
+      state.selectedWorkout = { ...action.payload };
+    },
   },
   extraReducers: builder => {
     builder.addCase(getUser.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.data = action.payload;
+      state.selectedWorkout = {
+        id: action.payload.plans[0].id,
+        name: action.payload.plans[0].name,
+        days: action.payload.plans[0].days,
+      };
+      state.isLoading = false;
     });
     builder.addCase(getUser.rejected, (state, action) => {
       state.isLoading = false;
@@ -28,5 +38,7 @@ const userSlice = createSlice({
     });
   },
 });
+
+export const { SET_SELECTED_PLAN } = userSlice.actions;
 
 export default userSlice.reducer;
