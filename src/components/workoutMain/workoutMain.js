@@ -8,7 +8,7 @@ import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
 import { SET_TRAINING_SUMMARY } from '../../store/reducers/trainingSummaryReducer';
-import { ADD_TO_HISTORY } from '../../store/reducers/historyReducer';
+import { addHistoryItemToUser } from '../../api/users';
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const WorkoutMain = () => {
   const plan = useSelector(store => store.training.ongoingTraining);
   const planName = useSelector(store => store.training.ongoingTrainingName);
   const trainingStart = useSelector(store => store.training.startTraining);
+  const userId = useSelector(store => store.user.data.id);
 
   useEffect(() => {
     const totalInterval = setInterval(() => {
@@ -50,6 +51,8 @@ const WorkoutMain = () => {
   };
 
   const handleFinishTraining = () => {
+    const date = new Date();
+
     dispatch(
       SET_TRAINING_SUMMARY({
         training: plan,
@@ -57,13 +60,12 @@ const WorkoutMain = () => {
       }),
     );
 
-    dispatch(
-      ADD_TO_HISTORY({
-        name: planName,
-        totalTime: totalTime,
-        exercises: plan,
-      }),
-    );
+    addHistoryItemToUser(userId, {
+      date: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
+      name: planName,
+      time: totalTime,
+      exercises: plan,
+    });
     navigation.navigate('WorkoutSummaryScreen');
   };
 

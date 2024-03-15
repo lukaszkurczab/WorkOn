@@ -7,3 +7,19 @@ export const fetchUser = async id => {
     console.error('Error fetching plans:', error);
   }
 };
+
+export const addHistoryItemToUser = async (id, historyItem) => {
+  try {
+    const response = await fetch('https://workon-backend.azurewebsites.net/users/history/' + id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(historyItem),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching plans:', error);
+  }
+};

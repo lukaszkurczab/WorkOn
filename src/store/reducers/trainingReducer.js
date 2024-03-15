@@ -32,7 +32,6 @@ const training = createSlice({
         success: action.payload.success,
       };
       state.ongoingTraining[elementToUpdateIndex].finished = action.payload.finished;
-      console.log(action.payload.success);
     },
     MARK_EXERCISE_AS_FINISHED: (state, action) => {
       state.ongoingTraining[action.payload.index].finished = true;
