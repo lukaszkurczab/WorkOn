@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RepeatRow from '../repeatRow/repeatRow';
 import SeriesModal from '../seriesModal/seriesModal';
 import styles from './exerciseView.styles';
-import { useGetExercise } from '../../../utils/hooks';
 import { SET_SELECTED_EXERCISE } from '../../../store/slice/exercisesSlice';
 import { MARK_EXERCISE_AS_FINISHED, UPDATE_PROGRESS } from '../../../store/reducers/trainingReducer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -18,7 +17,8 @@ const ExerciseView = ({ clearRestTime, exercise, handleNextExercise }) => {
   const [modalReps, setModalReps] = useState(0);
   const [modalWeight, setModalWeight] = useState(0);
   const [seriesSuccess, setSeriesSuccess] = useState(false);
-  const exerciseData = useGetExercise(exercise.id);
+  const exercisesList = useSelector(state => state.exercises.data);
+  const exerciseData = exercisesList.find(item => item.id === exercise.id);
   const repeatRows = [];
 
   const handleSeriesFinish = (index, initReps, initWiegth, success) => {

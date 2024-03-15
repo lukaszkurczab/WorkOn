@@ -1,18 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useGetExercise } from '../../../utils/hooks';
-import styles from './exercisesList.styles'
-
+import styles from './exercisesList.styles';
 
 const ExercisesList = ({ exercises, onClick }) => {
+  const exercisesList = useSelector(state => state.exercises.data);
+
   return (
-    <View style={styles.container} >
-      {exercises.map((exercise => {
-        const exerciseName = useGetExercise(exercise.id)
-        return <TouchableOpacity style={styles.exerciseRow} key={exercise.id} onPress={() => onClick(exercise.id)}>
-                  <Text style={styles.rowText}>{exerciseName.name}</Text>
-                </TouchableOpacity>
-      }))}
+    <View style={styles.container}>
+      {exercises.map(exercise => {
+        return (
+          <TouchableOpacity style={styles.exerciseRow} key={exercise.id} onPress={() => onClick(exercise.id)}>
+            <Text style={styles.rowText}>{exercisesList.find(item => item.id === exercise.id).name}</Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };

@@ -24,12 +24,13 @@ const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
+      state.data = [];
       state.data = action.payload;
-      state.selectedWorkout = {
+      state.selectedWorkout = Object.assign({
         id: action.payload.plans[0].id,
         name: action.payload.plans[0].name,
         days: action.payload.plans[0].days,
-      };
+      });
       state.isLoading = false;
     });
     builder.addCase(getUser.rejected, (state, action) => {
