@@ -4,29 +4,29 @@ import { secondaryColor, primaryColor, backgroundColor } from '../../styles/colo
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-    paddingBottom: 100,
     flex: 1,
     backgroundColor: backgroundColor,
+    paddingBottom: 60,
   },
   title: {
     color: 'white',
     fontWeight: '700',
     fontSize: 36,
-    marginBottom: 15
+    marginBottom: 15,
   },
   heading: {
     color: 'white',
     fontWeight: '500',
     fontSize: 28,
-    marginBottom: 15
+    marginTop: 15,
   },
   text: {
     color: primaryColor,
   },
-  buttonsWrapper:{
+  buttonsWrapper: {
     flexDirection: 'row',
     gap: 15,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   buttonWrapper: {
     flexDirection: 'row',
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 5,
     marginTop: 20,
-    alignSelf: 'center'
+    marginBottom: 20,
+    alignSelf: 'center',
   },
   button: {
     color: backgroundColor,
@@ -46,8 +47,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: backgroundColor,
-    marginRight: 15
-  }
+    marginRight: 15,
+  },
 });
 
 export default styles;
