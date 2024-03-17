@@ -23,3 +23,19 @@ export const addHistoryItemToUser = async (id, historyItem) => {
     console.error('Error fetching plans:', error);
   }
 };
+
+export const removePlanFromUser = async (userId, planId) => {
+  try {
+    const response = await fetch('https://workon-backend.azurewebsites.net/users/plans/' + userId, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: planId }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching plans:', error);
+  }
+};
