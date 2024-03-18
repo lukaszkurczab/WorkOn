@@ -20,9 +20,12 @@ const PlanTableScreen = () => {
   };
 
   const handleRemovePress = () => {
-    dispatch(SET_SELECTED_PLAN({}));
-    dispatch(removePlan(userId, plan.id));
-    navigation.navigate('PlanEditScreen');
+    const data = {
+      userId: userId,
+      planId: plan.id,
+    };
+    dispatch(removePlan(data));
+    navigation.navigate('PlansListScreen');
   };
 
   return (

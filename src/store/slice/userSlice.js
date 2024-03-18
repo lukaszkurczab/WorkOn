@@ -6,8 +6,8 @@ export const getUser = createAsyncThunk('getUser', async id => {
   return res;
 });
 
-export const removePlan = createAsyncThunk('removePlan', async (userId, planId) => {
-  const res = await removePlanFromUser(userId, planId);
+export const removePlan = createAsyncThunk('removePlan', async data => {
+  const res = await removePlanFromUser(data.userId, data.planId);
   return res;
 });
 
@@ -46,7 +46,7 @@ const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(removePlan.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.data.plans = action.payload;
       state.isLoading = false;
     });
     builder.addCase(removePlan.rejected, (state, action) => {

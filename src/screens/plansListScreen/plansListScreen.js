@@ -7,15 +7,18 @@ import styles from './plansListScreen.styles';
 
 const PlansListScreen = () => {
   const plans = useSelector(store => store.user.data.plans);
+  const isLoading = useSelector(store => store.user.isLoading);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your plans</Text>
-      <View>
-        {plans.map(plan => (
-          <PlanBanner plan={plan} img='test' key={plan.id} />
-        ))}
-      </View>
+      {!isLoading && (
+        <View>
+          {plans.map(plan => (
+            <PlanBanner plan={plan} img='test' key={plan.id} />
+          ))}
+        </View>
+      )}
       <TouchableOpacity>
         <View style={styles.buttonWrapper}>
           <Icon name='plus' size={45} style={styles.icon} />
