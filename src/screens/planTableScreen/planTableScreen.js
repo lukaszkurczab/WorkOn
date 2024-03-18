@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanTable from '../../components/planTable/planTable';
-import { SET_PLAN_TO_EDIT } from '../../store/reducers/planReducer';
+import { SET_PLAN_TO_EDIT, SET_SELECTED_PLAN } from '../../store/reducers/planReducer';
 import { removePlan } from '../../store/slice/userSlice';
 import styles from './planTableScreen.styles';
 
@@ -20,6 +20,7 @@ const PlanTableScreen = () => {
   };
 
   const handleRemovePress = () => {
+    dispatch(SET_SELECTED_PLAN({}));
     dispatch(removePlan(userId, plan.id));
     navigation.navigate('PlanEditScreen');
   };
