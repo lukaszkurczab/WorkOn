@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchUser, removePlanFromUser } from '../../api/users';
+import { fetchUser, removePlanFromUser, editUserPlan } from '../../api/users';
 
 export const getUser = createAsyncThunk('getUser', async id => {
   const res = await fetchUser(id);
@@ -8,6 +8,11 @@ export const getUser = createAsyncThunk('getUser', async id => {
 
 export const removePlan = createAsyncThunk('removePlan', async data => {
   const res = await removePlanFromUser(data.userId, data.planId);
+  return res;
+});
+
+export const editPlan = createAsyncThunk('editPlan', async data => {
+  const res = await editUserPlan(data.userId, data.plan);
   return res;
 });
 
@@ -50,6 +55,17 @@ const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(removePlan.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    builder.addCase(editPlan.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editPlan.fulfilled, (state, action) => {
+      state.data.plans = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(editPlan.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
     });

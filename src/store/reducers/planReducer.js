@@ -9,6 +9,9 @@ const plans = createSlice({
     planToEdit: {},
   },
   reducers: {
+    CHANGE_PLAN_NAME: (state, action) => {
+      state.planToEdit.name = action.payload;
+    },
     CHANGE_PLAN_TYPE: (state, action) => {
       state.planToEdit.planType = action.payload;
     },
@@ -40,6 +43,15 @@ const plans = createSlice({
   },
 });
 
-export const { SET_SELECTED_PLAN, SET_PLAN_TO_EDIT, CHANGE_PLAN_TYPE, ADD_DAY, REMOVE_DAY, EDIT_PLAN, SET_PLAN_TO_PREVIEW } = plans.actions;
+export const {
+  SET_SELECTED_PLAN,
+  SET_PLAN_TO_EDIT,
+  CHANGE_PLAN_TYPE,
+  ADD_DAY,
+  REMOVE_DAY,
+  EDIT_PLAN,
+  SET_PLAN_TO_PREVIEW,
+  CHANGE_PLAN_NAME,
+} = plans.actions;
 
 export default plans.reducer;

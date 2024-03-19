@@ -25,7 +25,6 @@ export const addHistoryItemToUser = async (id, historyItem) => {
 };
 
 export const removePlanFromUser = async (userId, planId) => {
-  console.log(userId, planId);
   try {
     const response = await fetch('https://workon-backend.azurewebsites.net/users/plans/' + userId, {
       method: 'DELETE',

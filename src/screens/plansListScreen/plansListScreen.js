@@ -13,18 +13,20 @@ const PlansListScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Your plans</Text>
       {!isLoading && (
-        <View>
-          {plans.map(plan => (
-            <PlanBanner plan={plan} img='test' key={plan.id} />
-          ))}
-        </View>
+        <>
+          <View>
+            {plans.map(plan => (
+              <PlanBanner plan={plan} img='test' key={plan.id} />
+            ))}
+          </View>
+          <TouchableOpacity>
+            <View style={styles.buttonWrapper}>
+              <Icon name='plus' size={45} style={styles.icon} />
+              <Text style={styles.button}>Add</Text>
+            </View>
+          </TouchableOpacity>
+        </>
       )}
-      <TouchableOpacity>
-        <View style={styles.buttonWrapper}>
-          <Icon name='plus' size={45} style={styles.icon} />
-          <Text style={styles.button}>Add</Text>
-        </View>
-      </TouchableOpacity>
     </View>
   );
 };

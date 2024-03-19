@@ -18,17 +18,17 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     paddingHorizontal: 5,
     justifyContent: 'space-between',
-    marginBottom: 15
-  },  
+    marginBottom: 15,
+  },
   planName: {
     color: backgroundColor,
     fontSize: 22,
-    flexGrow: 1
-  },  
+    flexGrow: 1,
+  },
   planType: {
     color: backgroundColor,
     fontSize: 22,
-    width: '50%'
+    width: '50%',
   },
   planTypeButton: {
     flexGrow: 1,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   planTypeButtonText: {
     alignSelf: 'center',
-    lineHeight: 26
+    lineHeight: 26,
   },
   planTypeButtonActive: {
     backgroundColor: backgroundColor,
@@ -47,8 +47,29 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: backgroundColor,
-    marginLeft: 10
-  }
+    marginLeft: 10,
+  },
+  saveButtonWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 15,
+    backgroundColor: secondaryColor,
+    width: 150,
+    justifyContent: 'center',
+    paddingVertical: 5,
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+  saveButton: {
+    color: backgroundColor,
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  saveIcon: {
+    color: backgroundColor,
+    marginRight: 15,
+  },
 });
 
 export default styles;

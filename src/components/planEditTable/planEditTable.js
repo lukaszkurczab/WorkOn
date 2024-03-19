@@ -40,9 +40,7 @@ const PlanEditTable = ({ plan }) => {
   };
 
   const handleEditExercise = updatedExercise => {
-    const x = { ...plan };
-    x.days[0].exercises[0] = 0;
-    console.log(x.days[0].exercises[0]);
+    console.log(updatedExercise);
     setShowEditModla(false);
   };
 
