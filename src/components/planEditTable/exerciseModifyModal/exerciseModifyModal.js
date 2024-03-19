@@ -48,7 +48,6 @@ const ExerciseModifyModal = ({ onConfirm, exercise }) => {
       weight: Number(newWeight) || 0,
     };
     setModifiedSeries(newModifiedSeries);
-    console.log(modifiedSeries);
   };
 
   return (
@@ -70,7 +69,7 @@ const ExerciseModifyModal = ({ onConfirm, exercise }) => {
               style={styles.input}
               keyboardType='numeric'
               maxLength={5}
-              defaultValue={`${i.reps}`}
+              defaultValue={`${i.reps || ''}`}
               onChangeText={newText => handleRepsChange(newText, index)}></TextInput>
           </View>
           <View style={styles.inputWrapper}>
@@ -79,7 +78,7 @@ const ExerciseModifyModal = ({ onConfirm, exercise }) => {
               style={styles.input}
               keyboardType='numeric'
               maxLength={5}
-              defaultValue={`${i.weight}`}
+              defaultValue={`${i.weight || ''}`}
               onChangeText={newText => handleWeightChange(newText, index)}></TextInput>
           </View>
         </View>

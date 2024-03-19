@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanEditTable from '../../components/planEditTable/planEditTable';
@@ -9,6 +10,7 @@ import styles from './planEditScreen.styles';
 
 const PlanEditScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [editablePlanName, setEditablePlanName] = useState(false);
   const [selectedPlanName, setSelectedPlanName] = useState(useSelector(store => store.plans.planToEdit.name));
   const planToEdit = useSelector(store => store.plans.planToEdit);
@@ -19,9 +21,8 @@ const PlanEditScreen = () => {
       userId: userId,
       plan: planToEdit,
     };
-    console.log(data.plan.days[0].exercises[0]);
-    //dispatch(editPlan(data));
-    //navigation.navigate('PlansListScreen');
+    dispatch(editPlan(data));
+    navigation.navigate('PlansListScreen');
   };
 
   return (
@@ -58,7 +59,7 @@ const PlanEditScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <PlanEditTable plan={planToEdit} />
+      <PlanEditTable />
       <TouchableOpacity onPress={handleSavePress}>
         <View style={styles.saveButtonWrapper}>
           <Icon name='save' size={24} style={styles.saveIcon} />

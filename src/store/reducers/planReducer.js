@@ -37,6 +37,13 @@ const plans = createSlice({
     REMOVE_DAY: state => {
       state.planToEdit.days = state.planToEdit.days.slice(0, -1);
     },
+    EDIT_EXERCISE: (state, action) => {
+      const editedPlan = { ...state.planToEdit };
+      const dayIndex = editedPlan.days.findIndex(i => i.name === action.payload.activeDay);
+      const exerciseIndex = editedPlan.days[dayIndex].exercises.findIndex(i => i.id === action.payload.updatedExercise.id);
+      editedPlan.days[dayIndex].exercises[exerciseIndex] = action.payload.updatedExercise;
+      state.planToEdit = { ...editedPlan };
+    },
     EDIT_PLAN: (state, action) => {
       state.planToEdit = { ...action.payload };
     },
@@ -52,6 +59,7 @@ export const {
   EDIT_PLAN,
   SET_PLAN_TO_PREVIEW,
   CHANGE_PLAN_NAME,
+  EDIT_EXERCISE,
 } = plans.actions;
 
 export default plans.reducer;

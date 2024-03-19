@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ButtonBig from '../buttons/buttonBig/buttonBig';
 import ExerciseRow from './exerciseRow/exerciseRow';
 import ExerciseModifyModal from './exerciseModifyModal/exerciseModifyModal';
 import WeeklyTableHeading from './weeklyTableHeading/weeklyTableHeading';
 import DailyTableHeading from './dailyTableHeading/dailyTableHeading';
-import { ADD_DAY, REMOVE_DAY } from '../../store/reducers/planReducer';
+import { ADD_DAY, REMOVE_DAY, EDIT_EXERCISE } from '../../store/reducers/planReducer';
 import styles from './planEditTable.styles';
 
-const PlanEditTable = ({ plan }) => {
+const PlanEditTable = () => {
   const dispatch = useDispatch();
+  const plan = useSelector(store => store.plans.planToEdit);
   const [activeDay, setActiveDay] = useState(plan.days[0].name);
   const [daysPlanToEdit, setDaysPlanToEdit] = useState(plan.days.filter(day => day.name === activeDay)[0].exercises);
   const [showEditModal, setShowEditModla] = useState(false);
@@ -18,7 +19,7 @@ const PlanEditTable = ({ plan }) => {
 
   useEffect(() => {
     setDaysPlanToEdit(plan.days.filter(day => day.name === activeDay)[0].exercises);
-  }, [activeDay]);
+  }, [activeDay, plan]);
 
   const handleAdd = () => {};
 
@@ -40,7 +41,7 @@ const PlanEditTable = ({ plan }) => {
   };
 
   const handleEditExercise = updatedExercise => {
-    console.log(updatedExercise);
+    dispatch(EDIT_EXERCISE({ updatedExercise: updatedExercise, activeDay: activeDay }));
     setShowEditModla(false);
   };
 
