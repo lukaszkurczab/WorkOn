@@ -8,7 +8,7 @@ import styles from './workoutMain.styles';
 import MenuButton from '../buttons/menuButton/menuButton';
 import ExercisesList from './exercisesList/exercisesList';
 import { SET_TRAINING_SUMMARY } from '../../store/reducers/trainingSummaryReducer';
-import { addHistoryItemToUser } from '../../api/users';
+import { addHistoryItem } from '../../store/slice/userSlice';
 
 const WorkoutMain = () => {
   const dispatch = useDispatch();
@@ -51,7 +51,11 @@ const WorkoutMain = () => {
   };
 
   const handleFinishTraining = () => {
-    const date = new Date();
+    const date = new Date().toLocaleDateString('en-GB', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
 
     dispatch(
       SET_TRAINING_SUMMARY({
@@ -60,12 +64,17 @@ const WorkoutMain = () => {
       }),
     );
 
-    addHistoryItemToUser(userId, {
-      date: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
-      name: planName,
-      time: totalTime,
-      exercises: plan,
-    });
+    dispatch(
+      addHistoryItem({
+        id: userId,
+        historyItem: {
+          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
+          name: planName,
+          time: totalTime,
+          exercises: plan,
+        },
+      }),
+    );
     navigation.navigate('WorkoutSummaryScreen');
   };
 

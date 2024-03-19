@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchUser, removePlanFromUser, editUserPlan } from '../../api/users';
+import { fetchUser, removePlanFromUser, editUserPlan, addHistoryItemToUser } from '../../api/users';
 
 export const getUser = createAsyncThunk('getUser', async id => {
   const res = await fetchUser(id);
@@ -13,6 +13,11 @@ export const removePlan = createAsyncThunk('removePlan', async data => {
 
 export const editPlan = createAsyncThunk('editPlan', async data => {
   const res = await editUserPlan(data.userId, data.plan);
+  return res;
+});
+
+export const addHistoryItem = createAsyncThunk('addHistoryItem', async data => {
+  const res = await addHistoryItemToUser(data.id, data.historyItem);
   return res;
 });
 
@@ -66,6 +71,17 @@ const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(editPlan.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    builder.addCase(addHistoryItem.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addHistoryItem.fulfilled, (state, action) => {
+      state.data.history = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(addHistoryItem.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
     });
