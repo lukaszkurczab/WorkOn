@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { history as historyDB } from '../db/history';
 
 const history = createSlice({
   name: 'history',
   initialState: {
-    history: historyDB,
+    history: [],
   },
   reducers: {
     REMOVE_FROM_HISTORY: (state, action) => {

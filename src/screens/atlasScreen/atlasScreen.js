@@ -1,12 +1,13 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './atlasScreen.styles';
 import ExerciseTile from '../../components/tiles/exerciseTile/exerciseTile';
 import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
 
 const AtlasScreen = () => {
-  const exercises = useSelector((store) => store.exercises.selectedExercises);
+  const exercises = useSelector(store => store.exercises.data);
+  console.log(exercises);
 
   return (
     <View style={styles.container}>
@@ -14,8 +15,8 @@ const AtlasScreen = () => {
         <Text style={styles.title}>Exercise atlas</Text>
         <AtlasDropdown />
         <View style={styles.atlasWrapper}>
-          {exercises.map((exercise) => (
-            <ExerciseTile exercise={exercise} key={exercise.id}/>
+          {exercises.map(exercise => (
+            <ExerciseTile exercise={exercise} key={exercise.id} />
           ))}
         </View>
       </ScrollView>
