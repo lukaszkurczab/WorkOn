@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './articlesListScreen.styles';
 import ArticleTile from '../../components/tiles/articleTile/articleTile';
@@ -31,8 +30,8 @@ const ArticlesListScreen = () => {
         </TouchableOpacity>
       </ScrollView>
       <View style={styles.articlesWrapper}>
-        <ArticleTile title='10-minute morning routine' desc='Stretch and Breathe' image='article_morning.png'/>
-        <ArticleTile title='Yoga terapy' desc='Pile and Twist' image='article_yoga.png'/>
+        <ArticleTile title='10-minute morning routine' desc='Stretch and Breathe' image='article_morning.png' />
+        <ArticleTile title='Yoga terapy' desc='Pile and Twist' image='article_yoga.png' />
       </View>
     </View>
   );

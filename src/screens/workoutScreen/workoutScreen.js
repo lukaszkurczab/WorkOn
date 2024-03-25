@@ -1,12 +1,32 @@
-import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 import styles from './workoutScreen.styles';
-import WorkoutMain from '../../components/workoutMain/workoutMain';
+import WorkoutTimer from '../../components/workoutTimer/workoutTimer';
+import WorkoutSelectExercise from '../../components/workoutSelectExercise/workoutSelectExercise';
+import WorkoutExercise from '../../components/workoutExercise/workoutExercise';
+import WorkoutRest from '../../components/workoutRest/workoutRest';
+
+const WorkoutMain = () => {
+  const step = useSelector(store => store.training.trainingStep);
+
+  switch (step) {
+    case 'select':
+      return <WorkoutSelectExercise />;
+    case 'exercise':
+      return <WorkoutExercise />;
+    case 'rest':
+      return <WorkoutRest />;
+  }
+};
 
 const WorkoutScreen = () => {
   return (
     <View style={styles.container}>
-      <WorkoutMain/>
+      <View style={styles.timerWrapper}>
+        <Text style={styles.timerText}>Total</Text>
+        <WorkoutTimer />
+      </View>
+      {WorkoutMain()}
     </View>
   );
 };

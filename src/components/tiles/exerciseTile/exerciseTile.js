@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './exerciseTile.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';

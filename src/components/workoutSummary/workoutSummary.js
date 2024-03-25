@@ -1,22 +1,21 @@
-import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { useFormatTime } from '../../utils/hooks';
 import styles from './workoutSummary.styles';
-import WorkoutSummaryListItem from "./workoutSummaryListItem/workoutSummaryListItem";
-import ButtonBig from "../buttons/buttonBig/buttonBig";
+import WorkoutSummaryListItem from './workoutSummaryListItem/workoutSummaryListItem';
+import ButtonBig from '../buttons/buttonBig/buttonBig';
 
 const WorkoutSummary = () => {
   const navigation = useNavigation();
-  const summary = useSelector((store) => store.trainingSummary.trainingSummary);
-  const trainingName = useSelector((store) => store.trainingSummary.trainingName);
-  const trainingTime = Date.now() - useSelector((store) => store.training.startTraining);
-  const date = new Date().toLocaleDateString('pl-PL')
+  const summary = useSelector(store => store.training.trainingSummary);
+  const trainingName = useSelector(store => store.training.ongoingPlanData.name);
+  const trainingTime = Date.now() - useSelector(store => store.training.trainingStart);
+  const date = new Date().toLocaleDateString('pl-PL');
 
   const handleFinish = () => {
-    navigation.navigate('MainScreen')
-  }
+    navigation.navigate('MainScreen');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -24,12 +23,12 @@ const WorkoutSummary = () => {
       <Text style={styles.time}>{date}</Text>
       <Text style={styles.listTitle}>Exercises:</Text>
       <View style={styles.listWrapper}>
-        {summary.map((exercise) => (
+        {summary.map(exercise => (
           <WorkoutSummaryListItem exercise={exercise} key={exercise.id} />
         ))}
       </View>
-      <Text style={styles.timeText}>Total time: {useFormatTime((trainingTime/1000).toFixed())}</Text>
-      <ButtonBig additionalStyles={{alignSelf: 'center'}} theme={'light'} onClick={handleFinish}>
+      <Text style={styles.timeText}>Total time: {useFormatTime((trainingTime / 1000).toFixed())}</Text>
+      <ButtonBig additionalStyles={{ alignSelf: 'center' }} theme={'light'} onClick={handleFinish}>
         <Text>FINISH</Text>
       </ButtonBig>
     </ScrollView>

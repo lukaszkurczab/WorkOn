@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { settings } from '../db/settings';
 
 const plans = createSlice({
   name: 'plans',
   initialState: {
-    selectedPlan: settings.selectedPlan,
     planToPreview: {},
     planToEdit: {},
   },
@@ -20,9 +18,6 @@ const plans = createSlice({
     },
     SET_PLAN_TO_PREVIEW: (state, action) => {
       state.planToPreview = action.payload;
-    },
-    SET_SELECTED_PLAN: (state, action) => {
-      state.selectedPlan = { ...action.payload };
     },
     ADD_DAY: (state, action) => {
       state.planToEdit.days = [
@@ -50,16 +45,7 @@ const plans = createSlice({
   },
 });
 
-export const {
-  SET_SELECTED_PLAN,
-  SET_PLAN_TO_EDIT,
-  CHANGE_PLAN_TYPE,
-  ADD_DAY,
-  REMOVE_DAY,
-  EDIT_PLAN,
-  SET_PLAN_TO_PREVIEW,
-  CHANGE_PLAN_NAME,
-  EDIT_EXERCISE,
-} = plans.actions;
+export const { SET_PLAN_TO_EDIT, CHANGE_PLAN_TYPE, ADD_DAY, REMOVE_DAY, EDIT_PLAN, SET_PLAN_TO_PREVIEW, CHANGE_PLAN_NAME, EDIT_EXERCISE } =
+  plans.actions;
 
 export default plans.reducer;

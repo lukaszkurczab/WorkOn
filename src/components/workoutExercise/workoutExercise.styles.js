@@ -1,23 +1,27 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, accentColor } from '../../../styles/colors';
+import { primaryColor, accentColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
+  },
+  buttonIcon: {
+    fontSize: 20,
+    lineHeight: 20,
+    color: primaryColor,
   },
   title: {
     color: primaryColor,
     fontSize: 32,
-    marginBottom: 35,
+    marginBottom: 10,
+    marginTop: 10,
     fontWeight: '700',
     textAlign: 'center',
-  },
-  seriesWrapper:{
-    gap: 10
   },
   descWrapper: {
     marginHorizontal: 30,
     marginTop: 40,
-    gap: 15
+    gap: 15,
   },
   descTitle: {
     color: primaryColor,
@@ -25,12 +29,7 @@ const styles = StyleSheet.create({
   },
   descText: {
     color: primaryColor,
-    fontSize: 16
-  },
-  titleWrapper: {
-    maxWidth: '70%',
-    alignSelf: 'center',
-    position: 'relative'
+    fontSize: 16,
   },
   buttonWrapper: {
     borderColor: accentColor,
@@ -39,17 +38,27 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     marginTop: 20,
+    marginBottom: 20,
     marginRight: 20,
     width: 160,
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
   },
   buttonText: {
     color: accentColor,
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '500',
-    letterSpacing: .8,
-  }
+    letterSpacing: 0.8,
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
+  reps: {
+    color: primaryColor,
+    fontSize: 32,
+    marginBottom: 20,
+  },
 });
 
 export default styles;

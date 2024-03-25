@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,8 +11,7 @@ import { START_TRAINING } from '../../../store/reducers/trainingReducer';
 const BeginTrainingTile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const selectedPlan = useSelector(store => store.user.selectedWorkout);
-  const plans = useSelector(state => state.user.data.plans);
+  const selectedPlan = useSelector(store => store.user.selectedPlan);
   const [selectedDay, setSelectedDay] = useState(0);
 
   const handleDaySelected = dayIndex => {
@@ -20,14 +19,15 @@ const BeginTrainingTile = () => {
   };
 
   const handleStartPress = () => {
-    const newTraining = plans.find(plan => plan.id === selectedPlan.id);
-
-    dispatch(
-      START_TRAINING({
-        plan: newTraining.days[selectedDay].exercises,
-        planName: newTraining.name,
-      }),
-    );
+    const planData = {
+      id: selectedPlan.id,
+      name: selectedPlan.name,
+      img: selectedPlan.img,
+      planType: selectedPlan.planType,
+      dayIndex: selectedDay,
+      plan: selectedPlan.days[selectedDay],
+    };
+    dispatch(START_TRAINING(planData));
     navigation.navigate('WorkoutScreen');
   };
 

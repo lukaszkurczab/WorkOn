@@ -3,45 +3,69 @@ import { createSlice } from '@reduxjs/toolkit';
 const training = createSlice({
   name: 'training',
   initialState: {
-    ongoingTraining: {},
-    ongoingTrainingName: '',
-    startTraining: Date.now(),
+    ongoingExercise: {},
+    ongoingPlanData: {},
+    plan: {},
+    trainingStart: new Date(),
+    trainingSummary: [],
+    finishedExercises: [],
+    notFinishedExercises: [],
+    trainingStep: 'select',
   },
   reducers: {
     START_TRAINING: (state, action) => {
-      const newTraining = action.payload.plan.map(exercise => ({
-        id: exercise.id,
-        series: exercise.series.map(i => ({ ...i, status: 'onTrack', success: false })),
-        finished: false,
-      }));
-
-      state.ongoingTraining = newTraining;
-      state.ongoingTrainingName = action.payload.planName;
-      state.startTraining = Date.now();
-    },
-    UPDATE_PROGRESS: (state, action) => {
-      const elementToUpdateIndex = state.ongoingTraining.findIndex(i => i.id === action.payload.id);
-      const seriesIndex = action.payload.index;
-      const finalReps = action.payload.reps;
-      const finalWeight = action.payload.weight;
-
-      state.ongoingTraining[elementToUpdateIndex].series[seriesIndex] = {
-        reps: finalReps,
-        weight: finalWeight,
-        status: 'finished',
-        success: action.payload.success,
+      state.plan = {
+        exercises: action.payload.plan.exercises,
+        name: action.payload.plan.name,
+        restDay: action.payload.plan.restDay,
       };
-      state.ongoingTraining[elementToUpdateIndex].finished = action.payload.finished;
+      state.ongoingPlanData = {
+        id: action.payload.id,
+        name: action.payload.name,
+        img: action.payload.img,
+        planType: action.payload.planType,
+        dayIndex: action.payload.dayIndex,
+      };
+      state.trainingStart = Date.now();
+      state.finishedExercises = [];
+      state.notFinishedExercises = state.plan.exercises;
+      state.trainingSummary = [];
+      state.trainingStep = 'select';
     },
-    MARK_EXERCISE_AS_FINISHED: (state, action) => {
-      state.ongoingTraining[action.payload.index].finished = true;
+    SET_ONGOING_EXERCISE: (state, action) => {
+      state.ongoingExercise = { exercise: action.payload, serieIndex: 0 };
+      state.trainingStep = 'exercise';
     },
-    FINISH_TRAINING: state => {
-      state.ongoingTraining = {};
+    FINISH_SERIE: (state, action) => {
+      // if (
+      //   action.payload.reps >= state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].reps &&
+      //   action.payload.weight >= state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].weight
+      // ) {
+      //   state.plan.exercises.series[state.ongoingExercise.serieIndex].completed = true;
+      // }
+
+      state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].reps = action.payload.reps;
+      state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].weight = action.payload.weight;
+
+      if (state.ongoingExercise.serieIndex < state.ongoingExercise.exercise.series.length - 1) {
+        state.ongoingExercise.serieIndex = state.ongoingExercise.serieIndex + 1;
+        state.trainingStep = 'rest';
+      } else {
+        state.notFinishedExercises = state.notFinishedExercises.filter(exercise => exercise.id !== state.ongoingExercise.exercise.id);
+        state.finishedExercises = [...state.finishedExercises, state.ongoingExercise.exercise];
+        state.trainingSummary = [...state.trainingSummary, state.ongoingExercise.exercise];
+        state.trainingStep = 'select';
+      }
+    },
+    END_REST: (state, action) => {
+      state.trainingStep = 'exercise';
+    },
+    END_TRAINING: (state, action) => {
+      console.log(state.trainingSummary);
     },
   },
 });
 
-export const { START_TRAINING, UPDATE_PROGRESS, MARK_EXERCISE_AS_FINISHED, FINISH_TRAINING } = training.actions;
+export const { START_TRAINING, FINISH_SERIE, END_REST, END_TRAINING, SET_ONGOING_EXERCISE } = training.actions;
 
 export default training.reducer;

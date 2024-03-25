@@ -26,12 +26,12 @@ const userSlice = createSlice({
   initialState: {
     isLoading: false,
     data: [],
-    selectedWorkout: undefined,
     isError: false,
+    selectedPlan: undefined,
   },
   reducers: {
     SET_SELECTED_PLAN: (state, action) => {
-      state.selectedWorkout = { ...action.payload };
+      state.selectedPlan = action.payload;
     },
   },
   extraReducers: builder => {
@@ -41,9 +41,11 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.data = [];
       state.data = action.payload;
-      state.selectedWorkout = Object.assign({
+      state.selectedPlan = Object.assign({
         id: action.payload.plans[0].id,
         name: action.payload.plans[0].name,
+        img: action.payload.plans[0].img,
+        planType: action.payload.plans[0].planType,
         days: action.payload.plans[0].days,
       });
       state.isLoading = false;

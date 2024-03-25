@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './atlasScreen.styles';
@@ -7,7 +6,6 @@ import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
 
 const AtlasScreen = () => {
   const exercises = useSelector(store => store.exercises.data);
-  console.log(exercises);
 
   return (
     <View style={styles.container}>

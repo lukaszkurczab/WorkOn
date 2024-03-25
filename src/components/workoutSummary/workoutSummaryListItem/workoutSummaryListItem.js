@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
 import styles from './workoutSummaryListItem.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const WorkoutSummaryListItem = ({ exercise }) => {
   const exercisesList = useSelector(state => state.exercises.data);
@@ -22,11 +21,6 @@ const WorkoutSummaryListItem = ({ exercise }) => {
               <Text style={styles.dropdownText}>
                 Series {index + 1}: {i.reps} x {i.weight}kg
               </Text>
-              {i.success ? (
-                <Icon name='check-circle' size={20} style={styles.iconSuccess} />
-              ) : (
-                <Icon name='cancel' size={20} style={styles.iconFail} />
-              )}
             </View>
           ))}
         </View>
