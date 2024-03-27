@@ -4,7 +4,8 @@ const training = createSlice({
   name: 'training',
   initialState: {
     ongoingExercise: {},
-    ongoingPlanData: {},
+    ongoingPlanData: null,
+    ongoingPlanName: '',
     plan: {},
     trainingStart: new Date(),
     trainingSummary: [],
@@ -26,6 +27,7 @@ const training = createSlice({
         planType: action.payload.planType,
         dayIndex: action.payload.dayIndex,
       };
+      state.ongoingPlanName = action.payload.name;
       state.trainingStart = Date.now();
       state.finishedExercises = [];
       state.notFinishedExercises = state.plan.exercises;
@@ -37,13 +39,6 @@ const training = createSlice({
       state.trainingStep = 'exercise';
     },
     FINISH_SERIE: (state, action) => {
-      // if (
-      //   action.payload.reps >= state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].reps &&
-      //   action.payload.weight >= state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].weight
-      // ) {
-      //   state.plan.exercises.series[state.ongoingExercise.serieIndex].completed = true;
-      // }
-
       state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].reps = action.payload.reps;
       state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].weight = action.payload.weight;
 
@@ -57,11 +52,11 @@ const training = createSlice({
         state.trainingStep = 'select';
       }
     },
-    END_REST: (state, action) => {
+    END_REST: state => {
       state.trainingStep = 'exercise';
     },
-    END_TRAINING: (state, action) => {
-      console.log(state.trainingSummary);
+    END_TRAINING: state => {
+      state.ongoingPlanData = null;
     },
   },
 });

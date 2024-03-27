@@ -24,7 +24,6 @@ const WorkoutSelectExercise = () => {
       day: '2-digit',
     });
 
-    dispatch(END_TRAINING());
     dispatch(
       addHistoryItem({
         id: userId,
@@ -47,6 +46,8 @@ const WorkoutSelectExercise = () => {
         },
       }),
     );
+
+    dispatch(END_TRAINING());
     navigation.navigate('WorkoutSummaryScreen');
   };
 

@@ -1,4 +1,4 @@
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text } from 'react-native';
 import Svg, { Circle, G } from 'react-native-svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -7,8 +7,6 @@ import { useEffect, useState } from 'react';
 import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
 import { END_REST } from '../../store/reducers/trainingReducer';
 import styles from './workoutRest.styles';
-
-const { width } = Dimensions.get('window');
 
 const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }) => {
   const progress = (seconds / 60) * 100;

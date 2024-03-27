@@ -9,7 +9,7 @@ import ButtonBig from '../buttons/buttonBig/buttonBig';
 const WorkoutSummary = () => {
   const navigation = useNavigation();
   const summary = useSelector(store => store.training.trainingSummary);
-  const trainingName = useSelector(store => store.training.ongoingPlanData.name);
+  const trainingName = useSelector(store => store.training.ongoingPlanName);
   const trainingTime = Date.now() - useSelector(store => store.training.trainingStart);
   const date = new Date().toLocaleDateString('pl-PL');
 
