@@ -43,6 +43,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginBottom: 20,
   },
+  buttonTextPreview: {
+    color: primaryColor,
+    textAlign: 'center',
+    fontSize: 26,
+    fontWeight: '500',
+    letterSpacing: 0.8,
+    textDecorationLine: 'underline',
+    marginBottom: 20,
+  },
 });
 
 export default styles;

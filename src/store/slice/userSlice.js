@@ -21,6 +21,45 @@ export const addHistoryItem = createAsyncThunk('addHistoryItem', async data => {
   return res;
 });
 
+export const progressTraining = createAsyncThunk('progressTraining', async data => {
+  const { id, dayIndex, plans, finishedExercises } = data.plan;
+
+  let planToUpdate = { ...plans.filter(plan => plan.id === id)[0] };
+  const dayToUpdate = planToUpdate.days[dayIndex];
+  const updatedDayExercises = dayToUpdate.exercises.map(exercise => {
+    const finishedExercise = finishedExercises.filter(i => i.id === exercise.id)[0];
+    if (finishedExercise) {
+      return finishedExercise.series.every(i => i.reps >= exercise.series[i.id - 1].reps)
+        ? {
+            id: exercise.id,
+            loadIncrease: exercise.loadIncrease,
+            repsRange: exercise.repsRange,
+            series: exercise.series.map(serie => ({
+              id: serie.id,
+              reps: serie.reps >= exercise.repsRange[1] ? exercise.repsRange[0] : serie.reps + 1,
+              weight: serie.reps >= exercise.repsRange[1] ? serie.weight + exercise.loadIncrease : serie.weight,
+            })),
+          }
+        : exercise;
+    } else {
+      return exercise;
+    }
+  });
+
+  planToUpdate = {
+    id: planToUpdate.id,
+    img: planToUpdate.img,
+    name: planToUpdate.name,
+    planType: planToUpdate.planType,
+    days: planToUpdate.days.map((day, index) =>
+      index === dayIndex ? { name: day.name, restDay: day.restDay, exercises: updatedDayExercises } : day,
+    ),
+  };
+
+  const res = await editUserPlan(data.userId, planToUpdate);
+  return res;
+});
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -35,7 +74,7 @@ const userSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(getUser.pending, (state, action) => {
+    builder.addCase(getUser.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
@@ -50,40 +89,51 @@ const userSlice = createSlice({
       });
       state.isLoading = false;
     });
-    builder.addCase(getUser.rejected, (state, action) => {
+    builder.addCase(getUser.rejected, state => {
       state.isLoading = false;
       state.isError = true;
     });
-    builder.addCase(removePlan.pending, (state, action) => {
+    builder.addCase(removePlan.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(removePlan.fulfilled, (state, action) => {
       state.data.plans = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(removePlan.rejected, (state, action) => {
+    builder.addCase(removePlan.rejected, state => {
       state.isLoading = false;
       state.isError = true;
     });
-    builder.addCase(editPlan.pending, (state, action) => {
+    builder.addCase(editPlan.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(editPlan.fulfilled, (state, action) => {
       state.data.plans = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(editPlan.rejected, (state, action) => {
+    builder.addCase(editPlan.rejected, state => {
       state.isLoading = false;
       state.isError = true;
     });
-    builder.addCase(addHistoryItem.pending, (state, action) => {
+    builder.addCase(addHistoryItem.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(addHistoryItem.fulfilled, (state, action) => {
       state.data.history = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(addHistoryItem.rejected, (state, action) => {
+    builder.addCase(addHistoryItem.rejected, state => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    builder.addCase(progressTraining.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(progressTraining.fulfilled, (state, action) => {
+      state.data.plans = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(progressTraining.rejected, state => {
       state.isLoading = false;
       state.isError = true;
     });

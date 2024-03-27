@@ -2,6 +2,7 @@ import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
+import { addHistoryItem, progressTraining } from '../../store/slice/userSlice';
 import WorkoutExerciseTile from '../tiles/workoutExerciseTile.js/workoutExerciseTile';
 import styles from './workoutSelectExercise.styles';
 
@@ -10,9 +11,42 @@ const WorkoutSelectExercise = () => {
   const navigation = useNavigation();
   const finishedExercises = useSelector(store => store.training.finishedExercises);
   const notFinishedExercises = useSelector(store => store.training.notFinishedExercises);
+  const userId = useSelector(store => store.user.data.id);
+  const userPlans = useSelector(store => store.user.data.plans);
+  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
+  const trainingSummary = useSelector(store => store.training.trainingSummary);
+  const trainingStart = useSelector(state => state.training.trainingStart);
 
   const handleFinish = () => {
+    const date = new Date().toLocaleDateString('en-GB', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
     dispatch(END_TRAINING());
+    dispatch(
+      addHistoryItem({
+        id: userId,
+        historyItem: {
+          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
+          name: ongoingPlanData.name,
+          time: Date.now() - trainingStart,
+          exercises: trainingSummary,
+        },
+      }),
+    );
+    dispatch(
+      progressTraining({
+        userId: userId,
+        plan: {
+          id: ongoingPlanData.id,
+          dayIndex: ongoingPlanData.dayIndex,
+          plans: userPlans,
+          finishedExercises: trainingSummary,
+        },
+      }),
+    );
     navigation.navigate('WorkoutSummaryScreen');
   };
 
@@ -43,6 +77,13 @@ const WorkoutSelectExercise = () => {
             <WorkoutExerciseTile exercise={exercise} key={exercise.id} touchable={false} />
           ))}
         </View>
+        {notFinishedExercises.length > 0 && (
+          <View>
+            <TouchableOpacity onPress={handleFinish}>
+              <Text style={styles.buttonTextPreview}>End training</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
