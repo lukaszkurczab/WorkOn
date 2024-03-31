@@ -17,7 +17,7 @@ const ExerciseScreen = () => {
         <Text style={styles.text}>{exercise.startPosition}</Text>
         <Text style={styles.sectionTitle}>Process:</Text>
         <Text style={styles.text}>{exercise.process}</Text>
-        <Text style={styles.sectionTitle}>Main muscles group:</Text>
+        <Text style={styles.sectionTitle}>Main muscles:</Text>
         {exercise.muscleMain.map(muscle => (
           <View style={styles.chip} key={muscle}>
             <Text style={styles.chipText}>{muscle}</Text>

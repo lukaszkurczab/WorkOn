@@ -6,6 +6,7 @@ import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
 
 const AtlasScreen = () => {
   const exercises = useSelector(store => store.exercises.data);
+  const selecterMusclesGroup = useSelector(store => store.atlas.selectedGroup);
 
   return (
     <View style={styles.container}>
@@ -13,9 +14,11 @@ const AtlasScreen = () => {
         <Text style={styles.title}>Exercise atlas</Text>
         <AtlasDropdown />
         <View style={styles.atlasWrapper}>
-          {exercises.map(exercise => (
-            <ExerciseTile exercise={exercise} key={exercise.id} />
-          ))}
+          {exercises.map(exercise => {
+            if (selecterMusclesGroup === 'Select group' || exercise.groups.includes(selecterMusclesGroup)) {
+              return <ExerciseTile exercise={exercise} key={exercise.id} />;
+            }
+          })}
         </View>
       </ScrollView>
     </View>

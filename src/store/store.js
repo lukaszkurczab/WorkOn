@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import planReducer from './reducers/planReducer';
 import trainingReducer from './reducers/trainingReducer';
 import historyReducer from './reducers/historyReducer';
+import atlasReducer from './reducers/atlasReducer';
 import userSlice from './slice/userSlice';
 import exercisesSlice from './slice/exercisesSlice';
 
@@ -13,12 +14,14 @@ const appReducer = combineReducers({
   plans: planReducer,
   training: trainingReducer,
   history: historyReducer,
+  atlas: atlasReducer,
   user: userSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['atlas'],
 };
 
 const persistedReducer = persistReducer(persistConfig, appReducer);
