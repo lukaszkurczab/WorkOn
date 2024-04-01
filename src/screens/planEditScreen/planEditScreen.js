@@ -18,6 +18,7 @@ const PlanEditScreen = () => {
   const [editablePlanName, setEditablePlanName] = useState(false);
   const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const [dayName, setDayName] = useState(null);
+  const [planName, setPlanName] = useState(selectedPlanName);
 
   const handleSetExerciseToEdit = (exercise, newDayName) => {
     setExerciseToEdit(exercise);
@@ -33,6 +34,15 @@ const PlanEditScreen = () => {
     navigation.navigate('PlansListScreen');
   };
 
+  const handlePlanNameChange = newName => {
+    setPlanName(newName);
+  };
+
+  const handleConfirmNameChange = () => {
+    dispatch(CHANGE_PLAN_NAME(planName));
+    setEditablePlanName(false);
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -40,12 +50,12 @@ const PlanEditScreen = () => {
           <View style={styles.rowWrapper}>
             <TextInput
               style={styles.planName}
-              defaultValue={selectedPlanName}
+              defaultValue={planName}
               editable={editablePlanName}
-              onChangeText={newName => dispatch(CHANGE_PLAN_NAME(newName))}
+              onChangeText={newName => handlePlanNameChange(newName)}
             />
             {editablePlanName ? (
-              <TouchableOpacity onPress={() => setEditablePlanName(false)}>
+              <TouchableOpacity onPress={handleConfirmNameChange}>
                 <Icon name='check' size={26} style={styles.icon} />
               </TouchableOpacity>
             ) : (
