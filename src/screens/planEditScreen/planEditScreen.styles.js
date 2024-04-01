@@ -4,7 +4,7 @@ import { secondaryColor, primaryColor, backgroundColor, fillColor } from '../../
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-    paddingBottom: 100,
+    paddingBottom: 60,
     flex: 1,
     backgroundColor: backgroundColor,
   },
@@ -24,26 +24,6 @@ const styles = StyleSheet.create({
     color: backgroundColor,
     fontSize: 22,
     flexGrow: 1,
-  },
-  planType: {
-    color: backgroundColor,
-    fontSize: 22,
-    width: '50%',
-  },
-  planTypeButton: {
-    flexGrow: 1,
-    backgroundColor: secondaryColor,
-    height: '100%',
-  },
-  planTypeButtonText: {
-    alignSelf: 'center',
-    lineHeight: 26,
-  },
-  planTypeButtonActive: {
-    backgroundColor: backgroundColor,
-  },
-  planTypeButtonTextActive: {
-    color: secondaryColor,
   },
   icon: {
     color: backgroundColor,

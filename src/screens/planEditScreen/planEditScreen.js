@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import PlanEditTable from '../../components/planEditTable/planEditTable';
-import { CHANGE_PLAN_TYPE, CHANGE_PLAN_NAME } from '../../store/reducers/planReducer';
+import PlanEditDayBox from '../../components/planEditDayBox/planEditDayBox';
+import { CHANGE_PLAN_NAME, SET_EXERCISE_TO_EDIT } from '../../store/reducers/planReducer';
 import { editPlan } from '../../store/slice/userSlice';
 import styles from './planEditScreen.styles';
+import PlanEditModal from '../../components/planEditModal/planEditModal';
 
 const PlanEditScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [editablePlanName, setEditablePlanName] = useState(false);
-  const [selectedPlanName, setSelectedPlanName] = useState(useSelector(store => store.plans.planToEdit.name));
+  const selectedPlanName = useSelector(store => store.plans.planToEdit.name);
   const planToEdit = useSelector(store => store.plans.planToEdit);
   const userId = useSelector(store => store.user.data.id);
+  const [editablePlanName, setEditablePlanName] = useState(false);
+  const [exerciseToEdit, setExerciseToEdit] = useState(null);
+
+  const handleSetExerciseToEdit = exercise => {
+    setExerciseToEdit(exercise);
+  };
 
   const handleSavePress = () => {
     const data = {
@@ -26,47 +32,39 @@ const PlanEditScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.rowWrapper}>
-        <TextInput
-          style={styles.planName}
-          defaultValue={selectedPlanName}
-          editable={editablePlanName}
-          onChangeText={newName => dispatch(CHANGE_PLAN_NAME(newName))}
-        />
-        {editablePlanName ? (
-          <TouchableOpacity onPress={() => setEditablePlanName(false)}>
-            <Icon name='check' size={26} style={styles.icon} />
+    <>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.rowWrapper}>
+            <TextInput
+              style={styles.planName}
+              defaultValue={selectedPlanName}
+              editable={editablePlanName}
+              onChangeText={newName => dispatch(CHANGE_PLAN_NAME(newName))}
+            />
+            {editablePlanName ? (
+              <TouchableOpacity onPress={() => setEditablePlanName(false)}>
+                <Icon name='check' size={26} style={styles.icon} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => setEditablePlanName(true)}>
+                <Icon name='edit' size={26} style={styles.icon} />
+              </TouchableOpacity>
+            )}
+          </View>
+          {planToEdit.days.map(day => (
+            <PlanEditDayBox day={day} key={day.name} handleSetExerciseToEdit={handleSetExerciseToEdit} />
+          ))}
+          <TouchableOpacity onPress={handleSavePress}>
+            <View style={styles.saveButtonWrapper}>
+              <Icon name='save' size={24} style={styles.saveIcon} />
+              <Text style={styles.saveButton}>Save</Text>
+            </View>
           </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={() => setEditablePlanName(true)}>
-            <Icon name='edit' size={26} style={styles.icon} />
-          </TouchableOpacity>
-        )}
+        </ScrollView>
       </View>
-      <View style={styles.rowWrapper}>
-        <Text style={styles.planType}>Plan type</Text>
-        <View style={[styles.planTypeButton, planToEdit.planType === 'weekly' ? styles.planTypeButtonActive : null]}>
-          <TouchableOpacity onPress={() => dispatch(CHANGE_PLAN_TYPE('weekly'))}>
-            <Text style={[styles.planTypeButtonText, planToEdit.planType == 'weekly' ? styles.planTypeButtonTextActive : null]}>
-              weekly
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.planTypeButton, planToEdit.planType === 'daily' ? styles.planTypeButtonActive : null]}>
-          <TouchableOpacity onPress={() => dispatch(CHANGE_PLAN_TYPE('daily'))}>
-            <Text style={[styles.planTypeButtonText, planToEdit.planType == 'daily' ? styles.planTypeButtonTextActive : null]}>daily</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <PlanEditTable />
-      <TouchableOpacity onPress={handleSavePress}>
-        <View style={styles.saveButtonWrapper}>
-          <Icon name='save' size={24} style={styles.saveIcon} />
-          <Text style={styles.saveButton}>Save</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+      {exerciseToEdit !== null ? <PlanEditModal exercise={exerciseToEdit} handleCloseModal={handleSetExerciseToEdit} /> : null}
+    </>
   );
 };
 

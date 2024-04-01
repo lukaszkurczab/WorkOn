@@ -26,7 +26,7 @@ const PlanBanner = ({ plan, img }) => {
 
   const handelBannerPress = () => {
     dispatch(SET_PLAN_TO_PREVIEW(plan));
-    navigation.navigate('PlanTableScreen');
+    navigation.navigate('PlanDetailsScreen');
   };
 
   return (
