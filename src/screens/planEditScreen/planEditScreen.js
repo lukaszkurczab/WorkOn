@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanEditDayBox from '../../components/planEditDayBox/planEditDayBox';
-import { CHANGE_PLAN_NAME, SET_EXERCISE_TO_EDIT } from '../../store/reducers/planReducer';
+import { CHANGE_PLAN_NAME } from '../../store/reducers/planReducer';
 import { editPlan } from '../../store/slice/userSlice';
 import styles from './planEditScreen.styles';
 import PlanEditModal from '../../components/planEditModal/planEditModal';
@@ -17,9 +17,11 @@ const PlanEditScreen = () => {
   const userId = useSelector(store => store.user.data.id);
   const [editablePlanName, setEditablePlanName] = useState(false);
   const [exerciseToEdit, setExerciseToEdit] = useState(null);
+  const [dayName, setDayName] = useState(null);
 
-  const handleSetExerciseToEdit = exercise => {
+  const handleSetExerciseToEdit = (exercise, newDayName) => {
     setExerciseToEdit(exercise);
+    setDayName(newDayName);
   };
 
   const handleSavePress = () => {
@@ -63,7 +65,9 @@ const PlanEditScreen = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-      {exerciseToEdit !== null ? <PlanEditModal exercise={exerciseToEdit} handleCloseModal={handleSetExerciseToEdit} /> : null}
+      {exerciseToEdit !== null ? (
+        <PlanEditModal exercise={exerciseToEdit} handleCloseModal={handleSetExerciseToEdit} dayName={dayName} />
+      ) : null}
     </>
   );
 };

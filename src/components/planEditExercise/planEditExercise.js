@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from './planEditExercise.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const PlanEditExercise = ({ exercise, handleSetExerciseToEdit }) => {
+const PlanEditExercise = ({ exercise, handleSetExerciseToEdit, dayName }) => {
   const exercisesList = useSelector(state => state.exercises.data);
   const [dropdown, setDropdown] = useState(false);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
@@ -31,7 +31,7 @@ const PlanEditExercise = ({ exercise, handleSetExerciseToEdit }) => {
               Reps range: {exercise.repsRange[0]}-{exercise.repsRange[1]}
             </Text>
             <Text style={styles.text}>Weight increase: {exercise.loadIncrease} kg</Text>
-            <TouchableOpacity style={styles.editButton} onPress={() => handleSetExerciseToEdit(exercise)}>
+            <TouchableOpacity style={styles.editButton} onPress={() => handleSetExerciseToEdit(exercise, dayName)}>
               <Text style={styles.editText}>Edit</Text>
             </TouchableOpacity>
           </View>

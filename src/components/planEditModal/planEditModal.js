@@ -5,15 +5,15 @@ import styles from './planEditModal.styles';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { EDIT_EXERCISE } from '../../store/reducers/planReducer';
 
-const PlanEditModal = ({ exercise, handleCloseModal }) => {
+const PlanEditModal = ({ exercise, handleCloseModal, dayName }) => {
   const dispatch = useDispatch();
   const exercisesList = useSelector(state => state.exercises.data);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
   const [exerciseToEdit, setExerciseToEdit] = useState(exercise);
 
   const handleSave = () => {
-    dispatch(EDIT_EXERCISE());
-    handleCloseModal(null);
+    dispatch(EDIT_EXERCISE({ exerciseToEdit, dayName }));
+    handleCloseModal(null, null);
   };
 
   const handleRepsChange = (newReps, serieId) => {
@@ -173,7 +173,7 @@ const PlanEditModal = ({ exercise, handleCloseModal }) => {
           </View>
           <View style={styles.buttonsRow}>
             <View style={styles.saveButton}>
-              <TouchableOpacity onPress={() => handleCloseModal(null)}>
+              <TouchableOpacity onPress={() => handleCloseModal(null, null)}>
                 <Text style={styles.saveText}>Cancel</Text>
               </TouchableOpacity>
             </View>
