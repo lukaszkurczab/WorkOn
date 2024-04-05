@@ -22,6 +22,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 5,
   },
+  moreButton: {
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
+    borderWidth: 1,
+    paddingVertical: 2,
+    paddingHorizontal: 10,
+  },
 });
 
 export default styles;
