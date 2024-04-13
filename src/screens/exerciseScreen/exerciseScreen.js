@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './exerciseScreen.styles';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
 
 const ExerciseScreen = () => {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ const ExerciseScreen = () => {
     <View style={styles.container}>
       <ScrollView>
         <Text style={styles.title}>{exercise.name}</Text>
-        <Image source={require('../../assets/atlas_placeholder.jpg')} style={styles.image} />
+        <Image source={ExerciseImageMap[exercise.image]} style={styles.image} />
         <Text style={styles.sectionTitle}>Start position:</Text>
         <Text style={styles.text}>{exercise.startPosition}</Text>
         <Text style={styles.sectionTitle}>Process:</Text>

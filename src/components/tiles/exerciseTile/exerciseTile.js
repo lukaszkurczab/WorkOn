@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { SET_SELECTED_EXERCISE } from '../../../store/slice/exercisesSlice';
+import { ExerciseImageMap } from '../../../assets/exercises/_exerciseImageMap';
 
 const ExerciseTile = ({ exercise }) => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const ExerciseTile = ({ exercise }) => {
   return (
     <TouchableOpacity onPress={handlePress}>
       <View style={styles.container}>
-        <Image source={require('../../../assets/atlas_placeholder.jpg')} style={styles.image} />
+        <Image source={ExerciseImageMap[exercise.image]} style={styles.image} />
         <View style={styles.textWrapper}>
           <Text style={styles.title}>{exercise.name}</Text>
           <Text style={styles.heading}>Main muscle:</Text>

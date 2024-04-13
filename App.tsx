@@ -18,6 +18,7 @@ import PlanEditScreen from './src/screens/planEditScreen/planEditScreen';
 import ExerciseScreen from './src/screens/exerciseScreen/exerciseScreen';
 import CalendarScreen from './src/screens/calendarScreen/calendarScreen';
 import UserScreen from './src/screens/userScreen/userScreen';
+import CreatePlanScreen from './src/screens/createPlanScreen/createPlanScreen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -45,6 +46,7 @@ const App = () => {
               <Stack.Screen name='ExerciseScreen' component={ExerciseScreen} options={{ headerShown: false }} />
               <Stack.Screen name='CalendarScreen' component={CalendarScreen} options={{ headerShown: false }} />
               <Stack.Screen name='UserScreen' component={UserScreen} options={{ headerShown: false }} />
+              <Stack.Screen name='CreatePlanScreen' component={CreatePlanScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
           </Navigation>
         </NavigationContainer>

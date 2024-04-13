@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignItems: 'center',
   },
-  image:{
-    width: 80,
-    height: 60,
+  image: {
+    width: 70,
+    height: 80,
     borderRadius: 15,
   },
-  textWrapper:{
+  textWrapper: {
     marginLeft: 15,
-    flexShrink: 1
+    flexShrink: 1,
   },
   title: {
     color: primaryColor,
@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 15,
     justifyContent: 'center',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
   },
   chipText: {
     color: primaryColor,
     fontSize: 12,
-  }
+  },
 });
 
 export default styles;

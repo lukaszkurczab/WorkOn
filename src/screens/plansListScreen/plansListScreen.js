@@ -3,10 +3,16 @@ import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanBanner from '../../components/planBanner/planBanner';
 import styles from './plansListScreen.styles';
+import { useNavigation } from '@react-navigation/native';
 
 const PlansListScreen = () => {
+  const navigation = useNavigation();
   const plans = useSelector(store => store.user.data.plans);
   const isLoading = useSelector(store => store.user.isLoading);
+
+  const handleAddPlan = () => {
+    navigation.navigate('CreatePlanScreen');
+  };
 
   return (
     <View style={styles.container}>
@@ -18,7 +24,7 @@ const PlansListScreen = () => {
               <PlanBanner plan={plan} img='test' key={plan.id} />
             ))}
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleAddPlan}>
             <View style={styles.buttonWrapper}>
               <Icon name='plus' size={45} style={styles.icon} />
               <Text style={styles.button}>Add</Text>

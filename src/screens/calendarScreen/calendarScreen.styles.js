@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   articlesNavigation: {
     flexDirection: 'row',
-    flexGrow: 0
+    flexGrow: 0,
   },
   navigationText: {
     color: primaryColor,
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     fontSize: 36,
-    marginBottom: 20
+    marginBottom: 20,
   },
   articlesWrapper: {
     marginTop: 30,
-    gap: 15
+    gap: 15,
   },
 });
 

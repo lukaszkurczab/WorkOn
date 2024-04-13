@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: secondaryColor,
     width: 150,
-    height: 180,
+    height: 240,
     paddingHorizontal: 5,
     paddingVertical: 10,
   },
   image: {
     width: 140,
-    height: 100,
+    height: 160,
     borderRadius: 15,
   },
   nameWrapper: {

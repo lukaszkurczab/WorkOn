@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
 import { FINISH_SERIE } from '../../store/reducers/trainingReducer';
+import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
 import WorkoutSeriesModal from '../workoutSeriesModal/workoutSeriesModal';
 import styles from './workoutExercise.styles';
 
@@ -47,7 +48,7 @@ const WorkoutExercise = () => {
         <Text style={styles.reps}>
           {reps} x {weight}kg
         </Text>
-        <Image source={require('../../assets/atlas_placeholder.jpg')} style={styles.image} />
+        <Image source={ExerciseImageMap[exerciseData.image]} style={styles.image} />
         <View style={styles.descWrapper}>
           <Text style={styles.descTitle}>Short description</Text>
           <Text style={styles.descText}>{exerciseData.focusPoints}</Text>
