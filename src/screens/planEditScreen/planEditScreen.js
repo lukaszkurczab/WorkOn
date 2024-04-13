@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanEditDayBox from '../../components/planEditDayBox/planEditDayBox';
-import { CHANGE_PLAN_NAME } from '../../store/reducers/planReducer';
+import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN } from '../../store/reducers/planReducer';
 import { editPlan } from '../../store/slice/userSlice';
 import styles from './planEditScreen.styles';
 import PlanEditModal from '../../components/planEditModal/planEditModal';
@@ -12,13 +12,13 @@ import PlanEditModal from '../../components/planEditModal/planEditModal';
 const PlanEditScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const selectedPlanName = useSelector(store => store.plans.planToEdit.name);
+  const planToEditName = useSelector(store => store.plans.planToEdit.name);
   const planToEdit = useSelector(store => store.plans.planToEdit);
   const userId = useSelector(store => store.user.data.id);
   const [editablePlanName, setEditablePlanName] = useState(false);
   const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const [dayName, setDayName] = useState(null);
-  const [planName, setPlanName] = useState(selectedPlanName);
+  const [planName, setPlanName] = useState(planToEditName);
 
   const handleSetExerciseToEdit = (exercise, newDayName) => {
     setExerciseToEdit(exercise);
@@ -28,7 +28,7 @@ const PlanEditScreen = () => {
   const handleSavePress = () => {
     const data = {
       userId: userId,
-      plan: planToEdit,
+      plan: newPlan,
     };
     dispatch(editPlan(data));
     navigation.navigate('PlansListScreen');
@@ -41,6 +41,10 @@ const PlanEditScreen = () => {
   const handleConfirmNameChange = () => {
     dispatch(CHANGE_PLAN_NAME(planName));
     setEditablePlanName(false);
+  };
+
+  const handleAddDay = () => {
+    dispatch(ADD_DAY_TO_PLAN());
   };
 
   return (
@@ -64,9 +68,14 @@ const PlanEditScreen = () => {
               </TouchableOpacity>
             )}
           </View>
-          {planToEdit.days.map(day => (
-            <PlanEditDayBox day={day} key={day.name} handleSetExerciseToEdit={handleSetExerciseToEdit} />
+          {planToEdit.days.map((day, index) => (
+            <PlanEditDayBox day={day} key={`${day.name}+${index}`} handleSetExerciseToEdit={handleSetExerciseToEdit} />
           ))}
+          <TouchableOpacity onPress={handleAddDay}>
+            <View style={styles.addDayButton}>
+              <Text style={styles.addDayText}>+ Add day</Text>
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity onPress={handleSavePress}>
             <View style={styles.saveButtonWrapper}>
               <Icon name='save' size={24} style={styles.saveIcon} />

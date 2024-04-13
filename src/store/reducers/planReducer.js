@@ -30,9 +30,35 @@ const plans = createSlice({
       editedPlan.days.splice(dayIndex, 1, newDay);
       state.planToEdit = { ...editedPlan };
     },
+    CREATE_NEW_PLAN: state => {
+      state.planToEdit = {
+        name: 'New plan',
+        img: 'string',
+        days: [
+          {
+            name: 'Day name',
+            exercises: [],
+          },
+        ],
+      };
+    },
+    ADD_DAY_TO_PLAN: state => {
+      state.planToEdit = {
+        name: state.planToEdit.name,
+        img: state.planToEdit.img,
+        days: [
+          ...state.planToEdit.days,
+          {
+            name: 'Day name',
+            exercises: [],
+          },
+        ],
+      };
+    },
   },
 });
 
-export const { SET_PLAN_TO_EDIT, SET_PLAN_TO_PREVIEW, CHANGE_PLAN_NAME, EDIT_EXERCISE, CHANGE_DAY_NAME } = plans.actions;
+export const { SET_PLAN_TO_EDIT, SET_PLAN_TO_PREVIEW, CHANGE_PLAN_NAME, EDIT_EXERCISE, CHANGE_DAY_NAME, CREATE_NEW_PLAN, ADD_DAY_TO_PLAN } =
+  plans.actions;
 
 export default plans.reducer;

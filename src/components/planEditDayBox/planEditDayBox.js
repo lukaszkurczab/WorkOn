@@ -39,7 +39,7 @@ const PlanEditDayBox = ({ day, handleSetExerciseToEdit }) => {
         {day.exercises.map(exercise => (
           <PlanEditExercise exercise={exercise} key={exercise.id} handleSetExerciseToEdit={handleSetExerciseToEdit} dayName={day.name} />
         ))}
-        <Text style={styles.text}>+ Add</Text>
+        <Text style={styles.text}>+ Add exercise</Text>
       </View>
     </ScrollView>
   );

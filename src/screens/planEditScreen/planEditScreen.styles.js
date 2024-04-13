@@ -50,6 +50,18 @@ const styles = StyleSheet.create({
     color: backgroundColor,
     marginRight: 15,
   },
+  addDayButton: {
+    backgroundColor: primaryColor,
+    borderRadius: 2,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  addDayText: {
+    fontSize: 18,
+    fontWeight: '500',
+  },
 });
 
 export default styles;
