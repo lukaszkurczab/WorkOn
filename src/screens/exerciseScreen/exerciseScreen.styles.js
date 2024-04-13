@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { secondaryColor,fillColor, primaryColor, backgroundColor } from '../../styles/colors';
+import { secondaryColor, fillColor, primaryColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 24,
     marginBottom: 15,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   text: {
     color: primaryColor,
     textAlign: 'justify',
-    fontSize: 16
+    fontSize: 16,
   },
-  sectionTitle:{
+  sectionTitle: {
     color: primaryColor,
     fontWeight: '600',
     fontSize: 20,
@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
   icon: {
     color: 'black',
     position: 'relative',
-    left: -2
+    left: -2,
   },
   buttonWrapper: {
     height: 0,
     position: 'absolute',
     bottom: 150,
-    right: 30
+    right: 30,
   },
   button: {
     backgroundColor: primaryColor,
@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'flex-end',
-    zIndex: 10
+    zIndex: 10,
   },
-  image:{
+  image: {
     width: 240,
-    height: 180,
+    height: 250,
     borderRadius: 15,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   chip: {
     backgroundColor: fillColor,
@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 5,
     justifyContent: 'center',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
   },
   chipText: {
     color: primaryColor,
     fontSize: 12,
-  }
+  },
 });
 
 export default styles;
