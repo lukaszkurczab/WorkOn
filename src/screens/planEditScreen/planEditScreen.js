@@ -21,6 +21,7 @@ const PlanEditScreen = () => {
   const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const [dayName, setDayName] = useState(null);
   const [planName, setPlanName] = useState(planToEditName);
+  const [dayNameToAddExercise, setDayNameToAddExercise] = useState('');
 
   const handleSetExerciseToEdit = (exercise, newDayName) => {
     setExerciseToEdit(exercise);
@@ -30,7 +31,7 @@ const PlanEditScreen = () => {
   const handleSavePress = () => {
     const data = {
       userId: userId,
-      plan: newPlan,
+      plan: planToEdit,
     };
     dispatch(editPlan(data));
     navigation.navigate('PlansListScreen');
@@ -49,7 +50,8 @@ const PlanEditScreen = () => {
     dispatch(ADD_DAY_TO_PLAN());
   };
 
-  const handleShowAddExerciseModal = () => {
+  const handleShowAddExerciseModal = dayName => {
+    setDayNameToAddExercise(dayName);
     setShowAddExerciseModal(true);
   };
 
@@ -102,7 +104,7 @@ const PlanEditScreen = () => {
       {exerciseToEdit !== null ? (
         <PlanEditModal exercise={exerciseToEdit} handleCloseModal={handleSetExerciseToEdit} dayName={dayName} />
       ) : null}
-      {showAddExerciseModal && <AddNewExerciseModal onConfirm={handleCloseAddExerciseModal} />}
+      {showAddExerciseModal && <AddNewExerciseModal onConfirm={handleCloseAddExerciseModal} dayName={dayNameToAddExercise} />}
     </>
   );
 };

@@ -36,11 +36,32 @@ const plans = createSlice({
         img: 'string',
         days: [
           {
-            name: 'Day name',
+            name: 'Day 1',
             exercises: [],
           },
         ],
       };
+    },
+    ADD_EXERCISE: (state, action) => {
+      const editedPlan = { ...state.planToEdit };
+      const newExercises = [];
+      action.payload.exercises.map(exercise => {
+        newExercises.push({
+          id: exercise.id,
+          repsRange: [5, 8],
+          loadIncrease: 5,
+          series: [
+            {
+              reps: 6,
+              weight: 60,
+              id: 1,
+            },
+          ],
+        });
+      });
+      const dayIndex = editedPlan.days.findIndex(i => i.name === action.payload.dayName);
+      editedPlan.days[dayIndex].exercises = [...editedPlan.days[dayIndex].exercises, ...newExercises];
+      state.planToEdit = { ...editedPlan };
     },
     ADD_DAY_TO_PLAN: state => {
       state.planToEdit = {
@@ -49,7 +70,7 @@ const plans = createSlice({
         days: [
           ...state.planToEdit.days,
           {
-            name: 'Day name',
+            name: `Day ${state.planToEdit.days.length + 1}`,
             exercises: [],
           },
         ],
@@ -58,7 +79,15 @@ const plans = createSlice({
   },
 });
 
-export const { SET_PLAN_TO_EDIT, SET_PLAN_TO_PREVIEW, CHANGE_PLAN_NAME, EDIT_EXERCISE, CHANGE_DAY_NAME, CREATE_NEW_PLAN, ADD_DAY_TO_PLAN } =
-  plans.actions;
+export const {
+  SET_PLAN_TO_EDIT,
+  SET_PLAN_TO_PREVIEW,
+  CHANGE_PLAN_NAME,
+  EDIT_EXERCISE,
+  CHANGE_DAY_NAME,
+  CREATE_NEW_PLAN,
+  ADD_DAY_TO_PLAN,
+  ADD_EXERCISE,
+} = plans.actions;
 
 export default plans.reducer;

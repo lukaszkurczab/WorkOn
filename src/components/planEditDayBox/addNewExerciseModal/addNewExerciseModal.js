@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import Checkbox from 'expo-checkbox';
 import { Text, TouchableOpacity, ScrollView, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { ADD_EXERCISE } from '../../../store/reducers/planReducer';
 import AtlasDropdown from '../../atlasDropdown/atlasDropdown';
-import ExerciseTile from '../../tiles/exerciseTile/exerciseTile';
 import styles from './addNewExerciseModal.styles';
 
-const AddNewExerciseModal = ({ onConfirm }) => {
+const AddNewExerciseModal = ({ onConfirm, dayName }) => {
+  const dispatch = useDispatch();
   const exercises = useSelector(store => store.exercises.data);
   const selecterMusclesGroup = useSelector(store => store.atlas.selectedGroup);
   const [selectedExercises, setSelectedExercises] = useState([]);
 
   const handleAddSelectedExercises = exercise => {
-    if (selectedExercises.includes(exercise)) {
-      const newSelectedExercises = selectedExercises.filter(item => item != exercise);
+    if (selectedExercises.some(item => item.name === exercise.name)) {
+      const newSelectedExercises = selectedExercises.filter(item => item.name != exercise.name);
       setSelectedExercises(newSelectedExercises);
     } else {
       const newSelectedExercises = [...selectedExercises, exercise];
       setSelectedExercises(newSelectedExercises);
     }
-    console.log(selectedExercises);
+  };
+
+  const handleConfirm = () => {
+    dispatch(ADD_EXERCISE({ dayName: dayName, exercises: selectedExercises }));
+    onConfirm();
   };
 
   return (
@@ -30,15 +35,15 @@ const AddNewExerciseModal = ({ onConfirm }) => {
           {exercises.map(exercise => {
             if (selecterMusclesGroup === 'Select group' || exercise.groups.includes(selecterMusclesGroup)) {
               return (
-                <TouchableOpacity style={styles.checkboxRow} onPress={() => handleAddSelectedExercises(exercise.name)}>
-                  <Checkbox value={selectedExercises.includes(exercise.name)} />
+                <TouchableOpacity style={styles.checkboxRow} onPress={() => handleAddSelectedExercises(exercise)} key={exercise.name}>
+                  <Checkbox value={selectedExercises.includes(exercise)} />
                   <Text style={styles.checkboxText}>{exercise.name}</Text>
                 </TouchableOpacity>
               );
             }
           })}
         </ScrollView>
-        <TouchableOpacity onPress={() => onConfirm({ id: exercise.id, series: modifiedSeries })} style={styles.button}>
+        <TouchableOpacity onPress={handleConfirm} style={styles.button}>
           <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>
       </View>

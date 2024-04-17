@@ -40,7 +40,7 @@ const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseMod
           {day.exercises.map(exercise => (
             <PlanEditExercise exercise={exercise} key={exercise.id} handleSetExerciseToEdit={handleSetExerciseToEdit} dayName={day.name} />
           ))}
-          <TouchableOpacity onPress={handleShowAddExerciseModal}>
+          <TouchableOpacity onPress={() => handleShowAddExerciseModal(dayName)}>
             <Text style={styles.text}>+ Add exercise</Text>
           </TouchableOpacity>
         </View>
