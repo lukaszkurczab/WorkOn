@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
     flex: 1,
     backgroundColor: backgroundColor,
+    height: 400,
   },
   rowWrapper: {
     flexDirection: 'row',

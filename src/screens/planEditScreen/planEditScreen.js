@@ -8,6 +8,7 @@ import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN } from '../../store/reducers/planRedu
 import { editPlan } from '../../store/slice/userSlice';
 import styles from './planEditScreen.styles';
 import PlanEditModal from '../../components/planEditModal/planEditModal';
+import AddNewExerciseModal from '../../components/planEditDayBox/addNewExerciseModal/addNewExerciseModal';
 
 const PlanEditScreen = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const PlanEditScreen = () => {
   const planToEdit = useSelector(store => store.plans.planToEdit);
   const userId = useSelector(store => store.user.data.id);
   const [editablePlanName, setEditablePlanName] = useState(false);
+  const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
   const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const [dayName, setDayName] = useState(null);
   const [planName, setPlanName] = useState(planToEditName);
@@ -47,6 +49,14 @@ const PlanEditScreen = () => {
     dispatch(ADD_DAY_TO_PLAN());
   };
 
+  const handleShowAddExerciseModal = () => {
+    setShowAddExerciseModal(true);
+  };
+
+  const handleCloseAddExerciseModal = () => {
+    setShowAddExerciseModal(false);
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -69,7 +79,12 @@ const PlanEditScreen = () => {
             )}
           </View>
           {planToEdit.days.map((day, index) => (
-            <PlanEditDayBox day={day} key={`${day.name}+${index}`} handleSetExerciseToEdit={handleSetExerciseToEdit} />
+            <PlanEditDayBox
+              day={day}
+              key={`${day.name}+${index}`}
+              handleSetExerciseToEdit={handleSetExerciseToEdit}
+              handleShowAddExerciseModal={handleShowAddExerciseModal}
+            />
           ))}
           <TouchableOpacity onPress={handleAddDay}>
             <View style={styles.addDayButton}>
@@ -87,6 +102,7 @@ const PlanEditScreen = () => {
       {exerciseToEdit !== null ? (
         <PlanEditModal exercise={exerciseToEdit} handleCloseModal={handleSetExerciseToEdit} dayName={dayName} />
       ) : null}
+      {showAddExerciseModal && <AddNewExerciseModal onConfirm={handleCloseAddExerciseModal} />}
     </>
   );
 };

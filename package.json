@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.26",
     "expo": "^50.0.0",
+    "expo-checkbox": "~2.7.0",
     "expo-dev-client": "~3.3.10",
     "expo-modules-autolinking": "~1.10.0",
     "expo-splash-screen": "~0.26.4",

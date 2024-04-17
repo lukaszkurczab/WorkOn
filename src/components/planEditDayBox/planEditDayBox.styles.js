@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { secondaryColor, primaryColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+  },
   heading: {
     color: 'white',
     fontWeight: '500',

@@ -6,7 +6,7 @@ import PlanEditExercise from '../planEditExercise/planEditExercise';
 import { CHANGE_DAY_NAME } from '../../store/reducers/planReducer';
 import styles from './planEditDayBox.styles';
 
-const PlanEditDayBox = ({ day, handleSetExerciseToEdit }) => {
+const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseModal }) => {
   const dispatch = useDispatch();
   const [editableDayName, setEditableDayName] = useState(false);
   const [dayName, setDayName] = useState(day.name);
@@ -18,28 +18,32 @@ const PlanEditDayBox = ({ day, handleSetExerciseToEdit }) => {
 
   return (
     <ScrollView key={day.name}>
-      <View style={styles.rowWrapper}>
-        <TextInput
-          style={styles.planName}
-          defaultValue={dayName}
-          editable={editableDayName}
-          onChangeText={newName => setDayName(newName)}
-        />
-        {editableDayName ? (
-          <TouchableOpacity onPress={handleConfirmNameChange}>
-            <Icon name='check' size={26} style={styles.icon} />
+      <View style={styles.container}>
+        <View style={styles.rowWrapper}>
+          <TextInput
+            style={styles.planName}
+            defaultValue={dayName}
+            editable={editableDayName}
+            onChangeText={newName => setDayName(newName)}
+          />
+          {editableDayName ? (
+            <TouchableOpacity onPress={handleConfirmNameChange}>
+              <Icon name='check' size={26} style={styles.icon} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={() => setEditableDayName(true)}>
+              <Icon name='edit' size={26} style={styles.icon} />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.exercisesWrapper}>
+          {day.exercises.map(exercise => (
+            <PlanEditExercise exercise={exercise} key={exercise.id} handleSetExerciseToEdit={handleSetExerciseToEdit} dayName={day.name} />
+          ))}
+          <TouchableOpacity onPress={handleShowAddExerciseModal}>
+            <Text style={styles.text}>+ Add exercise</Text>
           </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={() => setEditableDayName(true)}>
-            <Icon name='edit' size={26} style={styles.icon} />
-          </TouchableOpacity>
-        )}
-      </View>
-      <View style={styles.exercisesWrapper}>
-        {day.exercises.map(exercise => (
-          <PlanEditExercise exercise={exercise} key={exercise.id} handleSetExerciseToEdit={handleSetExerciseToEdit} dayName={day.name} />
-        ))}
-        <Text style={styles.text}>+ Add exercise</Text>
+        </View>
       </View>
     </ScrollView>
   );
