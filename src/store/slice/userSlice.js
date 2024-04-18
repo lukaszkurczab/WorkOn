@@ -64,13 +64,18 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     isLoading: false,
-    data: [],
+    data: {},
     isError: false,
     selectedPlan: undefined,
   },
   reducers: {
     SET_SELECTED_PLAN: (state, action) => {
       state.selectedPlan = action.payload;
+    },
+    CHANGE_PASSWORD: (state, action) => {
+      console.log(action.payload.oldPassword);
+      console.log(action.payload.newPassword);
+      console.log(action.payload.confirmNewPassword);
     },
   },
   extraReducers: builder => {
@@ -140,6 +145,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { SET_SELECTED_PLAN } = userSlice.actions;
+export const { SET_SELECTED_PLAN, CHANGE_PASSWORD } = userSlice.actions;
 
 export default userSlice.reducer;

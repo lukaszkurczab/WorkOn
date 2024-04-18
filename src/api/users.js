@@ -2,7 +2,15 @@ export const fetchUser = async id => {
   try {
     const response = await fetch('https://workon-backend.azurewebsites.net/users/' + id);
     const data = await response.json();
-    return { id: data.id, email: data.email, history: data.history, plans: data.plans };
+    return {
+      id: data.id,
+      email: data.email,
+      history: data.history,
+      plans: data.plans,
+      username: data.username,
+      password: data.password,
+      bio: data.bio,
+    };
   } catch (error) {
     console.error('Error fetching plans:', error);
   }
