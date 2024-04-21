@@ -1,6 +1,6 @@
 export const fetchExercises = async version => {
   try {
-    const response = await fetch('https://workon-backend.azurewebsites.net/exercises', {
+    const response = await fetch('https://workon-api.azurewebsites.net/exercises', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

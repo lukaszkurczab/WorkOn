@@ -5,7 +5,7 @@ import Header from '../../components/header/header';
 import styles from './mainScreen.styles';
 import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
-import { getUser, SET_USER } from '../../store/slice/userSlice';
+import { getUser } from '../../store/slice/userSlice';
 import { getExercises } from '../../store/slice/exercisesSlice';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,6 @@ const MainScreen = () => {
   const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
 
   useEffect(() => {
-    dispatch(getUser('1'));
     dispatch(getExercises('1.0'));
   }, []);
 

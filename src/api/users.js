@@ -1,6 +1,12 @@
 export const fetchUser = async id => {
   try {
-    const response = await fetch('https://workon-backend.azurewebsites.net/users/' + id);
+    const response = await fetch('https://workon-api.azurewebsites.net/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: 'test@example.com', password: 'password' }),
+    });
     const data = await response.json();
     return {
       id: data.id,
@@ -18,7 +24,7 @@ export const fetchUser = async id => {
 
 export const addHistoryItemToUser = async (id, historyItem) => {
   try {
-    const response = await fetch('https://workon-backend.azurewebsites.net/users/history/' + id, {
+    const response = await fetch('https://workon-api.azurewebsites.net/users/history/' + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +40,7 @@ export const addHistoryItemToUser = async (id, historyItem) => {
 
 export const removePlanFromUser = async (userId, planId) => {
   try {
-    const response = await fetch('https://workon-backend.azurewebsites.net/users/plans/' + userId, {
+    const response = await fetch('https://workon-api.azurewebsites.net/users/plans/' + userId, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +56,7 @@ export const removePlanFromUser = async (userId, planId) => {
 
 export const editUserPlan = async (userId, plan) => {
   try {
-    const response = await fetch('https://workon-backend.azurewebsites.net/users/plans/' + userId, {
+    const response = await fetch('https://workon-api.azurewebsites.net/users/plans/' + userId, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -61,5 +67,39 @@ export const editUserPlan = async (userId, plan) => {
     return data;
   } catch (error) {
     console.error('Error fetching plans:', error);
+  }
+};
+
+export const registerUser = async userData => {
+  try {
+    const response = await fetch('https://workon-api.azurewebsites.net/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error registering user:', error);
+    throw error;
+  }
+};
+
+export const loginUser = async userData => {
+  try {
+    const response = await fetch('https://workon-api.azurewebsites.net/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error logging in:', error);
+    throw error;
   }
 };

@@ -18,6 +18,7 @@ import PlanEditScreen from './src/screens/planEditScreen/planEditScreen';
 import ExerciseScreen from './src/screens/exerciseScreen/exerciseScreen';
 import CalendarScreen from './src/screens/calendarScreen/calendarScreen';
 import UserScreen from './src/screens/userScreen/userScreen';
+import LoginScreen from './src/screens/loginScreen/loginScreen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -32,7 +33,7 @@ const App = () => {
         <NavigationContainer>
           <StatusBar barStyle='dark-content' />
           <Navigation>
-            <Stack.Navigator initialRouteName='MainScreen'>
+            <Stack.Navigator initialRouteName='LoginScreen'>
               <Stack.Screen name='MainScreen' component={MainScreen} options={{ headerShown: false }} />
               <Stack.Screen name='PlansListScreen' component={PlansListScreen} options={{ headerShown: false }} />
               <Stack.Screen name='PlanDetailsScreen' component={PlanDetailsScreen} options={{ headerShown: false }} />
@@ -45,6 +46,7 @@ const App = () => {
               <Stack.Screen name='ExerciseScreen' component={ExerciseScreen} options={{ headerShown: false }} />
               <Stack.Screen name='CalendarScreen' component={CalendarScreen} options={{ headerShown: false }} />
               <Stack.Screen name='UserScreen' component={UserScreen} options={{ headerShown: false }} />
+              <Stack.Screen name='LoginScreen' component={LoginScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
           </Navigation>
         </NavigationContainer>

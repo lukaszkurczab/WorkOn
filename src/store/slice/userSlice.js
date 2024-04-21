@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchUser, removePlanFromUser, editUserPlan, addHistoryItemToUser } from '../../api/users';
+import { fetchUser, removePlanFromUser, editUserPlan, addHistoryItemToUser, registerUser, loginUser } from '../../api/users';
 
 export const getUser = createAsyncThunk('getUser', async id => {
   const res = await fetchUser(id);
@@ -60,6 +60,24 @@ export const progressTraining = createAsyncThunk('progressTraining', async data 
   return res;
 });
 
+export const register = createAsyncThunk('user/register', async (userData, { rejectWithValue }) => {
+  try {
+    const res = await registerUser(userData);
+    return res;
+  } catch (error) {
+    return rejectWithValue(error.message);
+  }
+});
+
+export const login = createAsyncThunk('user/login', async (userData, { rejectWithValue }) => {
+  try {
+    const res = await loginUser(userData);
+    return res;
+  } catch (error) {
+    return rejectWithValue(error.message);
+  }
+});
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -67,6 +85,8 @@ const userSlice = createSlice({
     data: {},
     isError: false,
     selectedPlan: undefined,
+    errorMessage: '',
+    token: null,
   },
   reducers: {
     SET_SELECTED_PLAN: (state, action) => {
@@ -141,6 +161,32 @@ const userSlice = createSlice({
     builder.addCase(progressTraining.rejected, state => {
       state.isLoading = false;
       state.isError = true;
+    });
+    builder.addCase(register.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(register.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(register.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = action.payload;
+    });
+    builder.addCase(login.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.token = action.payload.token;
+      state.isError = false;
+      state.errorMessage = '';
+    });
+    builder.addCase(login.rejected, state => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = 'Invalid email or password';
     });
   },
 });
