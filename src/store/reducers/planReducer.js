@@ -1,47 +1,93 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { plans as plansDB } from "../db/plans";
-import { settings } from "../db/settings"
+import { createSlice } from '@reduxjs/toolkit';
 
 const plans = createSlice({
-  name: "plans",
+  name: 'plans',
   initialState: {
-    plans: plansDB,
-    selectedPlan: settings.selectedPlan,
-    planToEdit: {}
+    planToPreview: {},
+    planToEdit: {},
   },
   reducers: {
-    CHANGE_PLAN_TYPE: (state, action) => {
-      state.planToEdit.planType = action.payload;
+    CHANGE_PLAN_NAME: (state, action) => {
+      state.planToEdit.name = action.payload;
     },
     SET_PLAN_TO_EDIT: (state, action) => {
-      state.planToEdit = state.plans.find((plan) => plan.id == action.payload)
+      state.planToEdit = action.payload;
     },
-    SET_SELECTED_PLAN: (state, action) => {
-      state.selectedPlan = {...action.payload}
+    SET_PLAN_TO_PREVIEW: (state, action) => {
+      state.planToPreview = action.payload;
     },
-    ADD_DAY: (state, action) => {
-      state.planToEdit.days = [...state.planToEdit.days, {
-        name: action.payload,
-        restDay: true,
-        exercises: []
-      }]
+    EDIT_EXERCISE: (state, action) => {
+      const editedPlan = { ...state.planToEdit };
+      const dayIndex = editedPlan.days.findIndex(i => i.name === action.payload.dayName);
+      const exerciseIndex = editedPlan.days[dayIndex].exercises.findIndex(i => i.id === action.payload.exerciseToEdit.id);
+      editedPlan.days[dayIndex].exercises[exerciseIndex] = action.payload.exerciseToEdit;
+      state.planToEdit = { ...editedPlan };
     },
-    REMOVE_DAY: (state) => {
-      state.planToEdit.days = state.planToEdit.days.slice(0, -1); 
+    CHANGE_DAY_NAME: (state, action) => {
+      const editedPlan = { ...state.planToEdit };
+      const dayIndex = editedPlan.days.findIndex(i => i.name === action.payload.day.name);
+      const newDay = { exercises: editedPlan.days[dayIndex].exercises, name: action.payload.dayName };
+      editedPlan.days.splice(dayIndex, 1, newDay);
+      state.planToEdit = { ...editedPlan };
     },
-    EDIT_PLAN: (state, action) => {
-      state.planToEdit = {...action.payload}
-    }
-  }
+    CREATE_NEW_PLAN: state => {
+      state.planToEdit = {
+        name: 'New plan',
+        img: 'string',
+        days: [
+          {
+            name: 'Day 1',
+            exercises: [],
+          },
+        ],
+      };
+    },
+    ADD_EXERCISE: (state, action) => {
+      const editedPlan = { ...state.planToEdit };
+      const newExercises = [];
+      action.payload.exercises.map(exercise => {
+        newExercises.push({
+          id: exercise.id,
+          repsRange: [5, 8],
+          loadIncrease: 5,
+          series: [
+            {
+              reps: 6,
+              weight: 60,
+              id: 1,
+            },
+          ],
+        });
+      });
+      const dayIndex = editedPlan.days.findIndex(i => i.name === action.payload.dayName);
+      editedPlan.days[dayIndex].exercises = [...editedPlan.days[dayIndex].exercises, ...newExercises];
+      state.planToEdit = { ...editedPlan };
+    },
+    ADD_DAY_TO_PLAN: state => {
+      state.planToEdit = {
+        name: state.planToEdit.name,
+        img: state.planToEdit.img,
+        days: [
+          ...state.planToEdit.days,
+          {
+            name: `Day ${state.planToEdit.days.length + 1}`,
+            exercises: [],
+          },
+        ],
+      };
+    },
+  },
 });
 
 export const {
-  SET_SELECTED_PLAN,
   SET_PLAN_TO_EDIT,
-  CHANGE_PLAN_TYPE,
-  ADD_DAY,
-  REMOVE_DAY,
-  EDIT_PLAN
+  SET_PLAN_TO_PREVIEW,
+  CHANGE_PLAN_NAME,
+  EDIT_EXERCISE,
+  CHANGE_DAY_NAME,
+  CREATE_NEW_PLAN,
+  ADD_DAY_TO_PLAN,
+  ADD_EXERCISE,
 } = plans.actions;
 
-export default plans.reducer
+export default plans.reducer;

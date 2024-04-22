@@ -2,29 +2,30 @@ import { StyleSheet } from 'react-native';
 import { primaryColor, secondaryColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 10,
   },
-  head: {  
+  head: {
     height: 40,
   },
-  wrapper: { 
+  wrapper: {
     flexDirection: 'row',
   },
-  row: {  
-    height: 28  
+  row: {
+    minHeight: 28,
   },
-  headText: { 
+  headText: {
     textAlign: 'center',
-    color: primaryColor, 
-    fontSize: 18
+    color: primaryColor,
+    fontSize: 18,
   },
-  rowText: { 
+  rowText: {
     textAlign: 'center',
-    color: primaryColor, 
-    fontSize: 14
-  }
+    color: primaryColor,
+    fontSize: 14,
+    lineHeight: 22,
+  },
 });
 
 export default styles;

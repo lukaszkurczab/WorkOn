@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
     padding: 24,
     backgroundColor: backgroundColor,
     height: '100%',
-    paddingBottom: 60
+    paddingBottom: 60,
   },
   articlesNavigation: {
     flexDirection: 'row',
-    flexGrow: 0
+    flexGrow: 0,
   },
   navigationText: {
     color: primaryColor,
@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     fontSize: 36,
-    marginBottom: 20
+    marginBottom: 20,
   },
   atlasWrapper: {
     marginTop: 30,
     gap: 15,
+    minHeight: 450,
   },
 });
 

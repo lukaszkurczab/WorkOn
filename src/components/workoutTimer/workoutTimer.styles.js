@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor: primaryColor,
+    borderWidth: 1,
   },
   text: {
     color: primaryColor,
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     fontWeight: '700',
     height: 50,
-    lineHeight: 50
+    lineHeight: 50,
   },
 });
 
