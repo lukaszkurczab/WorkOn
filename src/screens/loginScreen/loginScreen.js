@@ -12,9 +12,8 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     await dispatch(login({ email, password }));
-    // Po zakończeniu dispatcha, sprawdzamy stan tokena i błędu
     if (token) {
-      navigation.navigate('MainScreen'); // Przekierowanie, jeśli token jest dostępny
+      navigation.navigate('MainScreen');
     } else if (isError) {
       Alert.alert('Login Error', errorMessage, [{ text: 'OK' }]);
     }
@@ -23,14 +22,20 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder='Email'
+        placeholder="Email"
         value={email}
         onChangeText={setEmail}
         style={styles.input}
-        keyboardType='email-address' // Dodano dla lepszej obsługi wpisywania email
+        keyboardType="email-address"
       />
-      <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
-      <Button title='Log In' onPress={handleLogin} color={styles.button.backgroundColor} />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+      <Button title="Log In" onPress={handleLogin} color={styles.button.backgroundColor} />
     </View>
   );
 };
