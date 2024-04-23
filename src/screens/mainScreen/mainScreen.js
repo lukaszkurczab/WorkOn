@@ -8,11 +8,13 @@ import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTra
 import { getExercises } from '../../store/slice/exercisesSlice';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import CreateNewPlanTile from '../../components/tiles/createNewPlanTile/createNewPlanTile';
 
 const MainScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const dataLoaded = useSelector(store => !store.user.isLoading);
+  const userPlans = useSelector(store => store.user.data.plans);
   const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
 
   useEffect(() => {
@@ -33,8 +35,7 @@ const MainScreen = () => {
         {dataLoaded && (
           <>
             <Header />
-            <BeginTrainingTile />
-            <Text style={styles.tilesHeading}>Choose your workout plan</Text>
+            {userPlans && userPlans.length > 0 ? <BeginTrainingTile /> : <CreateNewPlanTile />}
             <View style={styles.tilesWrapper}>
               <Tile text='Your plans' icon='dumbbell' path='PlansListScreen' version='icon'></Tile>
               <Tile text='Exercise atlas' icon='list-ul' path='AtlasScreen' version='icon'></Tile>

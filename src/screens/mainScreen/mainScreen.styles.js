@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     width: '100%',
     gap: 20,
+    marginTop: 20,
   },
   popupWrapper: {
     position: 'absolute',
