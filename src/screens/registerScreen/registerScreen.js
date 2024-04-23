@@ -17,38 +17,26 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
     await dispatch(register({ email, password }));
-    const { token } = useSelector(state => state.user);
-    if (token) {
-      navigation.navigate('MainScreen');
-    } else if (isError) {
+
+    if (isError) {
       Alert.alert('Registration Error', errorMessage, [{ text: 'OK' }]);
+    } else {
+      navigation.navigate('LoginScreen');
     }
   };
 
   return (
     <View style={styles.container}>
+      <TextInput placeholder='Email' value={email} onChangeText={setEmail} style={styles.input} keyboardType='email-address' />
+      <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
       <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Confirm Password"
+        placeholder='Confirm Password'
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         secureTextEntry
         style={styles.input}
       />
-      <Button title="Register" onPress={handleRegister} color={styles.button.backgroundColor} />
+      <Button title='Register' onPress={handleRegister} color={styles.button.backgroundColor} />
     </View>
   );
 };

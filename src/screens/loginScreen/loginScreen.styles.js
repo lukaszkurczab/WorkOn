@@ -20,6 +20,19 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
+  image: {
+    width: 180,
+    height: 200,
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: '600',
+  },
+  buttonWrapper: {
+    flexDirection: 'row',
+    width: '90%',
+    justifyContent: 'space-around',
+  },
 });
 
 export default styles;

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, TextInput, Button, Alert, Image, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/slice/userSlice';
 import styles from './loginScreen.styles';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
   const { isError, errorMessage, token } = useSelector(state => state.user);
 
   const handleLogin = async () => {
@@ -19,23 +21,20 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  const handleSignUp = () => {
+    navigation.navigate('RegisterScreen');
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={styles.input}
-      />
-      <Button title="Log In" onPress={handleLogin} color={styles.button.backgroundColor} />
+      <Image source={require('../../assets/work.png')} style={styles.image} />
+      <Text style={styles.title}>WorkOn</Text>
+      <TextInput placeholder='Email' value={email} onChangeText={setEmail} style={styles.input} keyboardType='email-address' />
+      <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
+      <View style={styles.buttonWrapper}>
+        <Button title='Log In' onPress={handleLogin} color={styles.button.backgroundColor} />
+        <Button title='Sign Up' onPress={handleSignUp} color={styles.button.backgroundColor} />
+      </View>
     </View>
   );
 };
