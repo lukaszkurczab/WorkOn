@@ -1,10 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchUser, removePlanFromUser, editUserPlan, addHistoryItemToUser, registerUser, loginUser } from '../../api/users';
-
-export const getUser = createAsyncThunk('getUser', async id => {
-  const res = await fetchUser(id);
-  return res;
-});
+import { removePlanFromUser, editUserPlan, addHistoryItemToUser, registerUser, loginUser } from '../../api/users';
 
 export const removePlan = createAsyncThunk('removePlan', async data => {
   const res = await removePlanFromUser(data.userId, data.planId);
@@ -99,25 +94,6 @@ const userSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(getUser.pending, state => {
-      state.isLoading = true;
-    });
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      state.data = [];
-      state.data = action.payload;
-      state.selectedPlan = Object.assign({
-        id: action.payload.plans[0].id,
-        name: action.payload.plans[0].name,
-        img: action.payload.plans[0].img,
-        planType: action.payload.plans[0].planType,
-        days: action.payload.plans[0].days,
-      });
-      state.isLoading = false;
-    });
-    builder.addCase(getUser.rejected, state => {
-      state.isLoading = false;
-      state.isError = true;
-    });
     builder.addCase(removePlan.pending, state => {
       state.isLoading = true;
     });
@@ -181,6 +157,14 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.token = action.payload.token;
       state.isError = false;
+      state.data = action.payload;
+      state.selectedPlan = Object.assign({
+        id: action.payload.plans[0].id,
+        name: action.payload.plans[0].name,
+        img: action.payload.plans[0].img,
+        planType: action.payload.plans[0].planType,
+        days: action.payload.plans[0].days,
+      });
       state.errorMessage = '';
     });
     builder.addCase(login.rejected, state => {

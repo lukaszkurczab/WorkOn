@@ -1,27 +1,3 @@
-export const fetchUser = async id => {
-  try {
-    const response = await fetch('https://workon-backend.azurewebsites.net/users/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: 'test@example.com', password: 'password' }),
-    });
-    const data = await response.json();
-    return {
-      id: data.id,
-      email: data.email,
-      history: data.history,
-      plans: data.plans,
-      username: data.username,
-      password: data.password,
-      bio: data.bio,
-    };
-  } catch (error) {
-    console.error('Error fetching plans:', error);
-  }
-};
-
 export const addHistoryItemToUser = async (id, historyItem) => {
   try {
     const response = await fetch('https://workon-backend.azurewebsites.net/users/history/' + id, {
