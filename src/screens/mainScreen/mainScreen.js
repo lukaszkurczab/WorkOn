@@ -9,6 +9,7 @@ import { getExercises } from '../../store/slice/exercisesSlice';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNewPlanTile from '../../components/tiles/createNewPlanTile/createNewPlanTile';
+import Navigation from '../../components/navigation/navigation';
 
 const MainScreen = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const MainScreen = () => {
   };
 
   return (
-    <>
+    <Navigation>
       <View style={styles.container}>
         {dataLoaded && (
           <>
@@ -64,7 +65,7 @@ const MainScreen = () => {
           </View>
         </View>
       )}
-    </>
+    </Navigation>
   );
 };
 

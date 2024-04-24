@@ -5,6 +5,7 @@ import { Calendar } from 'react-native-calendars';
 import HistoryDetails from '../../components/historyDetails/historyDetails';
 import { REMOVE_FROM_HISTORY } from '../../store/reducers/historyReducer';
 import styles from './calendarScreen.styles';
+import Navigation from '../../components/navigation/navigation';
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();
@@ -29,16 +30,18 @@ const CalendarScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Calendar
-        onDayPress={day => {
-          handleDayPress(day.dateString);
-        }}
-        markingType={'period'}
-        markedDates={markedDays}
-      />
-      <HistoryDetails dayHistory={dayData} onRemove={handleRemove} />
-    </View>
+    <Navigation>
+      <View style={styles.container}>
+        <Calendar
+          onDayPress={day => {
+            handleDayPress(day.dateString);
+          }}
+          markingType={'period'}
+          markedDates={markedDays}
+        />
+        <HistoryDetails dayHistory={dayData} onRemove={handleRemove} />
+      </View>
+    </Navigation>
   );
 };
 

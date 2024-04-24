@@ -1,12 +1,15 @@
 import { View } from 'react-native';
 import styles from './workoutSummaryScreen.styles';
 import WorkoutSummary from '../../components/workoutSummary/workoutSummary';
+import Navigation from '../../components/navigation/navigation';
 
 const WorkoutSummaryScreen = () => {
   return (
-    <View style={styles.container}>
-      <WorkoutSummary />
-    </View>
+    <Navigation>
+      <View style={styles.container}>
+        <WorkoutSummary />
+      </View>
+    </Navigation>
   );
 };
 

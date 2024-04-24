@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './userScreen.styles';
 import ChangePasswordModal from '../../components/changePasswordModal/changePasswordModal';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Navigation from '../../components/navigation/navigation';
 
 const UserScreen = () => {
   const user = useSelector(state => state.user.data);
@@ -18,16 +19,18 @@ const UserScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.nameWrapper}>
-        <Text style={styles.username}>{user.username}</Text>
-        <Text style={styles.bio}>{user.bio}</Text>
+    <Navigation>
+      <View style={styles.container}>
+        <View style={styles.nameWrapper}>
+          <Text style={styles.username}>{user.username}</Text>
+          <Text style={styles.bio}>{user.bio}</Text>
+        </View>
+        <TouchableOpacity style={styles.changePasswordButton} onPress={handleShowChangePasswordModal}>
+          <Text style={styles.changePasswordText}>Change password</Text>
+        </TouchableOpacity>
+        {showChangePasswordModal && <ChangePasswordModal onClose={handleCloseChangePasswordModal} />}
       </View>
-      <TouchableOpacity style={styles.changePasswordButton} onPress={handleShowChangePasswordModal}>
-        <Text style={styles.changePasswordText}>Change password</Text>
-      </TouchableOpacity>
-      {showChangePasswordModal && <ChangePasswordModal onClose={handleCloseChangePasswordModal} />}
-    </View>
+    </Navigation>
   );
 };
 

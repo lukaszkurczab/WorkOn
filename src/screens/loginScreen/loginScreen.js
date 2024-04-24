@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, TextInput, Button, Alert, Image, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/slice/userSlice';
 import styles from './loginScreen.styles';
@@ -29,12 +29,24 @@ const LoginScreen = () => {
     <View style={styles.container}>
       <Image source={require('../../assets/work.png')} style={styles.image} />
       <Text style={styles.title}>WorkOn</Text>
-      <TextInput placeholder='Email' value={email} onChangeText={setEmail} style={styles.input} keyboardType='email-address' />
-      <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
-      <View style={styles.buttonWrapper}>
-        <Button title='Log In' onPress={handleLogin} color={styles.button.backgroundColor} />
-        <Button title='Sign Up' onPress={handleSignUp} color={styles.button.backgroundColor} />
-      </View>
+      <TextInput placeholder='Username' placeholderTextColor='#aaa' value={email} onChangeText={setEmail} style={styles.input} />
+      <TextInput
+        placeholder='Password'
+        placeholderTextColor='#aaa'
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Log in</Text>
+      </TouchableOpacity>
+      <Text style={styles.signUpText}>
+        New user?{' '}
+        <Text style={styles.signUpButton} onPress={handleSignUp}>
+          Sign Up
+        </Text>
+      </Text>
     </View>
   );
 };
