@@ -29,7 +29,16 @@ const LoginScreen = () => {
     <View style={styles.container}>
       <Image source={require('../../assets/work.png')} style={styles.image} />
       <Text style={styles.title}>WorkOn</Text>
-      <TextInput placeholder='Username' placeholderTextColor='#aaa' value={email} onChangeText={setEmail} style={styles.input} />
+      <TextInput
+        placeholder='Email'
+        placeholderTextColor='#aaa'
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+        autoComplete='email'
+        inputMode='email'
+        keyboardType='email-address'
+      />
       <TextInput
         placeholder='Password'
         placeholderTextColor='#aaa'

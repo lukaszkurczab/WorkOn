@@ -40,19 +40,16 @@ const WorkoutRest = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
+  const restStart = new Date();
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSeconds(prevSeconds => {
-        if (prevSeconds === 59) {
-          setMinutes(prevMinutes => prevMinutes + 1);
-          return 0;
-        } else {
-          return prevSeconds + 1;
-        }
-      });
+      const currentTime = new Date();
+      const restTime = Math.floor((currentTime - restStart) / 1000);
+      setSeconds(restTime % 60);
+      setMinutes(Math.floor(restTime / 60));
     }, 1000);
 
     return () => clearInterval(interval);

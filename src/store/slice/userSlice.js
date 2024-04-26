@@ -154,7 +154,6 @@ const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.token = action.payload.token;
       state.isError = false;
       state.data = action.payload;
@@ -166,6 +165,7 @@ const userSlice = createSlice({
         days: action.payload.plans[0].days,
       });
       state.errorMessage = '';
+      state.isLoading = false;
     });
     builder.addCase(login.rejected, state => {
       state.isLoading = false;

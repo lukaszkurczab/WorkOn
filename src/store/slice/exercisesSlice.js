@@ -11,7 +11,6 @@ const exercisesSlice = createSlice({
   initialState: {
     isLoading: false,
     data: [],
-    version: '1.0',
     isError: false,
     selectedExercise: '',
   },
