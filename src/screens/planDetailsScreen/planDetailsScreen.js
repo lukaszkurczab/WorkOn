@@ -45,7 +45,7 @@ const PlanDetailsScreen = () => {
             </TouchableOpacity>
             <TouchableOpacity onPress={handleRemovePress}>
               <View style={styles.buttonWrapper}>
-                <Icon name='plus' size={40} style={styles.icon} />
+                <Icon name='trash' size={40} style={styles.icon} />
                 <Text style={styles.button}>Remove</Text>
               </View>
             </TouchableOpacity>

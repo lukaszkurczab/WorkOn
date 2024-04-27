@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     fontSize: 22,
     flexGrow: 1,
   },
+  iconsWrapper: {
+    flexDirection: 'row',
+    gap: 10,
+  },
 });
 
 export default styles;

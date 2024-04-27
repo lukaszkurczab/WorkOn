@@ -88,6 +88,12 @@ const plans = createSlice({
         days: state.planToEdit.days.map(day => (day.name !== dayName ? day : dayToEdit)),
       };
     },
+    REMOVE_DAY: (state, action) => {
+      state.planToEdit = {
+        ...state.planToEdit,
+        days: state.planToEdit.days.filter(day => day.name !== action.payload),
+      };
+    },
   },
 });
 
@@ -101,6 +107,7 @@ export const {
   ADD_DAY_TO_PLAN,
   ADD_EXERCISE,
   REMOVE_EXERCISE,
+  REMOVE_DAY,
 } = plans.actions;
 
 export default plans.reducer;

@@ -63,6 +63,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
+  cancelButtonWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 5,
+    paddingBottom: 5,
+    marginBottom: 20,
+    alignSelf: 'center',
+    borderBottomColor: primaryColor,
+    borderBottomWidth: 1,
+  },
+  cancelIcon: {
+    color: primaryColor,
+    marginRight: 15,
+  },
+  cancelButton: {
+    color: primaryColor,
+    fontSize: 20,
+  },
 });
 
 export default styles;

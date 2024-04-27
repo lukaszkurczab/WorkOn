@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanEditDayBox from '../../components/planEditDayBox/planEditDayBox';
-import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN, REMOVE_EXERCISE } from '../../store/reducers/planReducer';
+import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN, REMOVE_EXERCISE, REMOVE_DAY } from '../../store/reducers/planReducer';
 import { editPlan } from '../../store/slice/userSlice';
 import styles from './planEditScreen.styles';
 import PlanEditModal from '../../components/planEditModal/planEditModal';
@@ -63,6 +63,14 @@ const PlanEditScreen = () => {
     dispatch(REMOVE_EXERCISE({ dayName, exerciseId }));
   };
 
+  const handleRemoveDay = dayName => {
+    dispatch(REMOVE_DAY(dayName));
+  };
+
+  const handleCancelPress = () => {
+    navigation.navigate('PlansListScreen');
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -90,6 +98,7 @@ const PlanEditScreen = () => {
               key={`${day.name}+${index}`}
               handleSetExerciseToEdit={handleSetExerciseToEdit}
               handleShowAddExerciseModal={handleShowAddExerciseModal}
+              handleRemoveDay={handleRemoveDay}
               handleRemoveExercise={handleRemoveExercise}
             />
           ))}
@@ -102,6 +111,12 @@ const PlanEditScreen = () => {
             <View style={styles.saveButtonWrapper}>
               <Icon name='save' size={24} style={styles.saveIcon} />
               <Text style={styles.saveButton}>Save</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCancelPress}>
+            <View style={styles.cancelButtonWrapper}>
+              <Icon name='times' size={20} style={styles.cancelIcon} />
+              <Text style={styles.cancelButton}>Cancel</Text>
             </View>
           </TouchableOpacity>
         </ScrollView>

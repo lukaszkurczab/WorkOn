@@ -6,7 +6,7 @@ import PlanEditExercise from '../planEditExercise/planEditExercise';
 import { CHANGE_DAY_NAME } from '../../store/reducers/planReducer';
 import styles from './planEditDayBox.styles';
 
-const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseModal, handleRemoveExercise }) => {
+const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleRemoveDay, handleShowAddExerciseModal, handleRemoveExercise }) => {
   const dispatch = useDispatch();
   const [editableDayName, setEditableDayName] = useState(false);
   const [dayName, setDayName] = useState(day.name);
@@ -26,15 +26,22 @@ const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseMod
             editable={editableDayName}
             onChangeText={newName => setDayName(newName)}
           />
-          {editableDayName ? (
-            <TouchableOpacity onPress={handleConfirmNameChange}>
-              <Icon name='check' size={26} style={styles.icon} />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={() => setEditableDayName(true)}>
-              <Icon name='edit' size={26} style={styles.icon} />
-            </TouchableOpacity>
-          )}
+          <View style={styles.iconsWrapper}>
+            {editableDayName ? null : (
+              <TouchableOpacity onPress={() => handleRemoveDay(dayName)}>
+                <Icon name='trash' size={26} style={styles.icon} />
+              </TouchableOpacity>
+            )}
+            {editableDayName ? (
+              <TouchableOpacity onPress={handleConfirmNameChange}>
+                <Icon name='check' size={26} style={styles.icon} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => setEditableDayName(true)}>
+                <Icon name='edit' size={26} style={styles.icon} />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
         <View style={styles.exercisesWrapper}>
           {day.exercises.map(exercise => (
