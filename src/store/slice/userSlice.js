@@ -120,7 +120,7 @@ const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(addHistoryItem.fulfilled, (state, action) => {
-      state.data.history = action.payload;
+      state.data.history = [...state.data.history, action.payload];
       state.isLoading = false;
     });
     builder.addCase(addHistoryItem.rejected, state => {
@@ -131,7 +131,10 @@ const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(progressTraining.fulfilled, (state, action) => {
-      state.data.plans = action.payload;
+      const newPlans = [...state.data.plans];
+      const index = newPlans.findIndex(plan => plan.id === action.payload.id);
+      newPlans[index] = action.payload;
+      state.data.plans = newPlans;
       state.isLoading = false;
     });
     builder.addCase(progressTraining.rejected, state => {
