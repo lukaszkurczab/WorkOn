@@ -19,6 +19,7 @@ import CalendarScreen from './src/screens/calendarScreen/calendarScreen';
 import UserScreen from './src/screens/userScreen/userScreen';
 import LoginScreen from './src/screens/loginScreen/loginScreen';
 import RegisterScreen from './src/screens/registerScreen/registerScreen';
+import AuthScreen from './src/screens/authScreen/authScreen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -32,7 +33,7 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <StatusBar barStyle='dark-content' />
-          <Stack.Navigator initialRouteName='LoginScreen'>
+          <Stack.Navigator initialRouteName='AuthScreen'>
             <Stack.Screen name='MainScreen' component={MainScreen} options={{ headerShown: false }} />
             <Stack.Screen name='PlansListScreen' component={PlansListScreen} options={{ headerShown: false }} />
             <Stack.Screen name='PlanDetailsScreen' component={PlanDetailsScreen} options={{ headerShown: false }} />
@@ -47,6 +48,7 @@ const App = () => {
             <Stack.Screen name='UserScreen' component={UserScreen} options={{ headerShown: false }} />
             <Stack.Screen name='LoginScreen' component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name='RegisterScreen' component={RegisterScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='AuthScreen' component={AuthScreen} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

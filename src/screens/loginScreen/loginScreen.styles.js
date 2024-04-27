@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
     width: 180,
     height: 200,
   },
+  checkboxText: {
+    color: secondaryColor,
+  },
 });
 
 export default styles;
