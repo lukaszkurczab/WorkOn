@@ -19,16 +19,20 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   button: {
-    color: primaryColor,
-    padding: 10,
+    height: 50,
+    justifyContent: 'center',
     borderRadius: 5,
     backgroundColor: '#06f',
     marginTop: 20,
     width: '90%',
     alignItems: 'center',
   },
+  disabledButton: {
+    backgroundColor: secondaryColor,
+  },
   buttonText: {
     color: primaryColor,
+    fontSize: 20,
     padding: 10,
   },
   signUpText: {

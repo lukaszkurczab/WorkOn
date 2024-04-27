@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, TextInput, TouchableOpacity, Text, Alert, Image } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Alert, Image, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/slice/userSlice';
 import styles from './loginScreen.styles';
@@ -10,7 +10,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isError, errorMessage, token } = useSelector(state => state.user);
+  const { isError, isLoading, errorMessage, token } = useSelector(state => state.user);
 
   const handleLogin = async () => {
     await dispatch(login({ email, password }));
@@ -47,8 +47,8 @@ const LoginScreen = () => {
         secureTextEntry
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Log in</Text>
+      <TouchableOpacity style={[styles.button, isLoading ? styles.disabledButton : '']} onPress={handleLogin} disabled={isLoading}>
+        {isLoading ? <ActivityIndicator color='#06f' /> : <Text style={styles.buttonText}>Log in</Text>}
       </TouchableOpacity>
       <Text style={styles.signUpText}>
         New user?{' '}
