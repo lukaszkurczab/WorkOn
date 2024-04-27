@@ -24,15 +24,15 @@ export const progressTraining = createAsyncThunk('progressTraining', async data 
   const updatedDayExercises = dayToUpdate.exercises.map(exercise => {
     const finishedExercise = finishedExercises.filter(i => i.id === exercise.id)[0];
     if (finishedExercise) {
-      return finishedExercise.series.every(i => i.reps >= exercise.series[i.id - 1].reps)
+      return finishedExercise.series.every(i => i.reps >= exercise.series[i.id - 1].reps && i.weight >= exercise.series[i.id - 1].weight)
         ? {
             id: exercise.id,
             loadIncrease: exercise.loadIncrease,
             repsRange: exercise.repsRange,
-            series: exercise.series.map(serie => ({
+            series: finishedExercise.series.map(serie => ({
               id: serie.id,
               reps: serie.reps >= exercise.repsRange[1] ? exercise.repsRange[0] : serie.reps + 1,
-              weight: serie.reps >= exercise.repsRange[1] ? serie.weight + exercise.loadIncrease : serie.weight,
+              weight: serie.reps >= exercise.repsRange[1] ? Number(serie.weight) + Number(exercise.loadIncrease) : serie.weight,
             })),
           }
         : exercise;

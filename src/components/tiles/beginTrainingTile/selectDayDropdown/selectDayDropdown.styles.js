@@ -3,7 +3,7 @@ import { backgroundColor, secondaryColor, primaryColor } from '../../../../style
 
 const styles = StyleSheet.create({
   dropdownWrapper: {
-    position: 'relative'
+    position: 'relative',
   },
   dropdownButton: {
     alignItems: 'center',
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     color: secondaryColor,
     fontSize: 16,
   },
-  dropdownButtonIcon:{
+  dropdownButtonIcon: {
     color: secondaryColor,
   },
   itemsWrapper: {
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 35,
     width: '100%',
-    zIndex: 10
+    zIndex: 10,
   },
   itemsWrapper__hidden: {
-    display: 'none'
+    display: 'none',
   },
   dropdownItem: {
     color: backgroundColor,
-    height: 25
+    height: 25,
   },
 });
 

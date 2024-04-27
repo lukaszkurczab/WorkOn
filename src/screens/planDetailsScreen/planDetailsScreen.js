@@ -6,6 +6,7 @@ import PlanDetailsDayBox from '../../components/planDetailsDayBox/planDetailsDay
 import { SET_PLAN_TO_EDIT } from '../../store/reducers/planReducer';
 import { removePlan } from '../../store/slice/userSlice';
 import styles from './planDetailsScreen.styles';
+import Navigation from '../../components/navigation/navigation';
 
 const PlanDetailsScreen = () => {
   const navigation = useNavigation();
@@ -28,28 +29,30 @@ const PlanDetailsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{plan.name}</Text>
-      <ScrollView>
-        {plan.days.map(day => (
-          <PlanDetailsDayBox day={day} key={day.name} />
-        ))}
-        <View style={styles.buttonsWrapper}>
-          <TouchableOpacity onPress={handleEditPress}>
-            <View style={styles.buttonWrapper}>
-              <Icon name='plus' size={40} style={styles.icon} />
-              <Text style={styles.button}>Edit</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleRemovePress}>
-            <View style={styles.buttonWrapper}>
-              <Icon name='plus' size={40} style={styles.icon} />
-              <Text style={styles.button}>Remove</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+    <Navigation>
+      <View style={styles.container}>
+        <Text style={styles.title}>{plan.name}</Text>
+        <ScrollView>
+          {plan.days.map(day => (
+            <PlanDetailsDayBox day={day} key={day.name} />
+          ))}
+          <View style={styles.buttonsWrapper}>
+            <TouchableOpacity onPress={handleEditPress}>
+              <View style={styles.buttonWrapper}>
+                <Icon name='plus' size={40} style={styles.icon} />
+                <Text style={styles.button}>Edit</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleRemovePress}>
+              <View style={styles.buttonWrapper}>
+                <Icon name='plus' size={40} style={styles.icon} />
+                <Text style={styles.button}>Remove</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+    </Navigation>
   );
 };
 

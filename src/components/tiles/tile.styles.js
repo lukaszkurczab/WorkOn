@@ -10,8 +10,9 @@ const styles = StyleSheet.create({
     height: 140,
     width: '45%',
     flexShrink: 1,
+    zIndex: -1,
   },
-  containerImage:{
+  containerImage: {
     borderRadius: 12,
     alignItems: 'center',
     backgroundColor: fillColor,
@@ -20,12 +21,12 @@ const styles = StyleSheet.create({
     width: '45%',
     flexShrink: 1,
   },
-  icon:{
+  icon: {
     alignSelf: 'center',
     marginBottom: 10,
-    color: primaryColor
+    color: primaryColor,
   },
-  image:{
+  image: {
     alignSelf: 'center',
     height: 100,
     width: 90,
@@ -37,8 +38,8 @@ const styles = StyleSheet.create({
   textImage: {
     color: primaryColor,
     fontSize: 18,
-    fontWeight: '700'
-  }
+    fontWeight: '700',
+  },
 });
 
 export default styles;
