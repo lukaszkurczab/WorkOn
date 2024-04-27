@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   name: {
     color: backgroundColor,
     fontSize: 18,
+    lineHeight: 26,
     fontWeight: '500',
   },
   exerciseDetails: {
@@ -31,6 +32,22 @@ const styles = StyleSheet.create({
     bottom: 5,
     borderBottomWidth: 1,
     paddingHorizontal: 5,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  removeButton: {
+    borderWidth: 1,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  removeText: {
+    fontSize: 18,
+    lineHeight: 18,
   },
 });
 

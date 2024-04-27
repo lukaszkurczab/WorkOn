@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from './planEditExercise.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const PlanEditExercise = ({ exercise, handleSetExerciseToEdit, dayName }) => {
+const PlanEditExercise = ({ exercise, handleSetExerciseToEdit, dayName, handleRemoveExercise }) => {
   const exercisesList = useSelector(state => state.exercises.data);
   const [dropdown, setDropdown] = useState(false);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
@@ -12,7 +12,13 @@ const PlanEditExercise = ({ exercise, handleSetExerciseToEdit, dayName }) => {
   return (
     <View style={styles.container} key={exercise.id}>
       <TouchableOpacity onPress={() => setDropdown(!dropdown)}>
-        <Text style={styles.name}>{exerciseData.name}</Text>
+        <View style={styles.header}>
+          <Text style={styles.name}>{exerciseData.name}</Text>
+          <TouchableOpacity onPress={() => handleRemoveExercise(dayName, exercise.id)} style={styles.removeButton}>
+            <Text style={styles.removeText}>-</Text>
+          </TouchableOpacity>
+        </View>
+
         {dropdown && (
           <View style={styles.exerciseDetails}>
             <Text style={styles.text}>Series:</Text>

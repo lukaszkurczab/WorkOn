@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanEditDayBox from '../../components/planEditDayBox/planEditDayBox';
-import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN } from '../../store/reducers/planReducer';
+import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN, REMOVE_EXERCISE } from '../../store/reducers/planReducer';
 import { editPlan } from '../../store/slice/userSlice';
 import styles from './planEditScreen.styles';
 import PlanEditModal from '../../components/planEditModal/planEditModal';
@@ -59,6 +59,10 @@ const PlanEditScreen = () => {
     setShowAddExerciseModal(false);
   };
 
+  const handleRemoveExercise = (dayName, exerciseId) => {
+    dispatch(REMOVE_EXERCISE({ dayName, exerciseId }));
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -86,6 +90,7 @@ const PlanEditScreen = () => {
               key={`${day.name}+${index}`}
               handleSetExerciseToEdit={handleSetExerciseToEdit}
               handleShowAddExerciseModal={handleShowAddExerciseModal}
+              handleRemoveExercise={handleRemoveExercise}
             />
           ))}
           <TouchableOpacity onPress={handleAddDay}>

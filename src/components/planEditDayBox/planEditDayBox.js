@@ -6,7 +6,7 @@ import PlanEditExercise from '../planEditExercise/planEditExercise';
 import { CHANGE_DAY_NAME } from '../../store/reducers/planReducer';
 import styles from './planEditDayBox.styles';
 
-const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseModal }) => {
+const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseModal, handleRemoveExercise }) => {
   const dispatch = useDispatch();
   const [editableDayName, setEditableDayName] = useState(false);
   const [dayName, setDayName] = useState(day.name);
@@ -17,7 +17,7 @@ const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseMod
   };
 
   return (
-    <ScrollView key={day.name}>
+    <ScrollView key={dayName}>
       <View style={styles.container}>
         <View style={styles.rowWrapper}>
           <TextInput
@@ -38,7 +38,13 @@ const PlanEditDayBox = ({ day, handleSetExerciseToEdit, handleShowAddExerciseMod
         </View>
         <View style={styles.exercisesWrapper}>
           {day.exercises.map(exercise => (
-            <PlanEditExercise exercise={exercise} key={exercise.id} handleSetExerciseToEdit={handleSetExerciseToEdit} dayName={day.name} />
+            <PlanEditExercise
+              exercise={exercise}
+              key={exercise.id}
+              handleSetExerciseToEdit={handleSetExerciseToEdit}
+              handleRemoveExercise={handleRemoveExercise}
+              dayName={dayName}
+            />
           ))}
           <TouchableOpacity onPress={() => handleShowAddExerciseModal(dayName)}>
             <Text style={styles.text}>+ Add exercise</Text>
