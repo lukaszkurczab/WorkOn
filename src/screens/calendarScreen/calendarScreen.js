@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
 import HistoryDetails from '../../components/historyDetails/historyDetails';
-import { REMOVE_FROM_HISTORY } from '../../store/reducers/historyReducer';
 import styles from './calendarScreen.styles';
 import Navigation from '../../components/navigation/navigation';
 
@@ -15,11 +14,6 @@ const CalendarScreen = () => {
 
   const handleDayPress = date => {
     setDayData(historyData.filter(day => day.date === date));
-  };
-
-  const handleRemove = id => {
-    dispatch(REMOVE_FROM_HISTORY(id));
-    setDayData([]);
   };
 
   historyData.map(day => {
@@ -39,7 +33,7 @@ const CalendarScreen = () => {
           markingType={'period'}
           markedDates={markedDays}
         />
-        <HistoryDetails dayHistory={dayData} onRemove={handleRemove} />
+        <HistoryDetails dayHistory={dayData} />
       </View>
     </Navigation>
   );
