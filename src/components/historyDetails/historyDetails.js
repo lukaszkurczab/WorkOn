@@ -16,7 +16,7 @@ const HistoryDetails = ({ dayHistory }) => {
               <View>
                 <Text style={styles.name}>{day.name}</Text>
                 <Text style={styles.date}>{day.date}</Text>
-                <Text style={styles.text}>Total time: {useFormatTime(day.time)}</Text>
+                <Text style={styles.text}>Total time: {useFormatTime(day.time / 1000)}</Text>
               </View>
             </TouchableOpacity>
           </View>

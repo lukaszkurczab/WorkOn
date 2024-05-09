@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, secondaryColor, backgroundColor } from '../../styles/colors';
+import { secondaryColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     fontSize: 36,
-    marginBottom: 20
+    marginBottom: 20,
   },
   image: {
     height: 250,
-    width: 200
+    width: 200,
   },
   tilesWrapper: {
     flexDirection: 'row',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 5,
     marginTop: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   button: {
     color: backgroundColor,
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: backgroundColor,
-    marginRight: 15
-  }
+    marginRight: 15,
+  },
 });
 
 export default styles;

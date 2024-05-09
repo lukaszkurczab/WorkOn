@@ -16,7 +16,7 @@ import WorkoutSummaryScreen from './src/screens/workoutSummaryScreen/workoutSumm
 import PlanEditScreen from './src/screens/planEditScreen/planEditScreen';
 import ExerciseScreen from './src/screens/exerciseScreen/exerciseScreen';
 import CalendarScreen from './src/screens/calendarScreen/calendarScreen';
-import UserScreen from './src/screens/userScreen/userScreen';
+import ProfileScreen from './src/screens/profileScreen/profileScreen';
 import LoginScreen from './src/screens/loginScreen/loginScreen';
 import RegisterScreen from './src/screens/registerScreen/registerScreen';
 import AuthScreen from './src/screens/authScreen/authScreen';
@@ -45,7 +45,7 @@ const App = () => {
             <Stack.Screen name='PlanEditScreen' component={PlanEditScreen} options={{ headerShown: false }} />
             <Stack.Screen name='ExerciseScreen' component={ExerciseScreen} options={{ headerShown: false }} />
             <Stack.Screen name='CalendarScreen' component={CalendarScreen} options={{ headerShown: false }} />
-            <Stack.Screen name='UserScreen' component={UserScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='ProfileScreen' component={ProfileScreen} options={{ headerShown: false }} />
             <Stack.Screen name='LoginScreen' component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name='RegisterScreen' component={RegisterScreen} options={{ headerShown: false }} />
             <Stack.Screen name='AuthScreen' component={AuthScreen} options={{ headerShown: false }} />
