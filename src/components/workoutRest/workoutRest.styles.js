@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     textDecorationLine: 'underline',
   },
+  underlineButtonWrapper: {
+    marginBottom: 20,
+  },
 });
 
 export default styles;

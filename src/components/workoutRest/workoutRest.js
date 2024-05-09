@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
 import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
-import { END_REST } from '../../store/reducers/trainingReducer';
+import { END_REST, END_TRAINING } from '../../store/reducers/trainingReducer';
+import { addHistoryItem, progressTraining } from '../../store/slice/userSlice';
 import styles from './workoutRest.styles';
 
 const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }) => {
@@ -41,6 +42,11 @@ const WorkoutRest = () => {
   const navigation = useNavigation();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
   const restStart = useSelector(state => state.training.restStart);
+  const userPlans = useSelector(store => store.user.data.plans);
+  const trainingSummary = useSelector(store => store.training.trainingSummary);
+  const trainingStart = useSelector(state => state.training.trainingStart);
+  const userId = useSelector(store => store.user.data.id);
+  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
@@ -64,6 +70,40 @@ const WorkoutRest = () => {
     dispatch(END_REST());
   };
 
+  const handleEndTraining = () => {
+    const date = new Date().toLocaleDateString('en-GB', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
+    dispatch(
+      addHistoryItem({
+        id: userId,
+        historyItem: {
+          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
+          name: ongoingPlanData.name,
+          time: Date.now() - trainingStart,
+          exercises: trainingSummary,
+        },
+      }),
+    );
+    dispatch(
+      progressTraining({
+        userId: userId,
+        plan: {
+          id: ongoingPlanData.id,
+          dayIndex: ongoingPlanData.dayIndex,
+          plans: userPlans,
+          finishedExercises: trainingSummary,
+        },
+      }),
+    );
+
+    dispatch(END_TRAINING());
+    navigation.navigate('WorkoutSummaryScreen');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.stoper}>
@@ -77,9 +117,14 @@ const WorkoutRest = () => {
           <Text style={styles.buttonText}>Finish</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={styles.underlineButtonWrapper}>
         <TouchableOpacity onPress={handlePreview}>
           <Text style={styles.buttonTextPreview}>Preview exercise</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.underlineButtonWrapper}>
+        <TouchableOpacity onPress={handleEndTraining}>
+          <Text style={styles.buttonTextPreview}>End Training</Text>
         </TouchableOpacity>
       </View>
     </View>

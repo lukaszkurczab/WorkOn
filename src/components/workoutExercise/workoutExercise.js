@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
-import { FINISH_SERIE } from '../../store/reducers/trainingReducer';
+import { FINISH_SERIE, END_TRAINING } from '../../store/reducers/trainingReducer';
+import { addHistoryItem, progressTraining } from '../../store/slice/userSlice';
 import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
 import WorkoutSeriesModal from '../workoutSeriesModal/workoutSeriesModal';
 import styles from './workoutExercise.styles';
@@ -15,14 +16,53 @@ const WorkoutExercise = () => {
   const dispatch = useDispatch();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
   const exerciseSerieIndex = useSelector(state => state.training.ongoingExercise.serieIndex);
+  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
+  const userId = useSelector(store => store.user.data.id);
   const exercisesList = useSelector(state => state.exercises.data);
   const [showModal, setShowModal] = useState(false);
   const reps = exercise.series[exerciseSerieIndex].reps;
+  const trainingStart = useSelector(state => state.training.trainingStart);
   const weight = exercise.series[exerciseSerieIndex].weight;
+  const userPlans = useSelector(store => store.user.data.plans);
+  const trainingSummary = useSelector(store => store.training.trainingSummary);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   const handleFinish = () => {
     setShowModal(true);
+  };
+
+  const handleEndTraining = () => {
+    const date = new Date().toLocaleDateString('en-GB', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
+    dispatch(
+      addHistoryItem({
+        id: userId,
+        historyItem: {
+          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
+          name: ongoingPlanData.name,
+          time: Date.now() - trainingStart,
+          exercises: trainingSummary,
+        },
+      }),
+    );
+    dispatch(
+      progressTraining({
+        userId: userId,
+        plan: {
+          id: ongoingPlanData.id,
+          dayIndex: ongoingPlanData.dayIndex,
+          plans: userPlans,
+          finishedExercises: trainingSummary,
+        },
+      }),
+    );
+
+    dispatch(END_TRAINING());
+    navigation.navigate('WorkoutSummaryScreen');
   };
 
   const handleSeriesConfirm = (reps, weight) => {
@@ -53,10 +93,17 @@ const WorkoutExercise = () => {
           <Text style={styles.descTitle}>Short description</Text>
           <Text style={styles.descText}>{exerciseData.focusPoints}</Text>
         </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity onPress={handleFinish}>
-            <Text style={styles.buttonText}>Finish</Text>
-          </TouchableOpacity>
+        <View style={styles.buttonsWrapper}>
+          <View style={styles.endButtonWrapper}>
+            <TouchableOpacity onPress={handleEndTraining}>
+              <Text style={styles.endButtonText}>End training</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity onPress={handleFinish}>
+              <Text style={styles.buttonText}>Finish</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       {showModal && <WorkoutSeriesModal onConfirm={handleSeriesConfirm} initReps={reps} initWeight={weight} />}

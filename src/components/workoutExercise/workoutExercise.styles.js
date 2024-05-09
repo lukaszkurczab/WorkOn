@@ -37,11 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 5,
     borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 20,
-    marginRight: 20,
     width: 160,
-    alignSelf: 'flex-end',
   },
   buttonText: {
     color: accentColor,
@@ -58,6 +54,24 @@ const styles = StyleSheet.create({
     color: primaryColor,
     fontSize: 32,
     marginBottom: 20,
+  },
+  buttonsWrapper: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 20,
+    paddingHorizontal: 20,
+  },
+  endButtonWrapper: {
+    padding: 5,
+    borderBottomWidth: 2,
+    borderColor: primaryColor,
+  },
+  endButtonText: {
+    color: primaryColor,
+    fontSize: 18,
+    fontWeight: '500',
+    letterSpacing: 0.8,
   },
 });
 
