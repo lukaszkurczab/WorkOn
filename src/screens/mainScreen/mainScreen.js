@@ -7,6 +7,7 @@ import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
 import { getExercises } from '../../store/slice/exercisesSlice';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
+import { SET_ONGOING_TRAINING } from '../../store/reducers/sessionReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNewPlanTile from '../../components/tiles/createNewPlanTile/createNewPlanTile';
 import Navigation from '../../components/navigation/navigation';
@@ -17,9 +18,14 @@ const MainScreen = () => {
   const dataLoaded = useSelector(store => !store.user.isLoading);
   const userPlans = useSelector(store => store.user.data.plans);
   const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
+  const lastActivity = useSelector(store => store.training.lastActivity);
 
   useEffect(() => {
     dispatch(getExercises('1.0'));
+
+    if (ongoingPlanData && new Date() - new Date(lastActivity) < 30 * 60000) {
+      navigation.navigate('WorkoutScreen');
+    }
   }, []);
 
   const handleClearOngoingPlanData = () => {
@@ -29,7 +35,6 @@ const MainScreen = () => {
   const handleContinueTraining = () => {
     navigation.navigate('WorkoutScreen');
   };
-
   return (
     <Navigation>
       <View style={styles.container}>

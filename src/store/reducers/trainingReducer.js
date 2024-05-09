@@ -11,7 +11,9 @@ const training = createSlice({
     trainingSummary: [],
     finishedExercises: [],
     notFinishedExercises: [],
+    lastActivity: new Date(),
     trainingStep: 'select',
+    restStart: new Date(),
   },
   reducers: {
     START_TRAINING: (state, action) => {
@@ -33,10 +35,12 @@ const training = createSlice({
       state.notFinishedExercises = state.plan.exercises;
       state.trainingSummary = [];
       state.trainingStep = 'select';
+      state.lastActivity = new Date();
     },
     SET_ONGOING_EXERCISE: (state, action) => {
       state.ongoingExercise = { exercise: action.payload, serieIndex: 0 };
       state.trainingStep = 'exercise';
+      state.lastActivity = new Date();
     },
     FINISH_SERIE: (state, action) => {
       state.ongoingExercise.exercise.series[state.ongoingExercise.serieIndex].reps = action.payload.reps;
@@ -51,9 +55,12 @@ const training = createSlice({
         state.trainingSummary = [...state.trainingSummary, state.ongoingExercise.exercise];
         state.trainingStep = 'select';
       }
+      state.restStart = new Date();
+      state.lastActivity = new Date();
     },
     END_REST: state => {
       state.trainingStep = 'exercise';
+      state.lastActivity = new Date();
     },
     END_TRAINING: state => {
       state.ongoingPlanData = null;
