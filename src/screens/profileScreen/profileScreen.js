@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import ProfileHeader from '../../components/profileHeader/profileHeader';
 import RecordDisplay from '../../components/recordDisplay/recordDisplay';
@@ -10,15 +11,19 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './profileScreen.styles';
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
   const userData = useSelector(state => state.user.data);
-  const handlePress = () => {};
+
+  const handleSettings = () => {
+    navigation.navigate('SettingsScreen');
+  };
 
   return (
     <Navigation>
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={styles.settingsButton} onPress={handlePress}>
-            <Icon name='bars' size={30} style={styles.settingsIcon}></Icon>
+          <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
+            <Icon name='cog' size={30} style={styles.settingsIcon}></Icon>
           </TouchableOpacity>
           <ProfileHeader name={userData.username} />
           <Text style={styles.title}>Personal records</Text>
