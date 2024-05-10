@@ -23,9 +23,36 @@ export default StyleSheet.create({
   },
   button: {
     paddingVertical: 10,
-    paddingVertical: 5,
+    paddingHorizontal: 5,
+  },
+  logoutButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+    borderTopColor: secondaryColor,
+    borderTopWidth: 1,
+    marginTop: 5,
   },
   settingsIcon: {
     color: primaryColor,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: primaryColor,
+    color: secondaryColor,
+    paddingHorizontal: 5,
+    marginVertical: 5,
+  },
+  confirmButton: {
+    borderColor: primaryColor,
+    borderWidth: 1,
+    width: 70,
+    alignItems: 'center',
+    backgroundColor: secondaryColor,
+    alignSelf: 'flex-end',
+    marginTop: 10,
+  },
+  confirmText: {
+    color: backgroundColor,
+    fontSize: 16,
   },
 });
