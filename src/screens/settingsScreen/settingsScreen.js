@@ -1,22 +1,38 @@
 import React, { useState } from 'react';
 import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Navigation from '../../components/navigation/navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { changeUsername } from '../../store/slice/userSlice';
 import { secondaryColor } from '../../styles/colors';
 import styles from './settingsScreen.styles';
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const userData = useSelector(state => state.user.data);
+  const [newUsername, setNewUsername] = useState('');
   const [showChangeUsernameInput, setShowChangeUsernameInput] = useState(false);
   const [showChangePasswordInput, setShowChangePasswordInput] = useState(false);
-  const handleChangeUsername = () => {
+
+  const handleShowChangeUsername = () => {
     setShowChangeUsernameInput(!showChangeUsernameInput);
   };
+
+  const handleChangeUsername = () => {
+    dispatch(
+      changeUsername({
+        userId: userData.id,
+        newUsername: newUsername,
+      }),
+    );
+  };
+
   const handleChangePassword = () => {
     setShowChangePasswordInput(!showChangePasswordInput);
   };
+
   const handleSelectRecords = () => {};
   const handlePublicWorkouts = () => {};
   const handlePublicPlans = () => {};
@@ -37,12 +53,17 @@ const SettingsScreen = () => {
             <Text style={styles.header}>Settings</Text>
           </View>
           <View>
-            <TouchableOpacity style={styles.button} onPress={handleChangeUsername}>
+            <TouchableOpacity style={styles.button} onPress={handleShowChangeUsername}>
               <Text style={styles.text}>Change username</Text>
             </TouchableOpacity>
             {showChangeUsernameInput && (
               <View>
-                <TextInput style={styles.input} placeholderTextColor={secondaryColor} placeholder='New username' />
+                <TextInput
+                  style={styles.input}
+                  placeholderTextColor={secondaryColor}
+                  placeholder='New username'
+                  onChangeText={setNewUsername}
+                />
                 <TouchableOpacity style={styles.confirmButton} onPress={handleChangeUsername}>
                   <Text style={styles.confirmText}>Confirm</Text>
                 </TouchableOpacity>

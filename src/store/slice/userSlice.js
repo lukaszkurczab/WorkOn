@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { removePlanFromUser, editUserPlan, addHistoryItemToUser, registerUser, loginUser } from '../../api/users';
+import { removePlanFromUser, editUserPlan, addHistoryItemToUser, registerUser, loginUser, updateUserUsername } from '../../api/users';
 
 export const removePlan = createAsyncThunk('removePlan', async data => {
   const res = await removePlanFromUser(data.userId, data.planId);
@@ -55,7 +55,7 @@ export const progressTraining = createAsyncThunk('progressTraining', async data 
   return res;
 });
 
-export const register = createAsyncThunk('user/register', async (userData, { rejectWithValue }) => {
+export const register = createAsyncThunk('register', async (userData, { rejectWithValue }) => {
   try {
     const res = await registerUser(userData);
     return res;
@@ -64,9 +64,18 @@ export const register = createAsyncThunk('user/register', async (userData, { rej
   }
 });
 
-export const login = createAsyncThunk('user/login', async (userData, { rejectWithValue }) => {
+export const login = createAsyncThunk('login', async (userData, { rejectWithValue }) => {
   try {
     const res = await loginUser(userData);
+    return res;
+  } catch (error) {
+    return rejectWithValue(error.message);
+  }
+});
+
+export const changeUsername = createAsyncThunk('changeUsername', async (userData, { rejectWithValue }) => {
+  try {
+    const res = await updateUserUsername(userData);
     return res;
   } catch (error) {
     return rejectWithValue(error.message);
@@ -93,7 +102,7 @@ const userSlice = createSlice({
       console.log(action.payload.newPassword);
       console.log(action.payload.confirmNewPassword);
     },
-    SET_REMEMBER_Me: state => {
+    SET_REMEMBER_ME: state => {
       state.userRemembered = !state.userRemembered;
     },
   },
@@ -179,9 +188,23 @@ const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = 'Invalid email or password';
     });
+    builder.addCase(changeUsername.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(changeUsername.fulfilled, (state, action) => {
+      state.isError = false;
+      state.data = { ...state.data, username: action.payload };
+      state.errorMessage = '';
+      state.isLoading = false;
+    });
+    builder.addCase(changeUsername.rejected, state => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = 'Username is already taken';
+    });
   },
 });
 
-export const { SET_SELECTED_PLAN, CHANGE_PASSWORD, SET_REMEMBER_Me } = userSlice.actions;
+export const { SET_SELECTED_PLAN, CHANGE_PASSWORD, SET_REMEMBER_ME } = userSlice.actions;
 
 export default userSlice.reducer;

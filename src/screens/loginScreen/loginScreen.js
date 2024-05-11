@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { View, TextInput, TouchableOpacity, Text, Alert, Image, ActivityIndicator } from 'react-native';
 import Checkbox from '../../components/checkbox/checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, SET_REMEMBER_Me } from '../../store/slice/userSlice';
+import { login, SET_REMEMBER_ME } from '../../store/slice/userSlice';
 import styles from './loginScreen.styles';
 
 const LoginScreen = () => {
@@ -27,7 +27,7 @@ const LoginScreen = () => {
   };
 
   const handleRememberMe = () => {
-    dispatch(SET_REMEMBER_Me());
+    dispatch(SET_REMEMBER_ME());
   };
 
   return (

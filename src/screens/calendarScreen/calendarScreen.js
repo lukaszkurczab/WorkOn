@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
 import HistoryDetails from '../../components/historyDetails/historyDetails';
+import LastTrainingList from '../../components/lastTrainingList/lastTrainingList';
 import styles from './calendarScreen.styles';
 import Navigation from '../../components/navigation/navigation';
 
@@ -33,7 +34,8 @@ const CalendarScreen = () => {
           markingType={'period'}
           markedDates={markedDays}
         />
-        <HistoryDetails dayHistory={dayData} />
+        {dayData.length > 0 && <HistoryDetails dayHistory={dayData} />}
+        {dayData.length === 0 && <LastTrainingList data={historyData} />}
       </View>
     </Navigation>
   );

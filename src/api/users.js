@@ -79,3 +79,85 @@ export const loginUser = async userData => {
     throw error;
   }
 };
+
+export const updateUserUsername = async userData => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/username/${userData.userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ newUsername: userData.newUsername }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error updating username:', error);
+    throw error;
+  }
+};
+
+export const getPublicPlans = async userId => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/public/plans/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching public plans:', error);
+    throw error;
+  }
+};
+
+export const getPublicRecords = async userId => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/public/records/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching public records:', error);
+    throw error;
+  }
+};
+
+export const getPublicHistoryItems = async userId => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/public/history/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching public history items:', error);
+    throw error;
+  }
+};
+
+export const setItemPublicStatus = async (userId, itemType, itemId, isPublic) => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/set-public/${itemType}/${userId}/${itemId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ isPublic }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error setting public status for ${itemType}:`, error);
+    throw error;
+  }
+};
