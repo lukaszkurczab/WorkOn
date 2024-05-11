@@ -33,7 +33,10 @@ const SettingsScreen = () => {
     setShowChangePasswordInput(!showChangePasswordInput);
   };
 
-  const handleSelectRecords = () => {};
+  const handleSelectRecords = () => {
+    navigation.navigate('SelectRecordsScreen');
+  };
+
   const handlePublicWorkouts = () => {};
   const handlePublicPlans = () => {};
   const handleLogout = () => {};

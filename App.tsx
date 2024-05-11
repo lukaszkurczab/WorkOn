@@ -21,6 +21,9 @@ import LoginScreen from './src/screens/loginScreen/loginScreen';
 import RegisterScreen from './src/screens/registerScreen/registerScreen';
 import AuthScreen from './src/screens/authScreen/authScreen';
 import SettingsScreen from './src/screens/settingsScreen/settingsScreen';
+import SelectRecordsScreen from './src/screens/selectRecordsScreen/selectRecordsScreen';
+import SelectPublicPlansScreen from './src/screens/selectPublicPlansScreen/selectPublicPlansScreen';
+import SelectPublicWorkoutsScreen from './src/screens/selectPublicWorkoutsScreen/selectPublicWorkoutsScreen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -51,6 +54,9 @@ const App = () => {
             <Stack.Screen name='RegisterScreen' component={RegisterScreen} options={{ headerShown: false }} />
             <Stack.Screen name='AuthScreen' component={AuthScreen} options={{ headerShown: false }} />
             <Stack.Screen name='SettingsScreen' component={SettingsScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='SelectRecordsScreen' component={SelectRecordsScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='SelectPublicPlansScreen' component={SelectPublicPlansScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='SelectPublicWorkoutsScreen' component={SelectPublicWorkoutsScreen} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
