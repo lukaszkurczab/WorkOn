@@ -37,8 +37,14 @@ const SettingsScreen = () => {
     navigation.navigate('SelectRecordsScreen');
   };
 
-  const handlePublicWorkouts = () => {};
-  const handlePublicPlans = () => {};
+  const handlePublicWorkouts = () => {
+    navigation.navigate('SelectPublicWorkoutsScreen');
+  };
+
+  const handlePublicPlans = () => {
+    navigation.navigate('SelectPublicPlansScreen');
+  };
+
   const handleLogout = () => {};
 
   const handleBack = () => {

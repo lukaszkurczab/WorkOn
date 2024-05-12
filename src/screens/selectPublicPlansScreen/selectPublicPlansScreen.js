@@ -21,7 +21,7 @@ const SelectPublicPlansScreen = () => {
           <TouchableOpacity style={styles.button} onPress={handleBack}>
             <Icon name='chevron-left' size={30} style={styles.settingsIcon}></Icon>
           </TouchableOpacity>
-          <Text>Select Plans</Text>
+          <Text style={styles.header}>Select Plans</Text>
         </ScrollView>
       </View>
     </Navigation>

@@ -21,7 +21,7 @@ const SelectPublicWorkoutsScreen = () => {
           <TouchableOpacity style={styles.button} onPress={handleBack}>
             <Icon name='chevron-left' size={30} style={styles.settingsIcon}></Icon>
           </TouchableOpacity>
-          <Text>Select workouts</Text>
+          <Text style={styles.header}>Select workouts</Text>
         </ScrollView>
       </View>
     </Navigation>
