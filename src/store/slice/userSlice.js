@@ -98,7 +98,7 @@ export const changeUsername = createAsyncThunk('changeUsername', async (userData
   }
 });
 
-export const updatePublicPlan = createAsyncThunk('setPublicPlan', async data => {
+export const updatePublicPlan = createAsyncThunk('updatePublicPlan', async data => {
   try {
     const res = await setPublicPlan(data.userId, data.itemId, data.isPublic);
     return res;
@@ -107,7 +107,7 @@ export const updatePublicPlan = createAsyncThunk('setPublicPlan', async data => 
   }
 });
 
-export const updatePublicHistoryItem = createAsyncThunk('setPublicHistoryItem', async data => {
+export const updatePublicHistoryItem = createAsyncThunk('updatePublicHistoryItem', async data => {
   try {
     const res = await setPublicHistoryItem(data.userId, data.itemId, data.isPublic);
     return res;
@@ -116,7 +116,7 @@ export const updatePublicHistoryItem = createAsyncThunk('setPublicHistoryItem', 
   }
 });
 
-export const updateUserRecords = createAsyncThunk('setUserRecords', async data => {
+export const updateUserRecords = createAsyncThunk('updateUserRecords', async data => {
   try {
     const res = await setUserRecords(data.userId, data.records);
     return res;
@@ -125,7 +125,7 @@ export const updateUserRecords = createAsyncThunk('setUserRecords', async data =
   }
 });
 
-export const updatePassword = createAsyncThunk('updateUserPassword', async (userData, { rejectWithValue }) => {
+export const updatePassword = createAsyncThunk('updatePassword', async (userData, { rejectWithValue }) => {
   try {
     const res = await updateUserPassword(userData.userId, userData.newPassword);
     return res;
