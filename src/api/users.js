@@ -145,19 +145,76 @@ export const getPublicHistoryItems = async userId => {
   }
 };
 
-export const setItemPublicStatus = async (userId, itemType, itemId, isPublic) => {
+export const setPublicPlan = async (userId, itemId, isPublic) => {
   try {
-    const response = await fetch(`https://workon-backend.azurewebsites.net/users/set-public/${itemType}/${userId}/${itemId}`, {
-      method: 'POST',
+    const response = await fetch(
+      `https://workon-backend.azurewebsites.net/users/set-public/plans/${userId}/${itemId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isPublic }),
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error setting public status for plan:`, error);
+    throw error;
+  }
+};
+
+export const setPublicHistoryItem = async (userId, itemId, isPublic) => {
+  try {
+    const response = await fetch(
+      `https://workon-backend.azurewebsites.net/users/set-public/history/${userId}/${itemId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isPublic }),
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error setting public status for history item:`, error);
+    throw error;
+  }
+};
+
+export const updateUserPassword = async (userId, newPassword) => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/password/${userId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ isPublic }),
+      body: JSON.stringify({ password: newPassword }),
     });
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(`Error setting public status for ${itemType}:`, error);
+    console.error(`Error updating user password:`, error);
+    throw error;
+  }
+};
+
+export const setUserRecords = async (userId, records) => {
+  try {
+    const response = await fetch(`https://workon-backend.azurewebsites.net/users/update-records/${userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ records: records }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error updating user records:`, error);
     throw error;
   }
 };
