@@ -27,10 +27,6 @@ const SelectRecordsScreen = () => {
     setExercisesList(newExercisesList);
   }, []);
 
-  const handleBack = () => {
-    navigation.navigate('SettingsScreen');
-  };
-
   const handleAdd = (exercise, weight) => {
     if (newExercise !== null && newWeight !== '0') {
       const updatedRecords = newRecords.filter(record => record.exercise !== exercise);
@@ -53,9 +49,6 @@ const SelectRecordsScreen = () => {
     <Navigation>
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={styles.button} onPress={handleBack}>
-            <Icon name='chevron-left' size={30} style={styles.settingsIcon}></Icon>
-          </TouchableOpacity>
           <Text style={styles.header}>Selected records</Text>
           {newRecords &&
             newRecords.map(record => (

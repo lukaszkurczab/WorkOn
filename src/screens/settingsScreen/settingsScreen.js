@@ -66,17 +66,10 @@ const SettingsScreen = () => {
     navigation.navigate('LoginScreen');
   };
 
-  const handleBack = () => {
-    navigation.navigate('ProfileScreen');
-  };
-
   return (
     <Navigation>
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={styles.button} onPress={handleBack}>
-            <Icon name='chevron-left' size={30} style={styles.settingsIcon}></Icon>
-          </TouchableOpacity>
           <View style={styles.button}>
             <Text style={styles.header}>Settings</Text>
           </View>

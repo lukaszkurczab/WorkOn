@@ -13,10 +13,6 @@ const SelectPublicWorkoutsScreen = () => {
   const workouts = useSelector(state => state.user.data.history);
   const [editedWorkouts, setEditedWorkouts] = useState(workouts);
 
-  const handleBack = () => {
-    navigation.navigate('SettingsScreen');
-  };
-
   const handleChangePublic = id => {
     const newEditedWorkouts = [...editedWorkouts];
     const index = newEditedWorkouts.findIndex(workout => workout.id === id);
@@ -32,15 +28,11 @@ const SelectPublicWorkoutsScreen = () => {
     <Navigation>
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={styles.button} onPress={handleBack}>
-            <Icon name='chevron-left' size={30} style={styles.settingsIcon} />
-          </TouchableOpacity>
           <Text style={styles.header}>Select workouts</Text>
           <View>
             {editedWorkouts.map(day => (
               <View key={day.id} style={styles.tileWrapper}>
                 <LastTrainingListItem day={day} />
-
                 <TouchableOpacity style={styles.publicButtonWrapper} onPress={() => handleChangePublic(day.id)}>
                   {day.public ? (
                     <Icon name='eye' size={30} style={styles.settingsIcon} />
