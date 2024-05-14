@@ -4,6 +4,8 @@ import { primaryColor, backgroundColor } from '../../../styles/colors';
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
+    width: '100%',
+    flexShrink: 1,
   },
   headingWrapper: {
     paddingHorizontal: 24,

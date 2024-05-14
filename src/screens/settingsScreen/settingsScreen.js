@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Navigation from '../../components/navigation/navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { changeUsername, updatePassword } from '../../store/actions/userActions';
+import { SET_REMEMBER_ME } from '../../store/slice/sessionSlice';
+import { CLEAR_TOKEN } from '../../store/slice/userSlice';
 import { secondaryColor } from '../../styles/colors';
 import styles from './settingsScreen.styles';
 
@@ -58,7 +60,11 @@ const SettingsScreen = () => {
     navigation.navigate('SelectPublicPlansScreen');
   };
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    dispatch(CLEAR_TOKEN());
+    dispatch(SET_REMEMBER_ME(false));
+    navigation.navigate('LoginScreen');
+  };
 
   const handleBack = () => {
     navigation.navigate('ProfileScreen');

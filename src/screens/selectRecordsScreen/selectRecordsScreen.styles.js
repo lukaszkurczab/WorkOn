@@ -84,7 +84,7 @@ export default StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 15,
     borderRadius: 3,
-    marginTop: 30,
+    marginVertical: 20,
   },
   confirmText: {
     fontSize: 20,
