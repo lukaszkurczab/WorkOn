@@ -7,7 +7,6 @@ import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
 import { getExercises } from '../../store/slice/exercisesSlice';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
-import { SET_ONGOING_TRAINING } from '../../store/reducers/sessionReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNewPlanTile from '../../components/tiles/createNewPlanTile/createNewPlanTile';
 import Navigation from '../../components/navigation/navigation';
@@ -15,7 +14,6 @@ import Navigation from '../../components/navigation/navigation';
 const MainScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const dataLoaded = useSelector(store => !store.user.isLoading);
   const userPlans = useSelector(store => store.user.data.plans);
   const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
   const lastActivity = useSelector(store => store.training.lastActivity);
@@ -26,7 +24,7 @@ const MainScreen = () => {
     if (ongoingPlanData && new Date() - new Date(lastActivity) < 30 * 60000) {
       navigation.navigate('WorkoutScreen');
     }
-  }, []);
+  }, [dispatch, ongoingPlanData, lastActivity, navigation]);
 
   const handleClearOngoingPlanData = () => {
     dispatch(END_TRAINING());
@@ -35,37 +33,34 @@ const MainScreen = () => {
   const handleContinueTraining = () => {
     navigation.navigate('WorkoutScreen');
   };
+
   return (
     <Navigation>
       <View style={styles.container}>
-        {dataLoaded && (
-          <>
-            <Header />
-            {userPlans && userPlans.length > 0 ? <BeginTrainingTile /> : <CreateNewPlanTile />}
-            <View style={styles.tilesWrapper}>
-              <Tile text='Your plans' icon='dumbbell' path='PlansListScreen' version='icon'></Tile>
-              <Tile text='Exercise atlas' icon='list-ul' path='AtlasScreen' version='icon'></Tile>
-              <Tile text='History' icon='chart-bar' path='CalendarScreen' version='icon'></Tile>
-              <Tile text='Articles' icon='book' path='ArticlesSelectScreen' version='icon'></Tile>
-            </View>
-          </>
-        )}
+        <Header />
+        {userPlans && userPlans.length > 0 ? <BeginTrainingTile /> : <CreateNewPlanTile />}
+        <View style={styles.tilesWrapper}>
+          {[
+            { text: 'Your plans', icon: 'dumbbell', path: 'PlansListScreen' },
+            { text: 'Exercise atlas', icon: 'list-ul', path: 'AtlasScreen' },
+            { text: 'History', icon: 'chart-bar', path: 'CalendarScreen' },
+            { text: 'Articles', icon: 'book', path: 'ArticlesSelectScreen' },
+          ].map(tile => (
+            <Tile key={tile.text} text={tile.text} icon={tile.icon} path={tile.path} version='icon' />
+          ))}
+        </View>
       </View>
       {ongoingPlanData !== null && (
         <View style={styles.popupWrapper}>
           <View style={styles.wrapper}>
             <Text style={styles.wrapperText}>You have unfinished training. Would you like to continue?</Text>
             <View style={styles.buttonsWrapper}>
-              <View style={styles.buttonWrapper}>
-                <TouchableOpacity onPress={handleClearOngoingPlanData}>
-                  <Text style={styles.buttonText}>No</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.buttonWrapper}>
-                <TouchableOpacity onPress={handleContinueTraining}>
-                  <Text style={styles.buttonText}>Yes</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={handleClearOngoingPlanData}>
+                <Text style={styles.buttonText}>No</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleContinueTraining}>
+                <Text style={styles.buttonText}>Yes</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

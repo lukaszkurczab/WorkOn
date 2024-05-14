@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserPlans, getUserRecords, getUserHistoryItems } from '../../store/actions/userActions';
 import ProfileHeader from '../../components/profileHeader/profileHeader';
 import RecordDisplay from '../../components/recordDisplay/recordDisplay';
 import WorkoutCard from '../../components/workoutCard/workoutCard';
@@ -12,7 +13,18 @@ import styles from './profileScreen.styles';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const userData = useSelector(state => state.user.data);
+  const user = useSelector(state => state.user);
+  const userPlans = useSelector(state => state.user.publicPlans);
+  const userRecords = useSelector(state => state.user.publicRecords);
+  const userHistoryItems = useSelector(state => state.user.publicHistoryItems);
+
+  useEffect(() => {
+    dispatch(getUserPlans(userData.id));
+    dispatch(getUserRecords(userData.id));
+    dispatch(getUserHistoryItems(userData.id));
+  }, []);
 
   const handleSettings = () => {
     navigation.navigate('SettingsScreen');
@@ -27,12 +39,7 @@ const ProfileScreen = () => {
           </TouchableOpacity>
           <ProfileHeader name={userData.username} />
           <Text style={styles.title}>Personal records</Text>
-          <RecordDisplay
-            records={[
-              { exercise: 'Bench press', weight: 95 },
-              { exercise: 'Squat', weight: 130 },
-            ]}
-          />
+          <RecordDisplay records={userRecords} />
           <View style={styles.section}>
             <Text style={styles.title}>Recent workouts</Text>
             <WorkoutCard workout={{ type: 'Gym workout - chest', duration: '1:23', exercises: 11 }} />

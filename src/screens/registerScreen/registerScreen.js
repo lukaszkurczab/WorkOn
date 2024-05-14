@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../store/slice/userSlice';
+import { register } from '../../store/actions/userActions';
 import styles from './registerScreen.styles';
 
 const RegisterScreen = ({ navigation }) => {

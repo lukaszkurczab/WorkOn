@@ -3,6 +3,7 @@ import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-native-element-dropdown';
+import { updateUserRecords } from '../../store/actions/userActions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Navigation from '../../components/navigation/navigation';
 import styles from './selectRecordsScreen.styles';
@@ -11,12 +12,12 @@ const SelectRecordsScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const exercises = useSelector(state => state.exercises.data);
-  const selectedRecords = useSelector(state => state.user.data.records);
+  const userData = useSelector(state => state.user.data);
   const [exercisesList, setExercisesList] = useState([]);
   const [newExercise, setNewExercise] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [newWeight, setNewWeight] = useState('0');
-  const [newRecords, setNewRecords] = useState(selectedRecords);
+  const [newRecords, setNewRecords] = useState(userData.records);
 
   useEffect(() => {
     const newExercisesList = [];
@@ -44,7 +45,8 @@ const SelectRecordsScreen = () => {
   };
 
   const handleConfirm = () => {
-    console.log(newRecords);
+    dispatch(updateUserRecords({ userId: userData.id, records: newRecords }));
+    navigation.navigate('SettingsScreen');
   };
 
   return (
@@ -55,17 +57,18 @@ const SelectRecordsScreen = () => {
             <Icon name='chevron-left' size={30} style={styles.settingsIcon}></Icon>
           </TouchableOpacity>
           <Text style={styles.header}>Selected records</Text>
-          {newRecords.map(record => (
-            <View style={styles.row} key={record.exercise}>
-              <Text style={styles.text}>{record.exercise}</Text>
-              <Text style={styles.text}>
-                {record.weight} kg
-                <TouchableOpacity style={styles.removeButton} onPress={() => handleRemove(record.exercise)}>
-                  <Icon name='times-circle' size={18} style={styles.removeIcon} />
-                </TouchableOpacity>
-              </Text>
-            </View>
-          ))}
+          {newRecords &&
+            newRecords.map(record => (
+              <View style={styles.row} key={record.exercise}>
+                <Text style={styles.text}>{record.exercise}</Text>
+                <Text style={styles.text}>
+                  {record.weight} kg
+                  <TouchableOpacity style={styles.removeButton} onPress={() => handleRemove(record.exercise)}>
+                    <Icon name='times-circle' size={18} style={styles.removeIcon} />
+                  </TouchableOpacity>
+                </Text>
+              </View>
+            ))}
           <View style={styles.row}>
             <Dropdown
               placeholderStyle={styles.placeholderStyle}

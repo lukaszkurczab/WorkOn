@@ -4,7 +4,7 @@ import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanDetailsDayBox from '../../components/planDetailsDayBox/planDetailsDayBox';
 import { SET_PLAN_TO_EDIT } from '../../store/reducers/planReducer';
-import { removePlan } from '../../store/slice/userSlice';
+import { removePlan } from '../../store/actions/userActions';
 import styles from './planDetailsScreen.styles';
 import Navigation from '../../components/navigation/navigation';
 

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, TextInput, TouchableOpacity, Text, Alert, Image, ActivityIndicator } from 'react-native';
 import Checkbox from '../../components/checkbox/checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, SET_REMEMBER_ME } from '../../store/slice/userSlice';
+import { SET_REMEMBER_ME, SET_IS_LOADING } from '../../store/slice/userSlice';
+import { login } from '../../store/actions/userActions';
 import styles from './loginScreen.styles';
 
 const LoginScreen = () => {
@@ -11,15 +12,17 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isError, isLoading, errorMessage, token, userRemembered } = useSelector(state => state.user);
+  const { isLoading, token, userRemembered } = useSelector(state => state.user);
+
+  useEffect(() => {
+    dispatch(SET_IS_LOADING());
+    if (token) {
+      navigation.navigate('MainScreen');
+    }
+  }, [token]);
 
   const handleLogin = async () => {
     await dispatch(login({ email, password }));
-    if (token) {
-      navigation.navigate('MainScreen');
-    } else if (isError) {
-      Alert.alert('Login Error', errorMessage, [{ text: 'OK' }]);
-    }
   };
 
   const handleSignUp = () => {
@@ -55,7 +58,7 @@ const LoginScreen = () => {
       <Checkbox selected={userRemembered} onClick={handleRememberMe}>
         <Text style={styles.checkboxText}>Remember me</Text>
       </Checkbox>
-      <TouchableOpacity style={[styles.button, isLoading ? styles.disabledButton : '']} onPress={handleLogin} disabled={isLoading}>
+      <TouchableOpacity style={[styles.button, isLoading && styles.disabledButton]} onPress={handleLogin} disabled={isLoading}>
         {isLoading ? <ActivityIndicator color='#06f' /> : <Text style={styles.buttonText}>Log in</Text>}
       </TouchableOpacity>
       <Text style={styles.signUpText}>

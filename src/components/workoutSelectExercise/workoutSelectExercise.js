@@ -2,7 +2,7 @@ import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
-import { addHistoryItem, progressTraining } from '../../store/slice/userSlice';
+import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
 import WorkoutExerciseTile from '../tiles/workoutExerciseTile.js/workoutExerciseTile';
 import styles from './workoutSelectExercise.styles';
 

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
 import { FINISH_SERIE, END_TRAINING } from '../../store/reducers/trainingReducer';
-import { addHistoryItem, progressTraining } from '../../store/slice/userSlice';
+import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
 import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
 import WorkoutSeriesModal from '../workoutSeriesModal/workoutSeriesModal';
 import styles from './workoutExercise.styles';

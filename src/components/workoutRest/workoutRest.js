@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
 import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
 import { END_REST, END_TRAINING } from '../../store/reducers/trainingReducer';
-import { addHistoryItem, progressTraining } from '../../store/slice/userSlice';
+import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
 import styles from './workoutRest.styles';
 
 const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }) => {

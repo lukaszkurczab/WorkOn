@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanEditDayBox from '../../components/planEditDayBox/planEditDayBox';
 import { CHANGE_PLAN_NAME, ADD_DAY_TO_PLAN, REMOVE_EXERCISE, REMOVE_DAY } from '../../store/reducers/planReducer';
-import { editPlan } from '../../store/slice/userSlice';
+import { editPlan } from '../../store/actions/userActions';
 import styles from './planEditScreen.styles';
 import PlanEditModal from '../../components/planEditModal/planEditModal';
 import AddNewExerciseModal from '../../components/planEditDayBox/addNewExerciseModal/addNewExerciseModal';
