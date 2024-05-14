@@ -11,7 +11,7 @@ import { START_TRAINING } from '../../../store/reducers/trainingReducer';
 const BeginTrainingTile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const selectedPlan = useSelector(store => store.user.selectedPlan);
+  const selectedPlan = useSelector(state => state.user.selectedPlan);
   const [selectedDay, setSelectedDay] = useState(0);
 
   const handleDaySelected = dayIndex => {

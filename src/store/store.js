@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import atlasReducer from './reducers/atlasReducer';
 import plansReducer from './reducers/planReducer';
 import trainingReducer from './reducers/trainingReducer';
-import sessionReducer from './reducers/sessionReducer';
+import sessionReducer from './slice/sessionSlice';
 import userReducer from './slice/userSlice';
 import exercisesReducer from './slice/exercisesSlice';
 
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,7 +29,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: [thunk],
-  blacklist: ['user'],
 });
 
 const persistor = persistStore(store);

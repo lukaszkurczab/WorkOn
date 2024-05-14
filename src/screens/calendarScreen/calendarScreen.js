@@ -9,7 +9,7 @@ import Navigation from '../../components/navigation/navigation';
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();
-  const historyData = useSelector(store => store.user.data.history);
+  const historyData = useSelector(state => state.user.data.history);
   const [dayData, setDayData] = useState([]);
   let markedDays = {};
 

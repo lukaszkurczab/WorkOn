@@ -25,12 +25,16 @@ import SelectRecordsScreen from './src/screens/selectRecordsScreen/selectRecords
 import SelectPublicPlansScreen from './src/screens/selectPublicPlansScreen/selectPublicPlansScreen';
 import SelectPublicWorkoutsScreen from './src/screens/selectPublicWorkoutsScreen/selectPublicWorkoutsScreen';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Stack = createStackNavigator();
 
 const App = () => {
+  AsyncStorage.clear();
+
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <StatusBar barStyle='dark-content' />
           <Stack.Navigator initialRouteName='AuthScreen'>

@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, TextInput, TouchableOpacity, Text, Alert, Image, ActivityIndicator } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
 import Checkbox from '../../components/checkbox/checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_REMEMBER_ME, SET_IS_LOADING } from '../../store/slice/userSlice';
+import { SET_IS_LOADING } from '../../store/slice/userSlice';
+import { SET_REMEMBER_ME, REMEMBER_USER } from '../../store/slice/sessionSlice';
 import { login } from '../../store/actions/userActions';
 import styles from './loginScreen.styles';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { isLoading, token } = useSelector(state => state.user);
+  const rememberMe = useSelector(state => state.session.rememberMe);
+  const session = useSelector(state => state.session);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isLoading, token, userRemembered } = useSelector(state => state.user);
 
   useEffect(() => {
     dispatch(SET_IS_LOADING());
@@ -22,6 +25,7 @@ const LoginScreen = () => {
   }, [token]);
 
   const handleLogin = async () => {
+    dispatch(REMEMBER_USER({ email: email, password: password }));
     await dispatch(login({ email, password }));
   };
 
@@ -30,7 +34,7 @@ const LoginScreen = () => {
   };
 
   const handleRememberMe = () => {
-    dispatch(SET_REMEMBER_ME());
+    dispatch(SET_REMEMBER_ME(!rememberMe));
   };
 
   return (
@@ -55,7 +59,7 @@ const LoginScreen = () => {
         secureTextEntry
         style={styles.input}
       />
-      <Checkbox selected={userRemembered} onClick={handleRememberMe}>
+      <Checkbox selected={rememberMe} onClick={handleRememberMe}>
         <Text style={styles.checkboxText}>Remember me</Text>
       </Checkbox>
       <TouchableOpacity style={[styles.button, isLoading && styles.disabledButton]} onPress={handleLogin} disabled={isLoading}>

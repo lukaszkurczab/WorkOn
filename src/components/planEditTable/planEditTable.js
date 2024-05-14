@@ -11,7 +11,7 @@ import styles from './planEditTable.styles';
 
 const PlanEditTable = () => {
   const dispatch = useDispatch();
-  const plan = useSelector(store => store.plans.planToEdit);
+  const plan = useSelector(state => state.plans.planToEdit);
   const [activeDay, setActiveDay] = useState(plan.days[0].name);
   const [daysPlanToEdit, setDaysPlanToEdit] = useState(plan.days.filter(day => day.name === activeDay)[0].exercises);
   const [showEditModal, setShowEditModla] = useState(false);

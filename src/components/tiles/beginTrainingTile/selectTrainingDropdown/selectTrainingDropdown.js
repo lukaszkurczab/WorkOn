@@ -7,7 +7,7 @@ import { SET_SELECTED_PLAN } from '../../../../store/slice/userSlice';
 
 const SelectTrainingDropdown = ({ selectedPlan, handleDaySelectedReset }) => {
   const dispatch = useDispatch();
-  const plans = useSelector(store => store.user.data.plans);
+  const plans = useSelector(state => state.user.data.plans);
   const [visible, setVisible] = useState(false);
   const [selectedPlanName, setSelectedPlanName] = useState('');
   const myRef = useRef(null);

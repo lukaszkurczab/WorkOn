@@ -11,8 +11,8 @@ import Navigation from '../../components/navigation/navigation';
 const PlanDetailsScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const plan = useSelector(store => store.plans.planToPreview);
-  const userId = useSelector(store => store.user.data.id);
+  const plan = useSelector(state => state.plans.planToPreview);
+  const userId = useSelector(state => state.user.data.id);
 
   const handleEditPress = () => {
     dispatch(SET_PLAN_TO_EDIT(plan));

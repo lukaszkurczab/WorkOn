@@ -24,7 +24,7 @@ const data = [
 const AtlasDropdown = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const selecterMusclesGroup = useSelector(store => store.atlas.selectedGroup);
+  const selecterMusclesGroup = useSelector(state => state.atlas.selectedGroup);
 
   const openMenu = () => setVisible(!visible);
 

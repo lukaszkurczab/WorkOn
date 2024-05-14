@@ -86,7 +86,7 @@ export const getPublicRecords = async userId => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return await response.json();
+    return response.json();
   } catch (error) {
     console.error('Error fetching public records:', error);
     throw error;

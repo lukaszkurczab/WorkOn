@@ -10,8 +10,8 @@ import Navigation from '../../components/navigation/navigation';
 const PlansListScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const plans = useSelector(store => store.user.data.plans);
-  const isLoading = useSelector(store => store.user.isLoading);
+  const plans = useSelector(state => state.user.data.plans);
+  const isLoading = useSelector(state => state.user.isLoading);
 
   const handleAddPlan = () => {
     dispatch(CREATE_NEW_PLAN());

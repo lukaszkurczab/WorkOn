@@ -9,12 +9,12 @@ import styles from './workoutSelectExercise.styles';
 const WorkoutSelectExercise = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const finishedExercises = useSelector(store => store.training.finishedExercises);
-  const notFinishedExercises = useSelector(store => store.training.notFinishedExercises);
-  const userId = useSelector(store => store.user.data.id);
-  const userPlans = useSelector(store => store.user.data.plans);
-  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
-  const trainingSummary = useSelector(store => store.training.trainingSummary);
+  const finishedExercises = useSelector(state => state.training.finishedExercises);
+  const notFinishedExercises = useSelector(state => state.training.notFinishedExercises);
+  const userId = useSelector(state => state.user.data.id);
+  const userPlans = useSelector(state => state.user.data.plans);
+  const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
+  const trainingSummary = useSelector(state => state.training.trainingSummary);
   const trainingStart = useSelector(state => state.training.trainingStart);
 
   const handleFinish = () => {

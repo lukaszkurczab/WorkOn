@@ -8,9 +8,9 @@ import ButtonBig from '../buttons/buttonBig/buttonBig';
 
 const WorkoutSummary = () => {
   const navigation = useNavigation();
-  const summary = useSelector(store => store.training.trainingSummary);
-  const trainingName = useSelector(store => store.training.ongoingPlanName);
-  const trainingTime = Date.now() - useSelector(store => store.training.trainingStart);
+  const summary = useSelector(state => state.training.trainingSummary);
+  const trainingName = useSelector(state => state.training.ongoingPlanName);
+  const trainingTime = Date.now() - useSelector(state => state.training.trainingStart);
   const date = new Date().toLocaleDateString('pl-PL');
 
   const handleFinish = () => {

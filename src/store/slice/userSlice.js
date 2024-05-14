@@ -16,26 +16,20 @@ import {
   getUserHistoryItems,
 } from '../actions/userActions';
 
-const initialState = {
-  isLoading: false,
-  data: {},
-  selectedPlan: undefined,
-  token: null,
-  userRemembered: false,
-  publicPlans: [],
-  publicRecords: [],
-  publicHistoryItems: [],
-};
-
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: {
+    isLoading: false,
+    data: {},
+    selectedPlan: undefined,
+    token: null,
+    publicPlans: [],
+    publicRecords: [],
+    publicHistoryItems: [],
+  },
   reducers: {
     SET_SELECTED_PLAN: (state, action) => {
       state.selectedPlan = action.payload;
-    },
-    SET_REMEMBER_ME: state => {
-      state.userRemembered = !state.userRemembered;
     },
     SET_IS_LOADING: state => {
       state.isLoading = false;
@@ -106,6 +100,7 @@ const userSlice = createSlice({
         state.publicPlans = action.payload;
       })
       .addCase(getUserRecords.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.publicRecords = action.payload;
       })
       .addCase(getUserHistoryItems.fulfilled, (state, action) => {
@@ -114,5 +109,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { SET_SELECTED_PLAN, SET_REMEMBER_ME, SET_IS_LOADING } = userSlice.actions;
+export const { SET_SELECTED_PLAN, SET_IS_LOADING } = userSlice.actions;
 export default userSlice.reducer;

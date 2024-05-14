@@ -13,9 +13,9 @@ import AddNewExerciseModal from '../../components/planEditDayBox/addNewExerciseM
 const PlanEditScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const planToEditName = useSelector(store => store.plans.planToEdit.name);
-  const planToEdit = useSelector(store => store.plans.planToEdit);
-  const userId = useSelector(store => store.user.data.id);
+  const planToEditName = useSelector(state => state.plans.planToEdit.name);
+  const planToEdit = useSelector(state => state.plans.planToEdit);
+  const userId = useSelector(state => state.user.data.id);
   const [editablePlanName, setEditablePlanName] = useState(false);
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
   const [exerciseToEdit, setExerciseToEdit] = useState(null);

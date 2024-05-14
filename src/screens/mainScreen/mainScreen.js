@@ -14,9 +14,9 @@ import Navigation from '../../components/navigation/navigation';
 const MainScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const userPlans = useSelector(store => store.user.data.plans);
-  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
-  const lastActivity = useSelector(store => store.training.lastActivity);
+  const userPlans = useSelector(state => state.user.data.plans);
+  const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
+  const lastActivity = useSelector(state => state.training.lastActivity);
 
   useEffect(() => {
     dispatch(getExercises('1.0'));

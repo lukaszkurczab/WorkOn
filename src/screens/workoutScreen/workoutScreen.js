@@ -7,7 +7,7 @@ import WorkoutExercise from '../../components/workoutExercise/workoutExercise';
 import WorkoutRest from '../../components/workoutRest/workoutRest';
 
 const WorkoutMain = () => {
-  const step = useSelector(store => store.training.trainingStep);
+  const step = useSelector(state => state.training.trainingStep);
 
   switch (step) {
     case 'select':

@@ -7,7 +7,7 @@ import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
 
 const ExerciseScreen = () => {
   const navigation = useNavigation();
-  const exercise = useSelector(store => store.exercises.selectedExercise);
+  const exercise = useSelector(state => state.exercises.selectedExercise);
 
   return (
     <View style={styles.container}>

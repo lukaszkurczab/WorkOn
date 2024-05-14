@@ -9,7 +9,7 @@ import styles from './planBanner.styles';
 const PlanBanner = ({ plan, img }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const userId = useSelector(store => store.user.data.id);
+  const userId = useSelector(state => state.user.data.id);
 
   const handleEdit = () => {
     dispatch(SET_PLAN_TO_EDIT(plan));

@@ -16,15 +16,15 @@ const WorkoutExercise = () => {
   const dispatch = useDispatch();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
   const exerciseSerieIndex = useSelector(state => state.training.ongoingExercise.serieIndex);
-  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
-  const userId = useSelector(store => store.user.data.id);
+  const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
+  const userId = useSelector(state => state.user.data.id);
   const exercisesList = useSelector(state => state.exercises.data);
   const [showModal, setShowModal] = useState(false);
   const reps = exercise.series[exerciseSerieIndex].reps;
   const trainingStart = useSelector(state => state.training.trainingStart);
   const weight = exercise.series[exerciseSerieIndex].weight;
-  const userPlans = useSelector(store => store.user.data.plans);
-  const trainingSummary = useSelector(store => store.training.trainingSummary);
+  const userPlans = useSelector(state => state.user.data.plans);
+  const trainingSummary = useSelector(state => state.training.trainingSummary);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   const handleFinish = () => {

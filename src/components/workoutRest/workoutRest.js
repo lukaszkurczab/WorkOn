@@ -42,11 +42,11 @@ const WorkoutRest = () => {
   const navigation = useNavigation();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
   const restStart = useSelector(state => state.training.restStart);
-  const userPlans = useSelector(store => store.user.data.plans);
-  const trainingSummary = useSelector(store => store.training.trainingSummary);
+  const userPlans = useSelector(state => state.user.data.plans);
+  const trainingSummary = useSelector(state => state.training.trainingSummary);
   const trainingStart = useSelector(state => state.training.trainingStart);
-  const userId = useSelector(store => store.user.data.id);
-  const ongoingPlanData = useSelector(store => store.training.ongoingPlanData);
+  const userId = useSelector(state => state.user.data.id);
+  const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
