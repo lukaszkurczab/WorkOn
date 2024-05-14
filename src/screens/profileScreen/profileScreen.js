@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,10 +15,10 @@ const ProfileScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user.data);
-  const user = useSelector(state => state.user);
   const userPlans = useSelector(state => state.user.publicPlans);
   const userRecords = useSelector(state => state.user.publicRecords);
   const userHistoryItems = useSelector(state => state.user.publicHistoryItems);
+  const maxHistoryItems = useState(5);
 
   useEffect(() => {
     dispatch(getUserPlans(userData.id));
@@ -42,16 +42,19 @@ const ProfileScreen = () => {
           <RecordDisplay records={userRecords} />
           <View style={styles.section}>
             <Text style={styles.title}>Recent workouts</Text>
-            <WorkoutCard workout={{ type: 'Gym workout - chest', duration: '1:23', exercises: 11 }} />
+            {userHistoryItems.map(
+              (historyItem, index) =>
+                index < maxHistoryItems[0] && (
+                  <WorkoutCard
+                    workout={{ type: historyItem.name, duration: historyItem.time, exercises: historyItem.exercises.length }}
+                    key={historyItem.id}
+                  />
+                ),
+            )}
           </View>
           <View style={styles.section}>
             <Text style={styles.title}>My plans</Text>
-            <PlanCard
-              plans={[
-                { type: 'Gym workout', frequency: '3 days', level: 'Advanced' },
-                { type: 'Home workout', frequency: '2 days', level: 'Intermediate' },
-              ]}
-            />
+            <PlanCard plans={userPlans} />
           </View>
         </ScrollView>
       </View>

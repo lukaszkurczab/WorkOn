@@ -100,7 +100,6 @@ const userSlice = createSlice({
         state.publicPlans = action.payload;
       })
       .addCase(getUserRecords.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.publicRecords = action.payload;
       })
       .addCase(getUserHistoryItems.fulfilled, (state, action) => {
