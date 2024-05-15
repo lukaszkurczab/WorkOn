@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
+import { updatePublicHistoryItem } from '../../store/actions/userActions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Navigation from '../../components/navigation/navigation';
 import LastTrainingListItem from '../../components/lastTrainingList/lastTrainingListItem/lastTrainingListItem';
@@ -11,6 +12,7 @@ const SelectPublicWorkoutsScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const workouts = useSelector(state => state.user.data.history);
+  const userData = useSelector(state => state.user.data);
   const [editedWorkouts, setEditedWorkouts] = useState(workouts);
 
   const handleChangePublic = id => {
@@ -21,7 +23,8 @@ const SelectPublicWorkoutsScreen = () => {
   };
 
   const handleConfirm = () => {
-    console.log(editedWorkouts);
+    dispatch(updatePublicHistoryItem({ userId: userData.id, items: editedWorkouts }));
+    navigation.navigate('SettingsScreen');
   };
 
   return (

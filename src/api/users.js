@@ -111,14 +111,14 @@ export const getPublicHistoryItems = async userId => {
   }
 };
 
-export const setPublicPlan = async (userId, itemId, isPublic) => {
+export const setPublicPlan = async ({ userId, items }) => {
   try {
-    const response = await fetch(`${BASE_URL}/set-public/plans/${userId}/${itemId}`, {
+    const response = await fetch(`${BASE_URL}/set-public/plans/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ isPublic }),
+      body: JSON.stringify({ items }),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -130,14 +130,14 @@ export const setPublicPlan = async (userId, itemId, isPublic) => {
   }
 };
 
-export const setPublicHistoryItem = async (userId, itemId, isPublic) => {
+export const setPublicHistoryItem = async ({ userId, items }) => {
   try {
-    const response = await fetch(`${BASE_URL}/set-public/history/${userId}/${itemId}`, {
+    const response = await fetch(`${BASE_URL}/set-public/history/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ isPublic }),
+      body: JSON.stringify({ items }),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');

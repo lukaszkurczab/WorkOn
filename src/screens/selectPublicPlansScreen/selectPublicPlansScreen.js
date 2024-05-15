@@ -4,16 +4,19 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Navigation from '../../components/navigation/navigation';
+import { updatePublicPlan } from '../../store/actions/userActions';
 import styles from './selectPublicPlansScreen.styles';
 
 const SelectPublicPlansScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const plans = useSelector(state => state.user.data.plans);
+  const userData = useSelector(state => state.user.data);
   const [editedPlans, setEditedPlans] = useState(plans);
 
   const handleConfirm = () => {
-    console.log(editedWorkouts);
+    dispatch(updatePublicPlan({ userId: userData.id, items: editedPlans }));
+    navigation.navigate('SettingsScreen');
   };
 
   const handleChangePublic = id => {

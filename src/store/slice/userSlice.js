@@ -75,10 +75,10 @@ const userSlice = createSlice({
         state.data.username = action.payload;
       })
       .addCase(updatePublicPlan.fulfilled, (state, action) => {
-        state.publicPlans = action.payload;
+        state.publicPlans = action.payload.result;
       })
       .addCase(updatePublicHistoryItem.fulfilled, (state, action) => {
-        state.publicHistoryItems = action.payload;
+        state.publicHistoryItems = action.payload.result;
       })
       .addCase(updateUserRecords.fulfilled, (state, action) => {
         state.publicRecords = action.payload;
