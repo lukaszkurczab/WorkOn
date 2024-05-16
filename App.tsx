@@ -24,6 +24,7 @@ import SettingsScreen from './src/screens/settingsScreen/settingsScreen';
 import SelectRecordsScreen from './src/screens/selectRecordsScreen/selectRecordsScreen';
 import SelectPublicPlansScreen from './src/screens/selectPublicPlansScreen/selectPublicPlansScreen';
 import SelectPublicWorkoutsScreen from './src/screens/selectPublicWorkoutsScreen/selectPublicWorkoutsScreen';
+import FindUsersScreen from './src/screens/findUserScreen/findUserScreen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -57,6 +58,7 @@ const App = () => {
             <Stack.Screen name='SelectRecordsScreen' component={SelectRecordsScreen} options={{ headerShown: false }} />
             <Stack.Screen name='SelectPublicPlansScreen' component={SelectPublicPlansScreen} options={{ headerShown: false }} />
             <Stack.Screen name='SelectPublicWorkoutsScreen' component={SelectPublicWorkoutsScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='FindUsersScreen' component={FindUsersScreen} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

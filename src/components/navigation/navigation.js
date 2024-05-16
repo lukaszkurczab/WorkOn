@@ -13,11 +13,11 @@ const Navigation = ({ children }) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MainScreen')}>
           <Icon name='home' style={styles.buttonIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
-          <Icon name='bar-chart' style={styles.buttonIcon} />
-        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CalendarScreen')}>
           <Icon name='calendar' style={styles.buttonIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FindUsersScreen')}>
+          <Icon name='users' style={styles.buttonIcon} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProfileScreen')}>
           <Icon name='user' style={styles.buttonIcon} />
