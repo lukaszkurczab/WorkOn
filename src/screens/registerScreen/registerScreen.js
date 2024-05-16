@@ -54,15 +54,12 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Sign up</Text>
-      </TouchableOpacity>
-      <Text style={styles.signInText}>
-        Already have an account?{' '}
-        <Text style={styles.signInButton} onPress={() => navigation.navigate('LoginScreen')}>
-          Log in
-        </Text>
-      </Text>
+      <View style={styles.signInWrapper}>
+        <Text style={styles.signInText}>Already have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+          <Text style={styles.signInButton}>Log in</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

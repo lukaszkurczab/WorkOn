@@ -45,6 +45,18 @@ const styles = StyleSheet.create({
     color: '#06f',
     fontWeight: 'bold',
   },
+  signInWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  signInText: {
+    color: secondaryColor,
+  },
+  signInButton: {
+    color: '#06f',
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;

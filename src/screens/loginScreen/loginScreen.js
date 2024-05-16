@@ -26,11 +26,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     dispatch(REMEMBER_USER({ email: email, password: password }));
-    await dispatch(login({ email, password }));
-  };
-
-  const handleSignUp = () => {
-    navigation.navigate('RegisterScreen');
+    dispatch(login({ email, password }));
   };
 
   const handleRememberMe = () => {
@@ -65,12 +61,12 @@ const LoginScreen = () => {
       <TouchableOpacity style={[styles.button, isLoading && styles.disabledButton]} onPress={handleLogin} disabled={isLoading}>
         {isLoading ? <ActivityIndicator color='#06f' /> : <Text style={styles.buttonText}>Log in</Text>}
       </TouchableOpacity>
-      <Text style={styles.signUpText}>
-        New user?{' '}
-        <Text style={styles.signUpButton} onPress={handleSignUp}>
-          Sign Up
-        </Text>
-      </Text>
+      <View style={styles.signUpWrapper}>
+        <Text style={styles.signUpText}>New user? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
+          <Text style={styles.signUpButton}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

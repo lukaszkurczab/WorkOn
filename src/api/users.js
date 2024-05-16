@@ -1,5 +1,53 @@
 const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
 
+export const addHistoryItemToUser = async userData => {
+  try {
+    const response = await fetch(`${BASE_URL}/history/` + userData.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData.historyItem),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching plans:', error);
+  }
+};
+
+export const removePlanFromUser = async userData => {
+  try {
+    const response = await fetch(`${BASE_URL}/plans/` + userData.userId, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: userData.planId }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching plans:', error);
+  }
+};
+
+export const editUserPlan = async userData => {
+  try {
+    const response = await fetch(`${BASE_URL}/plans/` + userData.userId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData.plan),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching plans:', error);
+  }
+};
+
 export const registerUser = async userData => {
   try {
     const response = await fetch(`${BASE_URL}/register`, {

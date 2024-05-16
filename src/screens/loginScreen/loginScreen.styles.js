@@ -35,9 +35,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
   },
+  signUpWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
   signUpText: {
     color: secondaryColor,
-    marginTop: 20,
   },
   signUpButton: {
     color: '#06f',

@@ -44,7 +44,11 @@ const userSlice = createSlice({
         state.data.plans = action.payload;
       })
       .addCase(editPlan.fulfilled, (state, action) => {
-        state.data.plans = action.payload;
+        const editedPlans = state.data.plans.forEach(plan => {
+          plan.id !== action.payload.id ? plan : action.payload;
+        });
+
+        state.data.plans = [...editedPlans];
       })
       .addCase(addHistoryItem.fulfilled, (state, action) => {
         state.data.history.push(action.payload);
