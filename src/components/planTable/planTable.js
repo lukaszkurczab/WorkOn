@@ -8,7 +8,7 @@ const tableHead = ['Exercise', 'Series', 'Rep', 'Weight'];
 
 const PlanTable = ({ exercises }) => {
   const [tableData, setTableData] = useState([]);
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
 
   useEffect(() => {
     newTable = [];

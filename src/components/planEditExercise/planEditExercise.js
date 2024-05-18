@@ -5,7 +5,7 @@ import styles from './planEditExercise.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const PlanEditExercise = ({ exercise, handleSetExerciseToEdit, dayName, handleRemoveExercise }) => {
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const [dropdown, setDropdown] = useState(false);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 

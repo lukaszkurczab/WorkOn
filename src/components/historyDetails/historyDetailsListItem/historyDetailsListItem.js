@@ -6,7 +6,7 @@ import styles from './historyDetailsListItem.styles';
 
 const WorkoutSummaryListItem = ({ exercise }) => {
   const [showSeries, setShowSeries] = useState(false);
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   return (

@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { fillColor } from '../../styles/colors';
+import { fillColor, primaryColor } from '../../styles/colors';
 
 export default StyleSheet.create({
   card: {
     flexDirection: 'row',
     backgroundColor: fillColor,
-    borderRadius: 10,
-    marginVertical: 8,
     padding: 5,
     overflow: 'hidden',
     alignItems: 'center',
+    borderRadius: 5,
+    borderColor: primaryColor,
+    borderWidth: 1,
   },
   image: {
     width: 100,

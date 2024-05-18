@@ -10,6 +10,7 @@ export default StyleSheet.create({
   },
   section: {
     marginTop: 20,
+    gap: 10,
   },
   title: {
     color: primaryColor,

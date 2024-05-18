@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import commonStyles from '../../styles/common';
 import { primaryColor, secondaryColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
@@ -14,16 +15,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: primaryColor,
     marginBottom: 16,
-  },
-  input: {
-    width: '80%',
-    padding: 10,
-    marginVertical: 8,
-    borderWidth: 1,
-    borderColor: secondaryColor,
-    borderRadius: 5,
-    backgroundColor: '#333',
-    color: primaryColor,
   },
   button: {
     backgroundColor: '#06f',
@@ -57,6 +48,7 @@ const styles = StyleSheet.create({
     color: '#06f',
     fontWeight: 'bold',
   },
+  ...commonStyles,
 });
 
 export default styles;

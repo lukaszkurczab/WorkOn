@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
-import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
+import { SET_SELECTED_EXERCISE } from '../../store/reducers/exercisesReducer';
 import { END_REST, END_TRAINING } from '../../store/reducers/trainingReducer';
 import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
 import styles from './workoutRest.styles';

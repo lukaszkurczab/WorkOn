@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './planDetailsExercise.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
+import { SET_SELECTED_EXERCISE } from '../../store/reducers/exercisesReducer';
 
 const PlanDetailsExercise = ({ exercise }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const [dropdown, setDropdown] = useState(false);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import commonStyles from '../../styles/common';
 import { primaryColor, secondaryColor, backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
@@ -9,43 +10,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
-  input: {
-    width: '90%',
-    padding: 10,
-    marginVertical: 10,
-    borderWidth: 1,
-    backgroundColor: '#333',
-    color: secondaryColor,
-    borderRadius: 5,
-  },
-  button: {
-    height: 50,
-    justifyContent: 'center',
-    borderRadius: 5,
-    backgroundColor: '#06f',
-    marginTop: 20,
-    width: '90%',
-    alignItems: 'center',
-  },
-  disabledButton: {
-    backgroundColor: secondaryColor,
-  },
-  buttonText: {
-    color: primaryColor,
-    fontSize: 20,
-    padding: 10,
-  },
   signUpWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
   },
   signUpText: {
     color: secondaryColor,
+    lineHeight: 60,
   },
   signUpButton: {
     color: '#06f',
     fontWeight: 'bold',
+    lineHeight: 60,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 48,
@@ -59,6 +36,7 @@ const styles = StyleSheet.create({
   checkboxText: {
     color: secondaryColor,
   },
+  ...commonStyles,
 });
 
 export default styles;

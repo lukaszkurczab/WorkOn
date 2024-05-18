@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, TextInput, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
-import Checkbox from '../../components/checkbox/checkbox';
+import { View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_IS_LOADING } from '../../store/slice/userSlice';
 import { SET_REMEMBER_ME, REMEMBER_USER } from '../../store/slice/sessionSlice';
 import { login } from '../../store/actions/userActions';
+import Checkbox from '../../components/checkbox/checkbox';
+import Button from '../../components/buttons/button/button';
 import styles from './loginScreen.styles';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { isLoading, token } = useSelector(state => state.user);
+  const { isLoading, data } = useSelector(state => state.user);
   const rememberMe = useSelector(state => state.session.rememberMe);
   const session = useSelector(state => state.session);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    dispatch(SET_IS_LOADING());
-    if (token) {
+    if (data.email !== undefined && data.password !== undefined) {
       navigation.navigate('MainScreen');
     }
-  }, [token]);
+  }, [data]);
 
   const handleLogin = async () => {
     dispatch(REMEMBER_USER({ email: email, password: password }));
@@ -58,9 +58,7 @@ const LoginScreen = () => {
       <Checkbox selected={rememberMe} onClick={handleRememberMe}>
         <Text style={styles.checkboxText}>Remember me</Text>
       </Checkbox>
-      <TouchableOpacity style={[styles.button, isLoading && styles.disabledButton]} onPress={handleLogin} disabled={isLoading}>
-        {isLoading ? <ActivityIndicator color='#06f' /> : <Text style={styles.buttonText}>Log in</Text>}
-      </TouchableOpacity>
+      <Button onPress={handleLogin} disabled={isLoading} isLoading={isLoading} text='Log in' />
       <View style={styles.signUpWrapper}>
         <Text style={styles.signUpText}>New user? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>

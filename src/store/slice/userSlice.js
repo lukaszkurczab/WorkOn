@@ -22,7 +22,6 @@ const userSlice = createSlice({
     isLoading: false,
     data: {},
     selectedPlan: undefined,
-    token: null,
     publicPlans: [],
     publicRecords: [],
     publicHistoryItems: [],
@@ -33,9 +32,6 @@ const userSlice = createSlice({
     },
     SET_IS_LOADING: state => {
       state.isLoading = false;
-    },
-    CLEAR_TOKEN: state => {
-      state.token = null;
     },
   },
   extraReducers: builder => {
@@ -68,7 +64,6 @@ const userSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.token = action.payload.token;
         state.data = action.payload;
         state.selectedPlan = action.payload.plans[0];
       })
@@ -95,7 +90,6 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(authUser.fulfilled, (state, action) => {
-        state.token = action.payload.token;
         state.data = action.payload;
         state.selectedPlan = action.payload.plans[0];
         state.isLoading = false;

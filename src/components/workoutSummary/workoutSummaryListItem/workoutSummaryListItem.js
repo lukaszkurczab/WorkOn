@@ -5,7 +5,7 @@ import styles from './workoutSummaryListItem.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const WorkoutSummaryListItem = ({ exercise }) => {
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
   const [showSeries, setShowSeries] = useState(false);
 

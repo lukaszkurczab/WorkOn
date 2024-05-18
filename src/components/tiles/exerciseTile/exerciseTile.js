@@ -3,7 +3,7 @@ import styles from './exerciseTile.styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { SET_SELECTED_EXERCISE } from '../../../store/slice/exercisesSlice';
+import { SET_SELECTED_EXERCISE } from '../../../store/reducers/exercisesReducer';
 import { ExerciseImageMap } from '../../../assets/exercises/_exerciseImageMap';
 
 const ExerciseTile = ({ exercise }) => {

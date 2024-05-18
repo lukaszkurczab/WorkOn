@@ -11,7 +11,7 @@ import styles from './selectRecordsScreen.styles';
 const SelectRecordsScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const exercises = useSelector(state => state.exercises.data);
+  const exercises = useSelector(state => state.exercises.exercises);
   const userData = useSelector(state => state.user.data);
   const [exercisesList, setExercisesList] = useState([]);
   const [newExercise, setNewExercise] = useState(null);

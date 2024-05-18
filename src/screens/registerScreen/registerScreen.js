@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../store/actions/userActions';
+import Button from '../../components/buttons/button/button';
 import styles from './registerScreen.styles';
 
 const RegisterScreen = ({ navigation }) => {
@@ -10,7 +11,7 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch();
-  const { isError, errorMessage } = useSelector(state => state.user);
+  const { isError, isLoading, errorMessage } = useSelector(state => state.user);
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
@@ -54,6 +55,7 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
       />
+      <Button disabled={isLoading} isLoading={isLoading} onPress={handleRegister} text='Register' />
       <View style={styles.signInWrapper}>
         <Text style={styles.signInText}>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>

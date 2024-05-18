@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { SET_SELECTED_EXERCISE } from '../../store/slice/exercisesSlice';
+import { SET_SELECTED_EXERCISE } from '../../store/reducers/exercisesReducer';
 import { FINISH_SERIE, END_TRAINING } from '../../store/reducers/trainingReducer';
 import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
 import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
@@ -18,7 +18,7 @@ const WorkoutExercise = () => {
   const exerciseSerieIndex = useSelector(state => state.training.ongoingExercise.serieIndex);
   const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
   const userId = useSelector(state => state.user.data.id);
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const [showModal, setShowModal] = useState(false);
   const reps = exercise.series[exerciseSerieIndex].reps;
   const trainingStart = useSelector(state => state.training.trainingStart);

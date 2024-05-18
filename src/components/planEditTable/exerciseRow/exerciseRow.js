@@ -6,7 +6,7 @@ import styles from './exerciseRow.styles';
 
 const ExerciseRow = ({ exercise, onEdit, exerciseIndex }) => {
   const [expandDropdown, setExpandDropdown] = useState(false);
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   const handleDelete = () => {};

@@ -7,7 +7,7 @@ import plansReducer from './reducers/planReducer';
 import trainingReducer from './reducers/trainingReducer';
 import sessionReducer from './slice/sessionSlice';
 import userReducer from './slice/userSlice';
-import exercisesReducer from './slice/exercisesSlice';
+import exercisesReducer from './reducers/exercisesReducer';
 
 const rootReducer = combineReducers({
   atlas: atlasReducer,
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['user'],
+  blacklist: ['user', 'exercises'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

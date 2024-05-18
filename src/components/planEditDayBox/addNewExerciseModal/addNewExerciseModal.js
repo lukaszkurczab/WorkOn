@@ -8,7 +8,7 @@ import styles from './addNewExerciseModal.styles';
 
 const AddNewExerciseModal = ({ onConfirm, dayName }) => {
   const dispatch = useDispatch();
-  const exercises = useSelector(state => state.exercises.data);
+  const exercises = useSelector(state => state.exercises.exercises);
   const selecterMusclesGroup = useSelector(state => state.atlas.selectedGroup);
   const [selectedExercises, setSelectedExercises] = useState([]);
 

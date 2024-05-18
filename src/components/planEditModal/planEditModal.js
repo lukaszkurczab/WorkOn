@@ -7,7 +7,7 @@ import { EDIT_EXERCISE } from '../../store/reducers/planReducer';
 
 const PlanEditModal = ({ exercise, handleCloseModal, dayName }) => {
   const dispatch = useDispatch();
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
   const [exerciseToEdit, setExerciseToEdit] = useState(exercise);
 

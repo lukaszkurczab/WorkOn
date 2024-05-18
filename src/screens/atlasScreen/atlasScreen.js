@@ -6,7 +6,7 @@ import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
 import Navigation from '../../components/navigation/navigation';
 
 const AtlasScreen = () => {
-  const exercises = useSelector(state => state.exercises.data);
+  const exercises = useSelector(state => state.exercises.exercises);
   const selecterMusclesGroup = useSelector(state => state.atlas.selectedGroup);
 
   return (

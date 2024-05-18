@@ -7,7 +7,8 @@ import { ExerciseImageMap } from '../../../assets/exercises/_exerciseImageMap';
 
 const WorkoutExerciseTile = ({ exercise, touchable = true }) => {
   const dispatch = useDispatch();
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
+  console.log(exercisesList);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   const handlePress = () => {

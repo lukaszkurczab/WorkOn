@@ -7,12 +7,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexShrink: 1,
   },
-  headingWrapper: {
-    paddingHorizontal: 24,
-    paddingVertical: 5,
-    borderRadius: 5,
-    backgroundColor: primaryColor,
-  },
   name: {
     color: backgroundColor,
     fontSize: 20,

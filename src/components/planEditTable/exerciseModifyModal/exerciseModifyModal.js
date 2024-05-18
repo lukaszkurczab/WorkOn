@@ -7,7 +7,7 @@ import styles from './exerciseModifyModal.styles';
 
 const ExerciseModifyModal = ({ onConfirm, exercise }) => {
   const [modifiedSeries, setModifiedSeries] = useState(exercise.series);
-  const exercisesList = useSelector(state => state.exercises.data);
+  const exercisesList = useSelector(state => state.exercises.exercises);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   const handleAddSerie = () => {

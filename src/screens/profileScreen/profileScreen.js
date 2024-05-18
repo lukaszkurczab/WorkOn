@@ -46,7 +46,12 @@ const ProfileScreen = () => {
               (historyItem, index) =>
                 index < maxHistoryItems[0] && (
                   <WorkoutCard
-                    workout={{ type: historyItem.name, duration: historyItem.time, exercises: historyItem.exercises.length }}
+                    workout={{
+                      plan: historyItem.plan,
+                      day: historyItem.day,
+                      duration: historyItem.time,
+                      exercises: historyItem.exercises.length,
+                    }}
                     key={historyItem.id}
                   />
                 ),
