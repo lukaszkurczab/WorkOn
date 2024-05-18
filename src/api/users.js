@@ -2,12 +2,12 @@ const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
 
 export const addHistoryItemToUser = async userData => {
   try {
-    const response = await fetch(`${BASE_URL}/history/` + userData.id, {
+    const response = await fetch(`${BASE_URL}/history/${userData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData.historyItem),
+      body: JSON.stringify({ historyItem: userData.historyItem }),
     });
     const data = await response.json();
     return data;
@@ -18,7 +18,7 @@ export const addHistoryItemToUser = async userData => {
 
 export const removePlanFromUser = async userData => {
   try {
-    const response = await fetch(`${BASE_URL}/plans/` + userData.userId, {
+    const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const removePlanFromUser = async userData => {
 
 export const editUserPlan = async userData => {
   try {
-    const response = await fetch(`${BASE_URL}/plans/` + userData.userId, {
+    const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

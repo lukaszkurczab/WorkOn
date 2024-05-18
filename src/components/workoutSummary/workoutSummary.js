@@ -9,7 +9,6 @@ import ButtonBig from '../buttons/buttonBig/buttonBig';
 const WorkoutSummary = () => {
   const navigation = useNavigation();
   const summary = useSelector(state => state.training.trainingSummary);
-  const trainingName = useSelector(state => state.training.ongoingPlanName);
   const trainingTime = Date.now() - useSelector(state => state.training.trainingStart);
   const date = new Date().toLocaleDateString('pl-PL');
 
@@ -19,11 +18,11 @@ const WorkoutSummary = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{trainingName} - summary </Text>
+      <Text style={styles.title}>{summary.name} - summary </Text>
       <Text style={styles.time}>{date}</Text>
       <Text style={styles.listTitle}>Exercises:</Text>
       <View style={styles.listWrapper}>
-        {summary.map(exercise => (
+        {summary.exercises.map(exercise => (
           <WorkoutSummaryListItem exercise={exercise} key={exercise.id} />
         ))}
       </View>

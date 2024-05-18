@@ -4,9 +4,7 @@ const training = createSlice({
   name: 'training',
   initialState: {
     ongoingExercise: {},
-    ongoingPlanData: null,
-    ongoingPlanName: '',
-    plan: {},
+    startedTraining: null,
     trainingStart: new Date(),
     trainingSummary: [],
     finishedExercises: [],
@@ -17,23 +15,16 @@ const training = createSlice({
   },
   reducers: {
     START_TRAINING: (state, action) => {
-      state.plan = {
-        exercises: action.payload.plan.exercises,
-        name: action.payload.plan.name,
-        restDay: action.payload.plan.restDay,
+      state.startedTraining = {
+        id: action.payload.plan.id,
+        plan: action.payload.plan.name,
+        day: action.payload.day.name,
+        exercises: action.payload.day.exercises,
       };
-      state.ongoingPlanData = {
-        id: action.payload.id,
-        name: action.payload.name,
-        img: action.payload.img,
-        planType: action.payload.planType,
-        dayIndex: action.payload.dayIndex,
-      };
-      state.ongoingPlanName = action.payload.name;
       state.trainingStart = Date.now();
       state.finishedExercises = [];
-      state.notFinishedExercises = state.plan.exercises;
-      state.trainingSummary = [];
+      state.notFinishedExercises = action.payload.day.exercises;
+      state.trainingSummary = { name: action.payload.plan.name, day: action.payload.day.name, exercises: [] };
       state.trainingStep = 'select';
       state.lastActivity = new Date();
     },
@@ -52,7 +43,7 @@ const training = createSlice({
       } else {
         state.notFinishedExercises = state.notFinishedExercises.filter(exercise => exercise.id !== state.ongoingExercise.exercise.id);
         state.finishedExercises = [...state.finishedExercises, state.ongoingExercise.exercise];
-        state.trainingSummary = [...state.trainingSummary, state.ongoingExercise.exercise];
+        state.trainingSummary.exercises = [...state.trainingSummary.exercises, state.ongoingExercise.exercise];
         state.trainingStep = 'select';
       }
       state.restStart = new Date();
@@ -63,7 +54,7 @@ const training = createSlice({
       state.lastActivity = new Date();
     },
     END_TRAINING: state => {
-      state.ongoingPlanData = null;
+      state.startedTraining = null;
     },
   },
 });

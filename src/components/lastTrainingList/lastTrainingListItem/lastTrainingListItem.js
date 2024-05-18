@@ -7,6 +7,8 @@ import styles from './lastTrainingListItem.styles';
 const LastTrainingListItem = ({ day }) => {
   const [showExercises, setShoweExercises] = useState(false);
 
+  console.log(day);
+
   return (
     <View style={styles.container} key={day.id}>
       <View style={styles.headingWrapper}>

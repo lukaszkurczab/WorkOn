@@ -8,15 +8,15 @@ const styles = StyleSheet.create({
     backgroundColor: fillColor,
     height: 140,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   text: {
     color: primaryColor,
-    fontSize: 28
+    fontSize: 28,
   },
   icon: {
     color: fillColor,
-    marginLeft: 10
+    marginLeft: 10,
   },
   iconWrapper: {
     backgroundColor: primaryColor,
@@ -28,8 +28,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textWrapper: {
-    gap: 10
-  }
+    gap: 10,
+    width: '55%',
+  },
+  dropdown: {
+    borderWidth: 1,
+    borderColor: primaryColor,
+    paddingHorizontal: 5,
+    borderRadius: 5,
+  },
+  selectedTextStyle: {
+    color: primaryColor,
+  },
 });
 
 export default styles;

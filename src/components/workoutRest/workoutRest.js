@@ -46,7 +46,7 @@ const WorkoutRest = () => {
   const trainingSummary = useSelector(state => state.training.trainingSummary);
   const trainingStart = useSelector(state => state.training.trainingStart);
   const userId = useSelector(state => state.user.data.id);
-  const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
+  const startedTraining = useSelector(state => state.training.startedTraining);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
@@ -82,9 +82,9 @@ const WorkoutRest = () => {
         id: userId,
         historyItem: {
           date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
-          name: ongoingPlanData.name,
+          name: startedTraining.name,
           time: Date.now() - trainingStart,
-          exercises: trainingSummary,
+          exercises: trainingSummary.exercises,
         },
       }),
     );
@@ -92,10 +92,10 @@ const WorkoutRest = () => {
       progressTraining({
         userId: userId,
         plan: {
-          id: ongoingPlanData.id,
-          dayIndex: ongoingPlanData.dayIndex,
+          id: startedTraining.id,
+          dayIndex: startedTraining.dayIndex,
           plans: userPlans,
-          finishedExercises: trainingSummary,
+          finishedExercises: trainingSummary.exercises,
         },
       }),
     );

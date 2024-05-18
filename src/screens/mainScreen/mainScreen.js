@@ -14,14 +14,14 @@ const MainScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const userPlans = useSelector(state => state.user.data.plans);
-  const ongoingPlanData = useSelector(state => state.training.ongoingPlanData);
+  const startedTraining = useSelector(state => state.training.startedTraining);
   const lastActivity = useSelector(state => state.training.lastActivity);
 
   useEffect(() => {
-    if (ongoingPlanData && new Date() - new Date(lastActivity) < 30 * 60000) {
+    if (startedTraining && new Date() - new Date(lastActivity) < 30 * 60000) {
       navigation.navigate('WorkoutScreen');
     }
-  }, [dispatch, ongoingPlanData, lastActivity, navigation]);
+  }, [dispatch, startedTraining, lastActivity, navigation]);
 
   const handleClearOngoingPlanData = () => {
     dispatch(END_TRAINING());
@@ -46,7 +46,7 @@ const MainScreen = () => {
           ))}
         </View>
       </View>
-      {ongoingPlanData !== null && (
+      {startedTraining !== null && (
         <View style={styles.popupWrapper}>
           <View style={styles.wrapper}>
             <Text style={styles.wrapperText}>You have unfinished training. Would you like to continue?</Text>

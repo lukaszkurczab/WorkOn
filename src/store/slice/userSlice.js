@@ -33,6 +33,13 @@ const userSlice = createSlice({
     SET_IS_LOADING: state => {
       state.isLoading = false;
     },
+    LOGOUT: state => {
+      state.data = {};
+      state.selectedPlan = undefined;
+      state.publicPlans = [];
+      state.publicRecords = [];
+      state.publicHistoryItems = [];
+    },
   },
   extraReducers: builder => {
     builder
@@ -109,5 +116,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { SET_SELECTED_PLAN, SET_IS_LOADING, CLEAR_TOKEN } = userSlice.actions;
+export const { SET_SELECTED_PLAN, SET_IS_LOADING, LOGOUT } = userSlice.actions;
 export default userSlice.reducer;

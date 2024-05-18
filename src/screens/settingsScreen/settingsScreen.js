@@ -3,10 +3,9 @@ import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Navigation from '../../components/navigation/navigation';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { changeUsername, updatePassword } from '../../store/actions/userActions';
+import { LOGOUT } from '../../store/slice/userSlice';
 import { SET_REMEMBER_ME } from '../../store/slice/sessionSlice';
-import { CLEAR_TOKEN } from '../../store/slice/userSlice';
 import { secondaryColor } from '../../styles/colors';
 import styles from './settingsScreen.styles';
 
@@ -61,8 +60,8 @@ const SettingsScreen = () => {
   };
 
   const handleLogout = () => {
-    dispatch(CLEAR_TOKEN());
     dispatch(SET_REMEMBER_ME(false));
+    dispatch(LOGOUT());
     navigation.navigate('LoginScreen');
   };
 
