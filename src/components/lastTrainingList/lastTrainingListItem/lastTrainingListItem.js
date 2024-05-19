@@ -4,28 +4,25 @@ import HistoryDetailsListItem from '../../historyDetails/historyDetailsListItem/
 import WorkoutCard from '../../workoutCard/workoutCard';
 import styles from './lastTrainingListItem.styles';
 
-const LastTrainingListItem = ({ day }) => {
+const LastTrainingListItem = ({ item }) => {
   const [showExercises, setShoweExercises] = useState(false);
 
-  console.log(day);
-
   return (
-    <View style={styles.container} key={day.id}>
+    <View style={styles.container} key={item.id}>
       <View style={styles.headingWrapper}>
         <TouchableOpacity onPress={() => setShoweExercises(!showExercises)}>
           <WorkoutCard
             workout={{
-              plan: day.plan,
-              day: day.day,
-              duration: day.time,
-              exercises: day.exercises.length,
+              plan: item.plan,
+              day: item.day,
+              duration: item.time,
+              exercises: item.exercises.length,
             }}
-            key={day.id}
           />
         </TouchableOpacity>
       </View>
       <ScrollView style={[styles.listWrapper, { display: showExercises ? 'flex' : 'none' }]} nestedScrollEnabled={true}>
-        {day.exercises.map(exercise => (
+        {item.exercises.map(exercise => (
           <HistoryDetailsListItem exercise={exercise} key={exercise.id} />
         ))}
       </ScrollView>

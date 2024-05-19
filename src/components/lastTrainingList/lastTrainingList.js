@@ -8,8 +8,8 @@ const LastTrainingList = historyData => {
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Recent trainings</Text>
       <View>
-        {historyData.data.map((day, index) => (
-          <LastTrainingListItem day={day} key={index} />
+        {historyData.data.map(item => (
+          <LastTrainingListItem item={item} key={item.id} />
         ))}
       </View>
     </ScrollView>

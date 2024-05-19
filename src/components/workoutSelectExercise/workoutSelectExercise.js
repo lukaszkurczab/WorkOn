@@ -1,56 +1,11 @@
 import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { END_TRAINING } from '../../store/reducers/trainingReducer';
-import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
+import { useSelector } from 'react-redux';
 import WorkoutExerciseTile from '../tiles/workoutExerciseTile.js/workoutExerciseTile';
 import styles from './workoutSelectExercise.styles';
 
-const WorkoutSelectExercise = () => {
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
+const WorkoutSelectExercise = ({ handleEndTraining }) => {
   const finishedExercises = useSelector(state => state.training.finishedExercises);
   const notFinishedExercises = useSelector(state => state.training.notFinishedExercises);
-  const userId = useSelector(state => state.user.data.id);
-  const userPlans = useSelector(state => state.user.data.plans);
-  const startedTraining = useSelector(state => state.training.startedTraining);
-  const trainingSummary = useSelector(state => state.training.trainingSummary);
-  const trainingStart = useSelector(state => state.training.trainingStart);
-
-  const handleFinish = () => {
-    const date = new Date().toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-
-    dispatch(
-      addHistoryItem({
-        id: userId,
-        historyItem: {
-          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
-          name: startedTraining.plan,
-          day: startedTraining.day,
-          time: Date.now() - trainingStart,
-          exercises: trainingSummary.exercises,
-        },
-      }),
-    );
-    dispatch(
-      progressTraining({
-        userId: userId,
-        plan: {
-          id: startedTraining.id,
-          dayIndex: startedTraining.dayIndex,
-          plans: userPlans,
-          finishedExercises: trainingSummary.exercises,
-        },
-      }),
-    );
-
-    dispatch(END_TRAINING());
-    navigation.navigate('WorkoutSummaryScreen');
-  };
 
   return (
     <ScrollView>
@@ -64,7 +19,7 @@ const WorkoutSelectExercise = () => {
             <View>
               <Text style={styles.text}>There is no more exercise</Text>
               <View style={styles.buttonWrapper}>
-                <TouchableOpacity onPress={handleFinish}>
+                <TouchableOpacity onPress={handleEndTraining}>
                   <Text style={styles.buttonText}>Go to summary</Text>
                 </TouchableOpacity>
               </View>
@@ -81,7 +36,7 @@ const WorkoutSelectExercise = () => {
         </View>
         {notFinishedExercises.length > 0 && (
           <View>
-            <TouchableOpacity onPress={handleFinish}>
+            <TouchableOpacity onPress={handleEndTraining}>
               <Text style={styles.buttonTextPreview}>End training</Text>
             </TouchableOpacity>
           </View>

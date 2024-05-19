@@ -22,7 +22,7 @@ const LoginScreen = () => {
     if (data.email !== undefined && data.password !== undefined) {
       navigation.navigate('MainScreen');
     }
-  }, [data]);
+  }, []);
 
   const handleLogin = async () => {
     dispatch(REMEMBER_USER({ email: email, password: password }));

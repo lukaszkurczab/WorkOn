@@ -5,65 +5,24 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SET_SELECTED_EXERCISE } from '../../store/reducers/exercisesReducer';
-import { FINISH_SERIE, END_TRAINING } from '../../store/reducers/trainingReducer';
-import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
+import { FINISH_SERIE } from '../../store/reducers/trainingReducer';
 import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
 import WorkoutSeriesModal from '../workoutSeriesModal/workoutSeriesModal';
 import styles from './workoutExercise.styles';
 
-const WorkoutExercise = () => {
+const WorkoutExercise = ({ handleEndTraining }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
   const exerciseSerieIndex = useSelector(state => state.training.ongoingExercise.serieIndex);
-  const startedTraining = useSelector(state => state.training.startedTraining);
-  const userId = useSelector(state => state.user.data.id);
   const exercisesList = useSelector(state => state.exercises.exercises);
   const [showModal, setShowModal] = useState(false);
   const reps = exercise.series[exerciseSerieIndex].reps;
-  const trainingStart = useSelector(state => state.training.trainingStart);
   const weight = exercise.series[exerciseSerieIndex].weight;
-  const userPlans = useSelector(state => state.user.data.plans);
-  const trainingSummary = useSelector(state => state.training.trainingSummary);
   const exerciseData = exercisesList.find(item => item.id === exercise.id);
 
   const handleFinish = () => {
     setShowModal(true);
-  };
-
-  const handleEndTraining = () => {
-    const date = new Date().toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-
-    dispatch(
-      addHistoryItem({
-        id: userId,
-        historyItem: {
-          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
-          plan: startedTraining.plan,
-          day: startedTraining.day,
-          time: Date.now() - trainingStart,
-          exercises: trainingSummary.exercises,
-        },
-      }),
-    );
-    dispatch(
-      progressTraining({
-        userId: userId,
-        plan: {
-          id: startedTraining.id,
-          dayIndex: startedTraining.dayIndex,
-          plans: userPlans,
-          finishedExercises: trainingSummary.exercises,
-        },
-      }),
-    );
-
-    dispatch(END_TRAINING());
-    navigation.navigate('WorkoutSummaryScreen');
   };
 
   const handleSeriesConfirm = (reps, weight) => {

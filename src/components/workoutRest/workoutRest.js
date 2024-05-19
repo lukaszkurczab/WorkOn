@@ -5,8 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
 import { SET_SELECTED_EXERCISE } from '../../store/reducers/exercisesReducer';
-import { END_REST, END_TRAINING } from '../../store/reducers/trainingReducer';
-import { addHistoryItem, progressTraining } from '../../store/actions/userActions';
+import { END_REST } from '../../store/reducers/trainingReducer';
 import styles from './workoutRest.styles';
 
 const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }) => {
@@ -37,16 +36,11 @@ const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }) => {
   );
 };
 
-const WorkoutRest = () => {
+const WorkoutRest = ({ handleEndTraining }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const exercise = useSelector(state => state.training.ongoingExercise.exercise);
   const restStart = useSelector(state => state.training.restStart);
-  const userPlans = useSelector(state => state.user.data.plans);
-  const trainingSummary = useSelector(state => state.training.trainingSummary);
-  const trainingStart = useSelector(state => state.training.trainingStart);
-  const userId = useSelector(state => state.user.data.id);
-  const startedTraining = useSelector(state => state.training.startedTraining);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
@@ -68,40 +62,6 @@ const WorkoutRest = () => {
 
   const handleFinish = () => {
     dispatch(END_REST());
-  };
-
-  const handleEndTraining = () => {
-    const date = new Date().toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-
-    dispatch(
-      addHistoryItem({
-        id: userId,
-        historyItem: {
-          date: `${date.split('/')[2]}-${date.split('/')[1]}-${date.split('/')[0]}`,
-          name: startedTraining.name,
-          time: Date.now() - trainingStart,
-          exercises: trainingSummary.exercises,
-        },
-      }),
-    );
-    dispatch(
-      progressTraining({
-        userId: userId,
-        plan: {
-          id: startedTraining.id,
-          dayIndex: startedTraining.dayIndex,
-          plans: userPlans,
-          finishedExercises: trainingSummary.exercises,
-        },
-      }),
-    );
-
-    dispatch(END_TRAINING());
-    navigation.navigate('WorkoutSummaryScreen');
   };
 
   return (
