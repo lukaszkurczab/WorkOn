@@ -3,6 +3,7 @@ node_modules/
 .vs/
 .idea/
 android/
+ios/
 dist/
 npm-debug.*
 *.jks
