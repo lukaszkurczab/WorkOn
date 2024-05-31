@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import { useFormatTime } from '../../utils/hooks';
+import { useFormatTime } from '../../utility/hooks';
 import styles from './workoutCard.styles';
 
 const WorkoutCard = ({ workout }) => {

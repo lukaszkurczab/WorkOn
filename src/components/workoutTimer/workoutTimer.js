@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
 import styles from './workoutTimer.styles';
-import { useFormatTime } from '../../utils/hooks';
+import { useFormatTime } from '../../utility/hooks';
 
 const WorkoutTimer = () => {
   const [totalTime, setTotalTime] = useState(0);

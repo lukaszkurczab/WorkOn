@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { useFormatTime } from '../../utils/hooks';
+import { useFormatTime } from '../../utility/hooks';
 import styles from './workoutSummary.styles';
 import WorkoutSummaryListItem from './workoutSummaryListItem/workoutSummaryListItem';
 import ButtonBig from '../buttons/buttonBig/buttonBig';

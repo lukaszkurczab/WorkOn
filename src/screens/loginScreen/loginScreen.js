@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_IS_LOADING } from '../../store/slice/userSlice';
 import { SET_REMEMBER_ME, REMEMBER_USER } from '../../store/slice/sessionSlice';
 import { login } from '../../store/actions/userActions';
-import Checkbox from '../../components/checkbox/checkbox';
+import Checkbox from '../../components/Checkbox/Checkbox';
 import Button from '../../components/buttons/button/button';
 import styles from './loginScreen.styles';
 
@@ -38,18 +38,18 @@ const LoginScreen = () => {
       <Image source={require('../../assets/work.png')} style={styles.image} />
       <Text style={styles.title}>WorkOn</Text>
       <TextInput
-        placeholder='Email'
-        placeholderTextColor='#aaa'
+        placeholder="Email"
+        placeholderTextColor="#aaa"
         value={email}
         onChangeText={setEmail}
         style={styles.input}
-        autoComplete='email'
-        inputMode='email'
-        keyboardType='email-address'
+        autoComplete="email"
+        inputMode="email"
+        keyboardType="email-address"
       />
       <TextInput
-        placeholder='Password'
-        placeholderTextColor='#aaa'
+        placeholder="Password"
+        placeholderTextColor="#aaa"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -58,7 +58,7 @@ const LoginScreen = () => {
       <Checkbox selected={rememberMe} onClick={handleRememberMe}>
         <Text style={styles.checkboxText}>Remember me</Text>
       </Checkbox>
-      <Button onPress={handleLogin} disabled={isLoading} isLoading={isLoading} text='Log in' />
+      <Button onPress={handleLogin} disabled={isLoading} isLoading={isLoading} text="Log in" />
       <View style={styles.signUpWrapper}>
         <Text style={styles.signUpText}>New user? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>

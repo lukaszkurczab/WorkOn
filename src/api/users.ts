@@ -1,22 +1,21 @@
 const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
 
-export const addHistoryItemToUser = async userData => {
+export const addHistoryItemToUser = async (userData: { userId: string; historyItem: WorkoutSession }) => {
   try {
-    const response = await fetch(`${BASE_URL}/history/${userData.id}`, {
+    const response = await fetch(`${BASE_URL}/history/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ historyItem: userData.historyItem }),
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error('Error fetching plans:', error);
   }
 };
 
-export const removePlanFromUser = async userData => {
+export const removePlanFromUser = async (userData: { userId: string; planId: string }) => {
   try {
     const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
       method: 'DELETE',
@@ -25,14 +24,13 @@ export const removePlanFromUser = async userData => {
       },
       body: JSON.stringify({ id: userData.planId }),
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error('Error fetching plans:', error);
   }
 };
 
-export const editUserPlan = async userData => {
+export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan }) => {
   try {
     const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
       method: 'PUT',
@@ -41,14 +39,13 @@ export const editUserPlan = async userData => {
       },
       body: JSON.stringify(userData.plan),
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error('Error fetching plans:', error);
   }
 };
 
-export const registerUser = async userData => {
+export const registerUser = async (userData: User) => {
   try {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
@@ -67,7 +64,7 @@ export const registerUser = async userData => {
   }
 };
 
-export const loginUser = async userData => {
+export const loginUser = async (userData: { email: string; password: string }) => {
   try {
     const response = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
@@ -86,7 +83,7 @@ export const loginUser = async userData => {
   }
 };
 
-export const updateUserUsername = async userData => {
+export const updateUserUsername = async (userData: { userId: string; newUsername: string }) => {
   try {
     const response = await fetch(`${BASE_URL}/username/${userData.userId}`, {
       method: 'PUT',
@@ -105,7 +102,7 @@ export const updateUserUsername = async userData => {
   }
 };
 
-export const getPublicPlans = async userId => {
+export const getPublicPlans = async (userId: string) => {
   try {
     const response = await fetch(`${BASE_URL}/public/plans/${userId}`, {
       method: 'GET',
@@ -123,7 +120,7 @@ export const getPublicPlans = async userId => {
   }
 };
 
-export const getPublicRecords = async userId => {
+export const getPublicRecords = async (userId: string) => {
   try {
     const response = await fetch(`${BASE_URL}/public/records/${userId}`, {
       method: 'GET',
@@ -141,7 +138,7 @@ export const getPublicRecords = async userId => {
   }
 };
 
-export const getPublicHistoryItems = async userId => {
+export const getPublicHistoryItems = async (userId: string) => {
   try {
     const response = await fetch(`${BASE_URL}/public/history/${userId}`, {
       method: 'GET',
@@ -159,7 +156,7 @@ export const getPublicHistoryItems = async userId => {
   }
 };
 
-export const setPublicPlan = async ({ userId, items }) => {
+export const setPublicPlan = async ({ userId, items }: { userId: string; items: string[] }) => {
   try {
     const response = await fetch(`${BASE_URL}/set-public/plans/${userId}`, {
       method: 'POST',
@@ -178,7 +175,7 @@ export const setPublicPlan = async ({ userId, items }) => {
   }
 };
 
-export const setPublicHistoryItem = async ({ userId, items }) => {
+export const setPublicHistoryItem = async ({ userId, items }: { userId: string; items: string[] }) => {
   try {
     const response = await fetch(`${BASE_URL}/set-public/history/${userId}`, {
       method: 'POST',
@@ -197,7 +194,15 @@ export const setPublicHistoryItem = async ({ userId, items }) => {
   }
 };
 
-export const updateUserPassword = async (userId, newPassword, oldPassword) => {
+export const updateUserPassword = async ({
+  userId,
+  newPassword,
+  oldPassword,
+}: {
+  userId: string;
+  newPassword: string;
+  oldPassword: string;
+}) => {
   try {
     const response = await fetch(`${BASE_URL}/password/${userId}`, {
       method: 'PUT',
@@ -212,43 +217,6 @@ export const updateUserPassword = async (userId, newPassword, oldPassword) => {
     return await response.json();
   } catch (error) {
     console.error('Error updating user password:', error);
-    throw error;
-  }
-};
-
-export const setUserRecords = async (userId, records) => {
-  try {
-    const response = await fetch(`${BASE_URL}/update-records/${userId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ records }),
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error updating user records:', error);
-    throw error;
-  }
-};
-
-export const getUserByToken = async token => {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/${token}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching user by token:', error);
     throw error;
   }
 };

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Header from '../../components/header/header';
+import Header from '../../components/Header/Header';
 import styles from './mainScreen.styles';
 import Tile from '../../components/tiles/tile';
 import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTrainingTile';
@@ -42,7 +42,7 @@ const MainScreen = () => {
             { text: 'Exercise atlas', icon: 'list-ul', path: 'AtlasScreen' },
             { text: 'History', icon: 'chart-bar', path: 'CalendarScreen' },
           ].map(tile => (
-            <Tile key={tile.text} text={tile.text} icon={tile.icon} path={tile.path} version='icon' />
+            <Tile key={tile.text} text={tile.text} icon={tile.icon} path={tile.path} version="icon" />
           ))}
         </View>
       </View>

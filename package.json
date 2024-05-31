@@ -2,7 +2,7 @@
   "name": "workon",
   "version": "1.0.0",
   "scripts": {
-    "dev": "expo start --dev-client",
+    "dev": "expo start --dev-client --reset-cache",
     "build": "eas build --platform android",
     "offline": "expo start --offline",
     "android": "npx expo run:android",

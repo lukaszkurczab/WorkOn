@@ -8,9 +8,7 @@ import {
   changeUsername,
   updatePublicPlan,
   updatePublicHistoryItem,
-  updateUserRecords,
   updatePassword,
-  authUser,
   getUserPlans,
   getUserRecords,
   getUserHistoryItems,
@@ -20,7 +18,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     isLoading: false,
-    data: {},
+    data: {
+      plans: [],
+      history: [],
+    },
     selectedPlan: undefined,
     publicPlans: [],
     publicRecords: [],
@@ -34,7 +35,7 @@ const userSlice = createSlice({
       state.isLoading = false;
     },
     LOGOUT: state => {
-      state.data = {};
+      state.data = { plans: [], history: [] };
       state.selectedPlan = undefined;
       state.publicPlans = [];
       state.publicRecords = [];
@@ -43,19 +44,15 @@ const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(removePlan.fulfilled, (state, action) => {
-        state.data.plans = action.payload;
-      })
-      .addCase(editPlan.fulfilled, (state, action) => {
-        const editedPlans = state.data.plans.forEach(plan => {
-          plan.id !== action.payload.id ? plan : action.payload;
-        });
-
-        state.data.plans = [...editedPlans];
-      })
-      .addCase(addHistoryItem.fulfilled, (state, action) => {
-        state.data.history.push(action.payload);
-      })
+      // .addCase(removePlan.fulfilled, (state, action) => {
+      //   state.data.plans = state.data.plans.filter(plan => plan.id !== action.payload.id);
+      // })
+      // .addCase(editPlan.fulfilled, (state, action) => {
+      //   state.data.plans = state.data.plans.map(plan => (plan.id === action.payload.id ? action.payload : plan));
+      // })
+      // .addCase(addHistoryItem.fulfilled, (state, action) => {
+      //   state.data.history.push(action.payload);
+      // })
       .addCase(register.pending, state => {
         state.isLoading = true;
       })
@@ -77,31 +74,17 @@ const userSlice = createSlice({
       .addCase(login.rejected, state => {
         state.isLoading = false;
       })
-      .addCase(changeUsername.fulfilled, (state, action) => {
-        state.data.username = action.payload;
-      })
+      // .addCase(changeUsername.fulfilled, (state, action) => {
+      //   state.data.username = action.payload;
+      // })
       .addCase(updatePublicPlan.fulfilled, (state, action) => {
         state.publicPlans = action.payload.result;
       })
       .addCase(updatePublicHistoryItem.fulfilled, (state, action) => {
         state.publicHistoryItems = action.payload.result;
       })
-      .addCase(updateUserRecords.fulfilled, (state, action) => {
-        state.publicRecords = action.payload;
-      })
       .addCase(updatePassword.fulfilled, state => {})
       .addCase(updatePassword.rejected, state => {
-        state.isLoading = false;
-      })
-      .addCase(authUser.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(authUser.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.selectedPlan = action.payload.plans[0];
-        state.isLoading = false;
-      })
-      .addCase(authUser.rejected, state => {
         state.isLoading = false;
       })
       .addCase(getUserPlans.fulfilled, (state, action) => {
