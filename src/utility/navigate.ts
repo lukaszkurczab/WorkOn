@@ -3,6 +3,10 @@ import { createNavigationContainerRef } from '@react-navigation/native';
 type RootStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
+  MainScreen: undefined;
+  CalendarScreen: undefined;
+  FindUsersScreen: undefined;
+  ProfileScreen: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

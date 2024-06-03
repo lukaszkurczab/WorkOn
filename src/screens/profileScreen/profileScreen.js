@@ -7,7 +7,7 @@ import ProfileHeader from '../../components/profileHeader/profileHeader';
 import RecordDisplay from '../../components/recordDisplay/recordDisplay';
 import WorkoutCard from '../../components/workoutCard/workoutCard';
 import PlanCard from '../../components/planCard/planCard';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/navigation/Navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './profileScreen.styles';
 
@@ -35,7 +35,7 @@ const ProfileScreen = () => {
       <View style={styles.container}>
         <ScrollView>
           <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
-            <Icon name='cog' size={30} style={styles.settingsIcon}></Icon>
+            <Icon name="cog" size={30} style={styles.settingsIcon}></Icon>
           </TouchableOpacity>
           <ProfileHeader name={userData.username} />
           <Text style={styles.title}>Personal records</Text>
@@ -54,7 +54,7 @@ const ProfileScreen = () => {
                     }}
                     key={historyItem.id}
                   />
-                ),
+                )
             )}
           </View>
           <View style={styles.section}>

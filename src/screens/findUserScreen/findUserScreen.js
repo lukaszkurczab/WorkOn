@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/navigation/Navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './findUsersScreen.styles';
 
@@ -22,7 +22,7 @@ const FindUsersScreen = () => {
         <ScrollView>
           <View style={styles.searchWrapper}>
             <TextInput style={styles.input} defaultValue={serched} onChangeText={value => setSearched(value)} />
-            <Icon name='search' style={styles.icon} />
+            <Icon name="search" style={styles.icon} />
           </View>
         </ScrollView>
       </View>

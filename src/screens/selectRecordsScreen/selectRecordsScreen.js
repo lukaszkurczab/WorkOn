@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-native-element-dropdown';
 import { updateUserRecords } from '../../store/actions/userActions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/navigation/Navigation';
 import styles from './selectRecordsScreen.styles';
 
 const SelectRecordsScreen = () => {
@@ -57,7 +57,7 @@ const SelectRecordsScreen = () => {
                 <Text style={styles.text}>
                   {record.weight} kg
                   <TouchableOpacity style={styles.removeButton} onPress={() => handleRemove(record.exercise)}>
-                    <Icon name='times-circle' size={18} style={styles.removeIcon} />
+                    <Icon name="times-circle" size={18} style={styles.removeIcon} />
                   </TouchableOpacity>
                 </Text>
               </View>
@@ -71,10 +71,10 @@ const SelectRecordsScreen = () => {
               data={exercisesList}
               search
               maxHeight={300}
-              labelField='label'
-              valueField='value'
+              labelField="label"
+              valueField="value"
               placeholder={!isFocus ? 'Select exercise' : '...'}
-              searchPlaceholder='Search...'
+              searchPlaceholder="Search..."
               value={newExercise}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
@@ -84,7 +84,7 @@ const SelectRecordsScreen = () => {
               }}
               style={styles.dropdown}
             />
-            <TextInput value={newWeight} style={styles.input} onChangeText={setNewWeight} keyboardType='numeric' />
+            <TextInput value={newWeight} style={styles.input} onChangeText={setNewWeight} keyboardType="numeric" />
           </View>
           <TouchableOpacity style={styles.addButton} onPress={() => handleAdd(newExercise, newWeight)}>
             <Text style={styles.addText}>Add</Text>

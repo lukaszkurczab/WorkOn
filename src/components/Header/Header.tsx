@@ -3,10 +3,14 @@ import { View, Image } from 'react-native';
 import { Typography } from '../Typography/Typography';
 import styles from './Header.styles';
 
-const Header = () => {
+interface HeaderProps {
+  hideImage?: boolean;
+}
+
+const Header = ({ hideImage = false }: HeaderProps) => {
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/work.png')} style={styles.image} />
+      {!hideImage && <Image source={require('../../assets/work.png')} style={styles.image} />}
       <Typography variant="h1">WorkOn</Typography>
     </View>
   );

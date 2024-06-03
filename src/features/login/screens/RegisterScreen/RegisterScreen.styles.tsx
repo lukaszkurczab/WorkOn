@@ -2,14 +2,6 @@ import { StyleSheet } from 'react-native';
 import { primaryColor, secondaryColor, backgroundColor } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: backgroundColor,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    height: '100%',
-  },
   inputs: {
     gap: 12,
     width: '100%',
@@ -26,6 +18,7 @@ const styles = StyleSheet.create({
   signInWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    alignSelf: 'center',
     marginTop: 20,
   },
 });

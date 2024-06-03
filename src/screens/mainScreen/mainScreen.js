@@ -8,7 +8,7 @@ import BeginTrainingTile from '../../components/tiles/beginTrainingTile/beginTra
 import { END_TRAINING } from '../../store/reducers/trainingReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNewPlanTile from '../../components/tiles/createNewPlanTile/createNewPlanTile';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/navigation/Navigation';
 
 const MainScreen = () => {
   const dispatch = useDispatch();

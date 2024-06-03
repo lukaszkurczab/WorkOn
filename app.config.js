@@ -21,8 +21,11 @@ module.exports = {
   },
   extra: {
     eas: {
-      projectId: 'a89380d1-fc6c-4188-9a42-e32498c9ea88'
+      projectId: 'a89380d1-fc6c-4188-9a42-e32498c9ea88',
     },
+  },
+  ios: {
+    bundleIdentifier: 'io.workon.development',
   },
   owner: 'lkurczab',
   updates: {

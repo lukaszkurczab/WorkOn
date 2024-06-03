@@ -9,12 +9,10 @@ const styles = StyleSheet.create({
     height: 60,
     position: 'absolute',
     width: '100%',
-    bottom: 0,
-    marginHorizontal: 5,
+    bottom: 8,
     borderTopWidth: 1,
     borderTopColor: primaryColor,
   },
-  button: {},
   buttonIcon: {
     alignItems: 'center',
     justifyContent: 'center',

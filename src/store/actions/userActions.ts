@@ -17,7 +17,12 @@ import { createAppAsyncThunk } from '../utils/createAppAsyncThunk';
 export const removePlan = createAppAsyncThunk('user/removePlan', removePlanFromUser);
 export const editPlan = createAppAsyncThunk('user/editPlan', editUserPlan);
 export const addHistoryItem = createAppAsyncThunk('user/addHistoryItem', addHistoryItemToUser);
-export const register = createAppAsyncThunk('user/register', registerUser);
+export const register = createAppAsyncThunk(
+  'user/register',
+  async (userData: { username: string; email: string; password: string }) => {
+    return await registerUser(userData);
+  }
+);
 export const login = createAppAsyncThunk('user/login', loginUser);
 export const changeUsername = createAppAsyncThunk('user/changeUsername', updateUserUsername);
 export const updatePublicPlan = createAppAsyncThunk('user/updatePublicPlan', setPublicPlan);

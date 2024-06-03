@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
+import { useDispatch } from '../../../../utility/hooks';
+import { register } from '../../../../store/actions/userActions';
 import { navigate } from '../../../../utility/navigate';
 import Button from '../../../../components/Button/Button';
 import { TextInput } from '../../../../components/TextInput/TextInput';
 import { Typography } from '../../../../components/Typography/Typography';
 import Header from '../../../../components/Header/Header';
+import Layout from '../../../../components/Layout/Layout';
 import styles from './RegisterScreen.styles';
 
 interface ErrorState {
@@ -15,15 +18,11 @@ interface ErrorState {
 }
 
 const isPasswordComplex = (password: string): boolean => {
-  const minLength = 8;
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasNumber = /\d/.test(password);
-
-  return password.length >= minLength && hasLowerCase && hasUpperCase && hasNumber;
+  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
 };
 
 const RegisterScreen: React.FC = () => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -32,16 +31,56 @@ const RegisterScreen: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleRegister = async () => {
-    if (isPasswordComplex(password)) {
-      setError({ ...error, password: 'Passwords is too simply' });
-    } else if (password !== confirmPassword) {
-      setError({ ...error, confirmPassword: 'Passwords not match' });
+    let hasError = false;
+
+    if (!username.trim()) {
+      setError(prevError => ({ ...prevError, username: 'Username is required' }));
+      hasError = true;
+    } else {
+      setError(prevError => ({ ...prevError, username: '' }));
+    }
+
+    if (!email.trim()) {
+      setError(prevError => ({ ...prevError, email: 'Email is required' }));
+      hasError = true;
+    } else {
+      setError(prevError => ({ ...prevError, email: '' }));
+    }
+
+    if (!isPasswordComplex(password)) {
+      setError(prevError => ({ ...prevError, password: 'Password is too simple' }));
+      hasError = true;
+    } else {
+      setError(prevError => ({ ...prevError, password: '' }));
+    }
+
+    if (password !== confirmPassword) {
+      setError(prevError => ({ ...prevError, confirmPassword: 'Passwords do not match' }));
+      hasError = true;
+    } else {
+      setError(prevError => ({ ...prevError, confirmPassword: '' }));
+    }
+
+    if (!hasError) {
+      setIsLoading(true);
+      try {
+        await dispatch(register({ username, email, password })).unwrap();
+        navigate('LoginScreen');
+      } catch (err: any) {
+        console.log(err);
+        if (err.message.includes('Username is taken')) {
+          setError(prevError => ({ ...prevError, username: 'Username is taken' }));
+        } else if (err.message.includes('Email is taken')) {
+          setError(prevError => ({ ...prevError, email: 'Email is taken' }));
+        }
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Header />
+    <Layout showNavigation={false}>
       <View style={styles.inputs}>
         <TextInput placeholder="Username" value={username} onChangeText={setUsername} error={error.username} />
         <TextInput
@@ -84,7 +123,7 @@ const RegisterScreen: React.FC = () => {
           </Typography>
         </TouchableOpacity>
       </View>
-    </View>
+    </Layout>
   );
 };
 

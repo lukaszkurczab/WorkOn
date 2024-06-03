@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextInput as DefaultTextInput, View, StyleProp, ViewStyle, Text, TextInputProps } from 'react-native';
 import styles from './TextInput.styles';
 
@@ -23,7 +23,6 @@ export const TextInput: React.FC<CustomTextInputProps> = ({
   ...props
 }) => {
   let inputWrapperStyle = styles.inputWrapper;
-  const [inputText, setInputText] = useState(value);
 
   if (error) {
     inputWrapperStyle = {
@@ -37,18 +36,13 @@ export const TextInput: React.FC<CustomTextInputProps> = ({
     };
   }
 
-  const handleChange = (newValue: string) => {
-    setInputText(newValue);
-    onChangeText(newValue);
-  };
-
   return (
     <View style={[inputWrapperStyle, style]}>
       {error && <Text style={styles.error}>{error}</Text>}
       <DefaultTextInput
         style={[styles.input, textStyle]}
-        value={inputText}
-        onChangeText={e => handleChange(e)}
+        value={value}
+        onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={theme === 'dark' ? '#848484' : '#343434'}
         {...props}

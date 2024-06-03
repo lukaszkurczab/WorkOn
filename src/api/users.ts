@@ -45,7 +45,7 @@ export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan
   }
 };
 
-export const registerUser = async (userData: User) => {
+export const registerUser = async (userData: { username: string; email: string; password: string }) => {
   try {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
@@ -54,9 +54,17 @@ export const registerUser = async (userData: User) => {
       },
       body: JSON.stringify(userData),
     });
+
     if (!response.ok) {
+      const errorResponse = await response.json();
+      if (errorResponse.message === 'User already exists with that username') {
+        throw new Error('Username is taken');
+      } else if (errorResponse.message === 'User already exists with that email') {
+        throw new Error('Email is taken');
+      }
       throw new Error('Network response was not ok');
     }
+
     return await response.json();
   } catch (error) {
     console.error('Error registering user:', error);

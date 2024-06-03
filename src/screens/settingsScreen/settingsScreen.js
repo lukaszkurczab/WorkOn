@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/navigation/Navigation';
 import { changeUsername, updatePassword } from '../../store/actions/userActions';
 import { LOGOUT } from '../../store/slice/userSlice';
 import { SET_REMEMBER_ME } from '../../store/slice/sessionSlice';
@@ -30,7 +30,7 @@ const SettingsScreen = () => {
       changeUsername({
         userId: userData.id,
         newUsername: newUsername,
-      }),
+      })
     );
   };
 
@@ -81,7 +81,7 @@ const SettingsScreen = () => {
                 <TextInput
                   style={styles.input}
                   placeholderTextColor={secondaryColor}
-                  placeholder='New username'
+                  placeholder="New username"
                   value={newUsername}
                   onChangeText={setNewUsername}
                 />
@@ -103,7 +103,7 @@ const SettingsScreen = () => {
                   value={oldPassword}
                   onChangeText={setOldPassword}
                   secureTextEntry
-                  placeholder='Old password'
+                  placeholder="Old password"
                 />
                 <TextInput
                   style={styles.input}
@@ -111,7 +111,7 @@ const SettingsScreen = () => {
                   onChangeText={setNewPassword}
                   placeholderTextColor={secondaryColor}
                   secureTextEntry
-                  placeholder='New password'
+                  placeholder="New password"
                 />
                 <TextInput
                   style={styles.input}
@@ -119,7 +119,7 @@ const SettingsScreen = () => {
                   onChangeText={setConfirmedNewPassword}
                   placeholderTextColor={secondaryColor}
                   secureTextEntry
-                  placeholder='Confirm password'
+                  placeholder="Confirm password"
                 />
                 {showPasswordMatchError && <Text style={{ color: 'red' }}>Passwords doesn't match</Text>}
                 <TouchableOpacity style={styles.confirmButton} onPress={handleChangePassword}>
