@@ -5,11 +5,7 @@ import { StatusBar } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import AppNavigator from './AppNavigator';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 const App = () => {
-  AsyncStorage.clear();
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

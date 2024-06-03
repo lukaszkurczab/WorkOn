@@ -8,6 +8,7 @@ import trainingReducer from './reducers/trainingReducer';
 import sessionReducer from './slice/sessionSlice';
 import userReducer from './slice/userSlice';
 import exercisesReducer from './reducers/exercisesReducer';
+import loginReducer from '../features/login/store/slice/slice';
 
 const rootReducer = combineReducers({
   atlas: atlasReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   user: userReducer,
   exercises: exercisesReducer,
+  login: loginReducer,
 });
 
 const persistConfig = {

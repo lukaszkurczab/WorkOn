@@ -7,11 +7,13 @@ import Checkbox from '../../../../components/Checkbox/Checkbox';
 import Button from '../../../../components/Button/Button';
 import Layout from '../../../../components/Layout/Layout';
 import styles from './LoginScreen.styles';
+import { loginUser } from '../../../../api/users';
+import { storeToken, removeToken } from '../../../../utility/secureStore';
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -19,56 +21,64 @@ const LoginScreen: React.FC = () => {
     setRememberMe(!rememberMe);
   };
 
-  const handleLogin = () => {
-    console.log('Login pressed');
+  const handleLogin = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const response = await loginUser({ email, password });
+      await storeToken('accessToken', response.accessToken);
+      await storeToken('refreshToken', response.refreshToken);
+      if (rememberMe) {
+        await storeToken('rememberMe', 'true');
+      } else {
+        await removeToken('rememberMe');
+      }
+      navigate('MainScreen');
+    } catch (error) {
+      setError('Invalid email or password');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <Layout showHeader={false} showNavigation={false}>
-      <View style={styles.container}>
-        <Image source={require('../../../../assets/work.png')} style={styles.image} />
-        <Typography variant="h1">WorkOn</Typography>
-        <View style={styles.inputs}>
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            autoComplete="email"
-            inputMode="email"
-            keyboardType="email-address"
-          />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            error={passwordError}
-            secureTextEntry
-          />
-        </View>
-        <Checkbox selected={rememberMe} onClick={handleRememberMe}>
-          <Typography variant="h6">Remember me</Typography>
-        </Checkbox>
-        <View style={styles.button}>
-          <Button variant="contained" onPress={handleLogin} disabled={isLoading}>
-            <Typography variant="h2">Log in</Typography>
-          </Button>
-        </View>
-        <View style={styles.text}>
-          <Typography variant="h5">Don't remember password? </Typography>
-          <TouchableOpacity onPress={() => {}}>
-            <Typography variant="h4" style={styles.signUpButton}>
-              Reset
-            </Typography>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.text}>
-          <Typography variant="h5">New user? </Typography>
-          <TouchableOpacity onPress={() => navigate('RegisterScreen')}>
-            <Typography variant="h5" style={styles.signUpButton}>
-              Sign Up
-            </Typography>
-          </TouchableOpacity>
-        </View>
+      <Image source={require('../../../../assets/work.png')} style={styles.image} />
+      <Typography variant="h1">WorkOn</Typography>
+      <View style={styles.inputs}>
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          autoComplete="email"
+          inputMode="email"
+          keyboardType="email-address"
+        />
+        <TextInput placeholder="Password" value={password} onChangeText={setPassword} error={error} secureTextEntry />
+      </View>
+      <Checkbox selected={rememberMe} onClick={handleRememberMe}>
+        <Typography variant="h6">Remember me</Typography>
+      </Checkbox>
+      <View style={styles.button}>
+        <Button variant="contained" onPress={handleLogin} disabled={isLoading}>
+          <Typography variant="h2">Log in</Typography>
+        </Button>
+      </View>
+      <View style={styles.text}>
+        <Typography variant="h5">Don't remember password? </Typography>
+        <TouchableOpacity onPress={() => {}}>
+          <Typography variant="h4" style={styles.signUpButton}>
+            Reset
+          </Typography>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.text}>
+        <Typography variant="h5">New user? </Typography>
+        <TouchableOpacity onPress={() => navigate('RegisterScreen')}>
+          <Typography variant="h5" style={styles.signUpButton}>
+            Sign Up
+          </Typography>
+        </TouchableOpacity>
       </View>
     </Layout>
   );

@@ -1,4 +1,5 @@
-const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
+//const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
+const BASE_URL = 'http://192.168.95.169:4000/users';
 
 export const addHistoryItemToUser = async (userData: { userId: string; historyItem: WorkoutSession }) => {
   try {
@@ -82,7 +83,8 @@ export const loginUser = async (userData: { email: string; password: string }) =
       body: JSON.stringify(userData),
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Network response was not ok');
     }
     return await response.json();
   } catch (error) {
@@ -225,6 +227,27 @@ export const updateUserPassword = async ({
     return await response.json();
   } catch (error) {
     console.error('Error updating user password:', error);
+    throw error;
+  }
+};
+
+export const refreshAccessToken = async (refreshToken: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: refreshToken }),
+    });
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Network response was not ok');
+    }
+    const data = await response.json();
+    return data.accessToken;
+  } catch (error) {
+    console.error('Error refreshing token:', error);
     throw error;
   }
 };

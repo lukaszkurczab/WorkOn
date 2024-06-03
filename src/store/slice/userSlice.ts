@@ -3,7 +3,6 @@ import {
   removePlan,
   editPlan,
   addHistoryItem,
-  register,
   login,
   changeUsername,
   updatePublicPlan,
@@ -53,16 +52,6 @@ const userSlice = createSlice({
       // .addCase(addHistoryItem.fulfilled, (state, action) => {
       //   state.data.history.push(action.payload);
       // })
-      .addCase(register.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(register.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.data = action.payload;
-      })
-      .addCase(register.rejected, state => {
-        state.isLoading = false;
-      })
       .addCase(login.pending, state => {
         state.isLoading = true;
       })

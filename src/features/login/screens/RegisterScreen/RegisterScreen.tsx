@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useDispatch } from '../../../../utility/hooks';
-import { register } from '../../../../store/actions/userActions';
+import { register } from '../../store/actions/actions';
 import { navigate } from '../../../../utility/navigate';
 import Button from '../../../../components/Button/Button';
 import { TextInput } from '../../../../components/TextInput/TextInput';
 import { Typography } from '../../../../components/Typography/Typography';
-import Header from '../../../../components/Header/Header';
 import Layout from '../../../../components/Layout/Layout';
 import styles from './RegisterScreen.styles';
 
