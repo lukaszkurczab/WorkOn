@@ -9,17 +9,31 @@ interface LayoutProps {
   children: ReactNode;
   showHeader?: boolean;
   showNavigation?: boolean;
+  scrollable?: boolean;
   position?: 'start' | 'center' | 'end';
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showNavigation = true, position = 'center' }) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  showHeader = true,
+  showNavigation = true,
+  position = 'center',
+  scrollable = true,
+}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.keyboardAvoidingView} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
-          {showHeader && <Header />}
-          <View style={[styles.body, styles[position]]}>{children}</View>
-        </ScrollView>
+        {scrollable ? (
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
+            {showHeader && <Header />}
+            <View style={[styles.body, styles[position]]}>{children}</View>
+          </ScrollView>
+        ) : (
+          <View style={styles.scrollView}>
+            {showHeader && <Header />}
+            <View style={[styles.body, styles[position]]}>{children}</View>
+          </View>
+        )}
       </KeyboardAvoidingView>
       {showNavigation && <Navigation />}
     </SafeAreaView>

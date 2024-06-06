@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { navigationRef } from './src/utility/navigate';
+import { navigationRef, RootStackParamList } from './src/utility/navigate';
 import { refreshAccessToken } from './src/api/users';
 import { jwtDecode } from 'jwt-decode';
 import LoginScreen from './src/features/login/screens/LoginScreen/LoginScreen';
 import RegisterScreen from './src/features/login/screens/RegisterScreen/RegisterScreen';
 import MainScreen from './src/features/main/screens/MainScreen';
 import TestScreen from './src/features/test/screens/TestScreen';
+import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/CarouselScreen';
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
 import { getToken, storeToken } from './src/utility/secureStore';
-
-export type RootStackParamList = {
-  LoginScreen: undefined;
-  RegisterScreen: undefined;
-  MainScreen: undefined;
-  TestScreen: undefined;
-};
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -35,7 +29,7 @@ const AppNavigator = () => {
           const currentTime = Date.now() / 1000;
 
           if (decodedToken.exp > currentTime) {
-            setInitialRoute('MainScreen');
+            setInitialRoute('CarouselScreen');
           } else {
             const refreshToken = await getToken('refreshToken');
             if (refreshToken) {
@@ -70,6 +64,7 @@ const AppNavigator = () => {
       <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Stack.Screen name="CarouselScreen" component={CarouselScreen} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
         <Stack.Screen name="TestScreen" component={TestScreen} />
       </Stack.Navigator>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useDispatch } from '../../../../utility/hooks';
-import { register } from '../../store/actions/actions';
+import { register, login } from '../../store/actions/actions';
+import { storeToken } from '../../../../utility/secureStore';
 import { navigate } from '../../../../utility/navigate';
 import Button from '../../../../components/Button/Button';
 import { TextInput } from '../../../../components/TextInput/TextInput';
@@ -64,7 +65,11 @@ const RegisterScreen: React.FC = () => {
       setIsLoading(true);
       try {
         await dispatch(register({ username, email, password })).unwrap();
-        navigate('LoginScreen');
+        const response = await dispatch(login({ email, password })).unwrap();
+        await storeToken('accessToken', response.accessToken);
+        await storeToken('refreshToken', response.refreshToken);
+        await storeToken('rememberMe', 'true');
+        navigate('CarouselScreen');
       } catch (err: any) {
         console.log(err);
         if (err.message.includes('Username is taken')) {

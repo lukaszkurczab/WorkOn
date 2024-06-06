@@ -1,5 +1,8 @@
 //const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
-const BASE_URL = 'http://192.168.95.169:4000/users';
+//work
+//const BASE_URL = 'http://192.168.95.169:4000/users';
+//home
+const BASE_URL = 'http://192.168.1.100:4000/users';
 
 export const addHistoryItemToUser = async (userData: { userId: string; historyItem: WorkoutSession }) => {
   try {
