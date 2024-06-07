@@ -1,33 +1,66 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import Layout from '../../../../components/Layout/Layout';
 import Carousel from '../../../../components/Carousel/Carousel';
+import { Typography } from '../../../../components/Typography/Typography';
+import Button from '../../../../components/Button/Button';
+import Modal from '../../../../components/Modal/Modal';
+import styles from './CarouselScreen.styles';
+import { navigate } from '../../../../utility/navigate';
 
 const CustomComponent1 = () => (
-  <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Manual creator</Text>
-    <Text>
-      Choose exercises from our database and create your own training plan. In this mode you have full control over what
-      the plan will look like. We recommend this mode for more experienced users.
-    </Text>
+  <View style={styles.carouselItem}>
+    <View>
+      <Typography variant="h2" style={styles.text}>
+        Manual creator
+      </Typography>
+      <Typography variant="h4" style={styles.text}>
+        Choose exercises from our database and create your own training plan. In this mode you have full control over
+        what the plan will look like. We recommend this mode for more experienced users.
+      </Typography>
+    </View>
+    <Button onPress={() => navigate('ManualCreatorScreen')}>
+      <Typography variant="h2" style={styles.buttonText}>
+        Select
+      </Typography>
+    </Button>
   </View>
 );
 const CustomComponent2 = () => (
-  <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-    <Text>AI Creator</Text>
-    <Text>
-      Choose exercises from our database and create your own training plan. In this mode you have full control over what
-      the plan will look like. We recommend this mode for more experienced users.
-    </Text>
+  <View style={styles.carouselItem}>
+    <View>
+      <Typography variant="h2" style={styles.text}>
+        AI creator
+      </Typography>
+      <Typography variant="h4" style={styles.text}>
+        Tell us what your experiences and expectations are and then our AI will help you create a training plan tailored
+        to you. The mode is recommended for beginners, but remember that artificial intelligence is not infallible.
+      </Typography>
+    </View>
+    <Button onPress={function (): void {}} disabled={true}>
+      <Typography variant="h2" style={styles.buttonText}>
+        Not ready
+      </Typography>
+    </Button>
   </View>
 );
 const CustomComponent3 = () => (
-  <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Import plan</Text>
-    <Text>
-      Choose exercises from our database and create your own training plan. In this mode you have full control over what
-      the plan will look like. We recommend this mode for more experienced users.
-    </Text>
+  <View style={styles.carouselItem}>
+    <View>
+      <Typography variant="h2" style={styles.text}>
+        Import plan
+      </Typography>
+      <Typography variant="h4" style={styles.text}>
+        Browse our database of training plans and choose the one that suits you best. This mode will also allow you to
+        import a plan sent to you by a trainer or a friend. Just remember that each plan should be adapted to your
+        capabilities.
+      </Typography>
+    </View>
+    <Button onPress={function (): void {}} disabled={true}>
+      <Typography variant="h2" style={styles.buttonText}>
+        Not ready
+      </Typography>
+    </Button>
   </View>
 );
 
@@ -47,11 +80,35 @@ const items = [
 ];
 
 const CarouselScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <Layout scrollable={false}>
-      <View>
+      <View style={styles.container}>
         <Carousel items={items} />
+        <Button variant="text" onPress={() => setModalVisible(true)} style={styles.button}>
+          <Typography variant="h2">Skip</Typography>
+        </Button>
       </View>
+      <Modal visible={modalVisible} onClose={() => setModalVisible(false)}>
+        <Typography variant="h3" style={styles.modal_text}>
+          Are you sure you want to skip creating a plan?{' '}
+        </Typography>
+        <View style={styles.modal_buttonsWrapper}>
+          <Button variant="outlined" onPress={() => setModalVisible(false)} style={styles.modal_button}>
+            <Typography variant="h3">No</Typography>
+          </Button>
+          <Button
+            onPress={() => {
+              setModalVisible(false);
+              navigate('MainScreen');
+            }}
+            style={styles.modal_button}
+          >
+            <Typography variant="h3">Yes</Typography>
+          </Button>
+        </View>
+      </Modal>
     </Layout>
   );
 };

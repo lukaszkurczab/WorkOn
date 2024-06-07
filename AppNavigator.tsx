@@ -10,6 +10,7 @@ import MainScreen from './src/features/main/screens/MainScreen';
 import TestScreen from './src/features/test/screens/TestScreen';
 import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/CarouselScreen';
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
+import ManualCreatorScreen from './src/features/planCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
 import { getToken, storeToken } from './src/utility/secureStore';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -67,6 +68,7 @@ const AppNavigator = () => {
         <Stack.Screen name="CarouselScreen" component={CarouselScreen} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
         <Stack.Screen name="TestScreen" component={TestScreen} />
+        <Stack.Screen name="ManualCreatorScreen" component={ManualCreatorScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

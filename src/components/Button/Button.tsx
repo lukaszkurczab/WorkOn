@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { styles } from './Button.styles';
 
 type ButtonProps = {
@@ -7,9 +7,10 @@ type ButtonProps = {
   onPress: () => void;
   disabled?: boolean;
   children: ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
-const Button: React.FC<ButtonProps> = ({ variant = 'contained', onPress, disabled = false, children }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'contained', style, onPress, disabled = false, children }) => {
   const getButtonStyle = () => {
     switch (variant) {
       case 'contained':
@@ -25,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'contained', onPress, disable
 
   return (
     <TouchableOpacity
-      style={[styles.button, getButtonStyle()]}
+      style={[styles.button, style, getButtonStyle()]}
       onPress={disabled ? undefined : onPress}
       disabled={disabled}
     >

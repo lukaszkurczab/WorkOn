@@ -10,6 +10,7 @@ interface CarouselProps {
 const { width: screenWidth } = Dimensions.get('window');
 
 const Carousel: React.FC<CarouselProps> = ({ items }) => {
+  const lastItemIndex = items.length - 1;
   const currentIndex = useSharedValue(0);
   const currentTranslateX = useSharedValue(0);
   const currentScale = useSharedValue(1);
@@ -46,13 +47,13 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
     .onChange(event => {
       if (startPosition.value === -1000) startPosition.value = event.x;
       distance.value = Math.abs(startPosition.value - event.x);
-      currentScale.value =
-        1 - 0.2 * (distance.value / adjustedTranslationX) > 0.8
-          ? 1 - 0.2 * (distance.value / adjustedTranslationX)
-          : 0.8;
 
       if (event.translationX > 0) {
-        if (distance.value <= changeWidth) {
+        if (distance.value <= changeWidth && currentIndex.value > 0) {
+          currentScale.value =
+            1 - 0.2 * (distance.value / adjustedTranslationX) > 0.8
+              ? 1 - 0.2 * (distance.value / adjustedTranslationX)
+              : 0.8;
           direction.value = 'none';
           newItemIndex.value = currentIndex.value;
           currentZIndex.value = 100;
@@ -60,7 +61,11 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
           prevTranslateX.value = -64 - distance.value;
           currentTranslateX.value = distance.value;
           prevScale.value = Math.max(0.8 + 0.2 * (distance.value / adjustedTranslationX));
-        } else if (distance.value <= 2 * changeWidth) {
+        } else if (distance.value <= 2 * changeWidth && currentIndex.value > 0) {
+          currentScale.value =
+            1 - 0.2 * (distance.value / adjustedTranslationX) > 0.8
+              ? 1 - 0.2 * (distance.value / adjustedTranslationX)
+              : 0.8;
           direction.value = 'right';
           newItemIndex.value = currentIndex.value - 1;
           currentZIndex.value = 1;
@@ -72,7 +77,11 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
           prevScale.value = Math.max(0.8 + 0.2 * (distance.value / adjustedTranslationX));
         }
       } else {
-        if (distance.value <= changeWidth) {
+        if (distance.value <= changeWidth && currentIndex.value < lastItemIndex) {
+          currentScale.value =
+            1 - 0.2 * (distance.value / adjustedTranslationX) > 0.8
+              ? 1 - 0.2 * (distance.value / adjustedTranslationX)
+              : 0.8;
           if (distance.value > 50) prevZIndex.value = -1;
           direction.value = 'none';
           newItemIndex.value = currentIndex.value;
@@ -81,7 +90,11 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
           nextTranslateX.value = 64 + distance.value;
           currentTranslateX.value = -distance.value;
           nextScale.value = Math.max(0.8 + 0.2 * (distance.value / adjustedTranslationX));
-        } else if (distance.value <= 2 * changeWidth) {
+        } else if (distance.value <= 2 * changeWidth && currentIndex.value < lastItemIndex) {
+          currentScale.value =
+            1 - 0.2 * (distance.value / adjustedTranslationX) > 0.8
+              ? 1 - 0.2 * (distance.value / adjustedTranslationX)
+              : 0.8;
           direction.value = 'left';
           newItemIndex.value = currentIndex.value + 1;
           currentZIndex.value = 1;
@@ -178,12 +191,10 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: '70%',
     width: screenWidth,
   },
   itemsWrapper: {
     position: 'absolute',
-    height: '100%',
     left: 32,
   },
   itemContainer: {
@@ -193,8 +204,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'blue',
     position: 'absolute',
-    height: '100%',
     width: screenWidth - 64,
+    padding: 16,
   },
 });
 
