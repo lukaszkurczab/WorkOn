@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import { changeUsername, updatePassword } from '../../store/actions/userActions';
 import { LOGOUT } from '../../store/slice/userSlice';
 import { SET_REMEMBER_ME } from '../../store/slice/sessionSlice';

@@ -3,33 +3,23 @@ import { backgroundColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
     backgroundColor: backgroundColor,
     alignItems: 'center',
   },
   body: {
-    paddingHorizontal: 36,
+    paddingHorizontal: 32,
     width: '100%',
-    flex: 1,
-    paddingBottom: 61,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight! + 8 : 8,
     alignItems: 'center',
-  },
-  start: {
-    justifyContent: 'flex-start',
-  },
-  center: {
-    justifyContent: 'center',
-  },
-  end: {
-    justifyContent: 'flex-end',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight! + 8 : 8,
   },
   scrollView: {
-    minHeight: '100%',
     justifyContent: 'center',
+    width: '100%',
   },
   keyboardAvoidingView: {
     width: '100%',
+    flex: 1,
   },
 });
 

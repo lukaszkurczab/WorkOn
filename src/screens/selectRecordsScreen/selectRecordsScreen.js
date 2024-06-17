@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-native-element-dropdown';
 import { updateUserRecords } from '../../store/actions/userActions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import styles from './selectRecordsScreen.styles';
 
 const SelectRecordsScreen = () => {

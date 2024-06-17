@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor } from '../../styles/colors';
+import { backgroundColor, primaryColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     bottom: 8,
     borderTopWidth: 1,
     borderTopColor: primaryColor,
+    backgroundColor: backgroundColor,
   },
   buttonIcon: {
     alignItems: 'center',

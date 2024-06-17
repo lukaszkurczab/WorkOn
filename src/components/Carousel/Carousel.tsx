@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
+import styles from './Carousel.styles';
 
 interface CarouselProps {
   items: Array<{ id: string; component: React.ReactNode }>;
@@ -187,26 +188,5 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
     </GestureHandlerRootView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    width: screenWidth,
-  },
-  itemsWrapper: {
-    position: 'absolute',
-    left: 32,
-  },
-  itemContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'blue',
-    position: 'absolute',
-    width: screenWidth - 64,
-    padding: 16,
-  },
-});
 
 export default Carousel;

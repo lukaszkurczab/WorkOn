@@ -1,89 +1,67 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { navigate } from '../../../../utility/navigate';
+import { useDispatch } from 'react-redux'; // Poprawienie importu useDispatch
 import Layout from '../../../../components/Layout/Layout';
 import Carousel from '../../../../components/Carousel/Carousel';
+import SelectCreatorTypeItem from '../../components/SelectCreatorTypeItem/SelectCreatorTypeItem';
 import { Typography } from '../../../../components/Typography/Typography';
 import Button from '../../../../components/Button/Button';
 import Modal from '../../../../components/Modal/Modal';
+import { CREATE_NEW_PLAN } from '../../store/slice/slice';
 import styles from './CarouselScreen.styles';
-import { navigate } from '../../../../utility/navigate';
-
-const CustomComponent1 = () => (
-  <View style={styles.carouselItem}>
-    <View>
-      <Typography variant="h2" style={styles.text}>
-        Manual creator
-      </Typography>
-      <Typography variant="h4" style={styles.text}>
-        Choose exercises from our database and create your own training plan. In this mode you have full control over
-        what the plan will look like. We recommend this mode for more experienced users.
-      </Typography>
-    </View>
-    <Button onPress={() => navigate('ManualCreatorScreen')}>
-      <Typography variant="h2" style={styles.buttonText}>
-        Select
-      </Typography>
-    </Button>
-  </View>
-);
-const CustomComponent2 = () => (
-  <View style={styles.carouselItem}>
-    <View>
-      <Typography variant="h2" style={styles.text}>
-        AI creator
-      </Typography>
-      <Typography variant="h4" style={styles.text}>
-        Tell us what your experiences and expectations are and then our AI will help you create a training plan tailored
-        to you. The mode is recommended for beginners, but remember that artificial intelligence is not infallible.
-      </Typography>
-    </View>
-    <Button onPress={function (): void {}} disabled={true}>
-      <Typography variant="h2" style={styles.buttonText}>
-        Not ready
-      </Typography>
-    </Button>
-  </View>
-);
-const CustomComponent3 = () => (
-  <View style={styles.carouselItem}>
-    <View>
-      <Typography variant="h2" style={styles.text}>
-        Import plan
-      </Typography>
-      <Typography variant="h4" style={styles.text}>
-        Browse our database of training plans and choose the one that suits you best. This mode will also allow you to
-        import a plan sent to you by a trainer or a friend. Just remember that each plan should be adapted to your
-        capabilities.
-      </Typography>
-    </View>
-    <Button onPress={function (): void {}} disabled={true}>
-      <Typography variant="h2" style={styles.buttonText}>
-        Not ready
-      </Typography>
-    </Button>
-  </View>
-);
-
-const items = [
-  {
-    id: 'item-1',
-    component: <CustomComponent1 />,
-  },
-  {
-    id: 'item-2',
-    component: <CustomComponent2 />,
-  },
-  {
-    id: 'item-3',
-    component: <CustomComponent3 />,
-  },
-];
 
 const CarouselScreen = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
 
+  const items = [
+    {
+      id: 'item-1',
+      component: (
+        <SelectCreatorTypeItem
+          title={'Manual creator'}
+          desc={
+            'Choose exercises from our database and create your own training plan. In this mode you have full control over what the plan will look like. We recommend this mode for more experienced users.'
+          }
+          buttonText={'Select'}
+          onSelect={() => {
+            dispatch(CREATE_NEW_PLAN());
+            navigate('ManualCreatorScreen');
+          }}
+        />
+      ),
+    },
+    {
+      id: 'item-2',
+      component: (
+        <SelectCreatorTypeItem
+          title={'AI creator'}
+          desc={
+            'Tell us what your experiences and expectations are and then our AI will help you create a training plan tailored to you. The mode is recommended for beginners, but remember that artificial intelligence is not infallible.'
+          }
+          buttonText={'Not ready'}
+          onSelect={() => {}}
+        />
+      ),
+    },
+    {
+      id: 'item-3',
+      component: (
+        <SelectCreatorTypeItem
+          title={'Import plan'}
+          desc={
+            'Browse our database of training plans and choose the one that suits you best. This mode will also allow you to import a plan sent to you by a trainer or a friend. Just remember that each plan should be adapted to your capabilities.'
+          }
+          buttonText={'Not ready'}
+          onSelect={() => {}}
+        />
+      ),
+    },
+  ];
+
   return (
-    <Layout scrollable={false}>
+    <Layout showNavigation={false}>
       <View style={styles.container}>
         <Carousel items={items} />
         <Button variant="text" onPress={() => setModalVisible(true)} style={styles.button}>
@@ -92,7 +70,7 @@ const CarouselScreen = () => {
       </View>
       <Modal visible={modalVisible} onClose={() => setModalVisible(false)}>
         <Typography variant="h3" style={styles.modal_text}>
-          Are you sure you want to skip creating a plan?{' '}
+          Are you sure you want to skip creating a plan?
         </Typography>
         <View style={styles.modal_buttonsWrapper}>
           <Button variant="outlined" onPress={() => setModalVisible(false)} style={styles.modal_button}>

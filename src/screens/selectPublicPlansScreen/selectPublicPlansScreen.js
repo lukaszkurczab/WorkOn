@@ -3,7 +3,7 @@ import { View, ScrollView, TouchableOpacity, Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import { updatePublicPlan } from '../../store/actions/userActions';
 import styles from './selectPublicPlansScreen.styles';
 

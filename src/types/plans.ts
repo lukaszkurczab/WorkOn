@@ -1,4 +1,6 @@
-interface WorkoutPlan {
+import { Exercise } from './exercises';
+
+export interface WorkoutPlan {
   id: string;
   name: string;
   publicType: string;
@@ -8,7 +10,7 @@ interface WorkoutPlan {
   days: Day[];
 }
 
-interface Day {
+export interface Day {
   id: string;
   name: string;
   exercises: Exercise[];

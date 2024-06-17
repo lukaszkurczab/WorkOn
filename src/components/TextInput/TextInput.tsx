@@ -10,6 +10,8 @@ interface CustomTextInputProps extends TextInputProps {
   error?: string;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<ViewStyle>;
+  leftComponent?: React.ReactNode;
+  rightComponent?: React.ReactNode;
 }
 
 export const TextInput: React.FC<CustomTextInputProps> = ({
@@ -20,6 +22,8 @@ export const TextInput: React.FC<CustomTextInputProps> = ({
   style,
   textStyle,
   theme = 'dark',
+  leftComponent,
+  rightComponent,
   ...props
 }) => {
   let inputWrapperStyle = styles.inputWrapper;
@@ -39,14 +43,18 @@ export const TextInput: React.FC<CustomTextInputProps> = ({
   return (
     <View style={[inputWrapperStyle, style]}>
       {error && <Text style={styles.error}>{error}</Text>}
-      <DefaultTextInput
-        style={[styles.input, textStyle]}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor={theme === 'dark' ? '#848484' : '#343434'}
-        {...props}
-      />
+      <View style={styles.container}>
+        {leftComponent && <View style={styles.leftComponent}>{leftComponent}</View>}
+        <DefaultTextInput
+          style={[styles.input, textStyle]}
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          placeholderTextColor={theme === 'dark' ? '#848484' : '#343434'}
+          {...props}
+        />
+        {rightComponent && <View style={styles.rightComponent}>{rightComponent}</View>}
+      </View>
     </View>
   );
 };

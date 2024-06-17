@@ -6,7 +6,7 @@ import PlanDetailsDayBox from '../../components/planDetailsDayBox/planDetailsDay
 import { SET_PLAN_TO_EDIT } from '../../store/reducers/planReducer';
 import { removePlan } from '../../store/actions/userActions';
 import styles from './planDetailsScreen.styles';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 const PlanDetailsScreen = () => {
   const navigation = useNavigation();

@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import styles from './workoutSummaryScreen.styles';
 import WorkoutSummary from '../../components/workoutSummary/workoutSummary';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 const WorkoutSummaryScreen = () => {
   return (

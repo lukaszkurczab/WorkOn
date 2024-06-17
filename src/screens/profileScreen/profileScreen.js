@@ -7,7 +7,7 @@ import ProfileHeader from '../../components/profileHeader/profileHeader';
 import RecordDisplay from '../../components/recordDisplay/recordDisplay';
 import WorkoutCard from '../../components/workoutCard/workoutCard';
 import PlanCard from '../../components/planCard/planCard';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './profileScreen.styles';
 

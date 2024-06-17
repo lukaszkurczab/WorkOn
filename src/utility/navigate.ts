@@ -5,7 +5,6 @@ export type RootStackParamList = {
   RegisterScreen: undefined;
   MainScreen: undefined;
   CarouselScreen: undefined;
-  TestScreen: undefined;
   ManualCreatorScreen: undefined;
 };
 

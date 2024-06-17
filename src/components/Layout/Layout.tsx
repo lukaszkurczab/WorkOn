@@ -1,39 +1,54 @@
-import React, { ReactNode } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { Dimensions, KeyboardAvoidingView, Keyboard, Platform, ScrollView, View, StatusBar } from 'react-native';
 import Header from '../Header/Header';
-import Navigation from '../navigation/Navigation';
+import Navigation from '../Navigation/Navigation';
 import styles from './Layout.styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface LayoutProps {
   children: ReactNode;
   showHeader?: boolean;
   showNavigation?: boolean;
-  scrollable?: boolean;
-  position?: 'start' | 'center' | 'end';
 }
 
-const Layout: React.FC<LayoutProps> = ({
-  children,
-  showHeader = true,
-  showNavigation = true,
-  position = 'center',
-  scrollable = true,
-}) => {
+const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showNavigation = true }) => {
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardVisible(true);
+    });
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  const headerHeight = showHeader ? 107 : 0;
+  const navigationHeight = showNavigation ? 40 : 0;
+  const bodyHeight =
+    Dimensions.get('window').height -
+    headerHeight -
+    navigationHeight -
+    (Platform.OS === 'ios' ? insets.top - insets.bottom : StatusBar.currentHeight!) -
+    64;
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.keyboardAvoidingView} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        {scrollable ? (
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
-            {showHeader && <Header />}
-            <View style={[styles.body, styles[position]]}>{children}</View>
-          </ScrollView>
-        ) : (
-          <View style={styles.scrollView}>
-            {showHeader && <Header />}
-            <View style={[styles.body, styles[position]]}>{children}</View>
-          </View>
-        )}
+        <ScrollView
+          scrollEnabled={isKeyboardVisible}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollView}
+        >
+          {showHeader && <Header />}
+          <View style={[styles.body, { height: bodyHeight }]}>{children}</View>
+        </ScrollView>
       </KeyboardAvoidingView>
       {showNavigation && <Navigation />}
     </SafeAreaView>

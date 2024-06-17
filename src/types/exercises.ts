@@ -1,13 +1,13 @@
-interface Exercise {
+export interface Exercise {
   id: string;
   name: string;
   loadIncrease: number;
-  repsRange: [number, number];
+  repsRange: number[];
   series: Series[];
 }
 
-interface Series {
-  id: number;
+export interface Series {
+  id: string;
   reps: number;
   weight: number;
 }

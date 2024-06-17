@@ -1,3 +1,5 @@
+import { Exercise } from '../types/exercises';
+
 const EXERCISE_BASE_URL = 'https://workon-backend.azurewebsites.net/exercises';
 
 export const fetchExercises = async (version = '1.0') => {

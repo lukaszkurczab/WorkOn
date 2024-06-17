@@ -5,7 +5,7 @@ import PlanBanner from '../../components/planBanner/planBanner';
 import styles from './plansListScreen.styles';
 import { useNavigation } from '@react-navigation/native';
 import { CREATE_NEW_PLAN } from '../../store/reducers/planReducer';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 const PlansListScreen = () => {
   const dispatch = useDispatch();
