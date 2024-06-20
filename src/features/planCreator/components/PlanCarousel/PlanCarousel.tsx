@@ -3,13 +3,12 @@ import { View } from 'react-native';
 import Carousel from '../../../../components/Carousel/Carousel';
 import PlanCarouselItem from '../PlanCarouselItem/PlanCarouelItem';
 import styles from './PlanCarousel.styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
+import { useDispatch } from 'react-redux';
 import { REMOVE_DAY } from '../../store/slice/slice';
+import { WorkoutPlan } from '../../../../types/plans';
 
-const CarouselScreen = () => {
+const CarouselScreen = ({ plan }: { plan: WorkoutPlan }) => {
   const dispatch = useDispatch();
-  const plan = useSelector((state: RootState) => state.planCreator.newPlan);
 
   const handleRemoveDay = (dayId: string) => {
     dispatch(REMOVE_DAY(dayId));

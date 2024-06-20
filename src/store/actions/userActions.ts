@@ -2,7 +2,6 @@ import {
   removePlanFromUser,
   editUserPlan,
   addHistoryItemToUser,
-  loginUser,
   updateUserUsername,
   setPublicPlan,
   setPublicHistoryItem,
@@ -10,13 +9,13 @@ import {
   getPublicPlans,
   getPublicRecords,
   getPublicHistoryItems,
+  getData,
 } from '../../api/users';
 import { createAppAsyncThunk } from '../../utility/createAppAsyncThunk';
 
 export const removePlan = createAppAsyncThunk('user/removePlan', removePlanFromUser);
 export const editPlan = createAppAsyncThunk('user/editPlan', editUserPlan);
 export const addHistoryItem = createAppAsyncThunk('user/addHistoryItem', addHistoryItemToUser);
-export const login = createAppAsyncThunk('user/login', loginUser);
 export const changeUsername = createAppAsyncThunk('user/changeUsername', updateUserUsername);
 export const updatePublicPlan = createAppAsyncThunk('user/updatePublicPlan', setPublicPlan);
 export const updatePublicHistoryItem = createAppAsyncThunk('user/updatePublicHistoryItem', setPublicHistoryItem);
@@ -24,6 +23,10 @@ export const updatePassword = createAppAsyncThunk('user/updatePassword', updateU
 export const getUserPlans = createAppAsyncThunk('user/getUserPlans', getPublicPlans);
 export const getUserRecords = createAppAsyncThunk('user/getUserRecords', getPublicRecords);
 export const getUserHistoryItems = createAppAsyncThunk('user/getUserHistoryItems', getPublicHistoryItems);
+
+export const getUserData = createAppAsyncThunk('user/getUserData', async (token: string) => {
+  return await getData(token);
+});
 
 // export const progressTraining = createAppAsyncThunk(
 //   'progressTraining',

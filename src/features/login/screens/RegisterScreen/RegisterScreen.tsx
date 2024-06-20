@@ -9,6 +9,7 @@ import { TextInput } from '../../../../components/TextInput/TextInput';
 import { Typography } from '../../../../components/Typography/Typography';
 import Layout from '../../../../components/Layout/Layout';
 import styles from './RegisterScreen.styles';
+import { DECODE_USER_DATA } from '../../../../store/slice/userSlice';
 
 interface ErrorState {
   username: string;
@@ -69,6 +70,7 @@ const RegisterScreen: React.FC = () => {
         await storeToken('accessToken', response.accessToken);
         await storeToken('refreshToken', response.refreshToken);
         await storeToken('rememberMe', 'true');
+        dispatch(DECODE_USER_DATA(response.accessToken));
         navigate('CarouselScreen');
       } catch (err: any) {
         console.log(err);

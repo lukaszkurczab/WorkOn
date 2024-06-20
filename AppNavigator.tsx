@@ -11,10 +11,14 @@ import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/Ca
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
 import ManualCreatorScreen from './src/features/planCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
 import { getToken, storeToken } from './src/utility/secureStore';
+import { useDispatch } from './src/utility/hooks';
+import { DECODE_USER_DATA } from './src/store/slice/userSlice';
+import { getUserData } from './src/store/actions/userActions';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList>('LoginScreen');
 
@@ -29,6 +33,8 @@ const AppNavigator = () => {
           const currentTime = Date.now() / 1000;
 
           if (decodedToken.exp > currentTime) {
+            dispatch(DECODE_USER_DATA(accessToken));
+            dispatch(getUserData(accessToken));
             setInitialRoute('CarouselScreen');
           } else {
             const refreshToken = await getToken('refreshToken');
@@ -38,6 +44,7 @@ const AppNavigator = () => {
                 const newAccessToken = await refreshAccessToken(refreshToken);
                 if (newAccessToken) {
                   await storeToken('accessToken', newAccessToken);
+                  dispatch(DECODE_USER_DATA(newAccessToken));
                   setInitialRoute('MainScreen');
                 }
               } catch (error) {

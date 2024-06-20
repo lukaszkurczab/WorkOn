@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
 import { TextInput } from '../../../../components/TextInput/TextInput';
@@ -8,10 +8,10 @@ import { RootState } from '../../../../store/store';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { CHANGE_PLAN_NAME, CHANGE_DAY_NAME, REMOVE_DAY, ADD_DAY } from '../../store/slice/slice';
 import styles from './PlanGeneral.styles';
+import { WorkoutPlan } from '../../../../types/plans';
 
-const PlanGeneral = () => {
+const PlanGeneral = ({ plan }: { plan: WorkoutPlan }) => {
   const dispatch = useDispatch();
-  const newPlan = useSelector((state: RootState) => state.planCreator.newPlan);
   const days = useSelector((state: RootState) => state.planCreator.newPlan.days);
   const error = useSelector((state: RootState) => state.planCreator.error);
 
@@ -20,7 +20,7 @@ const PlanGeneral = () => {
       <View>
         <Typography variant="h2">Name your plan</Typography>
         <TextInput
-          value={newPlan.name}
+          value={plan.name}
           onChangeText={e => dispatch(CHANGE_PLAN_NAME(e))}
           placeholder="Plan name"
           error={error === 'Plan must have name.' ? 'Plan must have name.' : ''}

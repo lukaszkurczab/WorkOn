@@ -1,8 +1,8 @@
 //const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
 //hotspot
-//const BASE_URL = 'http://192.168.95.169:4000/users';
+const BASE_URL = 'http://192.168.95.169:4000/users';
 //home
-const BASE_URL = 'http://192.168.1.102:4000/users';
+//const BASE_URL = 'http://192.168.1.102:4000/users';
 //Tuchów
 //const BASE_URL = 'http://192.168.1.25:4000/users';
 
@@ -255,6 +255,26 @@ export const refreshAccessToken = async (refreshToken: string) => {
     return data.accessToken;
   } catch (error) {
     console.error('Error refreshing token:', error);
+    throw error;
+  }
+};
+
+export const getData = async (token: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${token}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching user data:', error);
     throw error;
   }
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import { View, Text, Animated } from 'react-native';
 import styles from './Popup.styles';
 
 const Popup = ({ message, onClose }: { message: string; onClose: () => void }) => {

@@ -3,6 +3,8 @@ import { WorkoutPlan } from '../../../../types/plans';
 import { Exercise, Series } from '../../../../types/exercises';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import { createPlan } from '../actions/actions';
+import { navigate } from '../../../../utility/navigate';
 
 export interface PlanCreatorState {
   error: string;
@@ -31,7 +33,7 @@ const initialState: PlanCreatorState = {
             series: [
               {
                 id: '',
-                reps: 1,
+                reps: 4,
                 weight: 20,
               },
             ],
@@ -53,7 +55,7 @@ const planCreatorSlice = createSlice({
       state.newPlan = {
         id: planId,
         name: '',
-        publicType: '',
+        publicType: 'private',
         allowedUsers: [],
         authorId: '',
         public: false,
@@ -153,7 +155,11 @@ const planCreatorSlice = createSlice({
     },
     SET_SELECTED_EXERCISE: (state, action: PayloadAction<{ dayIndex: number; selectedExercise: number }>) => {},
   },
-  extraReducers: builder => {},
+  extraReducers: builder => {
+    builder.addCase(createPlan.fulfilled, (state, action) => {
+      navigate('MainScreen');
+    });
+  },
 });
 
 export const {

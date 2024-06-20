@@ -1,4 +1,3 @@
-// utils/secureStore.ts
 import * as SecureStore from 'expo-secure-store';
 
 export const storeToken = async (key: string, value: string) => {

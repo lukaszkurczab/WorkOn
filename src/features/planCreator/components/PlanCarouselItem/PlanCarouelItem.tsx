@@ -16,20 +16,28 @@ import {
 } from '../../store/slice/slice';
 import FontAwsome5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import Modal from '../../../../components/Modal/Modal';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
+import PlanCarouselItemSerie from '../PlanCarouselItemSerie/PlanCarouselItemSerie';
 
 type PlanCarouselItemProps = {
   name: string;
   id: string;
-  onRemoveDay: (dayId: string) => void;
 };
 
-const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveDay }) => {
+const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
   const dispatch = useDispatch();
-  const [step, setStep] = useState(0);
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState<number>(0);
   const exerciseList = useSelector(
     (state: RootState) => state.planCreator.newPlan.days.find(day => day.id === id)!.exercises
+  );
+  const [step, setStep] = useState(0);
+  const [modal, setModal] = useState({ display: false, text: '' });
+  const [repetitionsRangeValue, setRepetitionsRangeValue] = useState<(number | string)[]>(
+    exerciseList![selectedExerciseIndex].repsRange
+  );
+  const [loadIncreaseValue, setLoadIncreaseValue] = useState<number | string>(
+    exerciseList![selectedExerciseIndex].loadIncrease
   );
 
   const handleSelect = ({ dayId, exerciseId, name }: { dayId: string; exerciseId: string; name: string }) => {
@@ -66,7 +74,73 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
     setSelectedExerciseIndex(index);
   };
 
-  const handleUpdateExercise = (updatedExercise: Exercise) => {
+  const handleUpdateExercise = (exerciseIndex: number, property: string, newValue?: any, serieIndex?: number) => {
+    let updatedExercise = { ...exerciseList![exerciseIndex] };
+    switch (property) {
+      case 'minReps':
+        if (newValue === '') {
+          setRepetitionsRangeValue(['', updatedExercise.repsRange[1]]);
+          updatedExercise = { ...updatedExercise, repsRange: [0, updatedExercise.repsRange[1]] };
+        } else {
+          setRepetitionsRangeValue([newValue, updatedExercise.repsRange[1]]);
+          updatedExercise = { ...updatedExercise, repsRange: [Number(newValue), updatedExercise.repsRange[1]] };
+        }
+        break;
+      case 'maxReps':
+        if (newValue === '') {
+          setRepetitionsRangeValue([updatedExercise.repsRange[0], '']);
+          updatedExercise = { ...updatedExercise, repsRange: [updatedExercise.repsRange[0], 0] };
+        } else {
+          setRepetitionsRangeValue([updatedExercise.repsRange[0], Number(newValue)]);
+          updatedExercise = { ...updatedExercise, repsRange: [updatedExercise.repsRange[0], Number(newValue)] };
+        }
+        break;
+      case 'loadIncrease':
+        setLoadIncreaseValue(newValue);
+        if (newValue === '') {
+          updatedExercise = { ...updatedExercise, loadIncrease: 0 };
+        } else {
+          updatedExercise = { ...updatedExercise, loadIncrease: Number(newValue) };
+        }
+        break;
+      case 'serieReps':
+        updatedExercise = {
+          ...updatedExercise,
+          series: updatedExercise.series.map((s, i) => {
+            if (i === serieIndex) {
+              return { ...s, reps: Number(newValue) };
+            }
+            return s;
+          }),
+        };
+        break;
+      case 'serieWeight':
+        updatedExercise = {
+          ...updatedExercise,
+          series: updatedExercise.series.map((s, i) => {
+            if (i === serieIndex) {
+              return { ...s, weight: Number(newValue) };
+            }
+            return s;
+          }),
+        };
+        break;
+      case 'addSeries':
+        updatedExercise = {
+          ...updatedExercise,
+          series: [
+            ...updatedExercise.series,
+            {
+              id: `${Math.random()}`,
+              reps: 4,
+              weight: 20,
+            },
+          ],
+        };
+        break;
+    }
+
+    console.log(updatedExercise);
     dispatch(
       UPDATE_EXERCISE_IN_PLAN({
         dayId: id,
@@ -79,8 +153,36 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
     setSelectedExerciseIndex(selectedExerciseIndex - 1);
   };
 
+  const onSaveExercisePress = () => {
+    if (exerciseList[selectedExerciseIndex].repsRange[0] > exerciseList[selectedExerciseIndex].repsRange[1]) {
+      setModal({ display: true, text: 'Minimum repetitions should be lower than maximum repetitions' });
+    } else if (
+      exerciseList[selectedExerciseIndex].series.some(
+        serie =>
+          serie.reps < exerciseList[selectedExerciseIndex].repsRange[0] ||
+          serie.reps > exerciseList[selectedExerciseIndex].repsRange[1]
+      )
+    ) {
+      setModal({ display: true, text: 'Repetitions in every series should be in repetitions range' });
+    } else {
+      setStep(0);
+    }
+  };
+
   const onNextExercisePress = () => {
-    setSelectedExerciseIndex(selectedExerciseIndex + 1);
+    if (exerciseList[selectedExerciseIndex].repsRange[0] > exerciseList[selectedExerciseIndex].repsRange[1]) {
+      setModal({ display: true, text: 'Minimum repetitions should be lower than maximum repetitions' });
+    } else if (
+      exerciseList[selectedExerciseIndex].series.some(
+        serie =>
+          serie.reps < exerciseList[selectedExerciseIndex].repsRange[0] ||
+          serie.reps > exerciseList[selectedExerciseIndex].repsRange[1]
+      )
+    ) {
+      setModal({ display: true, text: 'Repetitions in every series should be in repetitions range' });
+    } else {
+      setSelectedExerciseIndex(selectedExerciseIndex + 1);
+    }
   };
 
   const getStepContent = (step: number, header: string, dayId: string) => {
@@ -170,13 +272,13 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
                       <TextInput
                         style={styles.textInput}
                         keyboardType="numeric"
-                        value={`${exerciseList![selectedExerciseIndex].repsRange[0]}`}
-                        onChangeText={text =>
-                          handleUpdateExercise({
-                            ...exerciseList![selectedExerciseIndex],
-                            repsRange: [Number(text), exerciseList![selectedExerciseIndex].repsRange[1]],
-                          })
+                        value={`${repetitionsRangeValue[0]}`}
+                        onEndEditing={() =>
+                          repetitionsRangeValue[0] === ''
+                            ? setRepetitionsRangeValue([0, exerciseList![selectedExerciseIndex].repsRange[1]])
+                            : null
                         }
+                        onChangeText={text => handleUpdateExercise(selectedExerciseIndex, 'minReps', text)}
                       />
                       <Typography variant="h5" style={{ color: backgroundColor }}>
                         {' - '}
@@ -184,13 +286,13 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
                       <TextInput
                         style={styles.textInput}
                         keyboardType="numeric"
-                        value={`${exerciseList![selectedExerciseIndex].repsRange[1]}`}
-                        onChangeText={text =>
-                          handleUpdateExercise({
-                            ...exerciseList![selectedExerciseIndex],
-                            repsRange: [exerciseList![selectedExerciseIndex].repsRange[0], Number(text)],
-                          })
+                        value={`${repetitionsRangeValue[1]}`}
+                        onEndEditing={() =>
+                          repetitionsRangeValue[1] === ''
+                            ? setRepetitionsRangeValue([exerciseList![selectedExerciseIndex].repsRange[0], 0])
+                            : null
                         }
+                        onChangeText={text => handleUpdateExercise(selectedExerciseIndex, 'maxReps', text)}
                       />
                     </View>
                   </View>
@@ -201,13 +303,9 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
                     <TextInput
                       style={styles.textInput}
                       keyboardType="numeric"
-                      value={`${exerciseList![selectedExerciseIndex].loadIncrease}`}
-                      onChangeText={text =>
-                        handleUpdateExercise({
-                          ...exerciseList![selectedExerciseIndex],
-                          loadIncrease: Number(text),
-                        })
-                      }
+                      value={`${loadIncreaseValue}`}
+                      onEndEditing={() => (loadIncreaseValue === '' ? setLoadIncreaseValue(0) : null)}
+                      onChangeText={text => handleUpdateExercise(selectedExerciseIndex, 'loadIncrease', text)}
                     />
                   </View>
                   <Typography variant="h5" style={[styles.row, { backgroundColor: gray }]}>
@@ -215,60 +313,16 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
                   </Typography>
                   <ScrollView style={styles.seriesScrollView}>
                     {exerciseList![selectedExerciseIndex].series.map((serie, index) => (
-                      <View key={index} style={{ gap: 1, backgroundColor: backgroundColor }}>
-                        <View style={[styles.row, { marginTop: 1, backgroundColor: 'white' }]}>
-                          <Typography variant="h5" style={{ color: backgroundColor, fontWeight: '600' }}>
-                            Serie {index + 1}
-                          </Typography>
-                          <TouchableOpacity
-                            onPress={() => handleRemoveSeries(exerciseList![selectedExerciseIndex].id, index)}
-                          >
-                            <FontAwesomeIcon name="trash" size={20} style={{ color: red, marginRight: 12 }} />
-                          </TouchableOpacity>
-                        </View>
-                        <View style={styles.row}>
-                          <Typography variant="h5" style={{ color: backgroundColor }}>
-                            Repetitions
-                          </Typography>
-                          <TextInput
-                            style={styles.textInput}
-                            keyboardType="numeric"
-                            value={`${serie.reps}`}
-                            onChangeText={text => {
-                              handleUpdateExercise({
-                                ...exerciseList![selectedExerciseIndex],
-                                series: exerciseList![selectedExerciseIndex].series.map((s, i) => {
-                                  if (i === index) {
-                                    return { ...s, reps: Number(text) };
-                                  }
-                                  return s;
-                                }),
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={styles.row}>
-                          <Typography variant="h5" style={{ color: backgroundColor }}>
-                            Weight [kg]
-                          </Typography>
-                          <TextInput
-                            style={styles.textInput}
-                            keyboardType="numeric"
-                            value={`${serie.weight}`}
-                            onChangeText={text => {
-                              handleUpdateExercise({
-                                ...exerciseList![selectedExerciseIndex],
-                                series: exerciseList![selectedExerciseIndex].series.map((s, i) => {
-                                  if (i === index) {
-                                    return { ...s, weight: Number(text) };
-                                  }
-                                  return s;
-                                }),
-                              });
-                            }}
-                          />
-                        </View>
-                      </View>
+                      <PlanCarouselItemSerie
+                        key={serie.id}
+                        exerciseIndex={selectedExerciseIndex}
+                        exerciseId={exerciseList[selectedExerciseIndex].id}
+                        reps={serie.reps}
+                        weight={serie.weight}
+                        index={index}
+                        onEdit={handleUpdateExercise}
+                        onRemove={handleRemoveSeries}
+                      />
                     ))}
                     <View
                       style={[
@@ -283,17 +337,7 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
                     >
                       <TouchableOpacity
                         onPress={() => {
-                          handleUpdateExercise({
-                            ...exerciseList![selectedExerciseIndex],
-                            series: [
-                              ...exerciseList![selectedExerciseIndex].series,
-                              {
-                                id: '',
-                                reps: 1,
-                                weight: 20,
-                              },
-                            ],
-                          });
+                          handleUpdateExercise(selectedExerciseIndex, 'addSeries');
                         }}
                         style={{ width: '100%' }}
                       >
@@ -320,7 +364,7 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
                     </Button>
                   )}
                   {selectedExerciseIndex === exerciseList.length - 1 ? (
-                    <Button onPress={() => setStep(0)} style={[styles.button]}>
+                    <Button onPress={() => onSaveExercisePress()} style={[styles.button]}>
                       <Typography variant="h3">Save</Typography>
                     </Button>
                   ) : (
@@ -367,7 +411,16 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id, onRemoveD
     }
   };
 
-  return <View style={styles.container}>{getStepContent(step, name, id)}</View>;
+  return (
+    <View style={styles.container}>
+      {getStepContent(step, name, id)}
+      <Modal visible={modal.display} onClose={() => setModal({ display: false, text: '' })}>
+        <Typography variant="h3" style={{ textAlign: 'center' }}>
+          {modal.text}
+        </Typography>
+      </Modal>
+    </View>
+  );
 };
 
 export default PlanCarouselItem;

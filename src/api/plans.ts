@@ -1,4 +1,12 @@
-const BASE_URL = 'https://workon-backend.azurewebsites.net/plans';
+//const BASE_URL = 'https://workon-backend.azurewebsites.net/plans';
+//hotspot
+const BASE_URL = 'http://192.168.95.169:4000/plans';
+//home
+//const BASE_URL = 'http://192.168.1.102:4000/plans';
+//Tuchów
+//const BASE_URL = 'http://192.168.1.25:4000/plans';
+
+import { WorkoutPlan } from '../types/plans';
 
 export const fetchPlans = async (): Promise<WorkoutPlan[]> => {
   try {
@@ -13,14 +21,14 @@ export const fetchPlans = async (): Promise<WorkoutPlan[]> => {
   }
 };
 
-export const addPlan = async (newPlan: WorkoutPlan): Promise<WorkoutPlan> => {
+export const addPlan = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<void> => {
   try {
     const response = await fetch(BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newPlan),
+      body: JSON.stringify(data),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');
