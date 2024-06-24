@@ -1,5 +1,13 @@
 import React from 'react';
-import { TextInput as DefaultTextInput, View, StyleProp, ViewStyle, Text, TextInputProps } from 'react-native';
+import {
+  TextInput as DefaultTextInput,
+  View,
+  StyleProp,
+  ViewStyle,
+  Text,
+  TextInputProps,
+  TextStyle,
+} from 'react-native';
 import styles from './TextInput.styles';
 
 interface CustomTextInputProps extends TextInputProps {
@@ -9,7 +17,7 @@ interface CustomTextInputProps extends TextInputProps {
   theme?: 'dark' | 'light';
   error?: string;
   style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   leftComponent?: React.ReactNode;
   rightComponent?: React.ReactNode;
 }

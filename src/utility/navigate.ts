@@ -6,6 +6,9 @@ export type RootStackParamList = {
   MainScreen: undefined;
   CarouselScreen: undefined;
   ManualCreatorScreen: undefined;
+  SelectTrainingScreen: undefined;
+  TrainingScreen: undefined;
+  WorkoutSummary: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

@@ -140,7 +140,6 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
         break;
     }
 
-    console.log(updatedExercise);
     dispatch(
       UPDATE_EXERCISE_IN_PLAN({
         dayId: id,

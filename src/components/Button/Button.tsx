@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'contained', style, onPress, 
 
   return (
     <TouchableOpacity
-      style={[styles.button, style, getButtonStyle()]}
+      style={[getButtonStyle(), styles.button, style]}
       onPress={disabled ? undefined : onPress}
       disabled={disabled}
     >

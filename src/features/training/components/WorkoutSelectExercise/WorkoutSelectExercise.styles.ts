@@ -1,14 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, fillColor, accentColor } from '../../styles/colors';
+import { primaryColor, gray, blue } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 80,
-    marginBottom: 60,
-    backgroundColor: fillColor,
-  },
   buttonWrapper: {
-    borderColor: accentColor,
+    borderColor: blue,
     backgroundColor: primaryColor,
     borderWidth: 2,
     padding: 5,
@@ -19,7 +14,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonText: {
-    color: accentColor,
+    color: blue,
     textAlign: 'center',
     fontSize: 24,
     fontWeight: '400',
@@ -27,21 +22,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: primaryColor,
-    fontSize: 22,
-    marginTop: 15,
+    marginTop: 16,
     textAlign: 'center',
   },
   title: {
-    color: primaryColor,
-    fontSize: 24,
+    paddingVertical: 8,
   },
   tilesWrapper: {
-    flexWrap: 'wrap',
-    rowGap: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: 10,
-    marginBottom: 20,
+    gap: 16,
   },
   buttonTextPreview: {
     color: primaryColor,

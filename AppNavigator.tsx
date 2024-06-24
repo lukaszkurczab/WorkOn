@@ -10,10 +10,13 @@ import MainScreen from './src/features/main/screens/MainScreen';
 import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/CarouselScreen';
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
 import ManualCreatorScreen from './src/features/planCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
+import SelectTrainingScreen from './src/features/training/screens/selectTrainingScreen/SelectTrainingScreen';
 import { getToken, storeToken } from './src/utility/secureStore';
 import { useDispatch } from './src/utility/hooks';
 import { DECODE_USER_DATA } from './src/store/slice/userSlice';
 import { getUserData } from './src/store/actions/userActions';
+import TrainingScreen from './src/features/training/screens/trainingScreen/TrainingScreen';
+import WorkoutSummary from './src/features/training/screens/TrainingSummaryScreen/TrainingSummaryScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -35,7 +38,7 @@ const AppNavigator = () => {
           if (decodedToken.exp > currentTime) {
             dispatch(DECODE_USER_DATA(accessToken));
             dispatch(getUserData(accessToken));
-            setInitialRoute('CarouselScreen');
+            setInitialRoute('MainScreen');
           } else {
             const refreshToken = await getToken('refreshToken');
 
@@ -45,6 +48,7 @@ const AppNavigator = () => {
                 if (newAccessToken) {
                   await storeToken('accessToken', newAccessToken);
                   dispatch(DECODE_USER_DATA(newAccessToken));
+                  dispatch(getUserData(newAccessToken));
                   setInitialRoute('MainScreen');
                 }
               } catch (error) {
@@ -74,7 +78,10 @@ const AppNavigator = () => {
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="CarouselScreen" component={CarouselScreen} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
+        <Stack.Screen name="SelectTrainingScreen" component={SelectTrainingScreen} />
         <Stack.Screen name="ManualCreatorScreen" component={ManualCreatorScreen} />
+        <Stack.Screen name="TrainingScreen" component={TrainingScreen} />
+        <Stack.Screen name="WorkoutSummary" component={WorkoutSummary} />
       </Stack.Navigator>
     </NavigationContainer>
   );

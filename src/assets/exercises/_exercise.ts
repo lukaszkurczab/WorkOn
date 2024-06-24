@@ -59,7 +59,7 @@ export const exercisesList = [
       },
       {
         id: '4',
-        name: 'Lat Pulldown',
+        name: 'Lateral Pulldown',
         group: 'Back',
         focusPoints:
           'Engage lats, avoid leaning back excessively, pull bar to chest. Focus on smooth, controlled movements to maximize muscle engagement.',
@@ -195,6 +195,20 @@ export const exercisesList = [
         muscleMain: ['Upper Back', 'Lats'],
         muscleAdditional: ['Biceps', 'Core'],
         image: 'landmine-row',
+      },
+      {
+        id: '200',
+        name: 'Bent Over Dumbbell Row',
+        group: 'Back',
+        focusPoints:
+          'Keep your back straight, pull both elbows back, squeeze your shoulder blades together. Avoid rounding your back or using momentum to lift the weights.',
+        startPosition:
+          'Stand with feet shoulder-width apart, bend your knees slightly, and hinge at the hips so your torso is nearly parallel to the floor. Hold a dumbbell in each hand with arms extended downwards.',
+        process:
+          'Pull both dumbbells towards your lower chest, squeezing your shoulder blades together. Lower the dumbbells back to the start position in a controlled manner.',
+        muscleMain: ['Upper Back', 'Lats'],
+        muscleAdditional: ['Biceps', 'Core'],
+        image: 'bent-over-two-arm-dumbbell-row',
       },
     ],
   },
@@ -451,6 +465,20 @@ export const exercisesList = [
         image: 'preacher-curl',
       },
       {
+        id: '209',
+        name: 'One-Hand Preacher Curl',
+        group: 'Arms',
+        focusPoints:
+          'Keep your wrist straight and avoid using momentum. Focus on contracting the biceps throughout the movement.',
+        startPosition:
+          'Sit at a preacher bench with your upper arm resting on the pad, hold a dumbbell in your hand with an underhand (supinated) grip.',
+        process:
+          'Curl the dumbbell towards your shoulder by bending your elbow, keeping your upper arm stationary on the pad. Squeeze your biceps at the top of the movement, then slowly lower the dumbbell back to the starting position.',
+        muscleMain: ['Biceps'],
+        muscleAdditional: ['Brachialis', 'Forearms'],
+        image: 'one-hand-preacher-curl',
+      },
+      {
         id: '35',
         name: 'Concentration Curl',
         group: 'Biceps',
@@ -631,7 +659,7 @@ export const exercisesList = [
         startPosition: 'Stand or sit, hold the wrist roller with both hands, arms extended in front of you.',
         process: 'Roll the weight up by flexing and extending your wrists, then slowly roll it back down.',
         muscleMain: ['Forearms'],
-        muscleAdditional: ['Grip Strength'],
+        muscleAdditional: [''],
         image: 'wrist-roller',
       },
       {
@@ -670,7 +698,7 @@ export const exercisesList = [
           'Stand with feet shoulder-width apart, hold two weight plates together with your fingers and thumb.',
         process: 'Hold the plates for a set duration, then release and repeat.',
         muscleMain: ['Forearms'],
-        muscleAdditional: ['Grip Strength'],
+        muscleAdditional: [''],
         image: 'plate-pinch',
       },
       {
@@ -707,7 +735,7 @@ export const exercisesList = [
         startPosition: 'Hang from a pull-up bar with hands shoulder-width apart, palms facing away.',
         process: 'Hold the position for a set duration, then release and repeat.',
         muscleMain: ['Forearms'],
-        muscleAdditional: ['Grip Strength'],
+        muscleAdditional: [''],
         image: 'dead-hang',
       },
       {
@@ -718,7 +746,7 @@ export const exercisesList = [
         startPosition: 'Hold a hand gripper in one hand, arm extended at your side.',
         process: 'Squeeze the gripper tightly, hold for a set duration, then release and repeat.',
         muscleMain: ['Forearms'],
-        muscleAdditional: ['Grip Strength'],
+        muscleAdditional: [''],
         image: 'grip-squeeze',
       },
       {
@@ -767,6 +795,20 @@ export const exercisesList = [
         muscleMain: ['Forearms'],
         muscleAdditional: ['Finger Flexors'],
         image: 'finger-curl',
+      },
+      {
+        id: '207',
+        name: 'Reverse Grip Preacher Curl',
+        group: 'Forearms',
+        focusPoints:
+          'Keep your wrists straight and avoid using momentum. Focus on engaging your forearm muscles throughout the movement.',
+        startPosition:
+          'Sit at a preacher bench with your upper arms resting on the pad, hold a barbell with an overhand (pronated) grip and your hands shoulder-width apart.',
+        process:
+          'Curl the barbell towards your shoulders by bending your elbows, keeping your upper arms stationary. Squeeze your forearm muscles at the top of the movement, then slowly lower the barbell back to the starting position.',
+        muscleMain: ['Brachioradialis'],
+        muscleAdditional: ['Biceps', 'Brachialis'],
+        image: 'reverse-grip-preacher-curl',
       },
     ],
   },
@@ -950,6 +992,34 @@ export const exercisesList = [
         muscleMain: ['Chest'],
         muscleAdditional: ['Lats', 'Triceps'],
         image: 'dumbbell-pullover',
+      },
+      {
+        id: '201',
+        name: 'Machine Fly',
+        group: 'Chest',
+        focusPoints:
+          'Keep your back flat against the pad, avoid locking elbows. Focus on bringing the handles together in a controlled manner.',
+        startPosition:
+          'Sit on the machine with feet flat on the floor, grip the handles with arms slightly bent and positioned at shoulder level.',
+        process:
+          'Bring the handles together in front of your chest, squeezing your chest muscles. Slowly return to the start position in a controlled manner.',
+        muscleMain: ['Pectorals'],
+        muscleAdditional: ['Front Deltoids'],
+        image: 'machine-fly',
+      },
+      {
+        id: '206',
+        name: 'Incline Dumbbell Press',
+        group: 'Chest',
+        focusPoints:
+          'Keep your back pressed against the bench and avoid arching. Focus on pressing the weights directly upwards in a controlled manner.',
+        startPosition:
+          'Lie back on an incline bench set at a 30-45 degree angle, hold a dumbbell in each hand at shoulder level with palms facing forward.',
+        process:
+          'Press the dumbbells upward until your arms are fully extended above your chest. Lower the dumbbells back to the starting position in a controlled manner.',
+        muscleMain: ['Upper Pectorals'],
+        muscleAdditional: ['Front Deltoids', 'Triceps'],
+        image: 'incline-dumbbell-press',
       },
     ],
   },
@@ -1289,18 +1359,6 @@ export const exercisesList = [
         image: 'sumo-squat',
       },
       {
-        id: '103',
-        name: 'Calf Raise',
-        group: 'Legs',
-        focusPoints: 'Fully extend ankles, control the movement. Focus on isolating the calves.',
-        startPosition:
-          'Stand with feet shoulder-width apart, hold a dumbbell in each hand or stand on a raised surface.',
-        process: 'Raise your heels off the ground by extending your ankles, then lower back to the starting position.',
-        muscleMain: ['Calves'],
-        muscleAdditional: [],
-        image: 'calf-raise',
-      },
-      {
         id: '104',
         name: 'Pistol Squat',
         group: 'Legs',
@@ -1465,14 +1523,17 @@ export const exercisesList = [
     exercises: [
       {
         id: '121',
-        name: 'Shoulder Press',
+        name: 'Machine Shoulder Press',
         group: 'Shoulders',
-        focusPoints: 'Keep back straight, avoid arching lower back. Focus on pressing weight directly overhead.',
-        startPosition: 'Stand or sit with feet shoulder-width apart, hold a barbell or dumbbells at shoulder level.',
-        process: 'Press the weight overhead until arms are fully extended, then lower back to shoulder level.',
+        focusPoints:
+          'Keep back against the pad, avoid arching lower back. Focus on pressing the weight directly overhead.',
+        startPosition:
+          'Sit on the machine with feet flat on the floor, grip the handles at shoulder level with elbows bent.',
+        process:
+          'Press the handles upward until arms are fully extended, then lower back to shoulder level in a controlled manner.',
         muscleMain: ['Deltoids'],
         muscleAdditional: ['Triceps', 'Upper Chest'],
-        image: 'shoulder-press',
+        image: 'machine-shoulder-press',
       },
       {
         id: '122',
@@ -1617,6 +1678,20 @@ export const exercisesList = [
         muscleAdditional: ['Triceps', 'Upper Chest'],
         image: 'dumbbell-press',
       },
+      {
+        id: '204',
+        name: 'Cuban Press',
+        group: 'Shoulders',
+        focusPoints:
+          'Keep movements controlled and maintain a straight back. Avoid using momentum to lift the weights.',
+        startPosition:
+          'Stand with feet shoulder-width apart, hold a pair of dumbbells with an overhand grip in front of your thighs.',
+        process:
+          'Lift the dumbbells to shoulder height with elbows bent at 90 degrees (like an upright row), rotate your shoulders to bring the dumbbells overhead, then press them up until your arms are fully extended. Reverse the motion to return to the start position.',
+        muscleMain: ['Deltoids'],
+        muscleAdditional: ['Rotator Cuffs', 'Trapezius'],
+        image: 'cuban-press',
+      },
     ],
   },
   {
@@ -1655,7 +1730,7 @@ export const exercisesList = [
         process:
           'Walk forward for a set distance or time, maintaining an upright posture and a firm grip on the weights.',
         muscleMain: ['Forearms', 'Trapezius'],
-        muscleAdditional: ['Core', 'Grip Strength'],
+        muscleAdditional: ['Core', ''],
         image: 'farmers-walk',
       },
       {
