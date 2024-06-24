@@ -5,7 +5,7 @@ import { Calendar } from 'react-native-calendars';
 import HistoryDetails from '../../components/historyDetails/historyDetails';
 import LastTrainingList from '../../components/lastTrainingList/lastTrainingList';
 import styles from './calendarScreen.styles';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();

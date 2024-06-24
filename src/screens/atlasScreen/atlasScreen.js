@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from 'react-native';
 import styles from './atlasScreen.styles';
 import ExerciseTile from '../../components/tiles/exerciseTile/exerciseTile';
 import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 const AtlasScreen = () => {
   const exercises = useSelector(state => state.exercises.exercises);

@@ -3,7 +3,7 @@ import { View, ScrollView, TouchableOpacity, Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import { updatePublicPlan } from '../../store/actions/userActions';
 import styles from './selectPublicPlansScreen.styles';
 
@@ -44,9 +44,9 @@ const SelectPublicPlansScreen = () => {
               </View>
               <TouchableOpacity style={styles.publicButtonWrapper} onPress={() => handleChangePublic(plan.id)}>
                 {plan.public ? (
-                  <Icon name='eye' size={30} style={styles.settingsIcon} />
+                  <Icon name="eye" size={30} style={styles.settingsIcon} />
                 ) : (
-                  <Icon name='eye-slash' size={30} style={styles.settingsIcon} />
+                  <Icon name="eye-slash" size={30} style={styles.settingsIcon} />
                 )}
               </TouchableOpacity>
             </View>

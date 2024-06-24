@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePublicHistoryItem } from '../../store/actions/userActions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import LastTrainingListItem from '../../components/lastTrainingList/lastTrainingListItem/lastTrainingListItem';
 import styles from './selectPublicWorkoutsScreen.styles';
 
@@ -38,9 +38,9 @@ const SelectPublicWorkoutsScreen = () => {
                 <LastTrainingListItem day={day} />
                 <TouchableOpacity style={styles.publicButtonWrapper} onPress={() => handleChangePublic(day.id)}>
                   {day.public ? (
-                    <Icon name='eye' size={30} style={styles.settingsIcon} />
+                    <Icon name="eye" size={30} style={styles.settingsIcon} />
                   ) : (
-                    <Icon name='eye-slash' size={30} style={styles.settingsIcon} />
+                    <Icon name="eye-slash" size={30} style={styles.settingsIcon} />
                   )}
                 </TouchableOpacity>
               </View>

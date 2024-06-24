@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { useFormatTime } from '../../utils/hooks';
+import { useFormatTime } from '../../utility/hooks';
 import HistoryDetailsListItem from './historyDetailsListItem/historyDetailsListItem';
 import WorkoutCard from '../workoutCard/workoutCard';
 import styles from './historyDetails.styles';

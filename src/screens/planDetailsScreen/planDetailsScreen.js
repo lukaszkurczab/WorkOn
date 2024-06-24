@@ -6,7 +6,7 @@ import PlanDetailsDayBox from '../../components/planDetailsDayBox/planDetailsDay
 import { SET_PLAN_TO_EDIT } from '../../store/reducers/planReducer';
 import { removePlan } from '../../store/actions/userActions';
 import styles from './planDetailsScreen.styles';
-import Navigation from '../../components/navigation/navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 const PlanDetailsScreen = () => {
   const navigation = useNavigation();
@@ -39,13 +39,13 @@ const PlanDetailsScreen = () => {
           <View style={styles.buttonsWrapper}>
             <TouchableOpacity onPress={handleEditPress}>
               <View style={styles.buttonWrapper}>
-                <Icon name='plus' size={40} style={styles.icon} />
+                <Icon name="plus" size={40} style={styles.icon} />
                 <Text style={styles.button}>Edit</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleRemovePress}>
               <View style={styles.buttonWrapper}>
-                <Icon name='trash' size={40} style={styles.icon} />
+                <Icon name="trash" size={40} style={styles.icon} />
                 <Text style={styles.button}>Remove</Text>
               </View>
             </TouchableOpacity>
