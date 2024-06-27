@@ -1,4 +1,5 @@
 import { createNavigationContainerRef } from '@react-navigation/native';
+import { ExerciseData } from '../types/exercises';
 
 export type RootStackParamList = {
   LoginScreen: undefined;
@@ -11,6 +12,8 @@ export type RootStackParamList = {
   WorkoutSummary: undefined;
   PlansListScreen: undefined;
   PlanDetailsScreen: undefined;
+  ExerciseAtlasScreen: undefined;
+  ExerciseDetailsScreen: { exercise: ExerciseData } | any;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

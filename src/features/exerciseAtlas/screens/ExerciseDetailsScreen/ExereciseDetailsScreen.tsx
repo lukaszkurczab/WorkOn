@@ -1,44 +1,65 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from './exerciseScreen.styles';
-import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { ExerciseImageMap } from '../../assets/exercises/_exerciseImageMap';
+import { View, Image, ScrollView } from 'react-native';
+import styles from './ExerciseDetailsScreen.styles';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { RootStackParamList } from '../../../../utility/navigate';
+import { Typography } from '../../../../components/Typography/Typography';
+import Layout from '../../../../components/Layout/Layout';
 
-const ExerciseScreen = () => {
-  const navigation = useNavigation();
-  const exercise = useSelector(state => state.exercises.selectedExercise);
+type ExerciseDetailsScreenRouteProp = RouteProp<RootStackParamList, 'ExerciseDetailsScreen'>;
+
+const ExerciseDetailsScreen = () => {
+  const route = useRoute<ExerciseDetailsScreenRouteProp>();
+
+  if (!route.params || !route.params.exercise) {
+    return (
+      <View>
+        <Typography variant="h2">No exercise data provided.</Typography>
+      </View>
+    );
+  }
+
+  const { exercise } = route.params;
 
   return (
-    <View style={styles.container}>
+    <Layout headerText={exercise.name}>
       <ScrollView>
-        <Text style={styles.title}>{exercise.name}</Text>
-        <Image source={ExerciseImageMap[exercise.image]} style={styles.image} />
-        <Text style={styles.sectionTitle}>Start position:</Text>
-        <Text style={styles.text}>{exercise.startPosition}</Text>
-        <Text style={styles.sectionTitle}>Process:</Text>
-        <Text style={styles.text}>{exercise.process}</Text>
-        <Text style={styles.sectionTitle}>Main muscles:</Text>
-        {exercise.muscleMain.map(muscle => (
-          <View style={styles.chip} key={muscle}>
-            <Text style={styles.chipText}>{muscle}</Text>
+        <View style={{ gap: 16 }}>
+          <Image source={require('../../../../assets/exercises/dips.jpg')} style={styles.image} />
+          <View>
+            <Typography variant="h3">Start position:</Typography>
+            <Typography variant="h4" style={{ textAlign: 'justify' }}>
+              {exercise.startPosition}
+            </Typography>
           </View>
-        ))}
-        <Text style={styles.sectionTitle}>Assisting muscles:</Text>
-        {exercise.muscleAdditional.map(muscle => (
-          <View style={styles.chip} key={muscle}>
-            <Text style={styles.chipText}>{muscle}</Text>
+          <View>
+            <Typography variant="h3">Process:</Typography>
+            <Typography variant="h4" style={{ textAlign: 'justify' }}>
+              {exercise.process}
+            </Typography>
           </View>
-        ))}
+          <View>
+            <Typography variant="h3">Main muscles:</Typography>
+            {exercise.muscleMain.map((muscle: string[], index: number) => (
+              <Typography variant="h4" key={index}>
+                {muscle}
+              </Typography>
+            ))}
+          </View>
+          {exercise.muscleAdditional.length > 0 && (
+            <View>
+              <Typography variant="h3">Additional muscles:</Typography>
+              {exercise.muscleAdditional.map((muscle: string[], index: number) => (
+                <Typography variant="h4" key={index}>
+                  {muscle}
+                </Typography>
+              ))}
+            </View>
+          )}
+        </View>
       </ScrollView>
-      <View style={styles.buttonWrapper}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-          <Icon name="chevron-left" size={25} style={styles.icon} />
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Layout>
   );
 };
 
-export default ExerciseScreen;
+export default ExerciseDetailsScreen;

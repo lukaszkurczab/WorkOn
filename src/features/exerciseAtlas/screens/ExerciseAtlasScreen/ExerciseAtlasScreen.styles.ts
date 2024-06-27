@@ -1,35 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, gray, backgroundColor } from '../../../../styles/colors';
+import { primaryColor, gray, backgroundColor, dark_gray } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    backgroundColor: backgroundColor,
     height: '100%',
-    paddingBottom: 60,
-  },
-  articlesNavigation: {
-    flexDirection: 'row',
-    flexGrow: 0,
-  },
-  navigationText: {
-    color: primaryColor,
-    fontSize: 18,
-    paddingHorizontal: 10,
-    borderBottomColor: gray,
-    borderBottomWidth: 1,
-    height: 35,
-  },
-  title: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 36,
-    marginBottom: 20,
+    width: '100%',
   },
   atlasWrapper: {
-    marginTop: 30,
     gap: 15,
-    minHeight: 450,
   },
 });
 

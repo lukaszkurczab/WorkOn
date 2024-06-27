@@ -7,6 +7,10 @@ interface TypographyProps extends TextProps {
   style?: StyleProp<TextStyle>;
 }
 
-export const Typography: React.FC<TypographyProps> = ({ variant, style, ...props }) => {
-  return <Text style={[styles[variant], style]} {...props} />;
+export const Typography: React.FC<TypographyProps> = ({ variant, style, children, ...props }) => {
+  return (
+    <Text style={[styles[variant], style]} {...props}>
+      {children}
+    </Text>
+  );
 };

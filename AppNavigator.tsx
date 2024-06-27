@@ -19,6 +19,8 @@ import TrainingScreen from './src/features/training/screens/trainingScreen/Train
 import WorkoutSummary from './src/features/training/screens/TrainingSummaryScreen/TrainingSummaryScreen';
 import PlansListScreen from './src/features/plansList/screens/PlansListScreen/PlansListScreen';
 import PlanDetailsScreen from './src/features/plansList/screens/PlanDetailsScreen/PlanDetailsScreen';
+import ExerciseAtlasScreen from './src/features/exerciseAtlas/screens/ExerciseAtlasScreen/ExerciseAtlasScreen';
+import ExerciseDetailsScreen from './src/features/exerciseAtlas/screens/ExerciseDetailsScreen/ExereciseDetailsScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -86,6 +88,8 @@ const AppNavigator = () => {
         <Stack.Screen name="WorkoutSummary" component={WorkoutSummary} />
         <Stack.Screen name="PlansListScreen" component={PlansListScreen} />
         <Stack.Screen name="PlanDetailsScreen" component={PlanDetailsScreen} />
+        <Stack.Screen name="ExerciseAtlasScreen" component={ExerciseAtlasScreen} />
+        <Stack.Screen name="ExerciseDetailsScreen" component={ExerciseDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

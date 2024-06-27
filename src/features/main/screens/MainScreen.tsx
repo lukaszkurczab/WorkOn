@@ -9,7 +9,6 @@ import { RootState } from '../../../store/store';
 
 const MainScreen = () => {
   const user = useSelector((state: RootState) => state.user);
-  console.log(user);
   return (
     <Layout>
       <View style={styles.container}>
@@ -28,7 +27,12 @@ const MainScreen = () => {
             History
           </Typography>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity
+          onPress={() => {
+            navigate('ExerciseAtlasScreen');
+          }}
+          style={styles.button}
+        >
           <Typography variant="h2" style={styles.buttonText}>
             Exercise atlas
           </Typography>

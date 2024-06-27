@@ -1,32 +1,24 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { View, Text, ScrollView } from 'react-native';
-import styles from './atlasScreen.styles';
-import ExerciseTile from '../../components/tiles/exerciseTile/exerciseTile';
-import AtlasDropdown from '../../components/atlasDropdown/atlasDropdown';
-import Navigation from '../../components/Navigation/Navigation';
+import { View, ScrollView } from 'react-native';
+import styles from './ExerciseAtlasScreen.styles';
+import Layout from '../../../../components/Layout/Layout';
+import { exercisesList } from '../../../../assets/exercises/_exercise';
+import GroupContainer from '../../components/GroupContainer/GroupContainer';
 
-const AtlasScreen = () => {
-  const exercises = useSelector(state => state.exercises.exercises);
-  const selecterMusclesGroup = useSelector(state => state.atlas.selectedGroup);
-
+const ExerciseAtlasScreen = () => {
   return (
-    <Navigation>
+    <Layout>
       <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.title}>Exercise atlas</Text>
-          <AtlasDropdown />
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.atlasWrapper}>
-            {exercises.map(exercise => {
-              if (selecterMusclesGroup === 'Select group' || exercise.groups.includes(selecterMusclesGroup)) {
-                return <ExerciseTile exercise={exercise} key={exercise.id} />;
-              }
-            })}
+            {exercisesList.map(group => (
+              <GroupContainer group={group} key={group.id} />
+            ))}
           </View>
         </ScrollView>
       </View>
-    </Navigation>
+    </Layout>
   );
 };
 
-export default AtlasScreen;
+export default ExerciseAtlasScreen;

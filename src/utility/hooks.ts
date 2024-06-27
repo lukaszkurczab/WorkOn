@@ -24,7 +24,7 @@ export const useGetExerciseData = (exerciseId: string): ExerciseData => {
   });
 
   if (!exerciseToReturn) {
-    console.log(exerciseId);
+    exerciseId;
     throw new Error('Exercise not found');
   }
 
