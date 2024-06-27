@@ -4,8 +4,6 @@ import { Exercise, Series } from '../../../../types/exercises';
 interface TrainingSummaryExercise {
   id: string;
   name: string;
-  reps: number;
-  weight: number;
   loadIncrease: number;
   repsRange: [number, number];
   series: Series[];
@@ -79,8 +77,6 @@ const initialState: TrainingState = {
     muscleAdditional: [''],
     muscleMain: [''],
     startPostition: '',
-    reps: 0,
-    weight: 0,
     loadIncrease: 0,
     repsRange: [0, 0],
     series: [{ id: '0', reps: 0, weight: 0 }],
@@ -142,8 +138,6 @@ const trainingSlice = createSlice({
           state.trainingSummary.exercises.push({
             id: state.selectedExercise.id,
             name: state.selectedExercise.name,
-            reps: state.selectedExercise.reps,
-            weight: state.selectedExercise.weight,
             loadIncrease: state.selectedExercise.loadIncrease,
             repsRange: state.selectedExercise.repsRange,
             series: [{ id: action.payload.id, reps: action.payload.reps, weight: action.payload.weight }],

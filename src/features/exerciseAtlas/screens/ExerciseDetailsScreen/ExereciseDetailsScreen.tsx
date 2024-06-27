@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './exerciseScreen.styles';
@@ -33,7 +34,7 @@ const ExerciseScreen = () => {
       </ScrollView>
       <View style={styles.buttonWrapper}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-          <Icon name='chevron-left' size={25} style={styles.icon} />
+          <Icon name="chevron-left" size={25} style={styles.icon} />
         </TouchableOpacity>
       </View>
     </View>

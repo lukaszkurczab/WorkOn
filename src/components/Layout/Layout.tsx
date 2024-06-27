@@ -9,9 +9,15 @@ interface LayoutProps {
   children: ReactNode;
   showHeader?: boolean;
   showNavigation?: boolean;
+  headerText?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showNavigation = true }) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  showHeader = true,
+  showNavigation = true,
+  headerText = 'WorkOn',
+}) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const insets = useSafeAreaInsets();
 
@@ -46,7 +52,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showNaviga
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollView}
         >
-          {showHeader && <Header />}
+          {showHeader && <Header text={headerText} />}
           <View style={[styles.body, { height: bodyHeight }]}>{children}</View>
         </ScrollView>
       </KeyboardAvoidingView>

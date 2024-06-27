@@ -9,8 +9,9 @@ import Layout from '../../../../components/Layout/Layout';
 import styles from './LoginScreen.styles';
 import { loginUser } from '../../../../api/users';
 import { storeToken, removeToken } from '../../../../utility/secureStore';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../../utility/hooks';
 import { DECODE_USER_DATA } from '../../../../store/slice/userSlice';
+import { getUserData } from '../../../../store/actions/userActions';
 
 const LoginScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const LoginScreen: React.FC = () => {
         await removeToken('rememberMe');
       }
       dispatch(DECODE_USER_DATA(response.accessToken));
+      dispatch(getUserData(response.accessToken));
       navigate('MainScreen');
     } catch (error) {
       setError('Invalid email or password');

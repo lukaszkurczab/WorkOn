@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, secondaryColor, backgroundColor } from '../../styles/colors';
+import { primaryColor, gray, backgroundColor } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     color: primaryColor,
     fontSize: 18,
     paddingHorizontal: 10,
-    borderBottomColor: secondaryColor,
+    borderBottomColor: gray,
     borderBottomWidth: 1,
     height: 35,
   },

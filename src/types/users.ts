@@ -1,4 +1,7 @@
-interface User {
+import { Series } from './exercises';
+import { WorkoutPlan } from './plans';
+
+export interface User {
   id: string;
   username: string;
   bio: string;
@@ -9,13 +12,13 @@ interface User {
   history: WorkoutSession[];
 }
 
-interface UserRecord {
+export interface UserRecord {
   exercise: string;
   weight: number;
   public: boolean;
 }
 
-interface WorkoutSession {
+export interface WorkoutSession {
   id: string;
   date: string;
   plan: string;

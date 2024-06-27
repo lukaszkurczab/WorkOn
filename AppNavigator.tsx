@@ -17,6 +17,8 @@ import { DECODE_USER_DATA } from './src/store/slice/userSlice';
 import { getUserData } from './src/store/actions/userActions';
 import TrainingScreen from './src/features/training/screens/trainingScreen/TrainingScreen';
 import WorkoutSummary from './src/features/training/screens/TrainingSummaryScreen/TrainingSummaryScreen';
+import PlansListScreen from './src/features/plansList/screens/PlansListScreen/PlansListScreen';
+import PlanDetailsScreen from './src/features/plansList/screens/PlanDetailsScreen/PlanDetailsScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -82,6 +84,8 @@ const AppNavigator = () => {
         <Stack.Screen name="ManualCreatorScreen" component={ManualCreatorScreen} />
         <Stack.Screen name="TrainingScreen" component={TrainingScreen} />
         <Stack.Screen name="WorkoutSummary" component={WorkoutSummary} />
+        <Stack.Screen name="PlansListScreen" component={PlansListScreen} />
+        <Stack.Screen name="PlanDetailsScreen" component={PlanDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

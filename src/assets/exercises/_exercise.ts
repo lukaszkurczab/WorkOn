@@ -1,7 +1,7 @@
-interface Exercise {
+export interface Exercise {
   id: string;
   name: string;
-  group: 'Back' | 'Triceps' | 'Biceps' | 'Abs' | 'Forearms' | 'Chest' | 'Legs' | 'Calves' | 'Shoulders' | 'Trapezius';
+  group: string;
   focusPoints: string;
   startPosition: string;
   process: string;

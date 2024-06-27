@@ -6,11 +6,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 75,
     marginBottom: 32,
+    flexDirection: 'row',
   },
   image: {
     width: 66,
-    position: 'absolute',
-    left: 36,
     resizeMode: 'contain',
   },
 });

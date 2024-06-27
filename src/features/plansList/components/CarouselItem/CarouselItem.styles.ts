@@ -6,18 +6,14 @@ const { height: screenHeight } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    flex: 1,
-    justifyContent: 'space-between',
-    height: screenHeight - 300,
-    alignItems: 'center',
-    paddingTop: 16,
+    height: screenHeight - 332,
   },
   text: {
     alignSelf: 'center',
     color: backgroundColor,
   },
   header: {
-    marginBottom: 16,
+    marginVertical: 16,
   },
   textInput: {
     width: 45,
@@ -72,14 +68,17 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 8,
     backgroundColor: primaryColor,
-    borderRadius: 8,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
-  viewIcon: {
+  iconWrapper: {
     height: 40,
     justifyContent: 'center',
     paddingHorizontal: 8,
+  },
+  viewIcon: {
+    color: blue,
   },
   selectedExerciseText: {
     color: backgroundColor,

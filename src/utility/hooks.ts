@@ -1,7 +1,7 @@
 import { useDispatch as useReduxDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from '../store/store';
 import { exercisesList } from '../assets/exercises/_exercise';
-import { Exercise } from '../types/exercises';
+import { ExerciseData } from '../types/exercises';
 
 export const useFormatTime = (time: number) => {
   const hours = Math.floor(time / 3600);
@@ -13,7 +13,7 @@ export const useFormatTime = (time: number) => {
     .padStart(2, '0')}`;
 };
 
-export const useGetExerciseData = (exerciseId: string): Exercise => {
+export const useGetExerciseData = (exerciseId: string): ExerciseData => {
   let exerciseToReturn;
   exercisesList.map(group => {
     group.exercises.map(exercise => {

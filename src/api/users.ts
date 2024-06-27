@@ -1,10 +1,10 @@
 //const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
 //hotspot
-//const BASE_URL = 'http://192.168.95.169:4000/users';
+const BASE_URL = 'http://192.168.122.169:4000/users';
 //home
 //const BASE_URL = 'http://192.168.1.102:4000/users';
 //Tuchów
-const BASE_URL = 'http://192.168.1.25:4000/users';
+//const BASE_URL = 'http://192.168.1.25:4000/users';
 
 import { WorkoutPlan } from '../types/plans';
 

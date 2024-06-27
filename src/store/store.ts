@@ -3,12 +3,12 @@ import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import thunk from 'redux-thunk';
 import atlasReducer from './reducers/atlasReducer';
-import plansReducer from './reducers/planReducer';
 import trainingReducer from '../features/training/store/slice/slice';
 import sessionReducer from './slice/sessionSlice';
 import userReducer from './slice/userSlice';
 import exercisesReducer from './reducers/exercisesReducer';
 import loginReducer from '../features/login/store/slice/slice';
+import plansReducer from '../features/plansList/store/slice/slice';
 import planCreatorReducer from '../features/planCreator/store/slice/slice';
 
 const rootReducer = combineReducers({

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './atlasScreen.styles';

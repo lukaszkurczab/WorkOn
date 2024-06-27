@@ -4,8 +4,12 @@ import { navigate } from '../../../utility/navigate';
 import Layout from '../../../components/Layout/Layout';
 import styles from './MainScreen.styles';
 import { Typography } from '../../../components/Typography/Typography';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 const MainScreen = () => {
+  const user = useSelector((state: RootState) => state.user);
+  console.log(user);
   return (
     <Layout>
       <View style={styles.container}>
@@ -14,7 +18,7 @@ const MainScreen = () => {
             Start training
           </Typography>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity onPress={() => navigate('PlansListScreen')} style={styles.button}>
           <Typography variant="h2" style={styles.buttonText}>
             Plans
           </Typography>

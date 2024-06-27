@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { secondaryColor, fillColor, primaryColor, backgroundColor } from '../../styles/colors';
+import { blue, primaryColor, backgroundColor } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   chip: {
-    backgroundColor: fillColor,
+    backgroundColor: blue,
     paddingVertical: 5,
     paddingHorizontal: 12,
     borderRadius: 15,
