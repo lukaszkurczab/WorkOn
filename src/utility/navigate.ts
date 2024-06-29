@@ -14,6 +14,7 @@ export type RootStackParamList = {
   PlanDetailsScreen: undefined;
   ExerciseAtlasScreen: undefined;
   ExerciseDetailsScreen: { exercise: ExerciseData } | any;
+  CalendarScreen: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

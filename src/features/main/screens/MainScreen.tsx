@@ -22,7 +22,12 @@ const MainScreen = () => {
             Plans
           </Typography>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity
+          onPress={() => {
+            navigate('CalendarScreen');
+          }}
+          style={styles.button}
+        >
           <Typography variant="h2" style={styles.buttonText}>
             History
           </Typography>
