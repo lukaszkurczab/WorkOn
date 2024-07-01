@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { navigate } from '../../../../utility/navigate';
-import { useDispatch } from 'react-redux'; // Poprawienie importu useDispatch
+import { RootStackParamList, navigate } from '../../../../utility/navigate';
 import Layout from '../../../../components/Layout/Layout';
 import Carousel from '../../../../components/Carousel/Carousel';
 import SelectCreatorTypeItem from '../../components/SelectCreatorTypeItem/SelectCreatorTypeItem';
@@ -10,10 +9,26 @@ import Button from '../../../../components/Button/Button';
 import Modal from '../../../../components/Modal/Modal';
 import { CREATE_NEW_PLAN } from '../../store/slice/slice';
 import styles from './CarouselScreen.styles';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useDispatch } from '../../../../utility/hooks';
+
+type CarouselScreenRouteProp = RouteProp<RootStackParamList, 'CarouselScreen'>;
 
 const CarouselScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+
+  const route = useRoute<CarouselScreenRouteProp>();
+
+  const handleCancel = () => {
+    setModalVisible(false);
+    if (!route.params || !route.params.firstLogin) {
+      navigation.goBack();
+    } else {
+      navigate('MainScreen');
+    }
+  };
 
   const items = [
     {
@@ -65,24 +80,18 @@ const CarouselScreen = () => {
       <View style={styles.container}>
         <Carousel items={items} />
         <Button variant="text" onPress={() => setModalVisible(true)} style={styles.button}>
-          <Typography variant="h2">Skip</Typography>
+          <Typography variant="h2">{route.params && route.params.firstLogin ? 'Skip' : 'Back'}</Typography>
         </Button>
       </View>
       <Modal visible={modalVisible} onClose={() => setModalVisible(false)}>
         <Typography variant="h3" style={styles.modal_text}>
-          Are you sure you want to skip creating a plan?
+          Are you sure you want to cancel creating a plan?
         </Typography>
         <View style={styles.modal_buttonsWrapper}>
           <Button variant="outlined" onPress={() => setModalVisible(false)} style={styles.modal_button}>
             <Typography variant="h3">No</Typography>
           </Button>
-          <Button
-            onPress={() => {
-              setModalVisible(false);
-              navigate('MainScreen');
-            }}
-            style={styles.modal_button}
-          >
+          <Button onPress={handleCancel} style={styles.modal_button}>
             <Typography variant="h3">Yes</Typography>
           </Button>
         </View>

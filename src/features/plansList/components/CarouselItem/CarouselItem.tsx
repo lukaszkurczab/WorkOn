@@ -5,12 +5,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Button from '../../../../components/Button/Button';
 import { exercisesList, Exercise } from '../../../../assets/exercises/_exercise';
 import styles from './CarouselItem.styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
 import FontAwsome5Icon from 'react-native-vector-icons/FontAwesome5';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
 import CarouselItemSerie from '../CarouselItemSerie/CarouselItemSerie';
+import { navigate } from '../../../../utility/navigate';
+import { ExerciseData } from '../../../../types/exercises';
+import { useGetExerciseData } from '../../../../utility/hooks';
 
 type CarouselItemProps = {
   name: string;
@@ -28,7 +30,6 @@ function getExerciseById(id: string): Exercise | undefined {
 }
 
 const CarouselItem: React.FC<CarouselItemProps> = ({ name, id }) => {
-  const dispatch = useDispatch();
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState<number>(0);
   const exercises = useSelector(
     (state: RootState) => state.plans.selectedPlan!.days.find(day => day.id === id)!.exercises
@@ -46,6 +47,11 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ name, id }) => {
 
   const onNextExercisePress = () => {
     setSelectedExerciseIndex(selectedExerciseIndex + 1);
+  };
+
+  const handlePreviewExercise = (exerciseId: string) => {
+    const exercise = useGetExerciseData(exerciseId);
+    navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
   };
 
   const getStepContent = (step: number, header: string) => {
@@ -68,7 +74,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ name, id }) => {
                           {getExerciseById(exercise.id)?.name}
                         </Typography>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => {}} style={styles.iconWrapper}>
+                      <TouchableOpacity onPress={() => handlePreviewExercise(exercise.id)} style={styles.iconWrapper}>
                         <FontAwsome5Icon name="eye" size={18} style={styles.viewIcon} />
                       </TouchableOpacity>
                     </View>

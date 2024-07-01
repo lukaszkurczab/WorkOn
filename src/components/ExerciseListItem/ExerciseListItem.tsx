@@ -8,6 +8,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { blue, primaryColor } from '../../styles/colors';
+import { useGetExerciseData } from '../../utility/hooks';
+import { navigate } from '../../utility/navigate';
 
 interface ExerciseListItemProps {
   name: string;
@@ -34,9 +36,14 @@ const ExerciseListItem = ({ name, onSelect, exerciseId, dayId }: ExerciseListIte
     onSelect({ dayId, exerciseId, name });
   };
 
+  const handlePreviewExercise = (id: string) => {
+    const exercise = useGetExerciseData(id);
+    navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => console.log('view')}>
+      <TouchableOpacity onPress={() => handlePreviewExercise(exerciseId)}>
         <View style={styles.iconButton}>
           <FontAwsome5Icon name="eye" size={14} style={styles.icon} />
         </View>

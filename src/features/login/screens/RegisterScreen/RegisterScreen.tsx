@@ -71,7 +71,7 @@ const RegisterScreen: React.FC = () => {
         await storeToken('refreshToken', response.refreshToken);
         await storeToken('rememberMe', 'true');
         dispatch(DECODE_USER_DATA(response.accessToken));
-        navigate('CarouselScreen');
+        navigate('CarouselScreen', { firstLogin: true });
       } catch (err: any) {
         console.log(err);
         if (err.message.includes('Username is taken')) {

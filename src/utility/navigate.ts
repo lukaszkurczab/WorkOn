@@ -5,7 +5,7 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   MainScreen: undefined;
-  CarouselScreen: undefined;
+  CarouselScreen: { firstLogin?: boolean } | any;
   ManualCreatorScreen: undefined;
   SelectTrainingScreen: undefined;
   TrainingScreen: undefined;

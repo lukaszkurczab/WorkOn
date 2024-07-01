@@ -3,7 +3,6 @@ import { TouchableOpacity, View, TextInput } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
 import { ScrollView } from 'react-native-gesture-handler';
 import Button from '../../../../components/Button/Button';
-import { Exercise } from '../../../../types/exercises';
 import ExerciseList from '../../../../components/ExerciseList/ExerciseList';
 import styles from './PlanCarouselItem.styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +18,8 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Modal from '../../../../components/Modal/Modal';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
 import PlanCarouselItemSerie from '../PlanCarouselItemSerie/PlanCarouselItemSerie';
+import { navigate } from '../../../../utility/navigate';
+import { useGetExerciseData } from '../../../../utility/hooks';
 
 type PlanCarouselItemProps = {
   name: string;
@@ -34,10 +35,10 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
   const [step, setStep] = useState(0);
   const [modal, setModal] = useState({ display: false, text: '' });
   const [repetitionsRangeValue, setRepetitionsRangeValue] = useState<(number | string)[]>(
-    exerciseList![selectedExerciseIndex].repsRange
+    exerciseList[selectedExerciseIndex] ? exerciseList[selectedExerciseIndex].repsRange : [4, 6]
   );
   const [loadIncreaseValue, setLoadIncreaseValue] = useState<number | string>(
-    exerciseList![selectedExerciseIndex].loadIncrease
+    exerciseList[selectedExerciseIndex] ? exerciseList[selectedExerciseIndex].loadIncrease : 5
   );
 
   const handleSelect = ({ dayId, exerciseId, name }: { dayId: string; exerciseId: string; name: string }) => {
@@ -184,6 +185,11 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
     }
   };
 
+  const handlePreviewExercise = (id: string) => {
+    const exercise = useGetExerciseData(id);
+    navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
+  };
+
   const getStepContent = (step: number, header: string, dayId: string) => {
     switch (step) {
       case 0:
@@ -199,7 +205,7 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
                 <View>
                   {exerciseList.map((exercise, index) => (
                     <View key={exercise.id} style={styles.selectedExerciseItem}>
-                      <TouchableOpacity onPress={() => {}} style={styles.viewIcon}>
+                      <TouchableOpacity onPress={() => handlePreviewExercise(exercise.id)} style={styles.viewIcon}>
                         <FontAwsome5Icon name="eye" size={14} />
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => handleSelectEditExercise(index)} style={{ width: '80%' }}>
