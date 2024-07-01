@@ -73,7 +73,7 @@ const LoginScreen: React.FC = () => {
       <View style={styles.text}>
         <Typography variant="h5">Don't remember password? </Typography>
         <TouchableOpacity onPress={() => {}}>
-          <Typography variant="h4" style={styles.signUpButton}>
+          <Typography variant="h5" style={styles.signUpButton}>
             Reset
           </Typography>
         </TouchableOpacity>

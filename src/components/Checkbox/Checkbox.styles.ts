@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { dark_gray } from '../../styles/colors';
+import { primaryColor } from '../../styles/colors';
 
 const styles = StyleSheet.create({
   iconWrapper: {
@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     padding: 2,
     width: 20,
     height: 20,
-    borderColor: dark_gray,
+    borderColor: primaryColor,
   },
   icon: {
-    color: dark_gray,
+    color: primaryColor,
   },
   wrapper: {
     flexDirection: 'row',

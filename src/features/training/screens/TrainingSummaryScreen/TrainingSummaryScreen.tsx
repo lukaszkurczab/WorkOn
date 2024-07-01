@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
-import { useFormatTime } from '../../../../utility/hooks';
+import { useDispatch, useFormatTime } from '../../../../utility/hooks';
 import styles from './TrainingSummaryScreen.styles';
 import WorkoutSummaryListItem from '../../components/SummaryListItem/SummaryListItem';
 import { RootState } from '../../../../store/store';
@@ -13,7 +13,7 @@ import { navigate } from '../../../../utility/navigate';
 const WorkoutSummary = () => {
   const summary = useSelector((state: RootState) => state.training.trainingSummary);
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     navigate('MainScreen');
   };
 

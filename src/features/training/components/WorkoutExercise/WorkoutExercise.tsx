@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { useDispatch } from '../../../../utility/hooks';
 import styles from './WorkoutExercise.styles';
@@ -10,13 +9,9 @@ import { Typography } from '../../../../components/Typography/Typography';
 import Modal from '../../../../components/Modal/Modal';
 import SeriesModal from '../SeriesModal/SeriesModal';
 import { END_SERIE } from '../../store/slice/slice';
+import { navigate } from '../../../../utility/navigate';
 
-type WorkoutExerciseProps = {
-  handleEndTraining: () => void;
-};
-
-const WorkoutExercise = ({ handleEndTraining }: WorkoutExerciseProps) => {
-  const navigation = useNavigation();
+const WorkoutExercise = () => {
   const dispatch = useDispatch();
   const exercise = useSelector((state: RootState) => state.training.selectedExercise);
   const seriesIndex = useSelector((state: RootState) => state.training.seriesIndex);
@@ -32,9 +27,10 @@ const WorkoutExercise = ({ handleEndTraining }: WorkoutExerciseProps) => {
     setModalVisible(false);
   };
 
+  const handleEndExercise = () => {};
+
   const handleHelp = () => {
-    // dispatch(SET_SELECTED_EXERCISE(exercise.id));
-    // navigation.navigate('ExerciseScreen');
+    navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
   };
 
   return (
@@ -68,11 +64,6 @@ const WorkoutExercise = ({ handleEndTraining }: WorkoutExerciseProps) => {
         </View>
       </ScrollView>
       <View style={styles.buttonsWrapper}>
-        <Button style={{ width: 120 }} variant="text" onPress={handleEndTraining}>
-          <Typography variant="h3" style={styles.endButtonText}>
-            End training
-          </Typography>
-        </Button>
         <Button style={{ width: 120 }} onPress={handleFinish}>
           <Typography variant="h3" style={styles.buttonText}>
             Finish

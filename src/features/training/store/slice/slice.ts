@@ -167,9 +167,25 @@ const trainingSlice = createSlice({
         duration: Date.now() - state.startTime,
       };
     },
+    END_EXERCISE: state => {
+      const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
+
+      state.step = 'select';
+      state.seriesIndex = 0;
+      const finishedExercise = state.unfinishedExercises.splice(exerciseIndex, 1)[0];
+      state.finishedExercises.push(finishedExercise);
+    },
   },
 });
 
-export const { SELECT_PLAN, END_REST, END_TRAINING, END_SERIE, SELECT_TRAINING, SELECT_EXERCISE, START_TRAINING } =
-  trainingSlice.actions;
+export const {
+  SELECT_PLAN,
+  END_EXERCISE,
+  END_REST,
+  END_TRAINING,
+  END_SERIE,
+  SELECT_TRAINING,
+  SELECT_EXERCISE,
+  START_TRAINING,
+} = trainingSlice.actions;
 export default trainingSlice.reducer;

@@ -2,13 +2,13 @@ import React, { View, Text } from 'react-native';
 import Svg, { Circle, G } from 'react-native-svg';
 import { useSelector } from 'react-redux';
 import { useDispatch } from '../../../../utility/hooks';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
 import styles from './WorkoutRest.styles';
 import { RootState } from '../../../../store/store';
-import { END_REST } from '../../store/slice/slice';
+import { END_REST, END_EXERCISE } from '../../store/slice/slice';
 import Button from '../../../../components/Button/Button';
 import { Typography } from '../../../../components/Typography/Typography';
+import { navigate } from '../../../../utility/navigate';
 
 const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }: any) => {
   const progress = (seconds / 60) * 100;
@@ -38,7 +38,7 @@ const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }: any) => 
   );
 };
 
-const WorkoutRest = ({ handleEndTraining }: any) => {
+const WorkoutRest = () => {
   const dispatch = useDispatch();
   const exercise = useSelector((state: RootState) => state.training.selectedExercise);
   const restStart = useSelector((state: RootState) => state.training.restStart);
@@ -56,7 +56,13 @@ const WorkoutRest = ({ handleEndTraining }: any) => {
     return () => clearInterval(interval);
   }, []);
 
-  const handlePreview = () => {};
+  const handlePreview = () => {
+    navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
+  };
+
+  const handleEndExercise = () => {
+    dispatch(END_EXERCISE());
+  };
 
   const handleFinish = () => {
     dispatch(END_REST());
@@ -73,14 +79,14 @@ const WorkoutRest = ({ handleEndTraining }: any) => {
       <Button style={[styles.button, { marginBottom: 8 }]} onPress={handleFinish}>
         <Typography variant="h2">Finish</Typography>
       </Button>
-      <Button style={styles.button} variant="text" onPress={() => {}}>
+      <Button style={styles.button} variant="text" onPress={handlePreview}>
         <Typography variant="h2" style={{ textDecorationLine: 'underline' }}>
           Preview exercise
         </Typography>
       </Button>
-      <Button style={styles.button} variant="text" onPress={() => {}}>
+      <Button style={styles.button} variant="text" onPress={handleEndExercise}>
         <Typography variant="h2" style={{ textDecorationLine: 'underline' }}>
-          End Training
+          End exercise
         </Typography>
       </Button>
     </View>

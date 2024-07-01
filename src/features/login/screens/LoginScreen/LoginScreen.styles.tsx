@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { blue } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,8 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   signUpButton: {
-    color: '#06f',
-    fontWeight: 'bold',
+    color: blue,
   },
   image: {
     width: 180,

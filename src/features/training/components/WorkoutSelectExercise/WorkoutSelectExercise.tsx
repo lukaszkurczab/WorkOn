@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import ExerciseTile from '../ExerciseTile/ExerciseTile';
 import styles from './WorkoutSelectExercise.styles';
@@ -26,14 +26,9 @@ const WorkoutSelectExercise = ({ handleEndTraining }: WorkoutSelectExerciseProps
             <ExerciseTile exercise={exercise} key={exercise.id} />
           ))}
           {unfinishedExercises.length === 0 && (
-            <View>
-              <Typography variant="h3" style={styles.text}>
-                There is no more exercise
-              </Typography>
-              <Button variant="outlined" style={{ marginVertical: 16 }} onPress={handleEndTraining}>
-                <Typography variant="h2">Go to summary</Typography>
-              </Button>
-            </View>
+            <Button style={{ marginVertical: 16 }} onPress={handleEndTraining}>
+              <Typography variant="h2">Go to summary</Typography>
+            </Button>
           )}
         </View>
       </View>

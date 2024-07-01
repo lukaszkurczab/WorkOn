@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   buttonsWrapper: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   endButtonWrapper: {
     padding: 5,

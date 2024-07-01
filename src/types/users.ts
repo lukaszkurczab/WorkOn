@@ -19,8 +19,8 @@ export interface UserRecord {
 }
 
 export interface WorkoutSession {
-  id: string;
-  date: string;
+  id: string | null;
+  date: Date;
   plan: string;
   day: string;
   time: number;

@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 import { getUserData } from '../actions/userActions';
 import { WorkoutPlan } from '../../types/plans';
 import { HistoryItem } from '../../types/history';
+import { addHistoryItem } from '../../features/training/store/actions/actions';
 
 interface UserState {
   id: string;
@@ -51,6 +52,9 @@ const userSlice = createSlice({
         state.history = action.payload.history;
       }
     );
+    builder.addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
+      state.history.push(action.payload);
+    });
   },
 });
 

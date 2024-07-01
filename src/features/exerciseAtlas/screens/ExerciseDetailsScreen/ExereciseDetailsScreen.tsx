@@ -19,10 +19,11 @@ const ExerciseDetailsScreen = () => {
     );
   }
 
-  const { exercise } = route.params;
+  const exercise = route.params.exercise;
+  const showNavigation = route.params.showNavigation ?? true;
 
   return (
-    <Layout headerText={exercise.name}>
+    <Layout headerText={exercise.name} showNavigation={showNavigation}>
       <ScrollView>
         <View style={{ gap: 16 }}>
           <Image source={require('../../../../assets/exercises/dips.jpg')} style={styles.image} />
