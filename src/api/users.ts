@@ -59,6 +59,27 @@ export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan
   }
 };
 
+export const addPlanToUser = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<void> => {
+  try {
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/plans/${data.userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(data.newPlan),
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error adding plan:', error);
+    throw error;
+  }
+};
+
 export const registerUser = async (userData: { username: string; email: string; password: string }) => {
   try {
     const response = await fetch(`${BASE_URL}/register`, {
