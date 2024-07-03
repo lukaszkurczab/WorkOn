@@ -6,6 +6,13 @@ export interface Exercise {
   series: Series[];
 }
 
+export interface PlanExercise {
+  id: string;
+  loadIncrease: number;
+  repsRange: [number, number];
+  series: Series[];
+}
+
 export interface ExerciseData {
   id: string;
   name: string;

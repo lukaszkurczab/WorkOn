@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Exercise, Series } from '../../../../types/exercises';
+import { updateUserPlan } from '../actions/actions';
 
 interface TrainingSummaryExercise {
   id: string;
@@ -175,6 +176,17 @@ const trainingSlice = createSlice({
       const finishedExercise = state.unfinishedExercises.splice(exerciseIndex, 1)[0];
       state.finishedExercises.push(finishedExercise);
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(updateUserPlan.fulfilled, state => {
+      state.step = 'select';
+      state.unfinishedExercises = [];
+      state.finishedExercises = [];
+      state.trainingSummary = {
+        ...state.trainingSummary,
+        duration: Date.now() - state.startTime,
+      };
+    });
   },
 });
 

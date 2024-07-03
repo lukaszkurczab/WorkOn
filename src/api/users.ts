@@ -13,7 +13,6 @@ import { getToken } from '../utility/secureStore';
 export const addHistoryItemToUser = async (userData: { userId: string; historyItem: WorkoutSession }) => {
   try {
     const accessToken = await getToken('accessToken');
-    console.log(accessToken);
     const response = await fetch(`${BASE_URL}/history/${userData.userId}`, {
       method: 'PUT',
       headers: {
@@ -45,10 +44,12 @@ export const removePlanFromUser = async (userData: { userId: string; planId: str
 
 export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan }) => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(userData.plan),
     });

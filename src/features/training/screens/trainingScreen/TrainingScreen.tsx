@@ -8,17 +8,21 @@ import { RootState } from '../../../../store/store';
 import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { navigate } from '../../../../utility/navigate';
-import { END_TRAINING } from '../../store/slice/slice';
-import { addHistoryItem } from '../../store/actions/actions';
-import { useDispatch } from '../../../../utility/hooks';
+import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
+import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
+import { WorkoutPlan } from '../../../../types/plans';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const summary = useSelector((state: RootState) => state.training.trainingSummary);
   const trainingStart = useSelector((state: RootState) => state.training.startTime);
+  const selectedTraining = useSelector((state: RootState) => state.training.selectedTraining);
+  const selectedPlan = useSelector((state: RootState) => state.training.selectedPlan);
 
   const handleEndTraining = async () => {
+    const selectedTrainingIndex = selectedPlan.days.findIndex(day => day.id === selectedTraining.id);
+
     await dispatch(
       addHistoryItem({
         userId: user.id,
@@ -33,7 +37,23 @@ const selectStep = (step: string) => {
         },
       })
     );
-    dispatch(END_TRAINING());
+
+    const updatedPlan: WorkoutPlan = JSON.parse(JSON.stringify(selectedPlan));
+    updatedPlan.days[selectedTrainingIndex] = {
+      ...selectedTraining,
+      exercises: summary.exercises.map(exercise => {
+        const exerciseFromPlan = selectedTraining.exercises.find(planExercise => planExercise.id === exercise.id);
+        let updatedExercise;
+        if (exerciseFromPlan != undefined) {
+          updatedExercise = updatePlanExercise(exercise, exerciseFromPlan);
+        } else {
+          updatedExercise = exercise;
+        }
+        return updatedExercise;
+      }),
+    };
+
+    await dispatch(updateUserPlan({ userId: user.id, plan: updatedPlan }));
     navigate('WorkoutSummary');
   };
 

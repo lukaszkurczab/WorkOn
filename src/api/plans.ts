@@ -7,6 +7,7 @@ const BASE_URL = 'http://192.168.1.100:4000/plans';
 //const BASE_URL = 'http://192.168.1.25:4000/plans';
 
 import { WorkoutPlan } from '../types/plans';
+import { getToken } from '../utility/secureStore';
 
 export const fetchPlans = async (): Promise<WorkoutPlan[]> => {
   try {
@@ -40,14 +41,16 @@ export const addPlan = async (data: { userId: string; newPlan: WorkoutPlan }): P
   }
 };
 
-export const updatePlan = async (id: string, updatedPlan: WorkoutPlan): Promise<WorkoutPlan> => {
+export const updatePlan = async (data: { id: string; updatedPlan: WorkoutPlan }): Promise<WorkoutPlan> => {
   try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/${data.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(updatedPlan),
+      body: JSON.stringify(data.updatedPlan),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');
