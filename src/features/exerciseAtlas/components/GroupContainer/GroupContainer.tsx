@@ -12,9 +12,10 @@ type GroupContainerProps = {
       name: string;
     }[];
   };
+  searchedText: string;
 };
 
-const GroupContainer = ({ group }: GroupContainerProps) => {
+const GroupContainer = ({ group, searchedText }: GroupContainerProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handleToggle = () => {
@@ -28,17 +29,21 @@ const GroupContainer = ({ group }: GroupContainerProps) => {
       </TouchableOpacity>
       {!isCollapsed && (
         <View style={styles.exercisesWrapper}>
-          {group.exercises.map((exercise, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.exercise}
-              onPress={() => navigate('ExerciseDetailsScreen', { exercise })}
-            >
-              <Typography variant="h4" style={{ color: backgroundColor }}>
-                {exercise.name}
-              </Typography>
-            </TouchableOpacity>
-          ))}
+          {group.exercises.map((exercise, index) => {
+            if (exercise.name.includes(searchedText)) {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.exercise}
+                  onPress={() => navigate('ExerciseDetailsScreen', { exercise })}
+                >
+                  <Typography variant="h4" style={{ color: backgroundColor }}>
+                    {exercise.name}
+                  </Typography>
+                </TouchableOpacity>
+              );
+            }
+          })}
         </View>
       )}
     </View>

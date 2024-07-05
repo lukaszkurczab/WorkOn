@@ -23,6 +23,8 @@ import ExerciseAtlasScreen from './src/features/exerciseAtlas/screens/ExerciseAt
 import ExerciseDetailsScreen from './src/features/exerciseAtlas/screens/ExerciseDetailsScreen/ExereciseDetailsScreen';
 import CalendarScreen from './src/features/history/screens/CalendarScreen/CalendarScreen';
 import ProfileScreen from './src/features/userProfile/screens/ProfileScreen/ProfileScreen';
+import { useSelector } from 'react-redux';
+import { RootState } from './src/store/store';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -30,6 +32,7 @@ const AppNavigator = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList>('LoginScreen');
+  const trainingActivity = useSelector((state: RootState) => state.training.lastActivity);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -66,7 +69,14 @@ const AppNavigator = () => {
       } catch (error) {
         console.error('Error checking login status:', error);
       } finally {
+        checkTrainingActivity();
         setIsLoading(false);
+      }
+    };
+
+    const checkTrainingActivity = () => {
+      if (trainingActivity !== null && Date.now() - trainingActivity < 1800000) {
+        setInitialRoute('TrainingScreen');
       }
     };
 

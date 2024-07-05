@@ -20,6 +20,8 @@ import { backgroundColor, gray, red } from '../../../../styles/colors';
 import PlanCarouselItemSerie from '../PlanCarouselItemSerie/PlanCarouselItemSerie';
 import { navigate } from '../../../../utility/navigate';
 import { useGetExerciseData } from '../../../../utility/hooks';
+import ExerciseListItem from '../ExerciseListItem/ExerciseListItem';
+import { Series } from '../../../../types/exercises';
 
 type PlanCarouselItemProps = {
   name: string;
@@ -40,6 +42,8 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
   const [loadIncreaseValue, setLoadIncreaseValue] = useState<number | string>(
     exerciseList[selectedExerciseIndex] ? exerciseList[selectedExerciseIndex].loadIncrease : 5
   );
+  const [series, setSeries] = useState<Series[]>(exerciseList[selectedExerciseIndex].series);
+  const [exerciseData, setExerciseData] = useState(useGetExerciseData(exerciseList[selectedExerciseIndex].id));
 
   const handleSelect = ({ dayId, exerciseId, name }: { dayId: string; exerciseId: string; name: string }) => {
     dispatch(
@@ -73,6 +77,7 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
   const handleSelectEditExercise = (index: number) => {
     setStep(2);
     setSelectedExerciseIndex(index);
+    setRepetitionsRangeValue(exerciseList[index].repsRange);
   };
 
   const handleUpdateExercise = (exerciseIndex: number, property: string, newValue?: any, serieIndex?: number) => {
@@ -151,6 +156,10 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
 
   const onPreviousExercisePress = () => {
     setSelectedExerciseIndex(selectedExerciseIndex - 1);
+    setRepetitionsRangeValue(exerciseList[selectedExerciseIndex - 1].repsRange);
+    setLoadIncreaseValue(exerciseList[selectedExerciseIndex + 1].loadIncrease);
+    setSeries(exerciseList[selectedExerciseIndex - 1].series);
+    setExerciseData(useGetExerciseData(exerciseList[selectedExerciseIndex - 1].id));
   };
 
   const onSaveExercisePress = () => {
@@ -182,12 +191,11 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
       setModal({ display: true, text: 'Repetitions in every series should be in repetitions range' });
     } else {
       setSelectedExerciseIndex(selectedExerciseIndex + 1);
+      setRepetitionsRangeValue(exerciseList[selectedExerciseIndex + 1].repsRange);
+      setLoadIncreaseValue(exerciseList[selectedExerciseIndex + 1].loadIncrease);
+      setSeries(exerciseList[selectedExerciseIndex + 1].series);
+      setExerciseData(useGetExerciseData(exerciseList[selectedExerciseIndex + 1].id));
     }
-  };
-
-  const handlePreviewExercise = (id: string) => {
-    const exercise = useGetExerciseData(id);
-    navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
   };
 
   const getStepContent = (step: number, header: string, dayId: string) => {
@@ -204,19 +212,13 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
               {exerciseList && exerciseList.length > 0 && (
                 <View>
                   {exerciseList.map((exercise, index) => (
-                    <View key={exercise.id} style={styles.selectedExerciseItem}>
-                      <TouchableOpacity onPress={() => handlePreviewExercise(exercise.id)} style={styles.viewIcon}>
-                        <FontAwsome5Icon name="eye" size={14} />
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => handleSelectEditExercise(index)} style={{ width: '80%' }}>
-                        <Typography variant="h4" style={[styles.text, { alignSelf: 'flex-start' }]}>
-                          {exercise.name}
-                        </Typography>
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => handleUnselectExercise(exercise.id)} style={styles.viewIcon}>
-                        <FontAwesomeIcon name="trash" size={20} style={{ color: red }} />
-                      </TouchableOpacity>
-                    </View>
+                    <ExerciseListItem
+                      exercise={exercise}
+                      index={index}
+                      handleUnselectExercise={handleUnselectExercise}
+                      handleSelectEditExercise={handleSelectEditExercise}
+                      key={exercise.id}
+                    />
                   ))}
                 </View>
               )}
@@ -260,7 +262,7 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
             {exerciseList && (
               <>
                 <Typography variant="h2" style={[styles.text, styles.header]}>
-                  {exerciseList![selectedExerciseIndex].name}
+                  {exerciseData.name}
                   <TouchableOpacity
                     onPress={() => handleUnselectExercise(exerciseList![selectedExerciseIndex].id)}
                     style={styles.viewIcon}
@@ -317,9 +319,9 @@ const PlanCarouselItem: React.FC<PlanCarouselItemProps> = ({ name, id }) => {
                     Series
                   </Typography>
                   <ScrollView style={styles.seriesScrollView}>
-                    {exerciseList![selectedExerciseIndex].series.map((serie, index) => (
+                    {series.map((serie, index) => (
                       <PlanCarouselItemSerie
-                        key={serie.id}
+                        key={exerciseList[selectedExerciseIndex].id + serie.id}
                         exerciseIndex={selectedExerciseIndex}
                         exerciseId={exerciseList[selectedExerciseIndex].id}
                         reps={serie.reps}

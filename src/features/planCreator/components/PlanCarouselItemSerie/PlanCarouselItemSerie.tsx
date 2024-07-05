@@ -37,6 +37,24 @@ const PlanCarouselItemSerie: React.FC<PlanCarouselItemSerieProps> = ({
     }
   };
 
+  const handleRepsChange = (text: string) => {
+    if (text === '') {
+      onEdit(exerciseIndex, 'serieReps', 0, index);
+    } else {
+      onEdit(exerciseIndex, 'serieReps', Number('text'), index);
+    }
+    setRepsValue(text);
+  };
+
+  const handleWeightChange = (text: string) => {
+    if (text === '') {
+      onEdit(exerciseIndex, 'serieWeight', 0, index);
+    } else {
+      onEdit(exerciseIndex, 'serieWeight', Number('text'), index);
+    }
+    setWeightValue(text);
+  };
+
   return (
     <View key={index} style={{ gap: 1, backgroundColor: backgroundColor }}>
       <View style={[styles.row, { marginTop: 1, backgroundColor: 'white' }]}>
@@ -56,9 +74,7 @@ const PlanCarouselItemSerie: React.FC<PlanCarouselItemSerieProps> = ({
           keyboardType="numeric"
           value={`${repsValue}`}
           onEndEditing={() => (repsValue === '' ? setRepsValue(0) : null)}
-          onChangeText={text => {
-            handleEdit(exerciseIndex, 'serieReps', text, index);
-          }}
+          onChangeText={text => handleRepsChange(text)}
         />
       </View>
       <View style={styles.row}>
@@ -69,10 +85,8 @@ const PlanCarouselItemSerie: React.FC<PlanCarouselItemSerieProps> = ({
           style={styles.textInput}
           keyboardType="numeric"
           value={`${weightValue}`}
-          onEndEditing={() => (repsValue === '' ? setWeightValue(0) : null)}
-          onChangeText={text => {
-            handleEdit(exerciseIndex, 'serieWeight', text, index);
-          }}
+          onEndEditing={() => (weightValue === '' ? setWeightValue(0) : null)}
+          onChangeText={text => handleWeightChange(text)}
         />
       </View>
     </View>

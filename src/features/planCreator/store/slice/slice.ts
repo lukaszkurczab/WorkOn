@@ -154,6 +154,9 @@ const planCreatorSlice = createSlice({
       state.error = '';
     },
     SET_SELECTED_EXERCISE: (state, action: PayloadAction<{ dayIndex: number; selectedExercise: number }>) => {},
+    EDIT_PLAN: (state, action) => {
+      state.newPlan = { ...action.payload };
+    },
   },
   extraReducers: builder => {
     builder.addCase(createPlan.fulfilled, (state, action) => {
@@ -175,6 +178,7 @@ export const {
   SET_SELECTED_EXERCISE,
   UNSELECT_EXERCISE,
   REMOVE_SERIES,
+  EDIT_PLAN,
 } = planCreatorSlice.actions;
 
 export default planCreatorSlice.reducer;

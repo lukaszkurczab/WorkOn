@@ -14,9 +14,6 @@ const styles = StyleSheet.create({
     marginLeft: 32,
     width: '100%',
   },
-  button: {
-    width: '45%',
-  },
 });
 
 export default styles;

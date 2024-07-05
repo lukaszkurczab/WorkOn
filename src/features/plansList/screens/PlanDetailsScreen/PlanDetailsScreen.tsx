@@ -9,8 +9,11 @@ import Button from '../../../../components/Button/Button';
 import { Typography } from '../../../../components/Typography/Typography';
 import Carousel from '../../../../components/Carousel/Carousel';
 import { navigate } from '../../../../utility/navigate';
+import { useDispatch } from '../../../../utility/hooks';
+import { EDIT_PLAN } from '../../../planCreator/store/slice/slice';
 
 const PlanDetailsScreen = () => {
+  const dispatch = useDispatch();
   const plan = useSelector((state: RootState) => state.plans.selectedPlan);
   const [items, setItems] = useState<{ id: string; component: React.ReactNode }[]>([]);
 
@@ -25,11 +28,8 @@ const PlanDetailsScreen = () => {
   }, [plan]);
 
   const handleEditPress = () => {
-    // Your edit logic here
-  };
-
-  const handleBackPress = () => {
-    navigate('PlansListScreen');
+    dispatch(EDIT_PLAN(plan));
+    navigate('ManualCreatorScreen');
   };
 
   return (
@@ -37,10 +37,7 @@ const PlanDetailsScreen = () => {
       <View style={styles.container}>
         {items.length > 0 && <Carousel items={items} />}
         <View style={styles.buttonsWrapper}>
-          <Button variant="outlined" onPress={handleBackPress} style={styles.button}>
-            <Typography variant="h3">Back</Typography>
-          </Button>
-          <Button onPress={handleEditPress} style={styles.button}>
+          <Button onPress={handleEditPress}>
             <Typography variant="h3">Edit</Typography>
           </Button>
         </View>

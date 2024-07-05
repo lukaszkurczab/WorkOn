@@ -46,6 +46,7 @@ interface TrainingState {
   selectedExercise: SelectedExercise;
   seriesIndex: number;
   restStart: Date;
+  lastActivity: number | null;
 }
 
 const initialState: TrainingState = {
@@ -84,6 +85,7 @@ const initialState: TrainingState = {
   },
   seriesIndex: 0,
   restStart: new Date(),
+  lastActivity: null,
 };
 
 const trainingSlice = createSlice({
@@ -100,6 +102,8 @@ const trainingSlice = createSlice({
       state.selectedExercise = action.payload;
       state.step = 'exercise';
       state.seriesIndex = 0;
+      state.lastActivity = Date.now();
+      console.log(state.lastActivity);
     },
     START_TRAINING: (state, action: PayloadAction<{ id: string; name: string; exercises: Exercise[] }>) => {
       state.startTime = Date.now();
@@ -114,6 +118,8 @@ const trainingSlice = createSlice({
         duration: 0,
         exercises: [],
       };
+      state.lastActivity = Date.now();
+      console.log(state.lastActivity);
     },
     END_SERIE: (state, action: PayloadAction<{ id: string; reps: number; weight: number }>) => {
       const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
@@ -155,9 +161,13 @@ const trainingSlice = createSlice({
         }
         state.restStart = new Date();
       }
+      state.lastActivity = Date.now();
+      console.log(state.lastActivity);
     },
     END_REST: state => {
       state.step = 'exercise';
+      state.lastActivity = Date.now();
+      console.log(state.lastActivity);
     },
     END_TRAINING: state => {
       state.step = 'select';
@@ -167,6 +177,7 @@ const trainingSlice = createSlice({
         ...state.trainingSummary,
         duration: Date.now() - state.startTime,
       };
+      state.lastActivity = null;
     },
     END_EXERCISE: state => {
       const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
@@ -175,6 +186,8 @@ const trainingSlice = createSlice({
       state.seriesIndex = 0;
       const finishedExercise = state.unfinishedExercises.splice(exerciseIndex, 1)[0];
       state.finishedExercises.push(finishedExercise);
+      state.lastActivity = Date.now();
+      console.log(state.lastActivity);
     },
   },
   extraReducers: builder => {

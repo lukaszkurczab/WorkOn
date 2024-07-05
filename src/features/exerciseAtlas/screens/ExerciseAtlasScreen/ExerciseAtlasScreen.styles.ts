@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
   atlasWrapper: {
     gap: 15,
   },
+  input: {
+    marginBottom: 16,
+  },
 });
 
 export default styles;
