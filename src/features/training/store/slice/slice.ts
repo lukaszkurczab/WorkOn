@@ -103,7 +103,6 @@ const trainingSlice = createSlice({
       state.step = 'exercise';
       state.seriesIndex = 0;
       state.lastActivity = Date.now();
-      console.log(state.lastActivity);
     },
     START_TRAINING: (state, action: PayloadAction<{ id: string; name: string; exercises: Exercise[] }>) => {
       state.startTime = Date.now();
@@ -119,7 +118,6 @@ const trainingSlice = createSlice({
         exercises: [],
       };
       state.lastActivity = Date.now();
-      console.log(state.lastActivity);
     },
     END_SERIE: (state, action: PayloadAction<{ id: string; reps: number; weight: number }>) => {
       const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
@@ -162,12 +160,10 @@ const trainingSlice = createSlice({
         state.restStart = new Date();
       }
       state.lastActivity = Date.now();
-      console.log(state.lastActivity);
     },
     END_REST: state => {
       state.step = 'exercise';
       state.lastActivity = Date.now();
-      console.log(state.lastActivity);
     },
     END_TRAINING: state => {
       state.step = 'select';
@@ -187,7 +183,6 @@ const trainingSlice = createSlice({
       const finishedExercise = state.unfinishedExercises.splice(exerciseIndex, 1)[0];
       state.finishedExercises.push(finishedExercise);
       state.lastActivity = Date.now();
-      console.log(state.lastActivity);
     },
   },
   extraReducers: builder => {

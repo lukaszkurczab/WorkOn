@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { backgroundColor, primaryColor } from '../../../../styles/colors';
+import { backgroundColor, primaryColor, blue } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: backgroundColor,
-    padding: 10,
-    paddingBottom: 60,
+    width: '100%',
+  },
+  contentWrapper: {
+    gap: 32,
   },
   section: {
     marginTop: 20,
@@ -17,9 +17,29 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  userDataWrapper: {
+    alignItems: 'center',
+  },
+  userPhotoWrapper: {
+    borderColor: blue,
+    borderWidth: 1,
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  userPhoto: {
+    color: primaryColor,
+  },
   settingsButton: {
     position: 'absolute',
-    right: 10,
+    top: 0,
+    right: 0,
+    alignItems: 'center',
+    height: 32,
+    width: 32,
+    zIndex: 2,
   },
   settingsIcon: {
     color: primaryColor,

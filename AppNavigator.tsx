@@ -23,6 +23,7 @@ import ExerciseAtlasScreen from './src/features/exerciseAtlas/screens/ExerciseAt
 import ExerciseDetailsScreen from './src/features/exerciseAtlas/screens/ExerciseDetailsScreen/ExereciseDetailsScreen';
 import CalendarScreen from './src/features/history/screens/CalendarScreen/CalendarScreen';
 import ProfileScreen from './src/features/userProfile/screens/ProfileScreen/ProfileScreen';
+import SettingsScreen from './src/features/userProfile/screens/SettingsScreen/SettingsScreen';
 import { useSelector } from 'react-redux';
 import { RootState } from './src/store/store';
 
@@ -104,6 +105,7 @@ const AppNavigator = () => {
         <Stack.Screen name="ExerciseDetailsScreen" component={ExerciseDetailsScreen} />
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

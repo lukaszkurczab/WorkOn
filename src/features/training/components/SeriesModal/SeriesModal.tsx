@@ -13,8 +13,8 @@ type SeriesModalProps = {
 };
 
 const SeriesModal = ({ onConfirm, initReps, initWeight, id }: SeriesModalProps) => {
-  const [reps, setReps] = useState(initReps);
-  const [weight, setWeight] = useState(initWeight);
+  const [reps, setReps] = useState<string>(initReps.toString());
+  const [weight, setWeight] = useState<string>(initWeight.toString());
 
   return (
     <View style={styles.container}>
@@ -27,7 +27,7 @@ const SeriesModal = ({ onConfirm, initReps, initWeight, id }: SeriesModalProps) 
           maxLength={5}
           value={reps.toString()}
           textStyle={styles.inputText}
-          onChangeText={newValue => setReps(Number(newValue))}
+          onChangeText={newValue => setReps(newValue)}
         ></TextInput>
       </View>
       <View style={styles.inputWrapper}>
@@ -38,10 +38,10 @@ const SeriesModal = ({ onConfirm, initReps, initWeight, id }: SeriesModalProps) 
           maxLength={5}
           value={weight.toString()}
           textStyle={styles.inputText}
-          onChangeText={newValue => setWeight(Number(newValue))}
+          onChangeText={newValue => setWeight(newValue)}
         ></TextInput>
       </View>
-      <Button onPress={() => onConfirm(id, reps, weight)} style={{ marginTop: 8 }}>
+      <Button onPress={() => onConfirm(id, Number(reps), Number(weight))} style={{ marginTop: 8 }}>
         <Typography variant="h4">Confirm</Typography>
       </Button>
     </View>
