@@ -5,12 +5,20 @@ import styles from './ProfileScreen.styles';
 import Layout from '../../../../components/Layout/Layout';
 import { Typography } from '../../../../components/Typography/Typography';
 import { navigate } from '../../../../utility/navigate';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store/store';
+import { gray, primaryColor } from '../../../../styles/colors';
+import { WorkoutPlan } from '../../../../types/plans';
 
 const ProfileScreen = () => {
-  const maxHistoryItems = useState(5);
+  const user = useSelector((state: RootState) => state.user);
 
   const handleSettings = () => {
     navigate('SettingsScreen');
+  };
+
+  const previewPlan = (plan: WorkoutPlan) => {
+    navigate('PlanDetailsScreen', { plan: plan, editable: false });
   };
 
   return (
@@ -24,9 +32,22 @@ const ProfileScreen = () => {
             <View style={styles.userPhotoWrapper}>
               <Icon name="user" size={64} style={styles.userPhoto} />
             </View>
-            <Typography variant="h3">Name</Typography>
+            <Typography variant="h3">{user.username}</Typography>
           </View>
-          <Text style={styles.title}>Personal records</Text>
+          <Typography variant="h2">Public plans</Typography>
+          {user.plans.map(plan => (
+            <View key={plan.id} style={styles.listItem}>
+              <View>
+                <Typography variant="h3">{plan.name}</Typography>
+                <Typography variant="h4" style={{ color: gray }}>
+                  {plan.days.length} days
+                </Typography>
+              </View>
+              <TouchableOpacity onPress={() => previewPlan(plan)}>
+                <Icon name="eye" size={24} style={{ color: primaryColor }} />
+              </TouchableOpacity>
+            </View>
+          ))}
         </View>
       </ScrollView>
     </Layout>

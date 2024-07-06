@@ -24,6 +24,10 @@ import ExerciseDetailsScreen from './src/features/exerciseAtlas/screens/Exercise
 import CalendarScreen from './src/features/history/screens/CalendarScreen/CalendarScreen';
 import ProfileScreen from './src/features/userProfile/screens/ProfileScreen/ProfileScreen';
 import SettingsScreen from './src/features/userProfile/screens/SettingsScreen/SettingsScreen';
+import SetPublicPlansScreen from './src/features/userProfile/screens/SetPublicPlansScreen/SetPublicPlansScreen';
+import SetPublicWorkoutsScreen from './src/features/userProfile/screens/SetPublicWorkoutsScreen/SetPublicWorkoutsScreen';
+import ChangePasswordScreen from './src/features/userProfile/screens/ChangePasswordScreen/ChangePasswordScreen';
+import ChangeUsernameScreen from './src/features/userProfile/screens/ChangeUsernameScreen/ChangeUsernameScreen';
 import { useSelector } from 'react-redux';
 import { RootState } from './src/store/store';
 
@@ -106,6 +110,10 @@ const AppNavigator = () => {
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+        <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
+        <Stack.Screen name="SetPublicPlansScreen" component={SetPublicPlansScreen} />
+        <Stack.Screen name="SetPublicWorkoutsScreen" component={SetPublicWorkoutsScreen} />
+        <Stack.Screen name="ChangeUsernameScreen" component={ChangeUsernameScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { backgroundColor, primaryColor, secondaryColor } from '../../styles/colors';
+import { backgroundColor, primaryColor, gray } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
   confirmButton: {
     alignSelf: 'center',
-    borderColor: secondaryColor,
+    borderColor: gray,
     backgroundColor: primaryColor,
     paddingVertical: 5,
     paddingHorizontal: 15,

@@ -1,10 +1,8 @@
 import React, { useRef } from 'react';
 import { View, TouchableOpacity, Text, TouchableWithoutFeedback } from 'react-native';
-import { useDispatch } from '../../../../utility/hooks';
 import { WorkoutPlan } from '../../../../types/plans';
 import { Typography } from '../../../../components/Typography/Typography';
 import styles from './PlanListItem.styles';
-import { SELECT_PLAN } from '../../store/slice/slice';
 import { navigate } from '../../../../utility/navigate';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -18,7 +16,6 @@ type PlanListItemProps = {
 };
 
 const PlanListItem = ({ plan, onEdit, onDelete, isActive, onMenuToggle, onOutsidePress }: PlanListItemProps) => {
-  const dispatch = useDispatch();
   const menuRef = useRef(null);
 
   const handleEdit = () => {
@@ -32,8 +29,7 @@ const PlanListItem = ({ plan, onEdit, onDelete, isActive, onMenuToggle, onOutsid
   };
 
   const handleSelectPlan = (plan: WorkoutPlan) => {
-    dispatch(SELECT_PLAN(plan));
-    navigate('PlanDetailsScreen');
+    navigate('PlanDetailsScreen', { plan: plan, editable: true });
   };
 
   return (

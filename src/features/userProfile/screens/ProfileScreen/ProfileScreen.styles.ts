@@ -1,21 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { backgroundColor, primaryColor, blue } from '../../../../styles/colors';
+import { primaryColor, blue, dark_gray } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
     width: '100%',
   },
   contentWrapper: {
-    gap: 32,
-  },
-  section: {
-    marginTop: 20,
-    gap: 10,
-  },
-  title: {
-    color: primaryColor,
-    fontSize: 20,
-    fontWeight: 'bold',
+    gap: 16,
   },
   userDataWrapper: {
     alignItems: 'center',
@@ -26,6 +17,7 @@ export default StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 48,
+    marginBottom: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -43,5 +35,14 @@ export default StyleSheet.create({
   },
   settingsIcon: {
     color: primaryColor,
+  },
+  listItem: {
+    borderRadius: 8,
+    padding: 8,
+    backgroundColor: dark_gray,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 16,
   },
 });

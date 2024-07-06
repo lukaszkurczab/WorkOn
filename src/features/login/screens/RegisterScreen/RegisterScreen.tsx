@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { useDispatch } from '../../../../utility/hooks';
+import { useDispatch, useIsPasswordComplex } from '../../../../utility/hooks';
 import { register, login } from '../../store/actions/actions';
 import { storeToken } from '../../../../utility/secureStore';
 import { navigate } from '../../../../utility/navigate';
@@ -17,10 +17,6 @@ interface ErrorState {
   password: string;
   confirmPassword: string;
 }
-
-const isPasswordComplex = (password: string): boolean => {
-  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
-};
 
 const RegisterScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -48,18 +44,18 @@ const RegisterScreen: React.FC = () => {
       setError(prevError => ({ ...prevError, email: '' }));
     }
 
-    if (!isPasswordComplex(password)) {
-      setError(prevError => ({ ...prevError, password: 'Password is too simple' }));
-      hasError = true;
-    } else {
-      setError(prevError => ({ ...prevError, password: '' }));
-    }
-
     if (password !== confirmPassword) {
       setError(prevError => ({ ...prevError, confirmPassword: 'Passwords do not match' }));
       hasError = true;
     } else {
       setError(prevError => ({ ...prevError, confirmPassword: '' }));
+    }
+
+    if (!useIsPasswordComplex(password)) {
+      setError(prevError => ({ ...prevError, password: 'Password is too simple' }));
+      hasError = true;
+    } else {
+      setError(prevError => ({ ...prevError, password: '' }));
     }
 
     if (!hasError) {

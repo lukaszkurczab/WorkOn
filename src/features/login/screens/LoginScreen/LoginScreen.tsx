@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import { navigate } from '../../../../utility/navigate';
 import { Typography } from '../../../../components/Typography/Typography';
@@ -20,6 +20,12 @@ const LoginScreen: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+    setRememberMe(false);
+  }, []);
 
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);

@@ -1,10 +1,10 @@
 //const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
 //hotspot
-const BASE_URL = 'http://192.168.74.169:4000/users';
+//const BASE_URL = 'http://192.168.74.169:4000/users';
 //home
 //const BASE_URL = 'http://192.168.1.100:4000/users';
 //Tuchów
-//const BASE_URL = 'http://192.168.1.25:4000/users';
+const BASE_URL = 'http://192.168.1.25:4000/users';
 
 import { WorkoutPlan } from '../types/plans';
 import { WorkoutSession } from '../types/users';
@@ -129,17 +129,23 @@ export const loginUser = async (userData: { email: string; password: string }) =
   }
 };
 
-export const updateUserUsername = async (userData: { userId: string; newUsername: string }) => {
+export const updateUserUsername = async (userData: { userId: string; newUsername: string; password: string }) => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/username/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ newUsername: userData.newUsername }),
+      body: JSON.stringify({ newUsername: userData.newUsername, password: userData.password }),
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      if (response.status === 401) {
+        console.log('Error: Invalid password');
+      } else if (response.status === 409) {
+        console.log('Error: Username taken');
+      } else throw new Error('Network response was not ok');
     }
     return await response.json();
   } catch (error) {
@@ -202,12 +208,14 @@ export const getPublicHistoryItems = async (userId: string) => {
   }
 };
 
-export const setPublicPlan = async ({ userId, items }: { userId: string; items: string[] }) => {
+export const setPublicPlan = async ({ userId, items }: { userId: string; items: WorkoutPlan[] }) => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/set-public/plans/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({ items }),
     });
@@ -250,15 +258,19 @@ export const updateUserPassword = async ({
   oldPassword: string;
 }) => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/password/${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({ newPassword, oldPassword }),
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      if (response.status === 401) {
+        console.log('Error: Invalid password');
+      } else throw new Error('Network response was not ok');
     }
     return await response.json();
   } catch (error) {

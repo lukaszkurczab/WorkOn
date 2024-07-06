@@ -4,30 +4,30 @@ import styles from './SettingsScreen.styles';
 import Layout from '../../../../components/Layout/Layout';
 import { navigate } from '../../../../utility/navigate';
 import { Typography } from '../../../../components/Typography/Typography';
+import { removeToken } from '../../../../utility/secureStore';
 
 const SettingsScreen = () => {
   const handleChangeUsername = () => {
-    console.log('ChangeUsernameScreen');
+    navigate('ChangeUsernameScreen');
   };
 
   const handleChangePassword = () => {
-    console.log('ChangePasswordScreen');
-  };
-
-  const handleSelectRecords = () => {
-    console.log('SetRecordsScreen');
+    navigate('ChangePasswordScreen');
   };
 
   const handlePublicWorkouts = () => {
-    console.log('SetPublicWorkoutsScreen');
+    navigate('SetPublicWorkoutsScreen');
   };
 
   const handlePublicPlans = () => {
-    console.log('SetPublicPlansScreen');
+    navigate('SetPublicPlansScreen');
   };
 
   const handleLogout = () => {
-    console.log('LoginScreen');
+    removeToken('accessToken');
+    removeToken('refreshToken');
+    removeToken('rememberMe');
+    navigate('LoginScreen');
   };
 
   return (
@@ -50,11 +50,6 @@ const SettingsScreen = () => {
             </Typography>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleSelectRecords}>
-          <Typography variant="h3" style={styles.text}>
-            Select records
-          </Typography>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={handlePublicWorkouts}>
           <Typography variant="h3" style={styles.text}>
             Select public workouts

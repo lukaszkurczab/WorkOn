@@ -8,6 +8,7 @@ import { addHistoryItem } from '../../features/training/store/actions/actions';
 interface UserState {
   id: string;
   email: string;
+  username: string;
   plans: WorkoutPlan[];
   history: HistoryItem[];
 }
@@ -19,6 +20,7 @@ interface JwtPayload {
 
 const initialState: UserState = {
   id: '',
+  username: '',
   email: '',
   plans: [
     {
@@ -43,6 +45,12 @@ const userSlice = createSlice({
       state.id = decodedData.id;
       state.email = decodedData.email;
     },
+    CHANGE_USERNAME: (state, action) => {
+      state.username = action.payload;
+    },
+    UPDATE_PLANS: (state, action) => {
+      state.plans = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(
@@ -58,5 +66,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { DECODE_USER_DATA } = userSlice.actions;
+export const { DECODE_USER_DATA, CHANGE_USERNAME, UPDATE_PLANS } = userSlice.actions;
 export default userSlice.reducer;

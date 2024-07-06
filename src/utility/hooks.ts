@@ -110,5 +110,9 @@ export function updatePlanExercise(trainingExercise: Exercise, planExercise: Exe
   return updatedPlan;
 }
 
+export const useIsPasswordComplex = (password: string): boolean => {
+  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
+};
+
 export const useDispatch = () => useReduxDispatch<AppDispatch>();
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
