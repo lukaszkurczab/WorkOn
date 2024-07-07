@@ -194,6 +194,7 @@ const trainingSlice = createSlice({
         ...state.trainingSummary,
         duration: Date.now() - state.startTime,
       };
+      state.lastActivity = null;
     });
   },
 });

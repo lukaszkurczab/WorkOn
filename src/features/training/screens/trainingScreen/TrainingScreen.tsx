@@ -19,6 +19,7 @@ const selectStep = (step: string) => {
   const trainingStart = useSelector((state: RootState) => state.training.startTime);
   const selectedTraining = useSelector((state: RootState) => state.training.selectedTraining);
   const selectedPlan = useSelector((state: RootState) => state.training.selectedPlan);
+  const unfinishedExercises = useSelector((state: RootState) => state.training.unfinishedExercises);
 
   const handleEndTraining = async () => {
     const selectedTrainingIndex = selectedPlan.days.findIndex(day => day.id === selectedTraining.id);
@@ -41,16 +42,19 @@ const selectStep = (step: string) => {
     const updatedPlan: WorkoutPlan = JSON.parse(JSON.stringify(selectedPlan));
     updatedPlan.days[selectedTrainingIndex] = {
       ...selectedTraining,
-      exercises: summary.exercises.map(exercise => {
-        const exerciseFromPlan = selectedTraining.exercises.find(planExercise => planExercise.id === exercise.id);
-        let updatedExercise;
-        if (exerciseFromPlan != undefined) {
-          updatedExercise = updatePlanExercise(exercise, exerciseFromPlan);
-        } else {
-          updatedExercise = exercise;
-        }
-        return updatedExercise;
-      }),
+      exercises: [
+        ...summary.exercises.map(exercise => {
+          const exerciseFromPlan = selectedTraining.exercises.find(planExercise => planExercise.id === exercise.id);
+          let updatedExercise;
+          if (exerciseFromPlan != undefined) {
+            updatedExercise = updatePlanExercise(exercise, exerciseFromPlan);
+          } else {
+            updatedExercise = exercise;
+          }
+          return updatedExercise;
+        }),
+        ...unfinishedExercises,
+      ],
     };
 
     await dispatch(updateUserPlan({ userId: user.id, plan: updatedPlan }));
