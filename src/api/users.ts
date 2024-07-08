@@ -1,10 +1,4 @@
-//const BASE_URL = 'https://workon-backend.azurewebsites.net/users';
-//hotspot
-const BASE_URL = 'http://192.168.74.169:4000/users';
-//home
-//const BASE_URL = 'http://192.168.1.100:4000/users';
-//Tuchów
-//const BASE_URL = 'http://192.168.1.25:4000/users';
+import { BASE_URL } from '../../env';
 
 import { WorkoutPlan } from '../types/plans';
 import { WorkoutSession } from '../types/users';
@@ -13,7 +7,7 @@ import { getToken } from '../utility/secureStore';
 export const addHistoryItemToUser = async (userData: { userId: string; historyItem: WorkoutSession }) => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/history/${userData.userId}`, {
+    const response = await fetch(`${BASE_URL}/users/history/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +24,7 @@ export const addHistoryItemToUser = async (userData: { userId: string; historyIt
 export const removePlanFromUser = async (userData: { userId: string; planId: string }) => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
+    const response = await fetch(`${BASE_URL}/users/plans/${userData.userId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +41,7 @@ export const removePlanFromUser = async (userData: { userId: string; planId: str
 export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan }) => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/plans/${userData.userId}`, {
+    const response = await fetch(`${BASE_URL}/users/plans/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +58,7 @@ export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan
 export const addPlanToUser = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<void> => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/plans/${data.userId}`, {
+    const response = await fetch(`${BASE_URL}/users/plans/${data.userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +78,7 @@ export const addPlanToUser = async (data: { userId: string; newPlan: WorkoutPlan
 
 export const registerUser = async (userData: { username: string; email: string; password: string }) => {
   try {
-    const response = await fetch(`${BASE_URL}/register`, {
+    const response = await fetch(`${BASE_URL}/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +105,7 @@ export const registerUser = async (userData: { username: string; email: string; 
 
 export const loginUser = async (userData: { email: string; password: string }) => {
   try {
-    const response = await fetch(`${BASE_URL}/login`, {
+    const response = await fetch(`${BASE_URL}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -132,7 +126,7 @@ export const loginUser = async (userData: { email: string; password: string }) =
 export const updateUserUsername = async (userData: { userId: string; newUsername: string; password: string }) => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/username/${userData.userId}`, {
+    const response = await fetch(`${BASE_URL}/users/username/${userData.userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +150,7 @@ export const updateUserUsername = async (userData: { userId: string; newUsername
 
 export const getPublicPlans = async (userId: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/public/plans/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/public/plans/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -174,7 +168,7 @@ export const getPublicPlans = async (userId: string) => {
 
 export const getPublicRecords = async (userId: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/public/records/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/public/records/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -192,7 +186,7 @@ export const getPublicRecords = async (userId: string) => {
 
 export const getPublicHistoryItems = async (userId: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/public/history/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/public/history/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -211,7 +205,7 @@ export const getPublicHistoryItems = async (userId: string) => {
 export const setPublicPlan = async ({ userId, items }: { userId: string; items: WorkoutPlan[] }) => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/set-public/plans/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/set-public/plans/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +225,7 @@ export const setPublicPlan = async ({ userId, items }: { userId: string; items: 
 
 export const setPublicHistoryItem = async ({ userId, items }: { userId: string; items: string[] }) => {
   try {
-    const response = await fetch(`${BASE_URL}/set-public/history/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/set-public/history/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -259,7 +253,7 @@ export const updateUserPassword = async ({
 }) => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/password/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/password/${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -281,7 +275,7 @@ export const updateUserPassword = async ({
 
 export const refreshAccessToken = async (refreshToken: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/token`, {
+    const response = await fetch(`${BASE_URL}/users/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -302,7 +296,7 @@ export const refreshAccessToken = async (refreshToken: string) => {
 
 export const getData = async (token: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/${token}`, {
+    const response = await fetch(`${BASE_URL}/users/${token}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -30,6 +30,12 @@ const styles = StyleSheet.create({
   button: {
     width: 240,
   },
+  seriesWrapper: {
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    position: 'absolute',
+    top: -64,
+  },
 });
 
 export default styles;

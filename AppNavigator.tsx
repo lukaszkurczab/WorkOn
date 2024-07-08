@@ -102,7 +102,7 @@ const AppNavigator = () => {
         <Stack.Screen name="SelectTrainingScreen" component={SelectTrainingScreen} />
         <Stack.Screen name="ManualCreatorScreen" component={ManualCreatorScreen} />
         <Stack.Screen name="TrainingScreen" component={TrainingScreen} />
-        <Stack.Screen name="WorkoutSummary" component={WorkoutSummary} />
+        <Stack.Screen name="WorkoutSummaryScreen" component={WorkoutSummary} />
         <Stack.Screen name="PlansListScreen" component={PlansListScreen} />
         <Stack.Screen name="PlanDetailsScreen" component={PlanDetailsScreen} />
         <Stack.Screen name="ExerciseAtlasScreen" component={ExerciseAtlasScreen} />

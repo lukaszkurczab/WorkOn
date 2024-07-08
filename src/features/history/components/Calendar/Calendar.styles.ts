@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor } from '../../../../styles/colors';
+import { blue, dark_gray, primaryColor } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -23,9 +23,17 @@ export default StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 20,
   },
   cellText: {
     fontSize: 16,
+  },
+  todayCell: {
+    borderWidth: 1,
+    borderColor: dark_gray,
+  },
+  markedDate: {
+    backgroundColor: blue,
   },
   calendarContainer: {
     width: 280,

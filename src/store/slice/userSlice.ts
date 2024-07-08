@@ -4,13 +4,14 @@ import { getUserData } from '../actions/userActions';
 import { WorkoutPlan } from '../../types/plans';
 import { HistoryItem } from '../../types/history';
 import { addHistoryItem } from '../../features/training/store/actions/actions';
+import { WorkoutSession } from '../../types/users';
 
 interface UserState {
   id: string;
   email: string;
   username: string;
   plans: WorkoutPlan[];
-  history: HistoryItem[];
+  history: WorkoutSession[];
 }
 
 interface JwtPayload {
@@ -55,12 +56,12 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(
       getUserData.fulfilled,
-      (state, action: PayloadAction<{ plans: WorkoutPlan[]; history: HistoryItem[] }>) => {
+      (state, action: PayloadAction<{ plans: WorkoutPlan[]; history: WorkoutSession[] }>) => {
         state.plans = action.payload.plans;
         state.history = action.payload.history;
       }
     );
-    builder.addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
+    builder.addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<WorkoutSession>) => {
       state.history.push(action.payload);
     });
   },

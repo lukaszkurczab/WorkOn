@@ -7,7 +7,6 @@ import styles from './TrainingScreen.styles';
 import { RootState } from '../../../../store/store';
 import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
-import { navigate } from '../../../../utility/navigate';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
 import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
 import { WorkoutPlan } from '../../../../types/plans';
@@ -58,7 +57,6 @@ const selectStep = (step: string) => {
     };
 
     await dispatch(updateUserPlan({ userId: user.id, plan: updatedPlan }));
-    navigate('WorkoutSummary');
   };
 
   switch (step) {

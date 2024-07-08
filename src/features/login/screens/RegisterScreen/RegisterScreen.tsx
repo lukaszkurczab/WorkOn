@@ -18,7 +18,7 @@ interface ErrorState {
   confirmPassword: string;
 }
 
-const RegisterScreen: React.FC = () => {
+const RegisterScreen = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');

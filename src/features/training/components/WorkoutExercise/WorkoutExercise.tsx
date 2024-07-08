@@ -27,8 +27,6 @@ const WorkoutExercise = () => {
     setModalVisible(false);
   };
 
-  const handleEndExercise = () => {};
-
   const handleHelp = () => {
     navigate('ExerciseDetailsScreen', { exercise, showNavigation: false });
   };

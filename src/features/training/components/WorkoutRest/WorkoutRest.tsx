@@ -42,6 +42,8 @@ const WorkoutRest = () => {
   const dispatch = useDispatch();
   const exercise = useSelector((state: RootState) => state.training.selectedExercise);
   const restStart = useSelector((state: RootState) => state.training.restStart);
+  const seriesIndex = useSelector((state: RootState) => state.training.seriesIndex);
+  const seriesNumber = useSelector((state: RootState) => state.training.selectedExercise.series.length);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
@@ -70,6 +72,11 @@ const WorkoutRest = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.seriesWrapper}>
+        <Typography variant="h3">
+          Finished series: {seriesIndex}/{seriesNumber}
+        </Typography>
+      </View>
       <View style={styles.stoper}>
         <Text style={styles.stoperText}>
           {minutes}:{seconds.toString().padStart(2, '0')}

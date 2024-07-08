@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Exercise, Series } from '../../../../types/exercises';
 import { updateUserPlan } from '../actions/actions';
+import { navigate } from '../../../../utility/navigate';
 
 interface TrainingSummaryExercise {
   id: string;
@@ -195,6 +196,7 @@ const trainingSlice = createSlice({
         duration: Date.now() - state.startTime,
       };
       state.lastActivity = null;
+      navigate('WorkoutSummaryScreen', { workout: state.trainingSummary });
     });
   },
 });

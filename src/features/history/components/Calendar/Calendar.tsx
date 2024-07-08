@@ -1,19 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
 import Icon from 'react-native-vector-icons/AntDesign';
 import styles from './Calendar.styles';
 import { backgroundColor, blue, gray } from '../../../../styles/colors';
 
-interface MarkedDate {
-  color: string;
-  details: string;
-}
-
 interface CalendarProps {
-  markedDates?: { [key: string]: MarkedDate };
-  onDateChange?: (month: number, year: number) => void;
-  onDayPress?: (date: string) => void;
+  markedDates: Record<string, { marked: boolean }>;
+  onDayPress: (date: Date) => void;
 }
 
 const daysInMonth = (month: number, year: number): number => new Date(year, month + 1, 0).getDate();
@@ -45,12 +39,13 @@ const generateCalendarMatrix = (month: number, year: number): { day: number; isC
   return matrix;
 };
 
-const Calendar: React.FC<CalendarProps> = ({ markedDates = {}, onDateChange, onDayPress }) => {
+const Calendar = ({ markedDates, onDayPress }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear());
   const [viewMode, setViewMode] = useState<'day' | 'month' | 'year'>('day');
   const years = Array.from({ length: 96 }, (_, i) => 2001 + i);
   const scrollViewRef = useRef<ScrollView>(null);
+  const today = new Date();
 
   useEffect(() => {
     if (viewMode === 'year' && scrollViewRef.current) {
@@ -65,25 +60,13 @@ const Calendar: React.FC<CalendarProps> = ({ markedDates = {}, onDateChange, onD
     }
   }, [viewMode]);
 
-  useEffect(() => {
-    if (onDateChange) {
-      onDateChange(currentMonth, currentYear);
-    }
-  }, [currentMonth, currentYear]);
-
   const handleDayPress = (day: { day: number; isCurrentMonth: boolean } | null) => {
     if (!day || !day.isCurrentMonth) return;
 
-    const dateString = `${currentYear}-${currentMonth + 1}-${day.day}`;
-
     if (onDayPress) {
-      onDayPress(dateString);
+      onDayPress(new Date(currentYear, currentMonth, day.day));
     }
-
-    if (markedDates[dateString]) {
-      Alert.alert('Szczegóły treningu', `Trening: ${JSON.stringify(markedDates[dateString])}`);
-      return;
-    }
+    console.log(markedDates);
   };
 
   const setPrevMonth = () => {
@@ -122,16 +105,23 @@ const Calendar: React.FC<CalendarProps> = ({ markedDates = {}, onDateChange, onD
         {matrix.map((row, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
             {row.map((day, colIndex) => {
-              const dateString = `${currentYear}-${currentMonth + 1}-${day.day}`;
+              const dateString = `${String(day.day).padStart(2, '0')}.${String(currentMonth + 1).padStart(
+                2,
+                '0'
+              )}.${currentYear}`;
               const isCurrentMonth = day.isCurrentMonth;
+              const isToday =
+                isCurrentMonth &&
+                today.getFullYear() === currentYear &&
+                today.getMonth() === currentMonth &&
+                today.getDate() === day.day;
               return (
                 <TouchableOpacity
                   key={colIndex}
                   style={[
                     styles.cell,
-                    isCurrentMonth && markedDates[dateString]
-                      ? { backgroundColor: markedDates[dateString].color }
-                      : null,
+                    isCurrentMonth && markedDates[dateString] ? styles.markedDate : null,
+                    isToday ? styles.todayCell : null,
                   ]}
                   onPress={() => handleDayPress(day)}
                 >

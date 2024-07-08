@@ -13,7 +13,7 @@ import { useDispatch } from '../../../../utility/hooks';
 import { DECODE_USER_DATA } from '../../../../store/slice/userSlice';
 import { getUserData } from '../../../../store/actions/userActions';
 
-const LoginScreen: React.FC = () => {
+const LoginScreen = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

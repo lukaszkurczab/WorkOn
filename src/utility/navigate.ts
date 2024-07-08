@@ -1,6 +1,7 @@
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { ExerciseData } from '../types/exercises';
 import { WorkoutPlan } from '../types/plans';
+import { WorkoutSession } from '../types/users';
 
 export type RootStackParamList = {
   LoginScreen: undefined;
@@ -10,7 +11,7 @@ export type RootStackParamList = {
   ManualCreatorScreen: undefined;
   SelectTrainingScreen: undefined;
   TrainingScreen: undefined;
-  WorkoutSummary: undefined;
+  WorkoutSummaryScreen: { workout: WorkoutSession } | any;
   PlansListScreen: undefined;
   PlanDetailsScreen: { plan: WorkoutPlan; editable: boolean } | any;
   ExerciseAtlasScreen: undefined;

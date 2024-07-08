@@ -1,17 +1,11 @@
-//const BASE_URL = 'https://workon-backend.azurewebsites.net/plans';
-//hotspot
-const BASE_URL = 'http://192.168.74.169:4000/plans';
-//home
-//const BASE_URL = 'http://192.168.1.100:4000/plans';
-//Tuchów
-//const BASE_URL = 'http://192.168.1.25:4000/plans';
+import { BASE_URL } from '../../env';
 
 import { WorkoutPlan } from '../types/plans';
 import { getToken } from '../utility/secureStore';
 
 export const fetchPlans = async (): Promise<WorkoutPlan[]> => {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/plans`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -24,7 +18,7 @@ export const fetchPlans = async (): Promise<WorkoutPlan[]> => {
 
 export const addPlan = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<void> => {
   try {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(`${BASE_URL}/plans`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +38,7 @@ export const addPlan = async (data: { userId: string; newPlan: WorkoutPlan }): P
 export const updatePlan = async (data: { id: string; updatedPlan: WorkoutPlan }): Promise<WorkoutPlan> => {
   try {
     const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/${data.id}`, {
+    const response = await fetch(`${BASE_URL}/plans/${data.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +58,7 @@ export const updatePlan = async (data: { id: string; updatedPlan: WorkoutPlan })
 
 export const deletePlan = async (id: string): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/plans/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
