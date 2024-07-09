@@ -1,7 +1,7 @@
-import { createNavigationContainerRef } from '@react-navigation/native';
+import { createNavigationContainerRef, CommonActions } from '@react-navigation/native';
 import { ExerciseData } from '../types/exercises';
 import { WorkoutPlan } from '../types/plans';
-import { WorkoutSession } from '../types/users';
+import { HistoryItem } from '../types/history';
 
 export type RootStackParamList = {
   LoginScreen: undefined;
@@ -11,7 +11,7 @@ export type RootStackParamList = {
   ManualCreatorScreen: undefined;
   SelectTrainingScreen: undefined;
   TrainingScreen: undefined;
-  WorkoutSummaryScreen: { workout: WorkoutSession } | any;
+  WorkoutSummaryScreen: { workout: HistoryItem; previousScreen?: string } | any;
   PlansListScreen: undefined;
   PlanDetailsScreen: { plan: WorkoutPlan; editable: boolean } | any;
   ExerciseAtlasScreen: undefined;
@@ -32,5 +32,14 @@ type ScreenNames = keyof RootStackParamList;
 export function navigate(name: ScreenNames, params?: RootStackParamList[ScreenNames]) {
   if (navigationRef.isReady()) {
     navigationRef.navigate(name, params);
+  }
+}
+
+export function resetNavigation(name: ScreenNames, params?: RootStackParamList[ScreenNames]) {
+  if (navigationRef.isReady()) {
+    navigationRef.reset({
+      index: 0,
+      routes: [{ name, params }],
+    });
   }
 }

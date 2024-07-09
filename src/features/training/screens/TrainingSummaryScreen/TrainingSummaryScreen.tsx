@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useDispatch, useFormatTime } from '../../../../utility/hooks';
 import styles from './TrainingSummaryScreen.styles';
@@ -16,19 +16,45 @@ type WorkoutSummaryScreenRouteProp = RouteProp<RootStackParamList, 'WorkoutSumma
 
 const WorkoutSummary = () => {
   const route = useRoute<WorkoutSummaryScreenRouteProp>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  if (!route.params || !route.params.workout) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      if (!route.params || !route.params.workout) {
+        setError(true);
+      }
+    }, 10000); // 10 seconds
+
+    if (route.params && route.params.workout) {
+      setLoading(false);
+    }
+
+    return () => clearTimeout(timer);
+  }, [route.params]);
+  if (loading) {
     return (
-      <Layout>
+      <Layout showHeader={false}>
+        <ActivityIndicator color="#06f" size="large" />
+        <Typography variant="h2">Loading workout data...</Typography>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout showHeader={false}>
         <Typography variant="h2">No workout data provided.</Typography>
       </Layout>
     );
   }
 
-  const summary = route.params.workout;
+  const summary = route.params!.workout;
+  const previousScreen = route.params!.previousScreen;
 
   const handleFinish = async () => {
-    navigate('MainScreen');
+    navigate(previousScreen ? previousScreen : 'MainScreen');
   };
 
   return (
@@ -48,7 +74,7 @@ const WorkoutSummary = () => {
           Total time: {useFormatTime((summary.duration ? summary.duration : summary.time) / 1000)}
         </Typography>
         <Button onPress={handleFinish}>
-          <Typography variant="h3">FINISH</Typography>
+          <Typography variant="h3">{previousScreen ? 'BACK' : 'FINISH'}</Typography>
         </Button>
       </ScrollView>
     </Layout>

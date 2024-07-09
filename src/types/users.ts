@@ -1,5 +1,6 @@
 import { Series } from './exercises';
 import { WorkoutPlan } from './plans';
+import { HistoryItem } from './history';
 
 export interface User {
   id: string;
@@ -9,24 +10,11 @@ export interface User {
   password: string;
   token?: string;
   plans: WorkoutPlan[];
-  history: WorkoutSession[];
+  history: HistoryItem[];
 }
 
 export interface UserRecord {
   exercise: string;
   weight: number;
   public: boolean;
-}
-
-export interface WorkoutSession {
-  id: string | null;
-  date: Date;
-  plan: string;
-  day: string;
-  time: number;
-  public: boolean;
-  exercises: Array<{
-    id: string;
-    series: Series[];
-  }>;
 }

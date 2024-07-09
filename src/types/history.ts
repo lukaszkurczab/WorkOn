@@ -1,8 +1,8 @@
 import { Series } from './exercises';
 
 export interface HistoryItem {
-  id: string;
-  date: string;
+  id: string | null;
+  date: Date;
   plan: string;
   day: string;
   time: number;

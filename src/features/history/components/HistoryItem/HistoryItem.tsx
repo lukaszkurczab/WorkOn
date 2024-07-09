@@ -4,10 +4,9 @@ import { Typography } from '../../../../components/Typography/Typography';
 import { gray } from '../../../../styles/colors';
 import { useFormatTime } from '../../../../utility/hooks';
 import styles from './HistoryItem.styles';
-import { WorkoutSession } from '../../../../types/users';
-
+import { HistoryItem as HistoryItemType } from '../../../../types/history';
 type HistoryItemProps = {
-  historyItem: WorkoutSession;
+  historyItem: HistoryItemType;
 };
 
 const HistoryItem = ({ historyItem }: HistoryItemProps) => {

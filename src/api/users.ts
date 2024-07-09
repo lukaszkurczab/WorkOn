@@ -1,10 +1,10 @@
 import { BASE_URL } from '../../env';
 
 import { WorkoutPlan } from '../types/plans';
-import { WorkoutSession } from '../types/users';
+import { HistoryItem } from '../types/history';
 import { getToken } from '../utility/secureStore';
 
-export const addHistoryItemToUser = async (userData: { userId: string; historyItem: WorkoutSession }) => {
+export const addHistoryItemToUser = async (userData: { userId: string; historyItem: HistoryItem }) => {
   try {
     const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/users/history/${userData.userId}`, {

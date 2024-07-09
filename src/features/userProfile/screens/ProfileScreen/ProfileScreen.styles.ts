@@ -45,4 +45,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingRight: 16,
   },
+  historyItem: {
+    backgroundColor: dark_gray,
+    padding: 8,
+    borderRadius: 8,
+  },
 });

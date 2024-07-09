@@ -66,7 +66,6 @@ const Calendar = ({ markedDates, onDayPress }: CalendarProps) => {
     if (onDayPress) {
       onDayPress(new Date(currentYear, currentMonth, day.day));
     }
-    console.log(markedDates);
   };
 
   const setPrevMonth = () => {

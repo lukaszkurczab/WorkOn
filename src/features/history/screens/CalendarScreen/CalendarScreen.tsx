@@ -9,14 +9,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import HistoryItem from '../../components/HistoryItem/HistoryItem';
 import { Typography } from '../../../../components/Typography/Typography';
 import { useFormatDate } from '../../../../utility/hooks';
-import { WorkoutSession } from '../../../../types/users';
+import { HistoryItem as HistoryItemType } from '../../../../types/history';
 import { navigate } from '../../../../utility/navigate';
 
 const CalendarScreen = () => {
   const userHistory = useSelector((state: RootState) => state.user.history);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const groupedHistory = userHistory.reduce<Record<string, WorkoutSession[]>>((acc, historyItem) => {
+  const groupedHistory = userHistory.reduce<Record<string, HistoryItemType[]>>((acc, historyItem) => {
     const date = useFormatDate(new Date(historyItem.date));
     if (!acc[date]) {
       acc[date] = [];
@@ -34,8 +34,8 @@ const CalendarScreen = () => {
     setSelectedDate(useFormatDate(date));
   };
 
-  const handlePreviewTraining = (training: WorkoutSession) => {
-    navigate('WorkoutSummaryScreen', { workout: training });
+  const handlePreviewTraining = (training: HistoryItemType) => {
+    navigate('WorkoutSummaryScreen', { workout: training, previousScreen: 'CalendarScreen' });
   };
 
   return (

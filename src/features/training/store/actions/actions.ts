@@ -1,11 +1,11 @@
 import { addHistoryItemToUser, editUserPlan } from '../../../../api/users';
 import { WorkoutPlan } from '../../../../types/plans';
-import { WorkoutSession } from '../../../../types/users';
+import { HistoryItem } from '../../../../types/history';
 import { createAppAsyncThunk } from '../../../../utility/createAppAsyncThunk';
 
 export const addHistoryItem = createAppAsyncThunk(
   'user/addHistoryItem',
-  async (userData: { userId: string; historyItem: WorkoutSession }) => {
+  async (userData: { userId: string; historyItem: HistoryItem }) => {
     return await addHistoryItemToUser(userData);
   }
 );

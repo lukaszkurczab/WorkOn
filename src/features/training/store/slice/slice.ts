@@ -196,6 +196,7 @@ const trainingSlice = createSlice({
         duration: Date.now() - state.startTime,
       };
       state.lastActivity = null;
+
       navigate('WorkoutSummaryScreen', { workout: state.trainingSummary });
     });
   },

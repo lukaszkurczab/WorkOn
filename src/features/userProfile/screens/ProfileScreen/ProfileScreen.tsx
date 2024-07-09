@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
 import { gray, primaryColor } from '../../../../styles/colors';
 import { WorkoutPlan } from '../../../../types/plans';
+import { HistoryItem } from '../../../../types/history';
+import { useFormatDate } from '../../../../utility/hooks';
 
 const ProfileScreen = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -19,6 +21,10 @@ const ProfileScreen = () => {
 
   const previewPlan = (plan: WorkoutPlan) => {
     navigate('PlanDetailsScreen', { plan: plan, editable: false });
+  };
+
+  const handlePreviewTraining = (training: HistoryItem) => {
+    navigate('WorkoutSummaryScreen', { workout: training, previousScreen: 'ProfileScreen' });
   };
 
   return (
@@ -34,8 +40,8 @@ const ProfileScreen = () => {
             </View>
             <Typography variant="h3">{user.username}</Typography>
           </View>
-          <Typography variant="h2">Public plans</Typography>
-          {user.plans.map(plan => (
+          <Typography variant="h2">Plans</Typography>
+          {user.plans.map((plan: WorkoutPlan) => (
             <View key={plan.id} style={styles.listItem}>
               <View>
                 <Typography variant="h3">{plan.name}</Typography>
@@ -47,6 +53,21 @@ const ProfileScreen = () => {
                 <Icon name="eye" size={24} style={{ color: primaryColor }} />
               </TouchableOpacity>
             </View>
+          ))}
+          <Typography variant="h2">History</Typography>
+          {user.history.map((historyItem: HistoryItem) => (
+            <TouchableOpacity
+              onPress={() => handlePreviewTraining(historyItem)}
+              style={styles.historyItem}
+              key={historyItem.id}
+            >
+              <Typography variant="h3">
+                {historyItem.plan} - {historyItem.day}
+              </Typography>
+              <Typography variant="h4" style={{ color: gray }}>
+                {historyItem.exercises.length} exercises · {useFormatDate(historyItem.date)}
+              </Typography>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>

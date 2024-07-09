@@ -19,8 +19,9 @@ export default StyleSheet.create({
     width: '100%',
   },
   cell: {
-    width: 40,
-    height: 40,
+    margin: 1,
+    width: 38,
+    height: 38,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,

@@ -9,7 +9,7 @@ import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
 import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
-import { WorkoutPlan } from '../../../../types/plans';
+import { resetNavigation } from '../../../../utility/navigate';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
@@ -38,22 +38,19 @@ const selectStep = (step: string) => {
       })
     );
 
-    const updatedPlan: WorkoutPlan = JSON.parse(JSON.stringify(selectedPlan));
+    const updatedPlan = JSON.parse(JSON.stringify(selectedPlan));
+    const updatedExercises = selectedTraining.exercises.map(planExercise => {
+      const exerciseFromSummary = summary.exercises.find(exercise => exercise.id === planExercise.id);
+      if (exerciseFromSummary) {
+        return updatePlanExercise(exerciseFromSummary, planExercise);
+      } else {
+        return planExercise;
+      }
+    });
+
     updatedPlan.days[selectedTrainingIndex] = {
       ...selectedTraining,
-      exercises: [
-        ...summary.exercises.map(exercise => {
-          const exerciseFromPlan = selectedTraining.exercises.find(planExercise => planExercise.id === exercise.id);
-          let updatedExercise;
-          if (exerciseFromPlan != undefined) {
-            updatedExercise = updatePlanExercise(exercise, exerciseFromPlan);
-          } else {
-            updatedExercise = exercise;
-          }
-          return updatedExercise;
-        }),
-        ...unfinishedExercises,
-      ],
+      exercises: [...updatedExercises, ...unfinishedExercises],
     };
 
     await dispatch(updateUserPlan({ userId: user.id, plan: updatedPlan }));
