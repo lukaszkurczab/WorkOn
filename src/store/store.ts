@@ -2,22 +2,16 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import thunk from 'redux-thunk';
-import atlasReducer from './reducers/atlasReducer';
 import trainingReducer from '../features/training/store/slice/slice';
-import sessionReducer from './slice/sessionSlice';
 import userReducer from './slice/userSlice';
-import exercisesReducer from './reducers/exercisesReducer';
 import loginReducer from '../features/login/store/slice/slice';
 import plansReducer from '../features/plansList/store/slice/slice';
 import planCreatorReducer from '../features/planCreator/store/slice/slice';
 
 const rootReducer = combineReducers({
-  atlas: atlasReducer,
   plans: plansReducer,
   training: trainingReducer,
-  session: sessionReducer,
   user: userReducer,
-  exercises: exercisesReducer,
   login: loginReducer,
   planCreator: planCreatorReducer,
 });

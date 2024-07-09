@@ -4,6 +4,7 @@ module.exports = {
   version: '1.0.0',
   orientation: 'portrait',
   userInterfaceStyle: 'light',
+  icon: './assets/icon.png',
   splash: {
     resizeMode: 'contain',
     backgroundColor: '#ffffff',
@@ -14,7 +15,8 @@ module.exports = {
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: './assets/adaptive-icon.png',
+      foregroundImage: './assets/adaptive-icon-foreground.png',
+      backgroundImage: './assets/adaptive-icon-background.png',
       backgroundColor: '#ffffff',
     },
     package: 'io.workon.development',
