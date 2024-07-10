@@ -12,11 +12,23 @@ const MainScreen = () => {
   return (
     <Layout>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigate('SelectTrainingScreen')} style={[styles.button, styles.startButton]}>
-          <Typography variant="h2" style={{}}>
-            Start training
-          </Typography>
-        </TouchableOpacity>
+        {user.plans.length === 0 ? (
+          <TouchableOpacity onPress={() => navigate('CarouselScreen')} style={[styles.button, styles.startButton]}>
+            <Typography variant="h2" style={{}}>
+              Create first plan
+            </Typography>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => navigate('SelectTrainingScreen')}
+            style={[styles.button, styles.startButton]}
+          >
+            <Typography variant="h2" style={{}}>
+              Start training
+            </Typography>
+          </TouchableOpacity>
+        )}
+
         <TouchableOpacity onPress={() => navigate('PlansListScreen')} style={styles.button}>
           <Typography variant="h2" style={styles.buttonText}>
             Plans
