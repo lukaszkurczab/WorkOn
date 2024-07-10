@@ -7,12 +7,21 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
   },
   image: {
-    width: 180,
-    height: 200,
+    width: '50%',
+    height: '30%',
     marginBottom: 16,
+    resizeMode: 'contain',
+  },
+  indicator: {
+    marginVertical: 20,
+  },
+  text: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#333',
   },
 });
 

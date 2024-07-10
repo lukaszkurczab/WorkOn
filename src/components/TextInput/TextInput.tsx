@@ -9,6 +9,7 @@ import {
   TextStyle,
 } from 'react-native';
 import styles from './TextInput.styles';
+import { gray, dark_gray, red } from '../../styles/colors';
 
 interface CustomTextInputProps extends TextInputProps {
   value: string;
@@ -22,6 +23,21 @@ interface CustomTextInputProps extends TextInputProps {
   rightComponent?: React.ReactNode;
 }
 
+const getInputWrapperStyle = (error: string | undefined, theme: 'dark' | 'light') => {
+  let backgroundColor;
+  if (error) {
+    backgroundColor = red;
+  } else if (theme === 'light') {
+    backgroundColor = gray;
+  } else {
+    backgroundColor = dark_gray;
+  }
+  return {
+    ...styles.inputWrapper,
+    backgroundColor,
+  };
+};
+
 export const TextInput: React.FC<CustomTextInputProps> = ({
   value,
   onChangeText,
@@ -34,22 +50,8 @@ export const TextInput: React.FC<CustomTextInputProps> = ({
   rightComponent,
   ...props
 }) => {
-  let inputWrapperStyle = styles.inputWrapper;
-
-  if (error) {
-    inputWrapperStyle = {
-      ...inputWrapperStyle,
-      backgroundColor: '#521616',
-    };
-  } else if (theme === 'light') {
-    inputWrapperStyle = {
-      ...inputWrapperStyle,
-      backgroundColor: '#F2F2F2',
-    };
-  }
-
   return (
-    <View style={[inputWrapperStyle, style]}>
+    <View style={[getInputWrapperStyle(error, theme), style]}>
       {error && <Text style={styles.error}>{error}</Text>}
       <View style={styles.container}>
         {leftComponent && <View style={styles.leftComponent}>{leftComponent}</View>}
@@ -58,7 +60,7 @@ export const TextInput: React.FC<CustomTextInputProps> = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={theme === 'dark' ? '#848484' : '#343434'}
+          placeholderTextColor={theme === 'dark' ? gray : dark_gray}
           {...props}
         />
         {rightComponent && <View style={styles.rightComponent}>{rightComponent}</View>}

@@ -1,13 +1,18 @@
 import { registerUser, loginUser } from '../../../../api/users';
 import { createAppAsyncThunk } from '../../../../utility/createAppAsyncThunk';
+import { User } from '../../../../types/users';
 
-export const register = createAppAsyncThunk(
-  'user/register',
-  async (userData: { username: string; email: string; password: string }) => {
-    return await registerUser(userData);
-  }
-);
+interface RegisterUserData {
+  username: string;
+  email: string;
+  password: string;
+}
 
-export const login = createAppAsyncThunk('user/login', async (userData: { email: string; password: string }) => {
-  return await loginUser(userData);
+interface LoginUserData {
+  email: string;
+  password: string;
+}
+
+export const register = createAppAsyncThunk<User, RegisterUserData>('user/register', async userData => {
+  return await registerUser(userData);
 });

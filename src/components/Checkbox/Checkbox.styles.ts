@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderColor: primaryColor,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     color: primaryColor,

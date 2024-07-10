@@ -114,6 +114,11 @@ export const useIsPasswordComplex = (password: string): boolean => {
   return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
 };
 
+export const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 export const useFormatDate = (dateInput: string | Date): string => {
   const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
   const day = String(date.getDate()).padStart(2, '0');

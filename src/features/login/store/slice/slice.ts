@@ -1,37 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, login } from '../actions/actions';
+import { register } from '../actions/actions';
+import { User } from '../../../../types/users';
+
+interface LoginState {
+  isLoading: boolean;
+  user: User | null;
+  error: string | null;
+}
+
+const initialState: LoginState = {
+  isLoading: false,
+  user: null,
+  error: null,
+};
 
 const loginSlice = createSlice({
   name: 'login',
-  initialState: {
-    isLoading: false,
-    data: {
-      plans: [],
-      history: [],
-    },
-  },
+  initialState,
   reducers: {},
   extraReducers: builder => {
     builder
       .addCase(register.pending, state => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload;
+        state.user = action.payload;
+        state.error = null;
       })
-      .addCase(register.rejected, state => {
+      .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
-      })
-      .addCase(login.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.data = action.payload;
-      })
-      .addCase(login.rejected, state => {
-        state.isLoading = false;
+        state.error = action.error.message || 'Unknown error';
       });
   },
 });

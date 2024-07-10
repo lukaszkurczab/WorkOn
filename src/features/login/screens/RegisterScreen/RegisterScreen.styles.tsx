@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, secondaryColor, backgroundColor } from '../../../../styles/colors';
+import { blue } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   inputs: {
@@ -7,12 +7,8 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 12,
   },
-  signInText: {
-    color: secondaryColor,
-    marginTop: 20,
-  },
   signInButton: {
-    color: '#06f',
+    color: blue,
     fontWeight: 'bold',
   },
   signInWrapper: {

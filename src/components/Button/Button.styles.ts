@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { blue, gray } from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   button: {
@@ -9,10 +10,10 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   containedButton: {
-    backgroundColor: '#0067FF',
+    backgroundColor: blue,
   },
   containedButtonDisabled: {
-    backgroundColor: '#A0A0A0',
+    backgroundColor: gray,
   },
   textButton: {
     backgroundColor: 'transparent',
@@ -23,11 +24,11 @@ export const styles = StyleSheet.create({
   outlinedButton: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: '#0067FF',
+    borderColor: blue,
   },
   outlinedButtonDisabled: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: '#A0A0A0',
+    borderColor: gray,
   },
 });

@@ -45,17 +45,12 @@ const userSlice = createSlice({
       state.id = decodedData.id;
       state.email = decodedData.email;
     },
-    CHANGE_USERNAME: (state, action) => {
-      state.username = action.payload;
-    },
-    UPDATE_PLANS: (state, action) => {
-      state.plans = action.payload;
-    },
   },
   extraReducers: builder => {
     builder.addCase(
       getUserData.fulfilled,
-      (state, action: PayloadAction<{ plans: WorkoutPlan[]; history: HistoryItem[] }>) => {
+      (state, action: PayloadAction<{ username: string; plans: WorkoutPlan[]; history: HistoryItem[] }>) => {
+        state.username = action.payload.username;
         state.plans = action.payload.plans;
         state.history = action.payload.history;
       }
@@ -66,5 +61,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { DECODE_USER_DATA, CHANGE_USERNAME, UPDATE_PLANS } = userSlice.actions;
+export const { DECODE_USER_DATA } = userSlice.actions;
 export default userSlice.reducer;

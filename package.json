@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "expo start --dev-client",
     "build": "eas build --platform android --profile preview",
+    "build:ios": "eas build --platform ios --profile preview",
     "offline": "expo start --offline",
     "android": "npx expo run:android",
     "ios": "expo run:ios",

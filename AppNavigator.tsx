@@ -4,6 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef, RootStackParamList } from './src/utility/navigate';
 import { refreshAccessToken } from './src/api/users';
 import { jwtDecode } from 'jwt-decode';
+import { useSelector } from 'react-redux';
+import { getToken, storeToken } from './src/utility/secureStore';
+import { DECODE_USER_DATA } from './src/store/slice/userSlice';
+import { getUserData } from './src/store/actions/userActions';
+import { RootState, AppDispatch } from './src/store/store';
+
 import LoginScreen from './src/features/login/screens/LoginScreen/LoginScreen';
 import RegisterScreen from './src/features/login/screens/RegisterScreen/RegisterScreen';
 import MainScreen from './src/features/main/screens/MainScreen';
@@ -11,10 +17,6 @@ import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/Ca
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
 import ManualCreatorScreen from './src/features/planCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
 import SelectTrainingScreen from './src/features/training/screens/SelectTrainingScreen/SelectTrainingScreen';
-import { getToken, storeToken } from './src/utility/secureStore';
-import { useDispatch } from './src/utility/hooks';
-import { DECODE_USER_DATA } from './src/store/slice/userSlice';
-import { getUserData } from './src/store/actions/userActions';
 import TrainingScreen from './src/features/training/screens/TrainingScreen/TrainingScreen';
 import WorkoutSummary from './src/features/training/screens/TrainingSummaryScreen/TrainingSummaryScreen';
 import PlansListScreen from './src/features/plansList/screens/PlansListScreen/PlansListScreen';
@@ -28,8 +30,7 @@ import SetPublicPlansScreen from './src/features/userProfile/screens/SetPublicPl
 import SetPublicWorkoutsScreen from './src/features/userProfile/screens/SetPublicWorkoutsScreen/SetPublicWorkoutsScreen';
 import ChangePasswordScreen from './src/features/userProfile/screens/ChangePasswordScreen/ChangePasswordScreen';
 import ChangeUsernameScreen from './src/features/userProfile/screens/ChangeUsernameScreen/ChangeUsernameScreen';
-import { useSelector } from 'react-redux';
-import { RootState } from './src/store/store';
+import { useDispatch } from './src/utility/hooks';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -50,25 +51,9 @@ const AppNavigator = () => {
           const currentTime = Date.now() / 1000;
 
           if (decodedToken.exp > currentTime) {
-            dispatch(DECODE_USER_DATA(accessToken));
-            dispatch(getUserData(accessToken));
-            setInitialRoute('MainScreen');
+            await handleValidAccessToken(accessToken);
           } else {
-            const refreshToken = await getToken('refreshToken');
-
-            if (refreshToken) {
-              try {
-                const newAccessToken = await refreshAccessToken(refreshToken);
-                if (newAccessToken) {
-                  await storeToken('accessToken', newAccessToken);
-                  dispatch(DECODE_USER_DATA(newAccessToken));
-                  dispatch(getUserData(newAccessToken));
-                  setInitialRoute('MainScreen');
-                }
-              } catch (error) {
-                console.error('Error refreshing token:', error);
-              }
-            }
+            await handleExpiredAccessToken();
           }
         }
       } catch (error) {
@@ -79,6 +64,27 @@ const AppNavigator = () => {
       }
     };
 
+    const handleValidAccessToken = async (token: string) => {
+      dispatch(DECODE_USER_DATA(token));
+      await dispatch(getUserData(token));
+      setInitialRoute('MainScreen');
+    };
+
+    const handleExpiredAccessToken = async () => {
+      try {
+        const refreshToken = await getToken('refreshToken');
+        if (refreshToken) {
+          const newAccessToken = await refreshAccessToken(refreshToken);
+          if (newAccessToken) {
+            await storeToken('accessToken', newAccessToken);
+            await handleValidAccessToken(newAccessToken);
+          }
+        }
+      } catch (error) {
+        console.error('Error refreshing token:', error);
+      }
+    };
+
     const checkTrainingActivity = () => {
       if (trainingActivity !== null && Date.now() - trainingActivity < 1800000) {
         setInitialRoute('TrainingScreen');
@@ -86,7 +92,7 @@ const AppNavigator = () => {
     };
 
     checkLoginStatus();
-  }, []);
+  }, [dispatch, trainingActivity]);
 
   if (isLoading) {
     return <LoadingScreen />;

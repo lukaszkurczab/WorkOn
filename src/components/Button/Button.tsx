@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { styles } from './Button.styles';
 
@@ -10,8 +10,8 @@ type ButtonProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const Button: React.FC<ButtonProps> = ({ variant = 'contained', style, onPress, disabled = false, children }) => {
-  const getButtonStyle = () => {
+const Button = ({ variant = 'contained', style, onPress, disabled = false, children }: ButtonProps) => {
+  const getButtonStyle = useCallback(() => {
     switch (variant) {
       case 'contained':
         return disabled ? styles.containedButtonDisabled : styles.containedButton;
@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'contained', style, onPress, 
       default:
         return disabled ? styles.containedButtonDisabled : styles.containedButton;
     }
-  };
+  }, [variant, disabled]);
 
   return (
     <TouchableOpacity

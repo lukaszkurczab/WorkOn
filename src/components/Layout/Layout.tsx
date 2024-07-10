@@ -12,14 +12,8 @@ interface LayoutProps {
   headerText?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({
-  children,
-  showHeader = true,
-  showNavigation = true,
-  headerText = 'WorkOn',
-}) => {
+const useKeyboardVisibility = () => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -34,6 +28,18 @@ const Layout: React.FC<LayoutProps> = ({
       keyboardDidHideListener.remove();
     };
   }, []);
+
+  return isKeyboardVisible;
+};
+
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  showHeader = true,
+  showNavigation = true,
+  headerText = 'WorkOn',
+}) => {
+  const isKeyboardVisible = useKeyboardVisibility();
+  const insets = useSafeAreaInsets();
 
   const headerHeight = showHeader ? 107 : 0;
   const navigationHeight = showNavigation ? 40 : 0;
