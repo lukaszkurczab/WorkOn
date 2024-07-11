@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   image: {
-    width: 96,
-    height: 96,
+    width: '30%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 8,
   },
   textWrapper: {
-    height: '100%',
     flex: 1,
     justifyContent: 'center',
   },

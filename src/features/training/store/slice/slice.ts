@@ -2,38 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Exercise, Series } from '../../../../types/exercises';
 import { updateUserPlan } from '../actions/actions';
 import { navigate } from '../../../../utility/navigate';
-
-interface TrainingSummaryExercise {
-  id: string;
-  name: string;
-  loadIncrease: number;
-  repsRange: [number, number];
-  series: Series[];
-}
-
-interface TrainingSummary {
-  planName: string;
-  id: string;
-  name: string;
-  duration: number;
-  exercises: TrainingSummaryExercise[];
-}
-
-interface SelectedExercise extends Omit<TrainingSummaryExercise, 'series'> {
-  focusPoints: string;
-  group: string;
-  muscleAdditional: string[];
-  muscleMain: string[];
-  startPostition: string;
-  series: Series[];
-}
+import { WorkoutPlan } from '../../../../types/plans';
 
 interface TrainingState {
-  selectedPlan: {
-    id: string;
-    name: string;
-    days: any[];
-  };
+  selectedPlan: WorkoutPlan;
   selectedTraining: {
     id: string;
     name: string;
@@ -43,8 +15,14 @@ interface TrainingState {
   startTime: number;
   unfinishedExercises: Exercise[];
   finishedExercises: Exercise[];
-  trainingSummary: TrainingSummary;
-  selectedExercise: SelectedExercise;
+  trainingSummary: {
+    id: string;
+    planName: string;
+    name: string;
+    duration: number;
+    exercises: Exercise[];
+  };
+  selectedExercise: Exercise;
   seriesIndex: number;
   restStart: Date;
   lastActivity: number | null;
@@ -55,6 +33,10 @@ const initialState: TrainingState = {
     id: '',
     name: '',
     days: [],
+    publicType: '',
+    allowedUsers: [],
+    authorId: '',
+    public: false,
   },
   selectedTraining: {
     id: '',
@@ -75,11 +57,6 @@ const initialState: TrainingState = {
   selectedExercise: {
     id: '',
     name: '',
-    focusPoints: '',
-    group: '',
-    muscleAdditional: [''],
-    muscleMain: [''],
-    startPostition: '',
     loadIncrease: 0,
     repsRange: [0, 0],
     series: [{ id: '0', reps: 0, weight: 0 }],
@@ -93,13 +70,13 @@ const trainingSlice = createSlice({
   name: 'training',
   initialState,
   reducers: {
-    SELECT_PLAN: (state, action: PayloadAction<typeof initialState.selectedPlan>) => {
+    SELECT_PLAN: (state, action: PayloadAction<WorkoutPlan>) => {
       state.selectedPlan = action.payload;
     },
     SELECT_TRAINING: (state, action: PayloadAction<typeof initialState.selectedTraining>) => {
       state.selectedTraining = action.payload;
     },
-    SELECT_EXERCISE: (state, action: PayloadAction<typeof initialState.selectedExercise>) => {
+    SELECT_EXERCISE: (state, action: PayloadAction<Exercise>) => {
       state.selectedExercise = action.payload;
       state.step = 'exercise';
       state.seriesIndex = 0;
@@ -120,33 +97,25 @@ const trainingSlice = createSlice({
       };
       state.lastActivity = Date.now();
     },
-    END_SERIE: (state, action: PayloadAction<{ id: string; reps: number; weight: number }>) => {
+    END_SERIE: (state, action: PayloadAction<Series>) => {
       const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
 
       if (exerciseIndex !== -1) {
         const series = state.unfinishedExercises[exerciseIndex].series;
-        series[state.seriesIndex] = {
-          id: action.payload.id,
-          reps: action.payload.reps,
-          weight: action.payload.weight,
-        };
+        series[state.seriesIndex] = action.payload;
 
         const summaryExerciseIndex = state.trainingSummary.exercises.findIndex(
           exercise => exercise.id === state.selectedExercise.id
         );
         if (summaryExerciseIndex !== -1) {
-          state.trainingSummary.exercises[summaryExerciseIndex].series.push({
-            id: action.payload.id,
-            reps: action.payload.reps,
-            weight: action.payload.weight,
-          });
+          state.trainingSummary.exercises[summaryExerciseIndex].series.push(action.payload);
         } else {
           state.trainingSummary.exercises.push({
             id: state.selectedExercise.id,
             name: state.selectedExercise.name,
             loadIncrease: state.selectedExercise.loadIncrease,
             repsRange: state.selectedExercise.repsRange,
-            series: [{ id: action.payload.id, reps: action.payload.reps, weight: action.payload.weight }],
+            series: [action.payload],
           });
         }
 

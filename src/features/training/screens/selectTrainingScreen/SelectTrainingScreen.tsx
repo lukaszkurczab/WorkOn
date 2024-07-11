@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { navigate } from '../../../../utility/navigate';
 import Layout from '../../../../components/Layout/Layout';
@@ -41,20 +41,15 @@ const SelectTrainingScreen = () => {
               Select plan
             </Typography>
             {plans.map((plan: any) => (
-              <TouchableOpacity
+              <Button
                 key={plan.id}
                 onPress={() => {
                   selectPlan(plan);
                 }}
-                style={plan.id === selectedPlan.id ? styles.selectedButton : styles.button}
+                style={plan.id === selectedPlan.id ? {} : styles.button}
               >
-                <Typography
-                  variant="h3"
-                  style={plan.id === selectedPlan.id ? styles.selectedButtonText : styles.buttonText}
-                >
-                  {plan.name}
-                </Typography>
-              </TouchableOpacity>
+                <Typography variant="h3">{plan.name}</Typography>
+              </Button>
             ))}
           </View>
           <View style={styles.buttonContainer}>
@@ -62,18 +57,13 @@ const SelectTrainingScreen = () => {
               Select day
             </Typography>
             {selectedPlan.days.map((day: any) => (
-              <TouchableOpacity
+              <Button
                 key={day.id}
-                style={day.id === selectedTraining.id ? styles.selectedButton : styles.button}
+                style={day.id === selectedTraining.id ? {} : styles.button}
                 onPress={() => selectTraining(day)}
               >
-                <Typography
-                  variant="h3"
-                  style={day.id === selectedTraining.id ? styles.selectedButtonText : styles.buttonText}
-                >
-                  {day.name}
-                </Typography>
-              </TouchableOpacity>
+                <Typography variant="h3">{day.name}</Typography>
+              </Button>
             ))}
           </View>
           <View>

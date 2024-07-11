@@ -13,12 +13,10 @@ import {
   UNSELECT_EXERCISE,
   REMOVE_SERIES,
 } from '../../store/slice/slice';
-import FontAwsome5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Modal from '../../../../components/Modal/Modal';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
 import PlanCarouselItemSerie from '../PlanCarouselItemSerie/PlanCarouselItemSerie';
-import { navigate } from '../../../../utility/navigate';
 import { useGetExerciseData } from '../../../../utility/hooks';
 import ExerciseListItem from '../ExerciseListItem/ExerciseListItem';
 import { Series } from '../../../../types/exercises';

@@ -17,11 +17,10 @@ const MainScreen = () => {
         <MenuButton
           screenToNavigate={hasPlans ? 'SelectTrainingScreen' : 'CarouselScreen'}
           text={hasPlans ? 'Start training' : 'Create first plan'}
-          style={styles.startButton}
         />
-        <MenuButton screenToNavigate="PlansListScreen" text="Plans" />
-        <MenuButton screenToNavigate="CalendarScreen" text="History" />
-        <MenuButton screenToNavigate="ExerciseAtlasScreen" text="Exercise atlas" />
+        <MenuButton screenToNavigate="PlansListScreen" text="Plans" style={styles.button} />
+        <MenuButton screenToNavigate="CalendarScreen" text="History" style={styles.button} />
+        <MenuButton screenToNavigate="ExerciseAtlasScreen" text="Exercise atlas" style={styles.button} />
       </View>
     </Layout>
   );

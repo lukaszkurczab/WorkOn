@@ -1,8 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, ViewStyle, StyleProp } from 'react-native';
+import { ViewStyle, StyleProp } from 'react-native';
 import { RootStackParamList, navigate } from '../../../utility/navigate';
-import styles from './MenuButton.styles';
 import { Typography } from '../../../components/Typography/Typography';
+import Button from '../../../components/Button/Button';
 
 type MenuButtonProps = {
   text: string;
@@ -12,11 +12,9 @@ type MenuButtonProps = {
 
 const MenuButton = ({ text, screenToNavigate, style = {} }: MenuButtonProps) => {
   return (
-    <TouchableOpacity onPress={() => navigate(screenToNavigate)} style={[styles.button, style]}>
-      <Typography variant="h2" style={styles.buttonText}>
-        {text}
-      </Typography>
-    </TouchableOpacity>
+    <Button onPress={() => navigate(screenToNavigate)} style={style}>
+      <Typography variant="h2">{text}</Typography>
+    </Button>
   );
 };
 

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { dark_gray, blue, gray } from '../../../styles/colors';
+import { dark_gray } from '../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
     paddingTop: 64,
     gap: 16,
   },
-  startButton: {
-    backgroundColor: blue,
-    marginBottom: 16,
+  button: {
+    backgroundColor: dark_gray,
   },
 });
 

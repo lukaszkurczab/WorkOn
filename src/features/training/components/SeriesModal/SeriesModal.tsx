@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import styles from './SeriesModal.styles';
 import { TextInput } from '../../../../components/TextInput/TextInput';
 import Button from '../../../../components/Button/Button';
@@ -12,36 +12,42 @@ type SeriesModalProps = {
   id: string;
 };
 
-const SeriesModal = ({ onConfirm, initReps, initWeight, id }: SeriesModalProps) => {
+const SeriesModal: React.FC<SeriesModalProps> = ({ onConfirm, initReps, initWeight, id }) => {
   const [reps, setReps] = useState<string>(initReps.toString());
   const [weight, setWeight] = useState<string>(initWeight.toString());
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>How many reps did you do?:</Text>
+      <Typography variant="h4" style={styles.title}>
+        How many reps did you do?
+      </Typography>
       <View style={styles.inputWrapper}>
-        <Text style={styles.inputLabel}>Repetitions:</Text>
+        <Typography variant="h6" style={styles.inputLabel}>
+          Repetitions:
+        </Typography>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
           maxLength={5}
-          value={reps.toString()}
+          value={reps}
           textStyle={styles.inputText}
           onChangeText={newValue => setReps(newValue)}
-        ></TextInput>
+        />
       </View>
       <View style={styles.inputWrapper}>
-        <Text style={styles.inputLabel}>Weight:</Text>
+        <Typography variant="h6" style={styles.inputLabel}>
+          Weight:
+        </Typography>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
           maxLength={5}
-          value={weight.toString()}
+          value={weight}
           textStyle={styles.inputText}
           onChangeText={newValue => setWeight(newValue)}
-        ></TextInput>
+        />
       </View>
-      <Button onPress={() => onConfirm(id, Number(reps), Number(weight))} style={{ marginTop: 8 }}>
+      <Button onPress={() => onConfirm(id, Number(reps), Number(weight))} style={styles.button}>
         <Typography variant="h4">Confirm</Typography>
       </Button>
     </View>
