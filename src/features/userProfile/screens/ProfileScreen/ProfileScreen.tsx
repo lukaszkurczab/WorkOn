@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import React from 'react';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './ProfileScreen.styles';
 import Layout from '../../../../components/Layout/Layout';
@@ -7,10 +7,11 @@ import { Typography } from '../../../../components/Typography/Typography';
 import { navigate } from '../../../../utility/navigate';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
-import { gray, primaryColor } from '../../../../styles/colors';
+import { gray } from '../../../../styles/colors';
 import { WorkoutPlan } from '../../../../types/plans';
 import { HistoryItem } from '../../../../types/history';
 import { useFormatDate } from '../../../../utility/hooks';
+import PlanTile from '../../components/PlanTile/PlanTile';
 
 const ProfileScreen = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -20,6 +21,7 @@ const ProfileScreen = () => {
   };
 
   const previewPlan = (plan: WorkoutPlan) => {
+    console.log(plan);
     navigate('PlanDetailsScreen', { plan: plan, editable: false });
   };
 
@@ -29,7 +31,7 @@ const ProfileScreen = () => {
 
   return (
     <Layout showHeader={false}>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
           <Icon name="cog" size={30} style={styles.settingsIcon} />
         </TouchableOpacity>
@@ -42,17 +44,7 @@ const ProfileScreen = () => {
           </View>
           <Typography variant="h2">Plans</Typography>
           {user.plans.map((plan: WorkoutPlan) => (
-            <View key={plan.id} style={styles.listItem}>
-              <View>
-                <Typography variant="h3">{plan.name}</Typography>
-                <Typography variant="h4" style={{ color: gray }}>
-                  {plan.days.length} days
-                </Typography>
-              </View>
-              <TouchableOpacity onPress={() => previewPlan(plan)}>
-                <Icon name="eye" size={24} style={{ color: primaryColor }} />
-              </TouchableOpacity>
-            </View>
+            <PlanTile plan={plan} handlePreview={previewPlan} />
           ))}
           <Typography variant="h2">History</Typography>
           {user.history.map((historyItem: HistoryItem) => (

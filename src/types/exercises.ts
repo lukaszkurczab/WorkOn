@@ -20,7 +20,7 @@ export interface ExerciseData {
   group: string;
   muscleAdditional: string[];
   muscleMain: string[];
-  startPostition: string;
+  startPosition: string;
   image: string;
 }
 

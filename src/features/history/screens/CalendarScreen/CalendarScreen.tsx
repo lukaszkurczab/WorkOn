@@ -35,7 +35,10 @@ const CalendarScreen = () => {
   };
 
   const handlePreviewTraining = (training: HistoryItemType) => {
-    navigate('WorkoutSummaryScreen', { workout: training, previousScreen: 'CalendarScreen' });
+    navigate('WorkoutSummaryScreen', {
+      workout: { ...training, planName: training.day, name: training.plan },
+      previousScreen: 'CalendarScreen',
+    });
   };
 
   return (

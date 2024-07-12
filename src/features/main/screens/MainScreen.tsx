@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import Layout from '../../../components/Layout/Layout';
 import styles from './MainScreen.styles';
-import { Typography } from '../../../components/Typography/Typography';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import MenuButton from '../components/MenuButton';

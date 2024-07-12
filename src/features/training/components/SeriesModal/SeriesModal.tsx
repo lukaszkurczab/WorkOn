@@ -22,7 +22,7 @@ const SeriesModal: React.FC<SeriesModalProps> = ({ onConfirm, initReps, initWeig
         How many reps did you do?
       </Typography>
       <View style={styles.inputWrapper}>
-        <Typography variant="h6" style={styles.inputLabel}>
+        <Typography variant="h4" style={styles.inputLabel}>
           Repetitions:
         </Typography>
         <TextInput
@@ -35,7 +35,7 @@ const SeriesModal: React.FC<SeriesModalProps> = ({ onConfirm, initReps, initWeig
         />
       </View>
       <View style={styles.inputWrapper}>
-        <Typography variant="h6" style={styles.inputLabel}>
+        <Typography variant="h4" style={styles.inputLabel}>
           Weight:
         </Typography>
         <TextInput

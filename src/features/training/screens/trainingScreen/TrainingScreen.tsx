@@ -9,7 +9,7 @@ import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
 import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
-import { resetNavigation } from '../../../../utility/navigate';
+import { navigate, resetNavigation } from '../../../../utility/navigate';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
@@ -54,6 +54,7 @@ const selectStep = (step: string) => {
     };
 
     await dispatch(updateUserPlan({ userId: user.id, plan: updatedPlan }));
+    navigate('WorkoutSummaryScreen', { workout: { ...summary, duration: Date.now() - trainingStart } });
   };
 
   switch (step) {

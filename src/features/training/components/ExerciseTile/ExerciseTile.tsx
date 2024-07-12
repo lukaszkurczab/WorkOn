@@ -25,7 +25,7 @@ const ExerciseTile: React.FC<ExerciseTileProps> = ({ exercise, touchable = true 
   return (
     <TouchableOpacity onPress={handlePress} disabled={!touchable}>
       <View style={styles.container}>
-        <Image source={{ uri: exerciseData.image }} style={styles.image} />
+        <Image source={require('../../../../assets/exercises/dips.jpg')} style={styles.image} />
         <View style={styles.textWrapper}>
           <Typography variant="h3" style={styles.name}>
             {exerciseData.name}

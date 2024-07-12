@@ -24,7 +24,6 @@ const PlanDetailsScreen = () => {
     );
   }
   const dispatch = useDispatch();
-  console.log(route.params.editable);
   const editable = route.params.editable ?? true;
   const plan = route.params.plan;
   const [items, setItems] = useState<{ id: string; component: React.ReactNode }[]>([]);
@@ -33,7 +32,7 @@ const PlanDetailsScreen = () => {
     if (plan != null) {
       const newItems = plan.days.map((day: Day) => ({
         id: day.id,
-        component: <CarouselItem name={day.name} id={day.id} />,
+        component: <CarouselItem name={day.name} exercises={day.exercises} id={day.id} />,
       }));
       setItems(newItems);
     }

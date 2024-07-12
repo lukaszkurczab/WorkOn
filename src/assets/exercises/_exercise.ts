@@ -1,15 +1,3 @@
-export interface Exercise {
-  id: string;
-  name: string;
-  group: string;
-  focusPoints: string;
-  startPosition: string;
-  process: string;
-  muscleMain: string[];
-  muscleAdditional: string[];
-  image: string;
-}
-
 export const exercisesList = [
   {
     id: 'back',

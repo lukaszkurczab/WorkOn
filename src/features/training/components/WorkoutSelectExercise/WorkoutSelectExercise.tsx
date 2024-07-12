@@ -27,7 +27,7 @@ const WorkoutSelectExercise = ({ handleEndTraining }: WorkoutSelectExerciseProps
           ))}
           {unfinishedExercises.length === 0 && (
             <Button style={{ marginVertical: 16 }} onPress={handleEndTraining}>
-              <Typography variant="h2">Go to summary</Typography>
+              <Typography variant="h2">End training</Typography>
             </Button>
           )}
         </View>
@@ -42,10 +42,8 @@ const WorkoutSelectExercise = ({ handleEndTraining }: WorkoutSelectExerciseProps
           ))}
         </View>
         {unfinishedExercises.length > 0 && (
-          <Button variant="text" style={{ marginTop: 16 }} onPress={handleEndTraining}>
-            <Typography variant="h2" style={{ textDecorationLine: 'underline' }}>
-              End training
-            </Typography>
+          <Button style={{ marginVertical: 16 }} onPress={handleEndTraining}>
+            <Typography variant="h2">End training</Typography>
           </Button>
         )}
       </View>

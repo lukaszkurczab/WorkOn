@@ -3,23 +3,22 @@ import { TouchableOpacity, View } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
 import { ScrollView } from 'react-native-gesture-handler';
 import Button from '../../../../components/Button/Button';
-import { exercisesList, Exercise } from '../../../../assets/exercises/_exercise';
+import { exercisesList } from '../../../../assets/exercises/_exercise';
 import styles from './CarouselItem.styles';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
 import FontAwsome5Icon from 'react-native-vector-icons/FontAwesome5';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
 import CarouselItemSerie from '../CarouselItemSerie/CarouselItemSerie';
 import { navigate } from '../../../../utility/navigate';
-import { ExerciseData } from '../../../../types/exercises';
 import { useGetExerciseData } from '../../../../utility/hooks';
+import { Exercise, ExerciseData } from '../../../../types/exercises';
 
 type CarouselItemProps = {
   name: string;
   id: string;
+  exercises: Exercise[];
 };
 
-function getExerciseById(id: string): Exercise | undefined {
+function getExerciseById(id: string): ExerciseData | undefined {
   for (const group of exercisesList) {
     const exercise = group.exercises.find(exercise => exercise.id === id);
     if (exercise) {
@@ -29,11 +28,8 @@ function getExerciseById(id: string): Exercise | undefined {
   return undefined;
 }
 
-const CarouselItem: React.FC<CarouselItemProps> = ({ name, id }) => {
+const CarouselItem: React.FC<CarouselItemProps> = ({ name, exercises }) => {
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState<number>(0);
-  const exercises = useSelector(
-    (state: RootState) => state.plans.selectedPlan!.days.find(day => day.id === id)!.exercises
-  );
   const [step, setStep] = useState(0);
 
   const handleSelectExercise = (index: number) => {
