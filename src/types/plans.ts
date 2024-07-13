@@ -6,7 +6,6 @@ export interface WorkoutPlan {
   publicType: string;
   allowedUsers: string[];
   authorId: string;
-  public: boolean;
   days: Day[];
 }
 

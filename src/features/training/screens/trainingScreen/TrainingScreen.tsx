@@ -9,7 +9,7 @@ import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
 import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
-import { navigate, resetNavigation } from '../../../../utility/navigate';
+import { navigate } from '../../../../utility/navigate';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
@@ -27,12 +27,12 @@ const selectStep = (step: string) => {
       addHistoryItem({
         userId: user.id,
         historyItem: {
-          id: null,
+          id: summary.id,
           date: new Date(),
-          plan: summary.planName,
-          day: summary.name,
+          plan: summary.plan,
+          day: summary.day,
           time: Date.now() - trainingStart,
-          public: false,
+          publicType: user.settings.defaultHistoryPublicType,
           exercises: summary.exercises,
         },
       })

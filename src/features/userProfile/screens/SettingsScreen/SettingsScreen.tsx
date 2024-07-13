@@ -36,28 +36,24 @@ const SettingsScreen = () => {
         <View style={styles.button}>
           <Typography variant="h2">Settings</Typography>
         </View>
-        <View>
-          <TouchableOpacity style={styles.button} onPress={handleChangeUsername}>
-            <Typography variant="h3" style={styles.text}>
-              Change username
-            </Typography>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
-            <Typography variant="h3" style={styles.text}>
-              Change password
-            </Typography>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={handlePublicWorkouts}>
+        <TouchableOpacity style={styles.button} onPress={handleChangeUsername}>
           <Typography variant="h3" style={styles.text}>
-            Select public workouts
+            Change username
+          </Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
+          <Typography variant="h3" style={styles.text}>
+            Change password
           </Typography>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={handlePublicPlans}>
           <Typography variant="h3" style={styles.text}>
             Select public plans
+          </Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handlePublicWorkouts}>
+          <Typography variant="h3" style={styles.text}>
+            Select public workouts
           </Typography>
         </TouchableOpacity>
         <View style={styles.logoutButton}>

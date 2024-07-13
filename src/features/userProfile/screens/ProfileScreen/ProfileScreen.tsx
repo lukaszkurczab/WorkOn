@@ -7,11 +7,10 @@ import { Typography } from '../../../../components/Typography/Typography';
 import { navigate } from '../../../../utility/navigate';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
-import { gray } from '../../../../styles/colors';
 import { WorkoutPlan } from '../../../../types/plans';
 import { HistoryItem } from '../../../../types/history';
-import { useFormatDate } from '../../../../utility/hooks';
 import PlanTile from '../../components/PlanTile/PlanTile';
+import HistoryTile from '../../components/HistoryTile/HistoryTile';
 
 const ProfileScreen = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -43,24 +42,17 @@ const ProfileScreen = () => {
             <Typography variant="h3">{user.username}</Typography>
           </View>
           <Typography variant="h2">Plans</Typography>
-          {user.plans.map((plan: WorkoutPlan) => (
-            <PlanTile plan={plan} handlePreview={previewPlan} />
-          ))}
+          {user.plans.map(
+            (plan: WorkoutPlan) =>
+              plan.publicType === 'public' && <PlanTile plan={plan} handlePreview={previewPlan} key={plan.id} />
+          )}
           <Typography variant="h2">History</Typography>
-          {user.history.map((historyItem: HistoryItem) => (
-            <TouchableOpacity
-              onPress={() => handlePreviewTraining(historyItem)}
-              style={styles.historyItem}
-              key={historyItem.id}
-            >
-              <Typography variant="h3">
-                {historyItem.plan} - {historyItem.day}
-              </Typography>
-              <Typography variant="h4" style={{ color: gray }}>
-                {historyItem.exercises.length} exercises · {useFormatDate(historyItem.date)}
-              </Typography>
-            </TouchableOpacity>
-          ))}
+          {user.history.map(
+            (historyItem: HistoryItem) =>
+              historyItem.publicType === 'public' && (
+                <HistoryTile key={historyItem.id} historyItem={historyItem} handlePreview={handlePreviewTraining} />
+              )
+          )}
         </View>
       </ScrollView>
     </Layout>

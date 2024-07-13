@@ -2,25 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Exercise, Series } from '../../../../types/exercises';
 import { updateUserPlan } from '../actions/actions';
 import { WorkoutPlan } from '../../../../types/plans';
+import { HistoryItem } from '../../../../types/history';
 
 interface TrainingState {
   selectedPlan: WorkoutPlan;
   selectedTraining: {
     id: string;
     name: string;
+    publicType: 'public' | 'private';
     exercises: Exercise[];
   };
   step: string;
   startTime: number;
   unfinishedExercises: Exercise[];
   finishedExercises: Exercise[];
-  trainingSummary: {
-    id: string;
-    planName: string;
-    name: string;
-    duration: number;
-    exercises: Exercise[];
-  };
+  trainingSummary: HistoryItem;
   selectedExercise: Exercise;
   seriesIndex: number;
   restStart: Date;
@@ -35,11 +31,11 @@ const initialState: TrainingState = {
     publicType: '',
     allowedUsers: [],
     authorId: '',
-    public: false,
   },
   selectedTraining: {
     id: '',
     name: '',
+    publicType: 'private',
     exercises: [],
   },
   step: 'select',
@@ -48,9 +44,11 @@ const initialState: TrainingState = {
   finishedExercises: [],
   trainingSummary: {
     id: '',
-    planName: '',
-    name: '',
-    duration: 0,
+    date: new Date(),
+    plan: '',
+    day: '',
+    time: 0,
+    publicType: 'private',
     exercises: [],
   },
   selectedExercise: {
@@ -81,17 +79,22 @@ const trainingSlice = createSlice({
       state.seriesIndex = 0;
       state.lastActivity = Date.now();
     },
-    START_TRAINING: (state, action: PayloadAction<{ id: string; name: string; exercises: Exercise[] }>) => {
+    START_TRAINING: (
+      state,
+      action: PayloadAction<{ id: string; name: string; exercises: Exercise[]; publicType: 'public' | 'private' }>
+    ) => {
       state.startTime = Date.now();
       state.step = 'select';
       state.seriesIndex = 0;
       state.unfinishedExercises = action.payload.exercises;
       state.finishedExercises = [];
       state.trainingSummary = {
-        planName: state.selectedPlan.name,
+        plan: state.selectedPlan.name,
         id: action.payload.id,
-        name: action.payload.name,
-        duration: 0,
+        day: action.payload.name,
+        time: 0,
+        publicType: action.payload.publicType,
+        date: new Date(),
         exercises: [],
       };
       state.lastActivity = Date.now();
@@ -140,7 +143,7 @@ const trainingSlice = createSlice({
       state.finishedExercises = [];
       state.trainingSummary = {
         ...state.trainingSummary,
-        duration: Date.now() - state.startTime,
+        time: Date.now() - state.startTime,
       };
       state.lastActivity = null;
     },
@@ -161,7 +164,7 @@ const trainingSlice = createSlice({
       state.finishedExercises = [];
       state.trainingSummary = {
         ...state.trainingSummary,
-        duration: Date.now() - state.startTime,
+        time: Date.now() - state.startTime,
       };
       state.lastActivity = null;
     });

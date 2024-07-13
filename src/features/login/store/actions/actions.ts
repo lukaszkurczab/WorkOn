@@ -1,14 +1,9 @@
-import { registerUser, loginUser } from '../../../../api/users';
+import { registerUser } from '../../../../api/users';
 import { createAppAsyncThunk } from '../../../../utility/createAppAsyncThunk';
 import { User } from '../../../../types/users';
 
 interface RegisterUserData {
   username: string;
-  email: string;
-  password: string;
-}
-
-interface LoginUserData {
   email: string;
   password: string;
 }

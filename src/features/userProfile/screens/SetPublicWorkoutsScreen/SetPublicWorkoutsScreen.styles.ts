@@ -1,46 +1,24 @@
 import { StyleSheet } from 'react-native';
-import { backgroundColor, primaryColor, gray } from '../../../../styles/colors';
+import { dark_gray } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: backgroundColor,
-    padding: 10,
-    paddingBottom: 61,
+    width: '100%',
   },
-  header: {
-    color: primaryColor,
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 10,
-    marginLeft: 5,
-  },
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-  },
-  settingsIcon: {
-    color: primaryColor,
-  },
-  tileWrapper: {
+  listItem: {
+    borderRadius: 8,
+    padding: 8,
+    backgroundColor: dark_gray,
+    marginBottom: 16,
     flexDirection: 'row',
-    gap: 20,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 16,
   },
-  publicButtonWrapper: {
-    width: 50,
-    marginTop: 35,
-  },
-  confirmButton: {
-    alignSelf: 'center',
-    borderColor: gray,
-    backgroundColor: primaryColor,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 3,
-    marginVertical: 20,
-  },
-  confirmText: {
-    fontSize: 20,
-    fontWeight: '500',
+  toggleSwitchWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingBottom: 16,
   },
 });

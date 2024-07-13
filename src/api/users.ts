@@ -223,14 +223,24 @@ export const setPublicPlan = async ({ userId, items }: { userId: string; items: 
   }
 };
 
-export const setPublicHistoryItem = async ({ userId, items }: { userId: string; items: string[] }) => {
+export const setPublicHistoryItem = async ({
+  userId,
+  items,
+  publicType,
+}: {
+  userId: string;
+  items: HistoryItem[];
+  publicType: 'public' | 'private';
+}) => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/users/set-public/history/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ items }),
+      body: JSON.stringify({ items, publicType }),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');

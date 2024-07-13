@@ -36,18 +36,4 @@ export default StyleSheet.create({
   settingsIcon: {
     color: primaryColor,
   },
-  listItem: {
-    borderRadius: 8,
-    padding: 8,
-    backgroundColor: dark_gray,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingRight: 16,
-  },
-  historyItem: {
-    backgroundColor: dark_gray,
-    padding: 8,
-    borderRadius: 8,
-  },
 });

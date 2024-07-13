@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { navigate } from '../../../../utility/navigate';
 import Layout from '../../../../components/Layout/Layout';
 import styles from './SelectTrainingScreen.styles';
@@ -17,10 +17,11 @@ const SelectTrainingScreen = () => {
   const plans = useSelector((state: RootState) => state.user.plans);
   const selectedPlan = useSelector((state: RootState) => state.training.selectedPlan);
   const selectedTraining = useSelector((state: RootState) => state.training.selectedTraining);
+  const publicType = useSelector((state: RootState) => state.user.settings.defaultHistoryPublicType);
 
   const selectPlan = (plan: WorkoutPlan) => {
     dispatch(SELECT_PLAN(plan));
-    dispatch(SELECT_TRAINING(plan.days[0]));
+    dispatch(SELECT_TRAINING({ ...plan.days[0], publicType: publicType }));
   };
 
   const selectTraining = (training: any) => {

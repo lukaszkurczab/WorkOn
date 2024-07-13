@@ -19,7 +19,6 @@ const initialState: PlanCreatorState = {
     publicType: '',
     allowedUsers: [],
     authorId: '',
-    public: false,
     days: [
       {
         id: '',
@@ -58,7 +57,6 @@ const planCreatorSlice = createSlice({
         publicType: 'private',
         allowedUsers: [],
         authorId: '',
-        public: false,
         days: [
           {
             id: dayId,

@@ -4,21 +4,14 @@ import { getUserData } from '../actions/userActions';
 import { WorkoutPlan } from '../../types/plans';
 import { HistoryItem } from '../../types/history';
 import { addHistoryItem } from '../../features/training/store/actions/actions';
-
-interface UserState {
-  id: string;
-  email: string;
-  username: string;
-  plans: WorkoutPlan[];
-  history: HistoryItem[];
-}
+import { User, UserSettings } from '../../types/users';
 
 interface JwtPayload {
   id: string;
   email: string;
 }
 
-const initialState: UserState = {
+const initialState: User = {
   id: '',
   username: '',
   email: '',
@@ -30,10 +23,14 @@ const initialState: UserState = {
       publicType: '',
       allowedUsers: [],
       authorId: '',
-      public: false,
     },
   ],
+  settings: {
+    defaultHistoryPublicType: 'public',
+  },
   history: [],
+  bio: '',
+  password: '',
 };
 
 const userSlice = createSlice({
@@ -45,21 +42,37 @@ const userSlice = createSlice({
       state.id = decodedData.id;
       state.email = decodedData.email;
     },
+    UPDATE_PLANS: (state, action) => {
+      state.plans = action.payload;
+    },
+    UPDATE_HISTORY: (state, action) => {
+      state.history = action.payload;
+    },
   },
   extraReducers: builder => {
-    builder.addCase(
-      getUserData.fulfilled,
-      (state, action: PayloadAction<{ username: string; plans: WorkoutPlan[]; history: HistoryItem[] }>) => {
-        state.username = action.payload.username;
-        state.plans = action.payload.plans;
-        state.history = action.payload.history;
-      }
-    );
-    builder.addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
-      state.history.unshift(action.payload);
-    });
+    builder
+      .addCase(
+        getUserData.fulfilled,
+        (
+          state,
+          action: PayloadAction<{
+            username: string;
+            plans: WorkoutPlan[];
+            history: HistoryItem[];
+            settings: UserSettings;
+          }>
+        ) => {
+          state.username = action.payload.username;
+          state.settings = action.payload.settings;
+          state.plans = action.payload.plans;
+          state.history = action.payload.history;
+        }
+      )
+      .addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
+        state.history.unshift(action.payload);
+      });
   },
 });
 
-export const { DECODE_USER_DATA } = userSlice.actions;
+export const { DECODE_USER_DATA, UPDATE_PLANS, UPDATE_HISTORY } = userSlice.actions;
 export default userSlice.reducer;

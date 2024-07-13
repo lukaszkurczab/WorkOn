@@ -1,6 +1,9 @@
-import { Series } from './exercises';
 import { WorkoutPlan } from './plans';
 import { HistoryItem } from './history';
+
+export interface UserSettings {
+  defaultHistoryPublicType: 'public' | 'private';
+}
 
 export interface User {
   id: string;
@@ -11,6 +14,7 @@ export interface User {
   token?: string;
   plans: WorkoutPlan[];
   history: HistoryItem[];
+  settings: UserSettings;
 }
 
 export interface UserRecord {
