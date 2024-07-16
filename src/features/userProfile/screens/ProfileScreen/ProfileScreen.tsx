@@ -20,7 +20,6 @@ const ProfileScreen = () => {
   };
 
   const previewPlan = (plan: WorkoutPlan) => {
-    console.log(plan);
     navigate('PlanDetailsScreen', { plan: plan, editable: false });
   };
 

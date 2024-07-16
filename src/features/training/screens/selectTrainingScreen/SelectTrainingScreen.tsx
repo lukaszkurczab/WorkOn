@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from '../../../../utility/hooks';
 import { SELECT_PLAN, SELECT_TRAINING, START_TRAINING } from '../../store/slice/slice';
 import Button from '../../../../components/Button/Button';
-import { WorkoutPlan } from '../../../../types/plans';
+import { Day, WorkoutPlan } from '../../../../types/plans';
 import { RootState } from '../../../../store/store';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -21,15 +21,15 @@ const SelectTrainingScreen = () => {
 
   const selectPlan = (plan: WorkoutPlan) => {
     dispatch(SELECT_PLAN(plan));
-    dispatch(SELECT_TRAINING({ ...plan.days[0], publicType: publicType }));
+    dispatch(SELECT_TRAINING({ ...plan.days[0] }));
   };
 
-  const selectTraining = (training: any) => {
+  const selectTraining = (training: Day) => {
     dispatch(SELECT_TRAINING(training));
   };
 
   const handleTrainingSelect = () => {
-    dispatch(START_TRAINING(selectedTraining));
+    dispatch(START_TRAINING({ ...selectedTraining, publicType: publicType }));
     navigate('TrainingScreen');
   };
 

@@ -9,7 +9,6 @@ interface TrainingState {
   selectedTraining: {
     id: string;
     name: string;
-    publicType: 'public' | 'private';
     exercises: Exercise[];
   };
   step: string;
@@ -21,6 +20,7 @@ interface TrainingState {
   seriesIndex: number;
   restStart: Date;
   lastActivity: number | null;
+  sendingTraining: boolean;
 }
 
 const initialState: TrainingState = {
@@ -28,14 +28,13 @@ const initialState: TrainingState = {
     id: '',
     name: '',
     days: [],
-    publicType: '',
+    publicType: 'public',
     allowedUsers: [],
     authorId: '',
   },
   selectedTraining: {
     id: '',
     name: '',
-    publicType: 'private',
     exercises: [],
   },
   step: 'select',
@@ -61,6 +60,7 @@ const initialState: TrainingState = {
   seriesIndex: 0,
   restStart: new Date(),
   lastActivity: null,
+  sendingTraining: false,
 };
 
 const trainingSlice = createSlice({
@@ -158,16 +158,17 @@ const trainingSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(updateUserPlan.fulfilled, state => {
-      state.step = 'select';
-      state.unfinishedExercises = [];
-      state.finishedExercises = [];
-      state.trainingSummary = {
-        ...state.trainingSummary,
-        time: Date.now() - state.startTime,
-      };
-      state.lastActivity = null;
-    });
+    builder
+      .addCase(updateUserPlan.pending, state => {
+        state.sendingTraining = true;
+      })
+      .addCase(updateUserPlan.fulfilled, state => {
+        state.step = 'select';
+        state.unfinishedExercises = [];
+        state.finishedExercises = [];
+        state.lastActivity = null;
+        state.sendingTraining = false;
+      });
   },
 });
 

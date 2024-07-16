@@ -14,6 +14,7 @@ type WorkoutSelectExerciseProps = {
 const WorkoutSelectExercise = ({ handleEndTraining }: WorkoutSelectExerciseProps) => {
   const finishedExercises = useSelector((state: RootState) => state.training.finishedExercises);
   const unfinishedExercises = useSelector((state: RootState) => state.training.unfinishedExercises);
+  const sendingTraining = useSelector((state: RootState) => state.training.sendingTraining);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -26,7 +27,7 @@ const WorkoutSelectExercise = ({ handleEndTraining }: WorkoutSelectExerciseProps
             <ExerciseTile exercise={exercise} key={exercise.id} />
           ))}
           {unfinishedExercises.length === 0 && (
-            <Button style={{ marginVertical: 16 }} onPress={handleEndTraining}>
+            <Button style={{ marginVertical: 16 }} onPress={handleEndTraining} disabled={sendingTraining}>
               <Typography variant="h2">End training</Typography>
             </Button>
           )}
@@ -42,7 +43,7 @@ const WorkoutSelectExercise = ({ handleEndTraining }: WorkoutSelectExerciseProps
           ))}
         </View>
         {unfinishedExercises.length > 0 && (
-          <Button style={{ marginVertical: 16 }} onPress={handleEndTraining}>
+          <Button style={{ marginVertical: 16 }} onPress={handleEndTraining} disabled={sendingTraining}>
             <Typography variant="h2">End training</Typography>
           </Button>
         )}

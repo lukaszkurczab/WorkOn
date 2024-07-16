@@ -60,9 +60,9 @@ const WorkoutSummary = () => {
   return (
     <Layout showHeader={false}>
       <ScrollView style={styles.container}>
-        <Typography variant="h1">{summary.planName}</Typography>
+        <Typography variant="h1">{summary.day}</Typography>
         <Typography variant="h2" style={{ marginBottom: 24 }}>
-          {summary.name}
+          {summary.plan}
         </Typography>
         <Typography variant="h3">Exercises</Typography>
         <View style={styles.listWrapper}>

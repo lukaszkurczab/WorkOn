@@ -3,7 +3,7 @@ import { Exercise } from './exercises';
 export interface WorkoutPlan {
   id: string;
   name: string;
-  publicType: string;
+  publicType: 'public' | 'private';
   allowedUsers: string[];
   authorId: string;
   days: Day[];

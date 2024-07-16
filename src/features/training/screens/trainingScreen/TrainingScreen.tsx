@@ -18,7 +18,6 @@ const selectStep = (step: string) => {
   const trainingStart = useSelector((state: RootState) => state.training.startTime);
   const selectedTraining = useSelector((state: RootState) => state.training.selectedTraining);
   const selectedPlan = useSelector((state: RootState) => state.training.selectedPlan);
-  const unfinishedExercises = useSelector((state: RootState) => state.training.unfinishedExercises);
 
   const handleEndTraining = async () => {
     const selectedTrainingIndex = selectedPlan.days.findIndex(day => day.id === selectedTraining.id);
@@ -49,8 +48,7 @@ const selectStep = (step: string) => {
     });
 
     updatedPlan.days[selectedTrainingIndex] = {
-      ...selectedTraining,
-      exercises: [...updatedExercises, ...unfinishedExercises],
+      exercises: [...updatedExercises],
     };
 
     await dispatch(updateUserPlan({ userId: user.id, plan: updatedPlan }));
