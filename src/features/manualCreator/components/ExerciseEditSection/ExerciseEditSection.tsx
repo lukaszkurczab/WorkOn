@@ -52,18 +52,18 @@ const ExerciseEditSection = ({
     let updatedExercise = { ...exercise };
     switch (property) {
       case 'minReps':
+        setRepetitionsRangeValue([newValue, repetitionsRangeValue[1]]);
         const minReps = newValue === '' ? 0 : Number(newValue);
-        setRepetitionsRangeValue([minReps, updatedExercise.repsRange[1]]);
         updatedExercise = { ...updatedExercise, repsRange: [minReps, updatedExercise.repsRange[1]] };
         break;
       case 'maxReps':
+        setRepetitionsRangeValue([repetitionsRangeValue[0], newValue]);
         const maxReps = newValue === '' ? 0 : Number(newValue);
-        setRepetitionsRangeValue([updatedExercise.repsRange[0], maxReps]);
         updatedExercise = { ...updatedExercise, repsRange: [updatedExercise.repsRange[0], maxReps] };
         break;
       case 'loadIncrease':
+        setLoadIncreaseValue(newValue);
         const loadIncrease = newValue === '' ? 0 : Number(newValue);
-        setLoadIncreaseValue(loadIncrease);
         updatedExercise = { ...updatedExercise, loadIncrease };
         break;
       case 'serieReps':
