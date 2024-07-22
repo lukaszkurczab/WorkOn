@@ -9,7 +9,7 @@ import { Typography } from '../../../../components/Typography/Typography';
 import Carousel from '../../../../components/Carousel/Carousel';
 import { RootStackParamList, navigate } from '../../../../utility/navigate';
 import { useDispatch } from '../../../../utility/hooks';
-import { EDIT_PLAN } from '../../../planCreator/store/slice/slice';
+import { EDIT_PLAN } from '../../../manualCreator/store/slice/slice';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 type PlanDetailsScreenRouteProp = RouteProp<RootStackParamList, 'PlanDetailsScreen'>;

@@ -9,6 +9,7 @@ import { END_REST, END_EXERCISE } from '../../store/slice/slice';
 import Button from '../../../../components/Button/Button';
 import { Typography } from '../../../../components/Typography/Typography';
 import { navigate } from '../../../../utility/navigate';
+import { blue, primaryColor } from '../../../../styles/colors';
 
 const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }: any) => {
   const progress = (seconds / 60) * 100;
@@ -20,11 +21,11 @@ const CircularProgressBar = ({ size = 200, strokeWidth = 15, seconds }: any) => 
     <View style={styles.stoperWrapper}>
       <Svg width={size} height={size}>
         <G rotation="-90" origin={`${size / 2}, ${size / 2}`}>
-          <Circle cx="50%" cy="50%" stroke="#e6e7e8" strokeWidth={strokeWidth} r={radius} fill="none" />
+          <Circle cx="50%" cy="50%" stroke={primaryColor} strokeWidth={strokeWidth} r={radius} fill="none" />
           <Circle
             cx="50%"
             cy="50%"
-            stroke="#3498db"
+            stroke={blue}
             strokeWidth={strokeWidth}
             r={radius}
             fill="none"

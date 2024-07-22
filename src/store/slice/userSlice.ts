@@ -5,6 +5,7 @@ import { WorkoutPlan } from '../../types/plans';
 import { HistoryItem } from '../../types/history';
 import { addHistoryItem } from '../../features/training/store/actions/actions';
 import { User, UserSettings } from '../../types/users';
+import { createPlan } from '../../features/manualCreator/store/actions/actions';
 
 interface JwtPayload {
   id: string;
@@ -20,7 +21,7 @@ const initialState: User = {
       id: '',
       name: '',
       days: [],
-      publicType: '',
+      publicType: 'public',
       allowedUsers: [],
       authorId: '',
     },
@@ -68,6 +69,9 @@ const userSlice = createSlice({
           state.history = action.payload.history;
         }
       )
+      .addCase(createPlan.fulfilled, (state, action: PayloadAction<WorkoutPlan>) => {
+        state.plans.push(action.payload);
+      })
       .addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
         state.history.unshift(action.payload);
       });

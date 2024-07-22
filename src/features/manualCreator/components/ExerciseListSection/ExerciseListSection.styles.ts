@@ -21,6 +21,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 8,
   },
+  buttonsWrapper: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    backgroundColor: primaryColor,
+  },
+  button: {
+    width: 120,
+    borderRadius: 0,
+  },
+  listWrapper: {
+    height: screenHeight - 398,
+  },
 });
 
 export default styles;

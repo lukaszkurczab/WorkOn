@@ -55,7 +55,7 @@ export const editUserPlan = async (userData: { userId: string; plan: WorkoutPlan
   }
 };
 
-export const addPlanToUser = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<void> => {
+export const addPlanToUser = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<WorkoutPlan> => {
   try {
     const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/users/plans/${data.userId}`, {

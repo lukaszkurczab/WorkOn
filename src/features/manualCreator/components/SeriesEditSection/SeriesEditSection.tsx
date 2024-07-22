@@ -1,57 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View, TextInput } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
-import styles from './PlanCarouselItemSerie.styles';
+import styles from './SeriesEditSection.styles';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
 
-type PlanCarouselItemSerieProps = {
-  exerciseIndex: number;
+type SeriesEditSectionProps = {
   reps: number;
   weight: number;
   index: number;
   exerciseId: string;
-  onEdit: (exerciseIndex: number, property: string, newValue: number, index: number) => void;
+  onEdit: (property: string, newValue: number, index: number) => void;
   onRemove: (exerciseId: string, index: number) => void;
 };
 
-const PlanCarouselItemSerie: React.FC<PlanCarouselItemSerieProps> = ({
-  exerciseIndex,
-  exerciseId,
-  reps,
-  weight,
-  index,
-  onRemove,
-  onEdit,
-}) => {
+const SeriesEditSection = ({ exerciseId, reps, weight, index, onRemove, onEdit }: SeriesEditSectionProps) => {
   const [repsValue, setRepsValue] = useState<number | string>(reps);
   const [weightValue, setWeightValue] = useState<number | string>(weight);
 
-  const handleEdit = (exerciseIndex: number, property: string, newValue: string, index: number) => {
-    if (newValue === '') {
-      setRepsValue('');
-      onEdit(exerciseIndex, property, 0, index);
-    } else {
-      setRepsValue(newValue);
-      onEdit(exerciseIndex, property, Number(newValue), index);
-    }
-  };
+  useEffect(() => {
+    setRepsValue(reps);
+    setWeightValue(weight);
+  }, [exerciseId]);
 
   const handleRepsChange = (text: string) => {
-    if (text === '') {
-      onEdit(exerciseIndex, 'serieReps', 0, index);
-    } else {
-      onEdit(exerciseIndex, 'serieReps', Number('text'), index);
-    }
+    const newValue = text === '' ? 0 : Number(text);
+    onEdit('serieReps', newValue, index);
     setRepsValue(text);
   };
 
   const handleWeightChange = (text: string) => {
-    if (text === '') {
-      onEdit(exerciseIndex, 'serieWeight', 0, index);
-    } else {
-      onEdit(exerciseIndex, 'serieWeight', Number('text'), index);
-    }
+    const newValue = text === '' ? 0 : Number(text);
+    onEdit('serieWeight', newValue, index);
     setWeightValue(text);
   };
 
@@ -73,8 +53,8 @@ const PlanCarouselItemSerie: React.FC<PlanCarouselItemSerieProps> = ({
           style={styles.textInput}
           keyboardType="numeric"
           value={`${repsValue}`}
-          onEndEditing={() => (repsValue === '' ? setRepsValue(0) : null)}
-          onChangeText={text => handleRepsChange(text)}
+          onEndEditing={() => repsValue === '' && setRepsValue(0)}
+          onChangeText={handleRepsChange}
         />
       </View>
       <View style={styles.row}>
@@ -85,12 +65,12 @@ const PlanCarouselItemSerie: React.FC<PlanCarouselItemSerieProps> = ({
           style={styles.textInput}
           keyboardType="numeric"
           value={`${weightValue}`}
-          onEndEditing={() => (weightValue === '' ? setWeightValue(0) : null)}
-          onChangeText={text => handleWeightChange(text)}
+          onEndEditing={() => weightValue === '' && setWeightValue(0)}
+          onChangeText={handleWeightChange}
         />
       </View>
     </View>
   );
 };
 
-export default PlanCarouselItemSerie;
+export default SeriesEditSection;

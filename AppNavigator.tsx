@@ -8,14 +8,15 @@ import { useSelector } from 'react-redux';
 import { getToken, storeToken } from './src/utility/secureStore';
 import { DECODE_USER_DATA } from './src/store/slice/userSlice';
 import { getUserData } from './src/store/actions/userActions';
-import { RootState, AppDispatch } from './src/store/store';
+import { RootState } from './src/store/store';
+import { useDispatch } from './src/utility/hooks';
 
 import LoginScreen from './src/features/login/screens/LoginScreen/LoginScreen';
 import RegisterScreen from './src/features/login/screens/RegisterScreen/RegisterScreen';
 import MainScreen from './src/features/main/screens/MainScreen';
 import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/CarouselScreen';
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
-import ManualCreatorScreen from './src/features/planCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
+import ManualCreatorScreen from './src/features/manualCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
 import SelectTrainingScreen from './src/features/training/screens/SelectTrainingScreen/SelectTrainingScreen';
 import TrainingScreen from './src/features/training/screens/TrainingScreen/TrainingScreen';
 import WorkoutSummary from './src/features/training/screens/TrainingSummaryScreen/TrainingSummaryScreen';
@@ -30,7 +31,7 @@ import SetPublicPlansScreen from './src/features/userProfile/screens/SetPublicPl
 import SetPublicWorkoutsScreen from './src/features/userProfile/screens/SetPublicWorkoutsScreen/SetPublicWorkoutsScreen';
 import ChangePasswordScreen from './src/features/userProfile/screens/ChangePasswordScreen/ChangePasswordScreen';
 import ChangeUsernameScreen from './src/features/userProfile/screens/ChangeUsernameScreen/ChangeUsernameScreen';
-import { useDispatch } from './src/utility/hooks';
+import ManualPlanGeneralScreen from './src/features/manualCreator/screens/ManualPlanGeneralScreen/ManualPlanGeneralScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -120,6 +121,7 @@ const AppNavigator = () => {
         <Stack.Screen name="SetPublicPlansScreen" component={SetPublicPlansScreen} />
         <Stack.Screen name="SetPublicWorkoutsScreen" component={SetPublicWorkoutsScreen} />
         <Stack.Screen name="ChangeUsernameScreen" component={ChangeUsernameScreen} />
+        <Stack.Screen name="ManualPlanGeneralScreen" component={ManualPlanGeneralScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

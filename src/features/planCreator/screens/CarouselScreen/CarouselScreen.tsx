@@ -7,16 +7,19 @@ import SelectCreatorTypeItem from '../../components/SelectCreatorTypeItem/Select
 import { Typography } from '../../../../components/Typography/Typography';
 import Button from '../../../../components/Button/Button';
 import Modal from '../../../../components/Modal/Modal';
-import { CREATE_NEW_PLAN } from '../../store/slice/slice';
 import styles from './CarouselScreen.styles';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from '../../../../utility/hooks';
+import { CREATE_NEW_PLAN } from '../../../manualCreator/store/slice/slice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store/store';
 
 type CarouselScreenRouteProp = RouteProp<RootStackParamList, 'CarouselScreen'>;
 
 const CarouselScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const userId = useSelector((state: RootState) => state.user.id);
   const [modalVisible, setModalVisible] = useState(false);
 
   const route = useRoute<CarouselScreenRouteProp>();
@@ -41,8 +44,8 @@ const CarouselScreen = () => {
           }
           buttonText={'Select'}
           onSelect={() => {
-            dispatch(CREATE_NEW_PLAN());
-            navigate('ManualCreatorScreen');
+            dispatch(CREATE_NEW_PLAN({ userId }));
+            navigate('ManualPlanGeneralScreen');
           }}
         />
       ),

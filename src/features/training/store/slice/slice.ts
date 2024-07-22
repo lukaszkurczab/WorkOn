@@ -156,6 +156,9 @@ const trainingSlice = createSlice({
       state.finishedExercises.push(finishedExercise);
       state.lastActivity = Date.now();
     },
+    NAVIGATE_TO_ADD_EXERCISE: state => {
+      state.step = 'add';
+    },
   },
   extraReducers: builder => {
     builder
@@ -181,5 +184,6 @@ export const {
   SELECT_TRAINING,
   SELECT_EXERCISE,
   START_TRAINING,
+  NAVIGATE_TO_ADD_EXERCISE,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;

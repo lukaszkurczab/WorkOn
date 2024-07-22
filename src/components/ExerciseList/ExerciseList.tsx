@@ -4,13 +4,14 @@ import { Typography } from '../Typography/Typography';
 import ExerciseListItem from '../ExerciseListItem/ExerciseListItem';
 import { exercisesList } from '../../assets/exercises/_exercise';
 import styles from './ExerciseList.styles';
+import { Exercise, ExerciseData } from '../../types/exercises';
 
 interface ExerciseListProps {
-  dayId: string;
-  onSelect: ({ dayId, exerciseId, name }: { dayId: string; exerciseId: string; name: string }) => void;
+  onItemPress: ({}: any) => void;
+  selected?: Exercise[] | ExerciseData[];
 }
 
-const ExerciseList = ({ dayId, onSelect }: ExerciseListProps) => {
+const ExerciseList = ({ selected, onItemPress }: ExerciseListProps) => {
   const [visibleGroups, setVisibleGroups] = useState<{ [key: string]: boolean }>({});
 
   const toggleVisibility = (id: string) => {
@@ -33,11 +34,10 @@ const ExerciseList = ({ dayId, onSelect }: ExerciseListProps) => {
             <View style={styles.list}>
               {exerciseGroup.exercises.map(exercise => (
                 <ExerciseListItem
-                  onSelect={onSelect}
-                  name={exercise.name}
-                  exerciseId={exercise.id}
-                  dayId={dayId}
+                  onPress={onItemPress}
+                  exercise={exercise}
                   key={exercise.id}
+                  selected={selected !== undefined && selected.findIndex(item => item.id === exercise.id) !== -1}
                 />
               ))}
             </View>

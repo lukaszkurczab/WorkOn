@@ -1,5 +1,7 @@
 import { useDispatch as useReduxDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from '../store/store';
+import 'react-native-get-random-values';
+import uuid from 'react-native-uuid';
 import { exercisesList } from '../assets/exercises/_exercise';
 import { Exercise, ExerciseData } from '../types/exercises';
 
@@ -125,6 +127,10 @@ export const useFormatDate = (dateInput: string | Date): string => {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
   return `${day}.${month}.${year}`;
+};
+
+export const useGenerateID = (): string => {
+  return uuid.v4().toString();
 };
 
 export const useDispatch = () => useReduxDispatch<AppDispatch>();

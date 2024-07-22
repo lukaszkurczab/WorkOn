@@ -6,14 +6,14 @@ import trainingReducer from '../features/training/store/slice/slice';
 import userReducer from './slice/userSlice';
 import loginReducer from '../features/login/store/slice/slice';
 import plansReducer from '../features/plansList/store/slice/slice';
-import planCreatorReducer from '../features/planCreator/store/slice/slice';
+import ManualCreatorReducer from '../features/manualCreator/store/slice/slice';
 
 const rootReducer = combineReducers({
   plans: plansReducer,
   training: trainingReducer,
   user: userReducer,
   login: loginReducer,
-  planCreator: planCreatorReducer,
+  manualCreator: ManualCreatorReducer,
 });
 
 const persistConfig = {

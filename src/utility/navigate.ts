@@ -1,4 +1,4 @@
-import { createNavigationContainerRef, CommonActions } from '@react-navigation/native';
+import { createNavigationContainerRef } from '@react-navigation/native';
 import { ExerciseData } from '../types/exercises';
 import { WorkoutPlan } from '../types/plans';
 import { HistoryItem } from '../types/history';
@@ -23,6 +23,7 @@ export type RootStackParamList = {
   ChangePasswordScreen: undefined;
   SetPublicPlansScreen: undefined;
   SetPublicWorkoutsScreen: undefined;
+  ManualPlanGeneralScreen: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

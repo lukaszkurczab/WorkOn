@@ -10,6 +10,7 @@ import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
 import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
 import { navigate } from '../../../../utility/navigate';
+import WorkoutAddNewExercise from '../../components/WorkoutAddNewExercise/WorkoutAddNewExercise';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
@@ -60,6 +61,8 @@ const selectStep = (step: string) => {
       return <WorkoutSelectExercise handleEndTraining={handleEndTraining} />;
     case 'exercise':
       return <WorkoutExercise />;
+    case 'add':
+      return <WorkoutAddNewExercise />;
     case 'rest':
       return <WorkoutRest />;
   }
