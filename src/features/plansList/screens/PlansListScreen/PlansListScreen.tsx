@@ -12,6 +12,7 @@ import { navigate } from '../../../../utility/navigate';
 import { WorkoutPlan } from '../../../../types/plans';
 import { useDispatch } from '../../../../utility/hooks';
 import { removePlan } from '../../store/actions/actions';
+import { EDIT_PLAN } from '../../../manualCreator/store/slice/slice';
 
 const PlansListScreen = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,8 @@ const PlansListScreen = () => {
   };
 
   const handleEditPlan = (plan: WorkoutPlan) => {
-    console.log('edit');
+    dispatch(EDIT_PLAN(plan));
+    navigate('ManualCreatorScreen');
   };
 
   const handleDeletePlan = (planId: string) => {

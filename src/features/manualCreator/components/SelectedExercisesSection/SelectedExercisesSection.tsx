@@ -56,7 +56,7 @@ const SelectedExercisesSection = ({
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleEditExercise(index)} style={{ width: '80%' }}>
               <Typography variant="h4" style={[styles.text, { alignSelf: 'flex-start' }]}>
-                {exercise.name}
+                {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
               </Typography>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleRemoveExercise(exercise.id)} style={styles.viewIcon}>

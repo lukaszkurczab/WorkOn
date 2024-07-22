@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "expo start --dev-client",
-    "build": "eas build --platform android --profile preview",
+    "build:android": "eas build --platform android --profile preview",
     "build:ios": "eas build --platform ios --profile preview",
     "offline": "expo start --offline",
     "android": "expo run:android",
