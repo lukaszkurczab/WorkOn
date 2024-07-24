@@ -6,7 +6,7 @@ const { height: screenHeight } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: screenHeight - 332,
+    height: screenHeight - 334,
   },
   text: {
     alignSelf: 'center',
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   seriesScrollView: {
-    height: 327,
+    height: 289,
     backgroundColor: primaryColor,
     gap: 1,
   },

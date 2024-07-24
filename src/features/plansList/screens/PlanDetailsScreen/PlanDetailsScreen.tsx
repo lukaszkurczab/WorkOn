@@ -46,7 +46,7 @@ const PlanDetailsScreen = () => {
   return (
     <Layout headerText={plan ? plan.name : 'WorkOn'}>
       <View style={styles.container}>
-        {items.length > 0 && <Carousel items={items} />}
+        {items.length > 0 && <Carousel items={items} height={520} />}
         {editable && (
           <View style={styles.buttonsWrapper}>
             <Button onPress={handleEditPress}>

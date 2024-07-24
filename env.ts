@@ -1,6 +1,6 @@
-const BASE_URL = 'https://workon-backend.azurewebsites.net';
+//const BASE_URL = 'https://workon-backend.azurewebsites.net';
 //hotspot
-//const BASE_URL = 'http://192.168.118.169:4000';
+const BASE_URL = 'http://192.168.1.100:4000';
 //home
 //const BASE_URL = 'http://192.168.1.100:4000';
 //Tuchów

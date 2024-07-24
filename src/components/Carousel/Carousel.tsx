@@ -5,12 +5,13 @@ import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-g
 import styles from './Carousel.styles';
 
 interface CarouselProps {
+  height: number;
   items: Array<{ id: string; component: React.ReactNode }>;
 }
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const Carousel: React.FC<CarouselProps> = ({ items }) => {
+const Carousel: React.FC<CarouselProps> = ({ height, items }) => {
   const lastItemIndex = items.length - 1;
   const currentIndex = useSharedValue(0);
   const currentTranslateX = useSharedValue(0);
@@ -134,7 +135,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
     });
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ height: height, overflow: 'hidden', width: screenWidth }}>
       <GestureDetector gesture={pan}>
         <View style={styles.container}>
           <View style={styles.itemsWrapper}>

@@ -81,7 +81,7 @@ const CarouselScreen = () => {
   return (
     <Layout showNavigation={false}>
       <View style={styles.container}>
-        <Carousel items={items} />
+        <Carousel items={items} height={320} />
         <Button variant="text" onPress={() => setModalVisible(true)} style={styles.button}>
           <Typography variant="h2">{route.params && route.params.firstLogin ? 'Skip' : 'Back'}</Typography>
         </Button>

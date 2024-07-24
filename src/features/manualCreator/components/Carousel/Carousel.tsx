@@ -20,7 +20,7 @@ const CarouselScreen = ({ plan }: { plan: WorkoutPlan }) => {
 
   return (
     <View style={styles.container}>
-      <Carousel items={items} />
+      <Carousel items={items} height={554} />
     </View>
   );
 };

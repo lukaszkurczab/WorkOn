@@ -11,7 +11,7 @@ import { backgroundColor, gray, red } from '../../../../styles/colors';
 import { Exercise, Series } from '../../../../types/exercises';
 import Modal from '../../../../components/Modal/Modal';
 import SeriesEditSection from '../SeriesEditSection/SeriesEditSection';
-import { useGenerateID } from '../../../../utility/hooks';
+import { useGenerateID, useGetExerciseData } from '../../../../utility/hooks';
 
 type ExerciseEditSectionProps = {
   dayId: string;
@@ -46,7 +46,7 @@ const ExerciseEditSection = ({
     setRepetitionsRangeValue(exercise.repsRange);
     setLoadIncreaseValue(exercise.loadIncrease);
     setSeries(exercise.series);
-  }, [exercise]);
+  }, [exercise.id]);
 
   const handleUpdateExercise = (property: string, newValue?: any, serieIndex?: number) => {
     let updatedExercise = { ...exercise };
@@ -105,7 +105,7 @@ const ExerciseEditSection = ({
   return (
     <View style={{ width: '100%' }}>
       <Typography variant="h2" style={[styles.text, styles.header]}>
-        {exercise.name}
+        {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
         <TouchableOpacity
           onPress={() => dispatch(UNSELECT_EXERCISE({ dayId: dayId, exerciseId: exercise.id }))}
           style={styles.viewIcon}
@@ -154,6 +154,9 @@ const ExerciseEditSection = ({
             onChangeText={text => handleUpdateExercise('loadIncrease', text)}
           />
         </View>
+        <Typography variant="h5" style={[styles.row, { backgroundColor: gray }]}>
+          Series
+        </Typography>
         <ScrollView style={styles.seriesScrollView}>
           {series.map((serie, index) => (
             <SeriesEditSection

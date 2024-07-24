@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   seriesScrollView: {
-    height: screenHeight - 491,
+    height: screenHeight - 529,
     backgroundColor: primaryColor,
     gap: 1,
   },
