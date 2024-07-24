@@ -3,6 +3,7 @@ import { BASE_URL } from '../../env';
 import { WorkoutPlan } from '../types/plans';
 import { HistoryItem } from '../types/history';
 import { getToken } from '../utility/secureStore';
+import { SearchHistoryItem } from '../types/users';
 
 export const addHistoryItemToUser = async (userData: { userId: string; historyItem: HistoryItem }) => {
   try {
@@ -320,6 +321,95 @@ export const getData = async (token: string) => {
     return await response.json();
   } catch (error) {
     console.error('Error fetching user data:', error);
+    throw error;
+  }
+};
+
+export const addSearchHistoryItemToUser = async (userData: {
+  userId: string;
+  searchHistoryItem: SearchHistoryItem;
+}) => {
+  try {
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/users/search-history/${userData.userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ searchHistoryItem: userData.searchHistoryItem }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to add search history item');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error adding search history item:', error);
+    throw error;
+  }
+};
+
+export const removeSearchHistoryItemFromUser = async (userData: { userId: string; itemId: string }) => {
+  try {
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/users/search-history/${userData.userId}/${userData.itemId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to remove search history item');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error removing search history item:', error);
+    throw error;
+  }
+};
+
+export const clearSearchHistoryForUser = async (userId: string) => {
+  try {
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/users/search-history/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to clear search history');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error clearing search history:', error);
+    throw error;
+  }
+};
+
+export const searchUsers = async (userId: string, query: string, maxResults?: number) => {
+  try {
+    const accessToken = await getToken('accessToken');
+    const url = `${BASE_URL}/users/search/${userId}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ query, maxResults }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to search users');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error searching users:', error);
     throw error;
   }
 };

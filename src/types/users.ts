@@ -15,6 +15,14 @@ export interface User {
   plans: WorkoutPlan[];
   history: HistoryItem[];
   settings: UserSettings;
+  searchHistory: SearchHistoryItem[];
+}
+
+export interface SearchHistoryItem {
+  id: string;
+  name: string;
+  image: string;
+  userId: string;
 }
 
 export interface UserRecord {

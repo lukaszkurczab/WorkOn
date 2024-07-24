@@ -4,9 +4,14 @@ import { getUserData } from '../actions/userActions';
 import { WorkoutPlan } from '../../types/plans';
 import { HistoryItem } from '../../types/history';
 import { addHistoryItem } from '../../features/training/store/actions/actions';
-import { User, UserSettings } from '../../types/users';
+import { SearchHistoryItem, User, UserSettings } from '../../types/users';
 import { createPlan } from '../../features/manualCreator/store/actions/actions';
 import { removePlan } from '../../features/plansList/store/actions/actions';
+import {
+  addSearchHistoryItem,
+  clearSearchHistory,
+  removeSearchHistoryItem,
+} from '../../features/usersSearch/store/actions/actions';
 
 interface JwtPayload {
   id: string;
@@ -30,6 +35,7 @@ const initialState: User = {
   settings: {
     defaultHistoryPublicType: 'public',
   },
+  searchHistory: [],
   history: [],
   bio: '',
   password: '',
@@ -65,12 +71,14 @@ const userSlice = createSlice({
             plans: WorkoutPlan[];
             history: HistoryItem[];
             settings: UserSettings;
+            searchHistory: SearchHistoryItem[];
           }>
         ) => {
           state.username = action.payload.username;
           state.settings = action.payload.settings;
           state.plans = action.payload.plans;
           state.history = action.payload.history;
+          state.searchHistory = action.payload.searchHistory;
         }
       )
       .addCase(createPlan.fulfilled, (state, action: PayloadAction<WorkoutPlan>) => {
@@ -82,7 +90,6 @@ const userSlice = createSlice({
         }
       })
       .addCase(removePlan.fulfilled, (state, action) => {
-        console.log(action.payload);
         const index = state.plans.findIndex(plan => plan.id === action.payload.planId);
         if (index !== -1) {
           state.plans.splice(index, 1);
@@ -90,6 +97,18 @@ const userSlice = createSlice({
       })
       .addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
         state.history.unshift(action.payload);
+      })
+      .addCase(addSearchHistoryItem.fulfilled, (state, action: PayloadAction<SearchHistoryItem>) => {
+        state.searchHistory.unshift(action.payload);
+      })
+      .addCase(
+        removeSearchHistoryItem.fulfilled,
+        (state, action: PayloadAction<{ message: string; itemId: string }>) => {
+          state.searchHistory = state.searchHistory.filter(item => item.id !== action.payload.itemId);
+        }
+      )
+      .addCase(clearSearchHistory.fulfilled, state => {
+        state.searchHistory = [];
       });
   },
 });

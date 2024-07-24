@@ -32,6 +32,7 @@ import SetPublicWorkoutsScreen from './src/features/userProfile/screens/SetPubli
 import ChangePasswordScreen from './src/features/userProfile/screens/ChangePasswordScreen/ChangePasswordScreen';
 import ChangeUsernameScreen from './src/features/userProfile/screens/ChangeUsernameScreen/ChangeUsernameScreen';
 import ManualPlanGeneralScreen from './src/features/manualCreator/screens/ManualPlanGeneralScreen/ManualPlanGeneralScreen';
+import UserSearchScreen from './src/features/usersSearch/screens/UserSearchScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -122,6 +123,7 @@ const AppNavigator = () => {
         <Stack.Screen name="SetPublicWorkoutsScreen" component={SetPublicWorkoutsScreen} />
         <Stack.Screen name="ChangeUsernameScreen" component={ChangeUsernameScreen} />
         <Stack.Screen name="ManualPlanGeneralScreen" component={ManualPlanGeneralScreen} />
+        <Stack.Screen name="UserSearchScreen" component={UserSearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
