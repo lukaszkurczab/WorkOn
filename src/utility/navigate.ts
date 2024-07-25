@@ -25,6 +25,7 @@ export type RootStackParamList = {
   SetPublicWorkoutsScreen: undefined;
   ManualPlanGeneralScreen: undefined;
   UserSearchScreen: undefined;
+  UserPublicProfileScreen: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

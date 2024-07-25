@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styles from './HistoryTile.styles';
-import { Typography } from '../../../../components/Typography/Typography';
-import { gray } from '../../../../styles/colors';
-import { HistoryItem } from '../../../../types/history';
-import { useFormatDate } from '../../../../utility/hooks';
+import { Typography } from '../Typography/Typography';
+import { gray } from '../../styles/colors';
+import { HistoryItem } from '../../types/history';
+import { useFormatDate } from '../../utility/hooks';
 
 type HistoryItemType = {
   historyItem: HistoryItem;

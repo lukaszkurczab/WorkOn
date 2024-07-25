@@ -532,19 +532,6 @@ export const exercisesList = [
         image: 'incline-dumbbell-curl',
       },
       {
-        id: '40',
-        name: 'Zottman Curl',
-        group: 'Biceps',
-        focusPoints:
-          'Keep elbows stationary, fully extend arms at the bottom. Focus on rotating wrists at the top and bottom of the movement.',
-        startPosition: 'Stand with feet shoulder-width apart, hold a dumbbell in each hand with an underhand grip.',
-        process:
-          'Curl the dumbbells towards your shoulders by bending your elbows, rotate wrists at the top to a pronated grip, lower back to the starting position.',
-        muscleMain: ['Biceps'],
-        muscleAdditional: ['Forearms'],
-        image: 'zottman-curl',
-      },
-      {
         id: '41',
         name: 'EZ Bar Curl',
         group: 'Biceps',
@@ -569,19 +556,6 @@ export const exercisesList = [
         muscleMain: ['Biceps'],
         muscleAdditional: ['Forearms'],
         image: 'resistance-band-curl',
-      },
-      {
-        id: '43',
-        name: 'Reverse Curl',
-        group: 'Biceps',
-        focusPoints:
-          'Keep elbows stationary, fully extend arms at the bottom. Focus on controlled movements to engage biceps.',
-        startPosition: 'Stand with feet shoulder-width apart, hold a barbell with an overhand grip.',
-        process:
-          'Curl the barbell towards your shoulders by bending your elbows, then lower back to the starting position.',
-        muscleMain: ['Biceps'],
-        muscleAdditional: ['Forearms'],
-        image: 'reverse-curl',
       },
       {
         id: '44',

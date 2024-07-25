@@ -30,3 +30,10 @@ export interface UserRecord {
   weight: number;
   public: boolean;
 }
+
+export interface UserPublicData {
+  userId: string;
+  username: string;
+  plans: WorkoutPlan[];
+  history: HistoryItem[];
+}

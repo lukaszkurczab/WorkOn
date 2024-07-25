@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import Layout from '../../../components/Layout/Layout';
+import Layout from '../../../../components/Layout/Layout';
 import styles from './UserSearchScreen.styles';
-import SearchInput from '../components/SearchInput/SearchInput';
-import { Typography } from '../../../components/Typography/Typography';
-import { blue, primaryColor } from '../../../styles/colors';
-import Button from '../../../components/Button/Button';
+import SearchInput from '../../components/SearchInput/SearchInput';
+import { Typography } from '../../../../components/Typography/Typography';
+import { blue, primaryColor } from '../../../../styles/colors';
+import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { SearchHistoryItem } from '../../../types/users';
+import { RootState } from '../../../../store/store';
+import { SearchHistoryItem } from '../../../../types/users';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  addSearchHistoryItem,
   clearSearchHistory,
   removeSearchHistoryItem,
   searchUsersByString,
-} from '../store/actions/actions';
-import { useDispatch } from '../../../utility/hooks';
-import { CLEAR_USERS_FOUND } from '../store/slice/slice';
+  getUserPublicData,
+} from '../../store/actions/actions';
+import { useDispatch } from '../../../../utility/hooks';
+import { CLEAR_USERS_FOUND } from '../../store/slice/slice';
+import { navigate } from '../../../../utility/navigate';
 
 const UserSearchScreen = () => {
   const dispatch = useDispatch();
@@ -35,8 +36,9 @@ const UserSearchScreen = () => {
     }
   };
 
-  const handleSelectUser = (searchHistoryItem: SearchHistoryItem) => {
-    dispatch(addSearchHistoryItem({ userId, searchHistoryItem }));
+  const handleSelectUser = async (searchHistoryItem: SearchHistoryItem) => {
+    await dispatch(getUserPublicData({ userId, searchHistoryItem }));
+    navigate('UserPublicProfileScreen');
   };
 
   const handleClearHistory = () => {
@@ -61,25 +63,27 @@ const UserSearchScreen = () => {
                 </Typography>
               </Button>
             </View>
-            {userSearchHistory.map((item: SearchHistoryItem) => (
-              <TouchableOpacity style={styles.row} key={item.id} onPress={() => handleSelectUser(item)}>
-                <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
-                  <Image source={require('../../../../assets/icon.png')} style={styles.avatar} />
-                  <Typography variant="h3">{item.name}</Typography>
-                </View>
-                <Button variant="text" onPress={() => handleRemoveHistoryItem(item.id)} style={styles.removeIcon}>
-                  <Icon name="times" size={24} color={primaryColor} />
-                </Button>
-              </TouchableOpacity>
-            ))}
+            {userSearchHistory &&
+              userSearchHistory.map((item: SearchHistoryItem) => (
+                <TouchableOpacity style={styles.row} key={item.id} onPress={() => handleSelectUser(item)}>
+                  <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+                    <Image source={require('../../../../../assets/icon.png')} style={styles.avatar} />
+                    <Typography variant="h3">{item.name}</Typography>
+                  </View>
+                  <Button variant="text" onPress={() => handleRemoveHistoryItem(item.id)} style={styles.removeIcon}>
+                    <Icon name="times" size={24} color={primaryColor} />
+                  </Button>
+                </TouchableOpacity>
+              ))}
           </>
         )}
         {searchText &&
+          usersFound &&
           usersFound.map((item: SearchHistoryItem) => {
             return (
               <TouchableOpacity style={styles.row} key={item.id} onPress={() => handleSelectUser(item)}>
                 <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
-                  <Image source={require('../../../../assets/icon.png')} style={styles.avatar} />
+                  <Image source={require('../../../../../assets/icon.png')} style={styles.avatar} />
                   <Typography variant="h3">{item.name}</Typography>
                 </View>
               </TouchableOpacity>

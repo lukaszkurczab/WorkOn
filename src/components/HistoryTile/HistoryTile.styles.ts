@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { dark_gray } from '../../../../styles/colors';
+import { dark_gray } from '../../styles/colors';
 
 export default StyleSheet.create({
   historyItem: {

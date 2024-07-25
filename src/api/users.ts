@@ -325,30 +325,6 @@ export const getData = async (token: string) => {
   }
 };
 
-export const addSearchHistoryItemToUser = async (userData: {
-  userId: string;
-  searchHistoryItem: SearchHistoryItem;
-}) => {
-  try {
-    const accessToken = await getToken('accessToken');
-    const response = await fetch(`${BASE_URL}/users/search-history/${userData.userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ searchHistoryItem: userData.searchHistoryItem }),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to add search history item');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error adding search history item:', error);
-    throw error;
-  }
-};
-
 export const removeSearchHistoryItemFromUser = async (userData: { userId: string; itemId: string }) => {
   try {
     const accessToken = await getToken('accessToken');
@@ -410,6 +386,30 @@ export const searchUsers = async (userId: string, query: string, maxResults?: nu
     return await response.json();
   } catch (error) {
     console.error('Error searching users:', error);
+    throw error;
+  }
+};
+
+export const searchUser = async (userData: { userId: string; searchHistoryItem: SearchHistoryItem }) => {
+  try {
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/users/search-user/${userData.userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(userData.searchHistoryItem),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Network response was not ok');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error in searching user and adding to history:', error);
     throw error;
   }
 };

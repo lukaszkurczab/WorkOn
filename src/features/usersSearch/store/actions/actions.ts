@@ -1,11 +1,11 @@
 import { createAppAsyncThunk } from '../../../../utility/createAppAsyncThunk';
 import {
-  addSearchHistoryItemToUser,
   removeSearchHistoryItemFromUser,
   clearSearchHistoryForUser,
   searchUsers,
+  searchUser,
 } from '../../../../api/users';
-import { SearchHistoryItem } from '../../../../types/users';
+import { SearchHistoryItem, UserPublicData } from '../../../../types/users';
 
 interface AddSearchHistoryItemData {
   userId: string;
@@ -26,13 +26,6 @@ interface SearchUsersParams {
 export interface SearchUsersResponse {
   users: SearchHistoryItem[];
 }
-
-export const addSearchHistoryItem = createAppAsyncThunk<SearchHistoryItem, AddSearchHistoryItemData>(
-  'user/addSearchHistoryItem',
-  async ({ userId, searchHistoryItem }) => {
-    return await addSearchHistoryItemToUser({ userId, searchHistoryItem });
-  }
-);
 
 export const removeSearchHistoryItem = createAppAsyncThunk<
   { message: string; itemId: string },
@@ -56,3 +49,18 @@ export const searchUsersByString = createAppAsyncThunk<SearchUsersResponse, Sear
     return { users };
   }
 );
+
+export const getUserPublicData = createAppAsyncThunk<
+  UserPublicData,
+  { userId: string; searchHistoryItem: SearchHistoryItem }
+>('user/getUserPublicData', async ({ userId, searchHistoryItem }, { rejectWithValue }) => {
+  try {
+    const detailedUserData = await searchUser({
+      userId,
+      searchHistoryItem,
+    });
+    return detailedUserData;
+  } catch (error) {
+    return rejectWithValue(error);
+  }
+});

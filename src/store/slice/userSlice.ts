@@ -4,11 +4,11 @@ import { getUserData } from '../actions/userActions';
 import { WorkoutPlan } from '../../types/plans';
 import { HistoryItem } from '../../types/history';
 import { addHistoryItem } from '../../features/training/store/actions/actions';
-import { SearchHistoryItem, User, UserSettings } from '../../types/users';
+import { SearchHistoryItem, User, UserPublicData, UserSettings } from '../../types/users';
 import { createPlan } from '../../features/manualCreator/store/actions/actions';
 import { removePlan } from '../../features/plansList/store/actions/actions';
 import {
-  addSearchHistoryItem,
+  getUserPublicData,
   clearSearchHistory,
   removeSearchHistoryItem,
 } from '../../features/usersSearch/store/actions/actions';
@@ -98,8 +98,17 @@ const userSlice = createSlice({
       .addCase(addHistoryItem.fulfilled, (state, action: PayloadAction<HistoryItem>) => {
         state.history.unshift(action.payload);
       })
-      .addCase(addSearchHistoryItem.fulfilled, (state, action: PayloadAction<SearchHistoryItem>) => {
-        state.searchHistory.unshift(action.payload);
+      .addCase(getUserPublicData.fulfilled, (state, action: PayloadAction<UserPublicData>) => {
+        const existingItemIndex = state.searchHistory.findIndex(item => item.userId === action.payload.userId);
+        if (existingItemIndex !== -1) {
+          state.searchHistory.splice(existingItemIndex, 1);
+        }
+        state.searchHistory.unshift({
+          id: action.payload.userId,
+          name: action.payload.username,
+          image: 'image',
+          userId: action.payload.userId,
+        });
       })
       .addCase(
         removeSearchHistoryItem.fulfilled,

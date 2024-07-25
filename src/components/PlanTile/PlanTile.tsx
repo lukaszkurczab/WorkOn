@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styles from './PlanTile.style';
-import { Typography } from '../../../../components/Typography/Typography';
-import { gray } from '../../../../styles/colors';
-import { WorkoutPlan } from '../../../../types/plans';
+import { Typography } from '../Typography/Typography';
+import { gray } from '../../styles/colors';
+import { WorkoutPlan } from '../../types/plans';
 
 type PlanTileProps = {
   plan: WorkoutPlan;
