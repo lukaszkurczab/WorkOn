@@ -82,6 +82,12 @@ const manualCreatorSlice = createSlice({
         state.plan.days[index].name = action.payload.name;
       }
     },
+    CHANGE_EXERCISES_ORDER: (state, action: PayloadAction<{ dayId: string; newOrder: Exercise[] }>) => {
+      const index = state.plan.days.findIndex(day => day.id === action.payload.dayId);
+      if (index !== -1) {
+        state.plan.days[index].exercises = action.payload.newOrder;
+      }
+    },
     REMOVE_DAY: (state, action: PayloadAction<string>) => {
       if (state.plan.days.length > 1) {
         state.plan.days = state.plan.days.filter(day => day.id !== action.payload);
@@ -201,6 +207,7 @@ export const {
   UNSELECT_EXERCISE,
   REMOVE_SERIES,
   EDIT_PLAN,
+  CHANGE_EXERCISES_ORDER,
 } = manualCreatorSlice.actions;
 
 export default manualCreatorSlice.reducer;

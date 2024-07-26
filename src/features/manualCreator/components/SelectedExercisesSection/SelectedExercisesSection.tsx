@@ -10,11 +10,12 @@ import { red } from '../../../../styles/colors';
 import { Exercise } from '../../../../types/exercises';
 import { navigate } from '../../../../utility/navigate';
 import { useDispatch, useGetExerciseData } from '../../../../utility/hooks';
-import { UNSELECT_EXERCISE } from '../../store/slice/slice';
+import { CHANGE_EXERCISES_ORDER, UNSELECT_EXERCISE } from '../../store/slice/slice';
+import { DraggableList } from '../../../../components/DraggableList/DraggableList';
 
 type SelectedExercisesSectionProps = {
   day: Day;
-  exercises: any;
+  exercises: Exercise[];
   handleSetStep: (newStep: number) => void;
   handleSelectExerciseToEdit: (index: number) => void;
 };
@@ -41,6 +42,10 @@ const SelectedExercisesSection = ({
     handleSetStep(2);
   };
 
+  const handleDragEnd = (newData: Exercise[]) => {
+    dispatch(CHANGE_EXERCISES_ORDER({ dayId: day.id, newOrder: newData }));
+  };
+
   return (
     <View style={{ width: '100%' }}>
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -49,21 +54,25 @@ const SelectedExercisesSection = ({
         </Typography>
       </View>
       <ScrollView style={{ width: '100%' }}>
-        {exercises.map((exercise: Exercise, index: number) => (
-          <View key={exercise.id} style={styles.selectedExerciseItem}>
-            <TouchableOpacity onPress={() => handlePreviewExercise(exercise)} style={styles.viewIcon}>
-              <FontAwsome5Icon name="eye" size={14} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleEditExercise(index)} style={{ width: '80%' }}>
-              <Typography variant="h4" style={[styles.text, { alignSelf: 'flex-start' }]}>
-                {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
-              </Typography>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleRemoveExercise(exercise.id)} style={styles.viewIcon}>
-              <FontAwesomeIcon name="trash" size={20} style={{ color: red }} />
-            </TouchableOpacity>
-          </View>
-        ))}
+        <DraggableList
+          data={exercises}
+          onDragEnd={handleDragEnd}
+          renderItem={(exercise, index) => (
+            <View key={exercise.id} style={styles.selectedExerciseItem}>
+              <TouchableOpacity onPress={() => handlePreviewExercise(exercise)} style={styles.viewIcon}>
+                <FontAwsome5Icon name="eye" size={14} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleEditExercise(index)} style={{ width: '80%' }}>
+                <Typography variant="h4" style={[styles.text, { alignSelf: 'flex-start' }]}>
+                  {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
+                </Typography>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleRemoveExercise(exercise.id)} style={styles.viewIcon}>
+                <FontAwesomeIcon name="trash" size={20} style={{ color: red }} />
+              </TouchableOpacity>
+            </View>
+          )}
+        />
         <TouchableOpacity style={styles.addExerciseButton} onPress={() => handleSetStep(1)}>
           <Typography variant="h3" style={styles.addExerciseButtonText}>
             + Add exercises

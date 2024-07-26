@@ -11,6 +11,6 @@ export const createPlan = createAppAsyncThunk<WorkoutPlan, AddPlanToUserData>(
   'plans/addPlan',
   async (data: AddPlanToUserData) => {
     const response = await addPlanToUser(data);
-    return response; // Assuming response is of type WorkoutPlan
+    return response;
   }
 );
