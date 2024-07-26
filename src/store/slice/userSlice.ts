@@ -59,6 +59,12 @@ const userSlice = createSlice({
     UPDATE_HISTORY: (state, action) => {
       state.history = action.payload;
     },
+    CLEAR_SEARCH_HISTORY: state => {
+      state.searchHistory = [];
+    },
+    REMOVE_SEARTCH_HISTORY_ITEM: (state, action) => {
+      state.searchHistory = state.searchHistory.filter(item => item.id !== action.payload);
+    },
   },
   extraReducers: builder => {
     builder
@@ -109,18 +115,16 @@ const userSlice = createSlice({
           image: 'image',
           userId: action.payload.userId,
         });
-      })
-      .addCase(
-        removeSearchHistoryItem.fulfilled,
-        (state, action: PayloadAction<{ message: string; itemId: string }>) => {
-          state.searchHistory = state.searchHistory.filter(item => item.id !== action.payload.itemId);
-        }
-      )
-      .addCase(clearSearchHistory.fulfilled, state => {
-        state.searchHistory = [];
       });
   },
 });
 
-export const { DECODE_USER_DATA, CHANGE_USERNAME, UPDATE_PLANS, UPDATE_HISTORY } = userSlice.actions;
+export const {
+  REMOVE_SEARTCH_HISTORY_ITEM,
+  CLEAR_SEARCH_HISTORY,
+  DECODE_USER_DATA,
+  CHANGE_USERNAME,
+  UPDATE_PLANS,
+  UPDATE_HISTORY,
+} = userSlice.actions;
 export default userSlice.reducer;

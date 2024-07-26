@@ -6,7 +6,7 @@ import trainingReducer from '../features/training/store/slice/slice';
 import userReducer from './slice/userSlice';
 import loginReducer from '../features/login/store/slice/slice';
 import plansReducer from '../features/plansList/store/slice/slice';
-import ManualCreatorReducer from '../features/manualCreator/store/slice/slice';
+import manualCreatorReducer from '../features/manualCreator/store/slice/slice';
 import usersSearchReducer from '../features/usersSearch/store/slice/slice';
 
 const rootReducer = combineReducers({
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   training: trainingReducer,
   user: userReducer,
   login: loginReducer,
-  manualCreator: ManualCreatorReducer,
+  manualCreator: manualCreatorReducer,
   usersSearch: usersSearchReducer,
 });
 

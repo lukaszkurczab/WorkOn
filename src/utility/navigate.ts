@@ -2,6 +2,7 @@ import { createNavigationContainerRef } from '@react-navigation/native';
 import { ExerciseData } from '../types/exercises';
 import { WorkoutPlan } from '../types/plans';
 import { HistoryItem } from '../types/history';
+import { SearchHistoryItem } from '../types/users';
 
 export type RootStackParamList = {
   LoginScreen: undefined;
@@ -25,7 +26,7 @@ export type RootStackParamList = {
   SetPublicWorkoutsScreen: undefined;
   ManualPlanGeneralScreen: undefined;
   UserSearchScreen: undefined;
-  UserPublicProfileScreen: undefined;
+  UserPublicProfileScreen: { userId: string; searchHistoryItem: SearchHistoryItem };
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();

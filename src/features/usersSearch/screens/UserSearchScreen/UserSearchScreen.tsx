@@ -19,6 +19,7 @@ import {
 import { useDispatch } from '../../../../utility/hooks';
 import { CLEAR_USERS_FOUND } from '../../store/slice/slice';
 import { navigate } from '../../../../utility/navigate';
+import { CLEAR_SEARCH_HISTORY, REMOVE_SEARTCH_HISTORY_ITEM } from '../../../../store/slice/userSlice';
 
 const UserSearchScreen = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const UserSearchScreen = () => {
   const [searchText, setSearchText] = useState('');
 
   const handleSearchUsers = (newSearchText: string) => {
-    setSearchText(newSearchText);
+    setSearchText(newSearchText.trim());
     if (newSearchText.trim()) {
       dispatch(searchUsersByString({ userId, query: newSearchText, maxResults: 10 }));
     } else {
@@ -37,15 +38,16 @@ const UserSearchScreen = () => {
   };
 
   const handleSelectUser = async (searchHistoryItem: SearchHistoryItem) => {
-    await dispatch(getUserPublicData({ userId, searchHistoryItem }));
-    navigate('UserPublicProfileScreen');
+    navigate('UserPublicProfileScreen', { userId, searchHistoryItem });
   };
 
   const handleClearHistory = () => {
+    dispatch(CLEAR_SEARCH_HISTORY());
     dispatch(clearSearchHistory(userId));
   };
 
   const handleRemoveHistoryItem = (itemId: string) => {
+    dispatch(REMOVE_SEARTCH_HISTORY_ITEM(itemId));
     dispatch(removeSearchHistoryItem({ userId, itemId }));
   };
 
