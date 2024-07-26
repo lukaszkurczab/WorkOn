@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: 'blue',
     position: 'absolute',
     width: screenWidth - 64,
   },
