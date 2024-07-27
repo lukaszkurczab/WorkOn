@@ -10,15 +10,23 @@ import { Day } from '../../../../types/plans';
 
 type PlanCarouselItemProps = {
   day: Day;
+  handleSetIndex: (newIndex: 'prev' | 'next') => void;
 };
 
-const PlanCarouselItem = ({ day }: PlanCarouselItemProps) => {
+const PlanCarouselItem = ({ day, handleSetIndex }: PlanCarouselItemProps) => {
   const [step, setStep] = useState(0);
   const [modal, setModal] = useState({ display: false, text: '' });
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState<number>(0);
 
   const handleSetStep = (newStep: number) => {
     setStep(newStep);
+  };
+
+  const handleSelectExerciseIndex = (direction: 'prev' | 'next') => {
+    const newSelectedIndex = direction === 'prev' ? selectedExerciseIndex - 1 : selectedExerciseIndex + 1;
+    if (newSelectedIndex >= 0 && newSelectedIndex < day.exercises.length) {
+      setSelectedExerciseIndex(newSelectedIndex);
+    }
   };
 
   const getStepContent = (step: number) => {
@@ -30,10 +38,11 @@ const PlanCarouselItem = ({ day }: PlanCarouselItemProps) => {
             handleSelectExerciseToEdit={setSelectedExerciseIndex}
             day={day}
             exercises={day.exercises}
+            handleSetIndex={handleSetIndex}
           />
         );
       case 1:
-        return <ExerciseListSection day={day} handleSetStep={handleSetStep} />;
+        return <ExerciseListSection day={day} handleSetStep={handleSetStep} handleSetIndex={handleSetIndex} />;
       case 2:
         return (
           <ExerciseEditSection
@@ -43,6 +52,7 @@ const PlanCarouselItem = ({ day }: PlanCarouselItemProps) => {
             selectedExerciseIndex={selectedExerciseIndex}
             handleSetSelectedExerciseIndex={setSelectedExerciseIndex}
             lastExerciseIndex={day.exercises.length - 1}
+            handleSetIndex={handleSelectExerciseIndex}
           />
         );
       default:

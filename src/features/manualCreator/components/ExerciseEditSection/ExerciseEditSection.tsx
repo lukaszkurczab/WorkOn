@@ -20,6 +20,7 @@ type ExerciseEditSectionProps = {
   selectedExerciseIndex: number;
   handleSetStep: (newStep: number) => void;
   handleSetSelectedExerciseIndex: (newIndex: number) => void;
+  handleSetIndex: (direction: 'prev' | 'next') => void;
 };
 
 const ExerciseEditSection = ({
@@ -29,6 +30,7 @@ const ExerciseEditSection = ({
   exercise,
   handleSetSelectedExerciseIndex,
   handleSetStep,
+  handleSetIndex,
 }: ExerciseEditSectionProps) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState({ display: false, text: '' });
@@ -104,15 +106,23 @@ const ExerciseEditSection = ({
 
   return (
     <View style={{ width: '100%' }}>
-      <Typography variant="h2" style={[styles.text, styles.header]}>
-        {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
-        <TouchableOpacity
-          onPress={() => dispatch(UNSELECT_EXERCISE({ dayId: dayId, exerciseId: exercise.id }))}
-          style={styles.viewIcon}
-        >
-          <FontAwesomeIcon name="trash" size={24} style={{ color: red }} />
-        </TouchableOpacity>
-      </Typography>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginBottom: 16 }}>
+        <Button variant="text" onPress={() => handleSetIndex('prev')} style={{ width: 32 }}>
+          <FontAwesomeIcon name="chevron-left" size={14} />
+        </Button>
+        <Typography variant="h2" style={styles.text}>
+          {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
+          <TouchableOpacity
+            onPress={() => dispatch(UNSELECT_EXERCISE({ dayId: dayId, exerciseId: exercise.id }))}
+            style={styles.viewIcon}
+          >
+            <FontAwesomeIcon name="trash" size={24} style={{ color: red }} />
+          </TouchableOpacity>
+        </Typography>
+        <Button variant="text" onPress={() => handleSetIndex('next')} style={{ width: 32 }}>
+          <FontAwesomeIcon name="chevron-right" size={14} />
+        </Button>
+      </View>
       <View style={styles.editWrapper}>
         <View style={[styles.row, { backgroundColor: gray }]}>
           <Typography variant="h5" style={{ color: backgroundColor }}>
@@ -199,29 +209,12 @@ const ExerciseEditSection = ({
         </ScrollView>
       </View>
       <View style={styles.buttonsWrapper}>
-        {selectedExerciseIndex === 0 ? (
-          <Button onPress={() => handleSetStep(0)} style={styles.button}>
-            <Typography variant="h3">Back</Typography>
-          </Button>
-        ) : (
-          <Button onPress={() => handleSetSelectedExerciseIndex(selectedExerciseIndex - 1)} style={styles.button}>
-            <Typography variant="h3">Previous</Typography>
-          </Button>
-        )}
-        {selectedExerciseIndex === lastExerciseIndex ? (
-          <Button onPress={onSaveExercisePress} style={[styles.button]}>
-            <Typography variant="h3">Save</Typography>
-          </Button>
-        ) : (
-          <Button
-            onPress={() => {
-              handleSetSelectedExerciseIndex(selectedExerciseIndex + 1);
-            }}
-            style={[styles.button]}
-          >
-            <Typography variant="h3">Next</Typography>
-          </Button>
-        )}
+        <Button onPress={() => handleSetStep(0)} style={styles.button}>
+          <Typography variant="h3">Cancel</Typography>
+        </Button>
+        <Button onPress={onSaveExercisePress} style={[styles.button]}>
+          <Typography variant="h3">Save</Typography>
+        </Button>
       </View>
       <Modal visible={modal.display} onClose={() => setModal({ display: false, text: '' })}>
         <Typography variant="h3" style={{ textAlign: 'center' }}>

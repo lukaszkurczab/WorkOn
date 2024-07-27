@@ -9,9 +9,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: backgroundColor,
   },
-  header: {
-    marginBottom: 16,
-  },
   textInput: {
     width: 45,
     textAlign: 'center',

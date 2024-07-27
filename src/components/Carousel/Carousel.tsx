@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Dimensions } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import styles from './Carousel.styles';
@@ -7,13 +7,14 @@ import styles from './Carousel.styles';
 interface CarouselProps {
   height: number;
   items: Array<{ id: string; component: React.ReactNode }>;
+  selectedIndex?: number;
 }
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const Carousel: React.FC<CarouselProps> = ({ height, items }) => {
+const Carousel: React.FC<CarouselProps> = ({ height, items, selectedIndex = 0 }) => {
   const lastItemIndex = items.length - 1;
-  const currentIndex = useSharedValue(0);
+  const currentIndex = useSharedValue(selectedIndex);
   const currentTranslateX = useSharedValue(0);
   const currentScale = useSharedValue(1);
   const currentZIndex = useSharedValue(10);
@@ -23,12 +24,44 @@ const Carousel: React.FC<CarouselProps> = ({ height, items }) => {
   const nextTranslateX = useSharedValue(64);
   const nextScale = useSharedValue(0.8);
   const nextZIndex = useSharedValue(1);
-  const newItemIndex = useSharedValue(0);
+  const newItemIndex = useSharedValue(selectedIndex);
   const startPosition = useSharedValue(-1000);
   const distance = useSharedValue(0);
   const direction = useSharedValue('none');
   const changeWidth = (screenWidth - 128) / 2;
   const adjustedTranslationX = screenWidth - 128;
+
+  useEffect(() => {
+    // Ustawienie nowego indeksu i animacji po zmianie propsa selectedIndex
+    if (selectedIndex !== currentIndex.value) {
+      direction.value = selectedIndex > currentIndex.value ? 'left' : 'right';
+      newItemIndex.value = selectedIndex;
+      currentIndex.value = selectedIndex;
+
+      switch (direction.value) {
+        case 'left':
+          currentScale.value = withTiming(0.8, { duration: 500 });
+          currentTranslateX.value = withTiming(-64, { duration: 500 });
+          nextScale.value = withTiming(1, { duration: 500 });
+          nextTranslateX.value = withTiming(0, { duration: 500 });
+          break;
+        case 'right':
+          currentScale.value = withTiming(0.8, { duration: 500 });
+          currentTranslateX.value = withTiming(64, { duration: 500 });
+          prevScale.value = withTiming(1, { duration: 500 });
+          prevTranslateX.value = withTiming(0, { duration: 500 });
+          break;
+        default:
+          prevScale.value = withTiming(0.8, { duration: 500 });
+          currentScale.value = withTiming(1, { duration: 500 });
+          nextScale.value = withTiming(0.8, { duration: 500 });
+          prevTranslateX.value = withTiming(-64, { duration: 500 });
+          nextTranslateX.value = withTiming(64, { duration: 500 });
+          currentTranslateX.value = withTiming(0, { duration: 500 });
+          break;
+      }
+    }
+  }, [selectedIndex]);
 
   const pan = Gesture.Pan()
     .onBegin(() => {
@@ -133,7 +166,6 @@ const Carousel: React.FC<CarouselProps> = ({ height, items }) => {
           break;
       }
     });
-
   return (
     <GestureHandlerRootView style={{ height: height, overflow: 'hidden', width: screenWidth }}>
       <GestureDetector gesture={pan}>

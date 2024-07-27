@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
 import { ScrollView } from 'react-native-gesture-handler';
-import FontAwsome5Icon from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import styles from './SelectedExercisesSection.styles';
 import { Day } from '../../../../types/plans';
@@ -12,12 +12,14 @@ import { navigate } from '../../../../utility/navigate';
 import { useDispatch, useGetExerciseData } from '../../../../utility/hooks';
 import { CHANGE_EXERCISES_ORDER, UNSELECT_EXERCISE } from '../../store/slice/slice';
 import { DraggableList } from '../../../../components/DraggableList/DraggableList';
+import Button from '../../../../components/Button/Button';
 
 type SelectedExercisesSectionProps = {
   day: Day;
   exercises: Exercise[];
   handleSetStep: (newStep: number) => void;
   handleSelectExerciseToEdit: (index: number) => void;
+  handleSetIndex: (newIndex: 'prev' | 'next') => void;
 };
 
 const SelectedExercisesSection = ({
@@ -25,6 +27,7 @@ const SelectedExercisesSection = ({
   handleSelectExerciseToEdit,
   day,
   exercises,
+  handleSetIndex,
 }: SelectedExercisesSectionProps) => {
   const dispatch = useDispatch();
 
@@ -48,10 +51,16 @@ const SelectedExercisesSection = ({
 
   return (
     <View style={{ width: '100%' }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        <Typography variant="h2" style={[styles.text, styles.header]}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginBottom: 16 }}>
+        <Button variant="text" onPress={() => handleSetIndex('prev')} style={{ width: 32 }}>
+          <FontAwesomeIcon name="chevron-left" size={14} />
+        </Button>
+        <Typography variant="h2" style={styles.text}>
           {day.name}
         </Typography>
+        <Button variant="text" onPress={() => handleSetIndex('next')} style={{ width: 32 }}>
+          <FontAwesomeIcon name="chevron-right" size={14} />
+        </Button>
       </View>
       <ScrollView style={{ width: '100%' }}>
         <DraggableList
@@ -60,7 +69,7 @@ const SelectedExercisesSection = ({
           renderItem={(exercise, index) => (
             <View key={exercise.id} style={styles.selectedExerciseItem}>
               <TouchableOpacity onPress={() => handlePreviewExercise(exercise)} style={styles.viewIcon}>
-                <FontAwsome5Icon name="eye" size={14} />
+                <FontAwesome5Icon name="eye" size={14} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleEditExercise(index)} style={{ width: '80%' }}>
                 <Typography variant="h4" style={[styles.text, { alignSelf: 'flex-start' }]}>

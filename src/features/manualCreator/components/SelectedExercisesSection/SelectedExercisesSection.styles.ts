@@ -13,11 +13,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   text: {
-    alignSelf: 'center',
     color: backgroundColor,
-  },
-  header: {
-    marginBottom: 16,
   },
   textInput: {
     width: 45,
