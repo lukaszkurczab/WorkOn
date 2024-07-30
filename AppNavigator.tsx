@@ -31,7 +31,7 @@ import SetPublicPlansScreen from './src/features/userProfile/screens/SetPublicPl
 import SetPublicWorkoutsScreen from './src/features/userProfile/screens/SetPublicWorkoutsScreen/SetPublicWorkoutsScreen';
 import ChangePasswordScreen from './src/features/userProfile/screens/ChangePasswordScreen/ChangePasswordScreen';
 import ChangeUsernameScreen from './src/features/userProfile/screens/ChangeUsernameScreen/ChangeUsernameScreen';
-import ManualPlanGeneralScreen from './src/features/manualCreator/screens/ManualPlanGeneralScreen/ManualPlanGeneralScreen';
+import ManualPlanGeneralScreen from './src/features/manualCreatorNew/screens/ManualPlanGeneralScreen/ManualPlanGeneralScreen';
 import UserSearchScreen from './src/features/usersSearch/screens/UserSearchScreen/UserSearchScreen';
 import UserPublicProfileScreen from './src/features/usersSearch/screens/UserPublicProfileScreen/UserPublicProfileScreen';
 

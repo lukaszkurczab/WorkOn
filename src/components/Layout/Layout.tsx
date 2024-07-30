@@ -57,6 +57,7 @@ const Layout: React.FC<LayoutProps> = ({
           scrollEnabled={isKeyboardVisible}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollView}
+          nestedScrollEnabled={true}
         >
           {showHeader && <Header text={headerText} />}
           <View style={[styles.body, { height: bodyHeight }]}>{children}</View>

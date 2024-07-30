@@ -8,6 +8,7 @@ interface CarouselProps {
   height: number;
   items: Array<{ id: string; component: React.ReactNode }>;
   selectedIndex?: number;
+  setSelectedIndex?: (newIndex: number) => void;
 }
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -32,7 +33,6 @@ const Carousel: React.FC<CarouselProps> = ({ height, items, selectedIndex = 0 })
   const adjustedTranslationX = screenWidth - 128;
 
   useEffect(() => {
-    // Ustawienie nowego indeksu i animacji po zmianie propsa selectedIndex
     if (selectedIndex !== currentIndex.value) {
       direction.value = selectedIndex > currentIndex.value ? 'left' : 'right';
       newItemIndex.value = selectedIndex;
