@@ -58,48 +58,50 @@ const ManualPlanGeneralScreen = () => {
   return (
     <Layout showNavigation={false} showHeader={false}>
       <View style={styles.container}>
-        <View>
-          <Typography variant="h2">Name your plan</Typography>
-          <TextInput
-            value={plan.name}
-            onChangeText={e => handlePlanNameChange(e)}
-            placeholder="Plan name"
-            error={nameError ? 'Plan must have name.' : ''}
-          ></TextInput>
-        </View>
-        <View style={styles.daysList}>
-          <Typography variant="h2">Create training days</Typography>
-          {plan.days.map(day => (
+        <ScrollView contentContainerStyle={{ gap: 16 }}>
+          <View>
+            <Typography variant="h2">Name your plan</Typography>
             <TextInput
-              key={day.id}
-              value={day.name}
-              onChangeText={e => handleDayNameChange({ id: day.id, name: e })}
-              placeholder="Day name"
-              error={dayErrors[day.id] ? 'Day must have name.' : ''}
-              rightComponent={
-                plan.days.length > 1 && (
-                  <TouchableOpacity onPress={() => dispatch(REMOVE_DAY(day.id))}>
-                    <Icon name="trash" size={32} style={styles.icon} />
-                  </TouchableOpacity>
-                )
-              }
+              value={plan.name}
+              onChangeText={e => handlePlanNameChange(e)}
+              placeholder="Plan name"
+              error={nameError ? 'Plan must have name.' : ''}
             ></TextInput>
-          ))}
-        </View>
-        <Button onPress={() => dispatch(ADD_DAY())}>
-          <Typography variant="h3">+ Add day</Typography>
-        </Button>
-        <View>
-          <Typography variant="h2">Progrss type</Typography>
-          <Dropdown
-            label="Progress type"
-            data={['Linear progression', 'Wave progression', 'Volume progression', 'Periodization']}
-            onSelect={item => {
-              console.log(item);
-            }}
-            renderItem={item => <Typography variant="h3">{item}</Typography>}
-          />
-        </View>
+          </View>
+          <View>
+            <Typography variant="h2">Progrss type</Typography>
+            <Dropdown
+              label="Progress type"
+              data={['Volume progression', 'Wave progression', 'Periodization']}
+              onSelect={item => {
+                console.log(item);
+              }}
+              renderItem={item => <Typography variant="h3">{item}</Typography>}
+            />
+          </View>
+          <View style={styles.daysList}>
+            <Typography variant="h2">Create training days</Typography>
+            {plan.days.map(day => (
+              <TextInput
+                key={day.id}
+                value={day.name}
+                onChangeText={e => handleDayNameChange({ id: day.id, name: e })}
+                placeholder="Day name"
+                error={dayErrors[day.id] ? 'Day must have name.' : ''}
+                rightComponent={
+                  plan.days.length > 1 && (
+                    <TouchableOpacity onPress={() => dispatch(REMOVE_DAY(day.id))}>
+                      <Icon name="trash" size={32} style={styles.icon} />
+                    </TouchableOpacity>
+                  )
+                }
+              ></TextInput>
+            ))}
+          </View>
+          <Button onPress={() => dispatch(ADD_DAY())}>
+            <Typography variant="h3">+ Add day</Typography>
+          </Button>
+        </ScrollView>
         <Button onPress={handleNext}>
           <Typography variant="h2">Next</Typography>
         </Button>

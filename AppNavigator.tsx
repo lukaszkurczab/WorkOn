@@ -16,7 +16,7 @@ import RegisterScreen from './src/features/login/screens/RegisterScreen/Register
 import MainScreen from './src/features/main/screens/MainScreen';
 import CarouselScreen from './src/features/planCreator/screens/CarouselScreen/CarouselScreen';
 import LoadingScreen from './src/features/login/screens/LoadingScreen/LoadingScreen';
-import ManualCreatorScreen from './src/features/manualCreator/screens/ManualCreatorScreen/ManualCreatorScreen';
+import ManualCreatorScreen from './src/features/manualCreatorNew/screens/ManualCreatorScreen/ManualCreatorScreen';
 import SelectTrainingScreen from './src/features/training/screens/SelectTrainingScreen/SelectTrainingScreen';
 import TrainingScreen from './src/features/training/screens/TrainingScreen/TrainingScreen';
 import WorkoutSummary from './src/features/training/screens/TrainingSummaryScreen/TrainingSummaryScreen';

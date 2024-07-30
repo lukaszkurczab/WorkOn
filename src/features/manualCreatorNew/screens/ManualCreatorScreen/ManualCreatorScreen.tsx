@@ -21,7 +21,7 @@ const ManualCreatorScreen = () => {
   };
 
   return (
-    <Layout showNavigation={false}>
+    <Layout showNavigation={false} showHeader={false}>
       <View style={styles.container}>
         <Carousel plan={plan} />
         <Button onPress={handleSave}>

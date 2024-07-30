@@ -5,16 +5,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     gap: 16,
-    paddingBottom: 16,
+    paddingBottom: 32,
   },
   buttonsWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  button: {
-    width: 120,
   },
   modal_text: {
     textAlign: 'center',
