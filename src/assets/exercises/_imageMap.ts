@@ -457,10 +457,6 @@ export const imageMap: { [key: string]: any } = {
     require('./reverse-fly1.png'),
     require('./reverse-fly2.png'),
   ],
-  'reverse-flys': [
-    require('./reverse-flys1.png'),
-    require('./reverse-flys2.png'),
-  ],
   'reverse-standing-wrist-curl': [
     require('./reverse-standing-wrist-curl1.png'),
     require('./reverse-standing-wrist-curl2.png'),

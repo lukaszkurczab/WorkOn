@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Typography } from '../Typography/Typography';
 import ExerciseListItem from '../ExerciseListItem/ExerciseListItem';
-import { exercisesList } from '../../assets/exercises/_exercise';
+import { exercisesList, muscleGroupsList } from '../../assets/exercises/_exercise';
 import styles from './ExerciseList.styles';
 import { Exercise, ExerciseData } from '../../types/exercises';
 
@@ -23,23 +23,27 @@ const ExerciseList = ({ selected, onItemPress }: ExerciseListProps) => {
 
   return (
     <View style={styles.container}>
-      {exercisesList.map(exerciseGroup => (
-        <View key={exerciseGroup.id}>
-          <TouchableOpacity onPress={() => toggleVisibility(exerciseGroup.id)}>
+      {muscleGroupsList.map(muscle => (
+        <View key={muscle}>
+          <TouchableOpacity onPress={() => toggleVisibility(muscle)}>
             <Typography variant="h3" style={styles.header}>
-              {exerciseGroup.name}
+              {muscle}
             </Typography>
           </TouchableOpacity>
-          {visibleGroups[exerciseGroup.id] && (
+          {visibleGroups[muscle] && (
             <View style={styles.list}>
-              {exerciseGroup.exercises.map(exercise => (
-                <ExerciseListItem
-                  onPress={onItemPress}
-                  exercise={exercise}
-                  key={exercise.id}
-                  selected={selected !== undefined && selected.findIndex(item => item.id === exercise.id) !== -1}
-                />
-              ))}
+              {exercisesList.map(exercise => {
+                if (exercise.group.includes(muscle)) {
+                  return (
+                    <ExerciseListItem
+                      onPress={onItemPress}
+                      exercise={exercise}
+                      key={exercise.id}
+                      selected={selected !== undefined && selected.findIndex(item => item.id === exercise.id) !== -1}
+                    />
+                  );
+                }
+              })}
             </View>
           )}
         </View>

@@ -5,12 +5,12 @@ import Layout from '../../../../components/Layout/Layout';
 import { muscleGroupsList } from '../../../../assets/exercises/_exercise';
 import GroupContainer from '../../components/GroupContainer/GroupContainer';
 import { TextInput } from '../../../../components/TextInput/TextInput';
-import { newExercisesList } from '../../../../assets/exercises/_exercise';
+import { exercisesList } from '../../../../assets/exercises/_exercise';
 
 const ExerciseAtlasScreen = () => {
   const [searchedText, setSearchedText] = useState('');
 
-  const filteredExercises = newExercisesList.filter(exercise =>
+  const filteredExercises = exercisesList.filter(exercise =>
     exercise.name.toLowerCase().includes(searchedText.toLowerCase())
   );
 

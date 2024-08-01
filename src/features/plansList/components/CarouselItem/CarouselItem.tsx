@@ -19,11 +19,9 @@ type CarouselItemProps = {
 };
 
 function getExerciseById(id: string): ExerciseData | undefined {
-  for (const group of exercisesList) {
-    const exercise = group.exercises.find(exercise => exercise.id === id);
-    if (exercise) {
-      return exercise;
-    }
+  const exercise = exercisesList.find(exercise => exercise.id === id);
+  if (exercise) {
+    return exercise;
   }
   return undefined;
 }

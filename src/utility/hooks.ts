@@ -17,12 +17,10 @@ export const useFormatTime = (time: number) => {
 
 export const useGetExerciseData = (exerciseId: string): ExerciseData => {
   let exerciseToReturn;
-  exercisesList.map(group => {
-    group.exercises.map(exercise => {
-      if (exercise.id === exerciseId) {
-        exerciseToReturn = exercise;
-      }
-    });
+  exercisesList.map(exercise => {
+    if (exercise.id === exerciseId) {
+      exerciseToReturn = exercise;
+    }
   });
 
   if (!exerciseToReturn) {
