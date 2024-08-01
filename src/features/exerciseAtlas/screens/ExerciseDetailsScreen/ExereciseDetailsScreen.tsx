@@ -5,6 +5,7 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../../../utility/navigate';
 import { Typography } from '../../../../components/Typography/Typography';
 import Layout from '../../../../components/Layout/Layout';
+import ExerciseImage from '../../../../components/ExerciseImage/ExerciseImage';
 
 type ExerciseDetailsScreenRouteProp = RouteProp<RootStackParamList, 'ExerciseDetailsScreen'>;
 
@@ -26,7 +27,7 @@ const ExerciseDetailsScreen = () => {
     <Layout headerText={exercise.name} showNavigation={showNavigation}>
       <ScrollView>
         <View style={{ gap: 16 }}>
-          <Image source={require('../../../../assets/exercises/dips.jpg')} style={styles.image} />
+          <ExerciseImage imageName={exercise.image} />
           <View>
             <Typography variant="h3">Start position:</Typography>
             <Typography variant="h4" style={{ textAlign: 'justify' }}>

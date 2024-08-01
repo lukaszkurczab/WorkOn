@@ -4,18 +4,15 @@ import styles from './GroupContainer.styles';
 import { Typography } from '../../../../components/Typography/Typography';
 import { backgroundColor } from '../../../../styles/colors';
 import { navigate } from '../../../../utility/navigate';
+import { ExerciseData } from '../../../../types/exercises';
 
 type GroupContainerProps = {
-  group: {
-    name: string;
-    exercises: {
-      name: string;
-    }[];
-  };
+  group: string;
+  exercises: ExerciseData[];
   searchedText: string;
 };
 
-const GroupContainer = ({ group, searchedText }: GroupContainerProps) => {
+const GroupContainer: React.FC<GroupContainerProps> = ({ group, exercises, searchedText }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handleToggle = () => {
@@ -25,25 +22,21 @@ const GroupContainer = ({ group, searchedText }: GroupContainerProps) => {
   return (
     <View style={styles.groupWrapper}>
       <TouchableOpacity style={styles.groupTitle} onPress={handleToggle}>
-        <Typography variant="h3">{group.name}</Typography>
+        <Typography variant="h3">{group}</Typography>
       </TouchableOpacity>
       {!isCollapsed && (
         <View style={styles.exercisesWrapper}>
-          {group.exercises.map((exercise, index) => {
-            if (exercise.name.includes(searchedText)) {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.exercise}
-                  onPress={() => navigate('ExerciseDetailsScreen', { exercise })}
-                >
-                  <Typography variant="h4" style={{ color: backgroundColor }}>
-                    {exercise.name}
-                  </Typography>
-                </TouchableOpacity>
-              );
-            }
-          })}
+          {exercises.map((exercise, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.exercise}
+              onPress={() => navigate('ExerciseDetailsScreen', { exercise })}
+            >
+              <Typography variant="h4" style={{ color: backgroundColor }}>
+                {exercise.name}
+              </Typography>
+            </TouchableOpacity>
+          ))}
         </View>
       )}
     </View>

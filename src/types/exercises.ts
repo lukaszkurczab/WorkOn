@@ -17,7 +17,7 @@ export interface ExerciseData {
   id: string;
   name: string;
   focusPoints: string;
-  group: string;
+  group: string[];
   muscleAdditional: string[];
   muscleMain: string[];
   startPosition: string;
