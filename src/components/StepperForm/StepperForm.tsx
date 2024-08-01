@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View } from 'react-native';
 import { StepperFormStyles as styles } from './StepperForm.styles';
+import Button from '../Button/Button';
+import { Typography } from '../Typography/Typography';
 
 interface StepperFormProps {
   currentStep: number;
@@ -41,17 +43,18 @@ const StepperForm: React.FC<StepperFormProps> = ({ currentStep, setCurrentStep, 
   return (
     <View style={styles.container}>
       {renderProgressSteps()}
-      <Text style={styles.progressText}>
-        Step {currentStep + 1} of {totalSteps}
-      </Text>
       <View style={styles.stepContent}>{steps[currentStep]}</View>
       <View style={styles.navigation}>
-        <Button title="Previous" onPress={previousStep} disabled={currentStep === 0} />
-        <Button title="Next" onPress={nextStep} disabled={currentStep === totalSteps - 1} />
+        <Button onPress={previousStep} disabled={currentStep === 0} style={styles.button}>
+          <Typography variant="h3">Back</Typography>
+        </Button>
+        <Button onPress={nextStep} disabled={currentStep === totalSteps - 1} style={styles.button}>
+          <Typography variant="h3">Next</Typography>
+        </Button>
       </View>
-      <View style={styles.exitButton}>
-        <Button title="Exit" onPress={exitForm} />
-      </View>
+      <Button variant="text" onPress={exitForm}>
+        <Typography variant="h3">Exit</Typography>
+      </Button>
     </View>
   );
 };

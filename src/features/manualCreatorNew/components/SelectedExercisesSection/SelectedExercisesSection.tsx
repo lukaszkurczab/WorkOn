@@ -15,79 +15,15 @@ import { DraggableList } from '../../../../components/DraggableList/DraggableLis
 import Button from '../../../../components/Button/Button';
 
 type SelectedExercisesSectionProps = {
-  day: Day;
-  exercises: Exercise[];
-  handleSetStep: (newStep: number) => void;
-  handleSelectExerciseToEdit: (index: number) => void;
-  handleSetIndex: (newIndex: 'prev' | 'next') => void;
+  days: Day[];
 };
 
-const SelectedExercisesSection = ({
-  handleSetStep,
-  handleSelectExerciseToEdit,
-  day,
-  exercises,
-  handleSetIndex,
-}: SelectedExercisesSectionProps) => {
-  const dispatch = useDispatch();
-
-  const handlePreviewExercise = (exercise: Exercise) => {
-    const exerciseData = useGetExerciseData(exercise.id);
-    navigate('ExerciseDetailsScreen', { exercise: exerciseData, showNavigation: false });
-  };
-
-  const handleRemoveExercise = (exerciseId: string) => {
-    dispatch(UNSELECT_EXERCISE({ dayId: day.id, exerciseId: exerciseId }));
-  };
-
-  const handleEditExercise = (index: number) => {
-    handleSelectExerciseToEdit(index);
-    handleSetStep(2);
-  };
-
-  const handleDragEnd = (newData: Exercise[]) => {
-    dispatch(CHANGE_EXERCISES_ORDER({ dayId: day.id, newOrder: newData }));
-  };
-
+const SelectedExercisesSection = ({ days }: SelectedExercisesSectionProps) => {
   return (
     <View style={{ width: '100%' }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginBottom: 16 }}>
-        <Button variant="text" onPress={() => handleSetIndex('prev')} style={{ width: 32 }}>
-          <FontAwesomeIcon name="chevron-left" size={14} />
-        </Button>
-        <Typography variant="h2" style={styles.text}>
-          {day.name}
-        </Typography>
-        <Button variant="text" onPress={() => handleSetIndex('next')} style={{ width: 32 }}>
-          <FontAwesomeIcon name="chevron-right" size={14} />
-        </Button>
-      </View>
-      <ScrollView style={{ width: '100%' }}>
-        <DraggableList
-          data={exercises}
-          onDragEnd={handleDragEnd}
-          renderItem={(exercise, index) => (
-            <View key={exercise.id} style={styles.selectedExerciseItem}>
-              <TouchableOpacity onPress={() => handlePreviewExercise(exercise)} style={styles.viewIcon}>
-                <FontAwesome5Icon name="eye" size={14} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleEditExercise(index)} style={{ width: '80%' }}>
-                <Typography variant="h4" style={[styles.text, { alignSelf: 'flex-start' }]}>
-                  {exercise.name ? exercise.name : useGetExerciseData(exercise.id).name}
-                </Typography>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleRemoveExercise(exercise.id)} style={styles.viewIcon}>
-                <FontAwesomeIcon name="trash" size={20} style={{ color: red }} />
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-        <TouchableOpacity style={styles.addExerciseButton} onPress={() => handleSetStep(1)}>
-          <Typography variant="h3" style={styles.addExerciseButtonText}>
-            + Add exercises
-          </Typography>
-        </TouchableOpacity>
-      </ScrollView>
+      {days.map(day => (
+        <Typography variant="h2">{day.name}</Typography>
+      ))}
     </View>
   );
 };

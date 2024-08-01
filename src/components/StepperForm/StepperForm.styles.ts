@@ -1,43 +1,36 @@
 import { StyleSheet } from 'react-native';
+import { blue, gray } from '../../styles/colors';
 
 export const StepperFormStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    padding: 20,
   },
   progressContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 20,
+    gap: 8,
   },
   step: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    marginHorizontal: 5,
+    flexGrow: 1,
+    height: 8,
+    borderRadius: 4,
   },
   completedStep: {
-    backgroundColor: 'blue',
+    backgroundColor: blue,
   },
   incompleteStep: {
-    backgroundColor: 'gray',
-  },
-  progressText: {
-    textAlign: 'center',
-    marginVertical: 10,
+    backgroundColor: gray,
   },
   stepContent: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 16,
   },
   navigation: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 10,
+    gap: 8,
+    marginBottom: 16,
   },
-  exitButton: {
-    marginVertical: 10,
+  button: {
+    flexShrink: 1,
   },
 });

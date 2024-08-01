@@ -72,7 +72,7 @@ const ManualPlanGeneralScreen = () => {
             <Typography variant="h2">Progrss type</Typography>
             <Dropdown
               label="Progress type"
-              data={['Volume progression', 'Wave progression', 'Periodization']}
+              data={['Linear progression', 'Wave progression', 'Periodization']}
               onSelect={item => {
                 console.log(item);
               }}
