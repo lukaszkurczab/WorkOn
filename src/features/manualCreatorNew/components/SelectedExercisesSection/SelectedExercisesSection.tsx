@@ -22,7 +22,12 @@ const SelectedExercisesSection = ({ days }: SelectedExercisesSectionProps) => {
   return (
     <View style={{ width: '100%' }}>
       {days.map(day => (
-        <Typography variant="h2">{day.name}</Typography>
+        <View key={day.id} style={styles.daySection}>
+          <Typography variant="h2">{day.name}</Typography>
+          <Button variant="outlined" onPress={() => {}}>
+            <Typography variant="h3">+ Add exercises</Typography>
+          </Button>
+        </View>
       ))}
     </View>
   );
