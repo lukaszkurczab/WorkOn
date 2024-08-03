@@ -45,10 +45,6 @@ export const imageMap: { [key: string]: any } = {
     require('./banded-mountain-climber1.png'),
     require('./banded-mountain-climber2.png'),
   ],
-  'banded-mountain-climbers': [
-    require('./banded-mountain-climbers1.png'),
-    require('./banded-mountain-climbers2.png'),
-  ],
   'barbell-curls': [
     require('./barbell-curls1.png'),
     require('./barbell-curls2.png'),

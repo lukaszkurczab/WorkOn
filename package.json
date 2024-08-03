@@ -10,7 +10,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "watchman:clear": "watchman watch-del-all",
-    "watchman:off": "watchman shutdown-server"
+    "watchman:off": "watchman shutdown-server",
+    "port": "ifconfig | grep inet"
   },
   "dependencies": {
     "@expo/env": "^0.3.0",

@@ -3,8 +3,11 @@ module.exports = {
   slug: 'workon',
   version: '1.0.0',
   orientation: 'portrait',
-  userInterfaceStyle: 'light',
+  userInterfaceStyle: 'dark',
   icon: './assets/icon.png',
+  packagerOpts: {
+    port: 8000,
+  },
   splash: {
     resizeMode: 'contain',
     backgroundColor: '#ffffff',

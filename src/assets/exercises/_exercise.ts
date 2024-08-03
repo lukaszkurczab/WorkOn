@@ -385,8 +385,8 @@ export const exercisesList = [
     image: 'wrist-curls-with-dumbbells',
   },
   {
-    id: 'banded-mountain-climbers',
-    name: 'Banded Mountain Climbers',
+    id: 'banded-mountain-climber',
+    name: 'Banded Mountain Climber',
     group: ['Thighs', 'Abs'],
     focusPoints:
       'Keep your body straight and core engaged throughout the exercise. Avoid letting your hips drop or rise too high.',
@@ -396,7 +396,7 @@ export const exercisesList = [
       'Drive one knee towards your chest while keeping the other leg extended. Quickly switch legs in a running motion, keeping tension on the band.',
     muscleMain: ['Quadriceps', 'Hip Flexors'],
     muscleAdditional: ['Core', 'Shoulders'],
-    image: 'banded-mountain-climbers',
+    image: 'banded-mountain-climber',
   },
   {
     id: 'leg-extensions',
