@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { backgroundColor, dark_gray, gray, primaryColor } from '../../styles/colors';
+import { backgroundColor, dark_gray, gray, primaryColor, light_red } from '../../styles/colors';
 
 export default StyleSheet.create({
   chevron: {
@@ -18,6 +18,10 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  dropdownError: {
+    borderColor: light_red,
+    borderWidth: 1,
+  },
   dropdownText: {
     color: gray,
     fontWeight: '500',
@@ -35,5 +39,11 @@ export default StyleSheet.create({
   },
   itemText: {
     color: backgroundColor,
+  },
+  error: {
+    color: light_red,
+    fontSize: 14,
+    fontWeight: '500',
+    marginBottom: 4,
   },
 });

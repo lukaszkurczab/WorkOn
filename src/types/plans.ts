@@ -4,6 +4,7 @@ export interface WorkoutPlan {
   id: string;
   name: string;
   publicType: 'public' | 'private';
+  progression: string;
   allowedUsers: string[];
   authorId: string;
   days: Day[];

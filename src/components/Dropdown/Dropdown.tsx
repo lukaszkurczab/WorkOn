@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './Dropdown.styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Typography } from '../Typography/Typography';
@@ -10,9 +10,10 @@ interface DropdownProps<T> {
   data: Array<T>;
   onSelect: (item: T) => void;
   renderItem: (item: T) => React.ReactNode;
+  error?: string;
 }
 
-const Dropdown = <T extends unknown>({ label, data, onSelect, renderItem }: DropdownProps<T>) => {
+const Dropdown = <T extends unknown>({ label, data, onSelect, renderItem, error }: DropdownProps<T>) => {
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<T | null>(null);
 
@@ -24,7 +25,10 @@ const Dropdown = <T extends unknown>({ label, data, onSelect, renderItem }: Drop
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setVisible(!visible)} style={styles.dropdown}>
+      <TouchableOpacity
+        onPress={() => setVisible(!visible)}
+        style={[styles.dropdown, error ? styles.dropdownError : {}]}
+      >
         <Typography variant="h3" style={styles.dropdownText}>
           {selected ? renderItem(selected) : label}
         </Typography>
@@ -45,6 +49,7 @@ const Dropdown = <T extends unknown>({ label, data, onSelect, renderItem }: Drop
           </ScrollView>
         </View>
       )}
+      {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 };

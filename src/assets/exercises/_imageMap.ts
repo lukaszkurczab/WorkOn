@@ -1,7 +1,7 @@
 // prettier-ignore
 
 export const imageMap: { [key: string]: any } = {
-  'abwheel-rollout': [
+  'ab-wheel-rollout': [
     require('./ab-wheel-rollout1.png'),
     require('./ab-wheel-rollout2.png'),
   ],

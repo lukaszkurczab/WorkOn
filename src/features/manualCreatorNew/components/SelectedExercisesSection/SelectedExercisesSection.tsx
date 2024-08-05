@@ -1,34 +1,58 @@
-import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { Typography } from '../../../../components/Typography/Typography';
-import { ScrollView } from 'react-native-gesture-handler';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import styles from './SelectedExercisesSection.styles';
 import { Day } from '../../../../types/plans';
-import { red } from '../../../../styles/colors';
-import { Exercise } from '../../../../types/exercises';
-import { navigate } from '../../../../utility/navigate';
-import { useDispatch, useGetExerciseData } from '../../../../utility/hooks';
-import { CHANGE_EXERCISES_ORDER, UNSELECT_EXERCISE } from '../../store/slice/slice';
-import { DraggableList } from '../../../../components/DraggableList/DraggableList';
 import Button from '../../../../components/Button/Button';
+import ExerciseListSection from '../ExerciseListSection/ExerciseListSection';
+import { useDispatch } from '../../../../utility/hooks';
+import { CHANGE_EXERCISES_ORDER, SET_SHOW_NAVIGATION } from '../../store/slice/slice';
+import { DraggableList } from '../../../../components/DraggableList/DraggableList';
+import { Exercise } from '../../../../types/exercises';
 
 type SelectedExercisesSectionProps = {
-  days: Day[];
+  day: Day;
 };
 
-const SelectedExercisesSection = ({ days }: SelectedExercisesSectionProps) => {
+const SelectedExercisesSection = ({ day }: SelectedExercisesSectionProps) => {
+  const dispatch = useDispatch();
+  const [selectExercises, setSelectExercises] = useState(false);
+
+  useEffect(() => {
+    dispatch(SET_SHOW_NAVIGATION(true));
+  }, []);
+
+  const handleSelectExercisesPress = () => {
+    dispatch(SET_SHOW_NAVIGATION(false));
+    setSelectExercises(true);
+  };
+
+  const handleCloseSelectExercises = () => {
+    setSelectExercises(false);
+    dispatch(SET_SHOW_NAVIGATION(true));
+  };
+
+  const handleDragEnd = (newData: Exercise[]) => {
+    dispatch(CHANGE_EXERCISES_ORDER({ dayId: day.id, newOrder: newData }));
+  };
+
   return (
     <View style={{ width: '100%' }}>
-      {days.map(day => (
+      {selectExercises ? (
+        <ExerciseListSection day={day} handleClose={() => handleCloseSelectExercises()} />
+      ) : (
         <View key={day.id} style={styles.daySection}>
           <Typography variant="h2">{day.name}</Typography>
-          <Button variant="outlined" onPress={() => {}}>
+          <DraggableList
+            data={day.exercises}
+            renderItem={item => <Typography variant="h3">{item.name}</Typography>}
+            onDragEnd={handleDragEnd}
+          />
+          <Button variant="outlined" onPress={() => handleSelectExercisesPress()}>
             <Typography variant="h3">+ Add exercises</Typography>
           </Button>
         </View>
-      ))}
+      )}
     </View>
   );
 };

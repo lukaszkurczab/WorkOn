@@ -9,9 +9,10 @@ import { Exercise, ExerciseData } from '../../types/exercises';
 interface ExerciseListProps {
   onItemPress: ({}: any) => void;
   selected?: Exercise[] | ExerciseData[];
+  filter?: string;
 }
 
-const ExerciseList = ({ selected, onItemPress }: ExerciseListProps) => {
+const ExerciseList = ({ selected, onItemPress, filter = '' }: ExerciseListProps) => {
   const [visibleGroups, setVisibleGroups] = useState<{ [key: string]: boolean }>({});
 
   const toggleVisibility = (id: string) => {

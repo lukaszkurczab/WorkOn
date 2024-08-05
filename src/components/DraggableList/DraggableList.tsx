@@ -49,10 +49,10 @@ export const DraggableList = <T,>({ data, renderItem, onDragEnd }: DraggableList
   };
 
   const onGestureEnd = () => {
-    runOnJS(onDragEnd)(items);
     dragIndex.value = -1;
     translateY.value = 0;
     setItemsDifference(0);
+    runOnJS(onDragEnd)(items);
   };
 
   const measureItem = (index: number, height: number) => {

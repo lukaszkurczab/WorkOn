@@ -28,7 +28,7 @@ export const StepperFormStyles = StyleSheet.create({
   navigation: {
     flexDirection: 'row',
     gap: 8,
-    marginBottom: 16,
+    marginVertical: 16,
   },
   button: {
     flexShrink: 1,

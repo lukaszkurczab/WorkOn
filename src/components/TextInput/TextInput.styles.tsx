@@ -28,9 +28,6 @@ const styles = StyleSheet.create({
     color: light_red,
     fontSize: 14,
     fontWeight: '500',
-    position: 'absolute',
-    left: 8,
-    top: -8,
   },
 });
 

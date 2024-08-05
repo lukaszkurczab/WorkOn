@@ -8,9 +8,10 @@ interface StepperFormProps {
   currentStep: number;
   setCurrentStep: (step: number) => void;
   steps: React.ReactNode[];
+  showNavigation?: boolean;
 }
 
-const StepperForm: React.FC<StepperFormProps> = ({ currentStep, setCurrentStep, steps }) => {
+const StepperForm: React.FC<StepperFormProps> = ({ currentStep, setCurrentStep, steps, showNavigation = true }) => {
   const totalSteps = steps.length;
 
   const nextStep = () => {
@@ -44,14 +45,16 @@ const StepperForm: React.FC<StepperFormProps> = ({ currentStep, setCurrentStep, 
     <View style={styles.container}>
       {renderProgressSteps()}
       <View style={styles.stepContent}>{steps[currentStep]}</View>
-      <View style={styles.navigation}>
-        <Button onPress={previousStep} disabled={currentStep === 0} style={styles.button}>
-          <Typography variant="h3">Back</Typography>
-        </Button>
-        <Button onPress={nextStep} disabled={currentStep === totalSteps - 1} style={styles.button}>
-          <Typography variant="h3">Next</Typography>
-        </Button>
-      </View>
+      {showNavigation && (
+        <View style={styles.navigation}>
+          <Button onPress={previousStep} disabled={currentStep === 0} style={styles.button}>
+            <Typography variant="h3">Back</Typography>
+          </Button>
+          <Button onPress={nextStep} disabled={currentStep === totalSteps - 1} style={styles.button}>
+            <Typography variant="h3">Next</Typography>
+          </Button>
+        </View>
+      )}
       <Button variant="text" onPress={exitForm}>
         <Typography variant="h3">Exit</Typography>
       </Button>

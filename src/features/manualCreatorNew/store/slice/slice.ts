@@ -9,6 +9,7 @@ export interface ManualCreatorState {
   error: string;
   plan: WorkoutPlan;
   editExercise: Exercise;
+  showNavigation: boolean;
 }
 
 const initialState: ManualCreatorState = {
@@ -17,6 +18,7 @@ const initialState: ManualCreatorState = {
     id: '',
     name: '',
     publicType: 'public',
+    progression: '',
     allowedUsers: [],
     authorId: '',
     days: [
@@ -48,6 +50,7 @@ const initialState: ManualCreatorState = {
     repsRange: [5, 10],
     series: [],
   },
+  showNavigation: true,
 };
 
 const manualCreatorSlice = createSlice({
@@ -62,6 +65,7 @@ const manualCreatorSlice = createSlice({
         id: planId,
         name: '',
         publicType: 'private',
+        progression: '',
         allowedUsers: [],
         authorId: action.payload.userId,
         days: [
@@ -87,6 +91,9 @@ const manualCreatorSlice = createSlice({
       if (index !== -1) {
         state.plan.days[index].exercises = action.payload.newOrder;
       }
+    },
+    CHANGE_PROGRESSION: (state, action: PayloadAction<string>) => {
+      state.plan.progression = action.payload;
     },
     REMOVE_DAY: (state, action: PayloadAction<string>) => {
       if (state.plan.days.length > 1) {
@@ -154,37 +161,19 @@ const manualCreatorSlice = createSlice({
     RESET_ERROR: state => {
       state.error = '';
     },
-    SELECT_EXERCISE: (state, action: PayloadAction<{ day: Day; exercise: ExerciseData }>) => {
-      const { day, exercise } = action.payload;
+    SELECT_EXERCISE: (state, action: PayloadAction<{ day: Day; exercises: Exercise[] }>) => {
+      const { day, exercises } = action.payload;
       const dayIndex = state.plan.days.findIndex(item => item.id === day.id);
       const updatedPlan = { ...state.plan };
-      if (
-        updatedPlan.days[dayIndex].exercises.findIndex(
-          (exercise: Exercise) => exercise.id === action.payload.exercise.id
-        ) === -1
-      ) {
-        updatedPlan.days[dayIndex].exercises.push({
-          id: exercise.id,
-          name: exercise.name,
-          repsRange: [4, 6],
-          loadIncrease: 5,
-          series: [
-            {
-              id: '',
-              reps: 4,
-              weight: 20,
-            },
-          ],
-        });
-      } else {
-        updatedPlan.days[dayIndex].exercises = updatedPlan.days[dayIndex].exercises.filter(
-          exercise => exercise.id !== action.payload.exercise.id
-        );
-      }
+      updatedPlan.days[dayIndex].exercises = [...exercises];
+
       state.plan = { ...updatedPlan };
     },
     EDIT_PLAN: (state, action) => {
       state.plan = { ...action.payload };
+    },
+    SET_SHOW_NAVIGATION: (state, action) => {
+      state.showNavigation = action.payload;
     },
   },
   extraReducers: builder => {
@@ -207,7 +196,9 @@ export const {
   UNSELECT_EXERCISE,
   REMOVE_SERIES,
   EDIT_PLAN,
+  CHANGE_PROGRESSION,
   CHANGE_EXERCISES_ORDER,
+  SET_SHOW_NAVIGATION,
 } = manualCreatorSlice.actions;
 
 export default manualCreatorSlice.reducer;

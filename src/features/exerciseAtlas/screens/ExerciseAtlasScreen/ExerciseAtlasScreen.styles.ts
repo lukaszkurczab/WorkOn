@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, gray, backgroundColor, dark_gray } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +6,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   atlasWrapper: {
-    gap: 15,
+    gap: 16,
   },
   input: {
     marginBottom: 16,
