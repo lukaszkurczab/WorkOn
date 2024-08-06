@@ -24,6 +24,7 @@ export const StepperFormStyles = StyleSheet.create({
   stepContent: {
     flex: 1,
     marginTop: 16,
+    overflow: 'hidden',
   },
   navigation: {
     flexDirection: 'row',

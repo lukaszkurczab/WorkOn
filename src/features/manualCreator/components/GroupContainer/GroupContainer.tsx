@@ -41,7 +41,7 @@ const GroupContainer: React.FC<GroupContainerProps> = ({
       {!isCollapsed && (
         <View style={styles.exercisesWrapper}>
           {exercises.map((exercise, index) => (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row' }} key={exercise.id}>
               <TouchableOpacity style={styles.iconButton} onPress={() => handlePreviewExercise(exercise)}>
                 <FontAwsome5Icon name="eye" size={14} />
               </TouchableOpacity>

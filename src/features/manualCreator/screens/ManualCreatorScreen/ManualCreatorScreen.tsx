@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import Layout from '../../../../components/Layout/Layout';
-import { Typography } from '../../../../components/Typography/Typography';
-import Button from '../../../../components/Button/Button';
 import styles from './ManualCreatorScreen.styles';
-import { navigate } from '../../../../utility/navigate';
 import { useSelector } from 'react-redux';
 import { createPlan } from '../../store/actions/actions';
 import { RootState } from '../../../../store/store';
-import Carousel from '../../components/Carousel/Carousel';
 import { useDispatch } from '../../../../utility/hooks';
+import StepperForm from '../../../../components/StepperForm/StepperForm';
+import SelectedExercisesSection from '../../components/SelectedExercisesSection/SelectedExercisesSection';
+import ExercisesEditSection from '../../components/ExercisesEditSection/ExercisesEditSection';
+import SummarySection from '../../components/SummarySection/SummarySection';
 
 const ManualCreatorScreen = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.user.id);
   const plan = useSelector((state: RootState) => state.manualCreator.plan);
+  const showNavigation = useSelector((state: RootState) => state.manualCreator.showNavigation);
+  const [step, setStep] = useState<number>(0);
 
   const handleSave = () => {
     dispatch(createPlan({ userId, newPlan: plan }));
   };
 
+  const steps = [
+    ...plan.days.flatMap((day, index) => [
+      <SelectedExercisesSection key={`selected-${index}`} day={day} />,
+      <ExercisesEditSection key={`edit-${index}`} day={day} />,
+    ]),
+    <SummarySection key="summary" />,
+  ];
+
   return (
-    <Layout showNavigation={false}>
+    <Layout showNavigation={false} showHeader={false}>
       <View style={styles.container}>
-        <Carousel plan={plan} />
-        <Button onPress={handleSave}>
-          <Typography variant="h2">Save</Typography>
-        </Button>
+        <StepperForm
+          currentStep={step}
+          setCurrentStep={setStep}
+          steps={steps}
+          showNavigation={showNavigation}
+          onSubmit={handleSave}
+        />
       </View>
     </Layout>
   );

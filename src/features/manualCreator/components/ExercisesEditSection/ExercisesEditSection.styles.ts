@@ -4,21 +4,10 @@ import { backgroundColor, blue, primaryColor } from '../../../../styles/colors';
 const { height: screenHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flex: 1,
-    justifyContent: 'space-between',
-    height: screenHeight - 300,
-    overflow: 'hidden',
-    alignItems: 'center',
-    paddingTop: 16,
-  },
+  container: {},
   text: {
     alignSelf: 'center',
     color: backgroundColor,
-  },
-  header: {
-    marginBottom: 16,
   },
   textInput: {
     width: 45,
@@ -26,7 +15,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   seriesScrollView: {
-    height: 327,
+    height: screenHeight - 529,
     backgroundColor: primaryColor,
     gap: 1,
   },
@@ -89,6 +78,20 @@ const styles = StyleSheet.create({
     gap: 1,
     backgroundColor: backgroundColor,
     paddingTop: 1,
+  },
+  listText: {
+    color: backgroundColor,
+    paddingHorizontal: 16,
+  },
+  listItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: primaryColor,
+  },
+  listContainer: {
+    gap: 8,
+    marginVertical: 16,
   },
 });
 

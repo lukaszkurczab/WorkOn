@@ -1,38 +1,23 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { backgroundColor, blue, primaryColor } from '../../../../styles/colors';
-
-const { height: screenHeight } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  text: {
-    alignSelf: 'center',
-    color: backgroundColor,
+  container: {
+    height: '100%',
+    width: '100%',
   },
-  selectedExerciseItem: {
-    height: 40,
-    paddingHorizontal: 8,
-    backgroundColor: primaryColor,
-    borderRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
+  atlasWrapper: {
+    gap: 16,
+    marginBottom: 16,
   },
-  viewIcon: {
-    height: 40,
-    justifyContent: 'center',
-    paddingHorizontal: 8,
+  input: {
+    marginBottom: 16,
   },
   buttonsWrapper: {
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    backgroundColor: primaryColor,
+    gap: 8,
   },
   button: {
-    width: 120,
-    borderRadius: 0,
-  },
-  listWrapper: {
-    height: screenHeight - 398,
+    flexShrink: 1,
   },
 });
 

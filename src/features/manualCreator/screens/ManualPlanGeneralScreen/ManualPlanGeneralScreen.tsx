@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, TextInputProps, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import Layout from '../../../../components/Layout/Layout';
 import { Typography } from '../../../../components/Typography/Typography';
 import Button from '../../../../components/Button/Button';
@@ -7,16 +7,18 @@ import styles from './ManualPlanGeneralScreen.styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { navigate } from '../../../../utility/navigate';
 import { useSelector } from 'react-redux';
-import { ADD_DAY, CHANGE_DAY_NAME, CHANGE_PLAN_NAME, REMOVE_DAY } from '../../store/slice/slice';
+import { ADD_DAY, CHANGE_DAY_NAME, CHANGE_PLAN_NAME, CHANGE_PROGRESSION, REMOVE_DAY } from '../../store/slice/slice';
 import { RootState } from '../../../../store/store';
 import { useDispatch } from '../../../../utility/hooks';
 import { TextInput } from '../../../../components/TextInput/TextInput';
+import Dropdown from '../../../../components/Dropdown/Dropdown';
 
 const ManualPlanGeneralScreen = () => {
   const dispatch = useDispatch();
   const plan = useSelector((state: RootState) => state.manualCreator.plan);
   const [nameError, setNameError] = useState(false);
   const [dayErrors, setDayErrors] = useState<{ [key: string]: boolean }>({});
+  const [progressionError, setProgressionError] = useState(false);
 
   const handleNext = () => {
     let valid = true;
@@ -37,6 +39,13 @@ const ManualPlanGeneralScreen = () => {
       setNameError(false);
     }
 
+    if (!plan.progression) {
+      setProgressionError(true);
+      valid = false;
+    } else {
+      setProgressionError(false);
+    }
+
     setDayErrors(newDayErrors);
 
     if (valid) {
@@ -54,10 +63,15 @@ const ManualPlanGeneralScreen = () => {
     setDayErrors(prev => ({ ...prev, [id]: false }));
   };
 
+  const handleProgressionChange = (progression: string) => {
+    dispatch(CHANGE_PROGRESSION(progression));
+    setProgressionError(false);
+  };
+
   return (
-    <Layout showNavigation={false}>
+    <Layout showNavigation={false} showHeader={false}>
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={{ gap: 16 }}>
           <View>
             <Typography variant="h2">Name your plan</Typography>
             <TextInput
@@ -67,9 +81,18 @@ const ManualPlanGeneralScreen = () => {
               error={nameError ? 'Plan must have name.' : ''}
             ></TextInput>
           </View>
+          <View>
+            <Typography variant="h2">Progression type</Typography>
+            <Dropdown
+              label="Progression type"
+              data={['Linear progression', 'Wave progression', 'Periodization']}
+              onSelect={handleProgressionChange}
+              renderItem={item => <Typography variant="h3">{item}</Typography>}
+              error={progressionError ? 'Progression type must be selected.' : ''}
+            />
+          </View>
           <View style={styles.daysList}>
             <Typography variant="h2">Create training days</Typography>
-
             {plan.days.map(day => (
               <TextInput
                 key={day.id}

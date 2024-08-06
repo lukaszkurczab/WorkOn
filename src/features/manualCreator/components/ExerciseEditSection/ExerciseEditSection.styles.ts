@@ -4,7 +4,6 @@ import { backgroundColor, blue, primaryColor } from '../../../../styles/colors';
 const { height: screenHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: {},
   text: {
     alignSelf: 'center',
     color: backgroundColor,

@@ -9,9 +9,16 @@ interface StepperFormProps {
   setCurrentStep: (step: number) => void;
   steps: React.ReactNode[];
   showNavigation?: boolean;
+  onSubmit: () => void;
 }
 
-const StepperForm: React.FC<StepperFormProps> = ({ currentStep, setCurrentStep, steps, showNavigation = true }) => {
+const StepperForm: React.FC<StepperFormProps> = ({
+  onSubmit,
+  currentStep,
+  setCurrentStep,
+  steps,
+  showNavigation = true,
+}) => {
   const totalSteps = steps.length;
 
   const nextStep = () => {
@@ -50,9 +57,15 @@ const StepperForm: React.FC<StepperFormProps> = ({ currentStep, setCurrentStep, 
           <Button onPress={previousStep} disabled={currentStep === 0} style={styles.button}>
             <Typography variant="h3">Back</Typography>
           </Button>
-          <Button onPress={nextStep} disabled={currentStep === totalSteps - 1} style={styles.button}>
-            <Typography variant="h3">Next</Typography>
-          </Button>
+          {currentStep !== totalSteps - 1 ? (
+            <Button onPress={nextStep} style={styles.button}>
+              <Typography variant="h3">Next</Typography>
+            </Button>
+          ) : (
+            <Button onPress={onSubmit} style={styles.button}>
+              <Typography variant="h3">Submit</Typography>
+            </Button>
+          )}
         </View>
       )}
       <Button variant="text" onPress={exitForm}>

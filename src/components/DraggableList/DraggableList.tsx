@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, runOnJS } from 'react-native-reanimated';
 
@@ -12,9 +12,10 @@ type DraggableListProps<T> = {
   data: T[];
   renderItem: (item: T, index: number) => React.ReactNode;
   onDragEnd: (newData: T[]) => void;
+  style?: StyleProp<ViewStyle>;
 };
 
-export const DraggableList = <T,>({ data, renderItem, onDragEnd }: DraggableListProps<T>) => {
+export const DraggableList = <T,>({ data, renderItem, onDragEnd, style = {} }: DraggableListProps<T>) => {
   const [items, setItems] = useState(data);
   const [itemsDifference, setItemsDifference] = useState(0);
   const itemHeights = useRef<{ [key: number]: number }>({});
@@ -60,7 +61,7 @@ export const DraggableList = <T,>({ data, renderItem, onDragEnd }: DraggableList
   };
 
   return (
-    <View>
+    <View style={style}>
       {items.map((item, index) => {
         const animatedStyle = useAnimatedStyle(() => ({
           transform: [{ translateY: dragIndex.value === index ? translateY.value : 0 }],
