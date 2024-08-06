@@ -6,6 +6,7 @@ import { Exercise } from '../../../../types/exercises';
 import { useGetExerciseData } from '../../../../utility/hooks';
 import { Typography } from '../../../../components/Typography/Typography';
 import styles from './ExerciseTile.styles';
+import ExerciseImage from '../../../../components/ExerciseImage/ExerciseImage';
 
 type ExerciseTileProps = {
   exercise: Exercise;
@@ -25,7 +26,7 @@ const ExerciseTile: React.FC<ExerciseTileProps> = ({ exercise, touchable = true 
   return (
     <TouchableOpacity onPress={handlePress} disabled={!touchable}>
       <View style={styles.container}>
-        <Image source={require('../../../../assets/exercises/dips.jpg')} style={styles.image} />
+        <ExerciseImage imageName={exerciseData.image} style={{ width: 120, height: 120 }} />
         <View style={styles.textWrapper}>
           <Typography variant="h3" style={styles.name}>
             {exerciseData.name}

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, StyleProp, ImageStyle } from 'react-native';
 import { imageMap } from '../../assets/exercises/_imageMap';
 import styles from './ExerciseImage.styles';
 
 interface ExerciseImageProps {
   imageName: string;
+  style?: StyleProp<ImageStyle>;
 }
 
-const ExerciseImage: React.FC<ExerciseImageProps> = ({ imageName }) => {
+const ExerciseImage: React.FC<ExerciseImageProps> = ({ imageName, style = {} }) => {
   const [index, setIndex] = useState(0);
   const fadeAnim = new Animated.Value(1);
 
@@ -38,7 +39,9 @@ const ExerciseImage: React.FC<ExerciseImageProps> = ({ imageName }) => {
 
   return (
     <View style={styles.container}>
-      {images.length > 0 && <Animated.Image source={images[index]} style={[styles.image, { opacity: fadeAnim }]} />}
+      {images.length > 0 && (
+        <Animated.Image source={images[index]} style={[styles.image, { opacity: fadeAnim }, style]} />
+      )}
     </View>
   );
 };

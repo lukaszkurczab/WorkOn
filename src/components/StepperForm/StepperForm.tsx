@@ -10,6 +10,7 @@ interface StepperFormProps {
   steps: React.ReactNode[];
   showNavigation?: boolean;
   onSubmit: () => void;
+  onExit: () => void;
 }
 
 const StepperForm: React.FC<StepperFormProps> = ({
@@ -18,6 +19,7 @@ const StepperForm: React.FC<StepperFormProps> = ({
   setCurrentStep,
   steps,
   showNavigation = true,
+  onExit,
 }) => {
   const totalSteps = steps.length;
 
@@ -34,7 +36,7 @@ const StepperForm: React.FC<StepperFormProps> = ({
   };
 
   const exitForm = () => {
-    console.log('Exit form');
+    onExit();
   };
 
   const renderProgressSteps = () => {

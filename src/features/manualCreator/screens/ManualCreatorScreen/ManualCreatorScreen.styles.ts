@@ -27,6 +27,17 @@ const styles = StyleSheet.create({
   modal_button: {
     width: 100,
   },
+  modalBody: {
+    alignItems: 'center',
+    gap: 16,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 32,
+  },
+  modalButton: {
+    flexShrink: 1,
+  },
 });
 
 export default styles;

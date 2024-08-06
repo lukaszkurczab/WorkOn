@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, Image } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useDispatch } from '../../../../utility/hooks';
 import styles from './WorkoutExercise.styles';
@@ -10,6 +10,7 @@ import Modal from '../../../../components/Modal/Modal';
 import SeriesModal from '../SeriesModal/SeriesModal';
 import { END_SERIE } from '../../store/slice/slice';
 import { navigate } from '../../../../utility/navigate';
+import ExerciseImage from '../../../../components/ExerciseImage/ExerciseImage';
 
 const WorkoutExercise = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const WorkoutExercise = () => {
           <Typography variant="h3">
             Serie {seriesIndex + 1} of {exercise.series.length}
           </Typography>
-          <Image source={require('../../../../assets/exercises/dips.jpg')} style={styles.image} />
+          <ExerciseImage imageName={exercise.image} />
           <View style={styles.descWrapper}>
             <Typography variant="h3">Short description</Typography>
             <Typography variant="h4" style={{ textAlign: 'justify' }}>

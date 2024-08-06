@@ -31,6 +31,7 @@ const initialState: TrainingState = {
     publicType: 'public',
     allowedUsers: [],
     authorId: '',
+    progression: '',
   },
   selectedTraining: {
     id: '',
