@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View, TextInput } from 'react-native';
-import { Typography } from '../../../../components/Typography/Typography';
+import { Typography } from '../Typography/Typography';
 import styles from './SeriesEditSection.styles';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { backgroundColor, gray, red } from '../../../../styles/colors';
+import { backgroundColor, gray, red } from '../../styles/colors';
 
 type SeriesEditSectionProps = {
   reps: number;

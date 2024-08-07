@@ -131,6 +131,19 @@ const trainingSlice = createSlice({
           state.step = 'select';
         }
         state.restStart = new Date();
+      } else {
+        const newExercise = {
+          id: state.selectedExercise.id,
+          name: state.selectedExercise.name,
+          loadIncrease: state.selectedExercise.loadIncrease,
+          repsRange: state.selectedExercise.repsRange,
+          series: [action.payload],
+        };
+        state.trainingSummary.exercises.push(newExercise);
+
+        state.finishedExercises.push(newExercise);
+        state.step = 'select';
+        state.restStart = new Date();
       }
       state.lastActivity = Date.now();
     },
@@ -160,6 +173,9 @@ const trainingSlice = createSlice({
     NAVIGATE_TO_ADD_EXERCISE: state => {
       state.step = 'add';
     },
+    LEAVE_ADD_EXERCISE: state => {
+      state.step = 'select';
+    },
   },
   extraReducers: builder => {
     builder
@@ -186,5 +202,6 @@ export const {
   SELECT_EXERCISE,
   START_TRAINING,
   NAVIGATE_TO_ADD_EXERCISE,
+  LEAVE_ADD_EXERCISE,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;

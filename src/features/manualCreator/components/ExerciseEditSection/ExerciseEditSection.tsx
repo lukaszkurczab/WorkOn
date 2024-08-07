@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { UPDATE_EXERCISE_IN_PLAN, REMOVE_SERIES } from '../../store/slice/slice';
 import { backgroundColor, gray, red } from '../../../../styles/colors';
 import { Exercise, Series } from '../../../../types/exercises';
-import SeriesEditSection from '../SeriesEditSection/SeriesEditSection';
+import SeriesEditSection from '../../../../components/SeriesEditSection/SeriesEditSection';
 import { useGenerateID } from '../../../../utility/hooks';
 
 type ExerciseEditSectionProps = {

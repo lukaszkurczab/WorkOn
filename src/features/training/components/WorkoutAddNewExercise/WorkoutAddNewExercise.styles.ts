@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { primaryColor, blue } from '../../../../styles/colors';
+import { primaryColor, blue, backgroundColor } from '../../../../styles/colors';
 
 const styles = StyleSheet.create({
   buttonWrapper: {
@@ -12,6 +12,40 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     width: 220,
     alignSelf: 'center',
+  },
+  atlasWrapper: {
+    gap: 16,
+    marginBottom: 16,
+  },
+  input: {
+    marginBottom: 16,
+  },
+  textInput: {
+    width: 45,
+    textAlign: 'center',
+    fontSize: 12,
+  },
+  row: {
+    flexDirection: 'row',
+    color: backgroundColor,
+    backgroundColor: primaryColor,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  serie: {
+    gap: 8,
+    marginBottom: 16,
+  },
+  editContainer: {
+    alignItems: 'center',
+    width: '100%',
+  },
+  buttonsWrapper: {
+    flexDirection: 'row',
+    gap: 16,
+    marginTop: 16,
   },
 });
 
