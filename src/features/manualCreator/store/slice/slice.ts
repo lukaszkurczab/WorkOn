@@ -21,27 +21,8 @@ const initialState: ManualCreatorState = {
     progression: '',
     allowedUsers: [],
     authorId: '',
-    days: [
-      {
-        id: '',
-        name: '',
-        exercises: [
-          {
-            id: '',
-            name: '',
-            repsRange: [4, 6],
-            loadIncrease: 5,
-            series: [
-              {
-                id: '',
-                reps: 4,
-                weight: 20,
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    days: [],
+    waves: [],
   },
   editExercise: {
     id: '',
@@ -75,6 +56,7 @@ const manualCreatorSlice = createSlice({
             exercises: [],
           },
         ],
+        waves: [],
       };
     },
     CHANGE_PLAN_NAME: (state, action: PayloadAction<string>) => {
@@ -175,6 +157,25 @@ const manualCreatorSlice = createSlice({
     SET_SHOW_NAVIGATION: (state, action) => {
       state.showNavigation = action.payload;
     },
+    ADD_WAVE: state => {
+      const waveId = uuidv4();
+      state.plan.waves.push({ id: waveId, name: '', days: [] });
+    },
+    REMOVE_WAVE: (state, action: PayloadAction<string>) => {
+      state.plan.waves = state.plan.waves.filter(wave => wave.id !== action.payload);
+    },
+    CHANGE_WAVE_NAME: (state, action: PayloadAction<{ waveId: string; waveName: string }>) => {
+      const wave = state.plan.waves.find(w => w.id === action.payload.waveId);
+      if (wave) {
+        wave.name = action.payload.waveName;
+      }
+    },
+    ASSIGN_DAY_TO_WAVE: (state, action: PayloadAction<{ waveId: string; dayId: string }>) => {
+      const wave = state.plan.waves.find(w => w.id === action.payload.waveId);
+      if (wave && !wave.days.includes(action.payload.dayId)) {
+        wave.days.push(action.payload.dayId);
+      }
+    },
   },
   extraReducers: builder => {
     builder.addCase(createPlan.fulfilled, () => {
@@ -184,6 +185,10 @@ const manualCreatorSlice = createSlice({
 });
 
 export const {
+  ADD_WAVE,
+  CHANGE_WAVE_NAME,
+  ASSIGN_DAY_TO_WAVE,
+  REMOVE_WAVE,
   ADD_EXERCISE_TO_PLAN,
   UPDATE_EXERCISE_IN_PLAN,
   CREATE_NEW_PLAN,

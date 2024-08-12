@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Layout from '../../../../components/Layout/Layout';
 import { Typography } from '../../../../components/Typography/Typography';
 import Button from '../../../../components/Button/Button';
 import styles from './ManualPlanGeneralScreen.styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { navigate } from '../../../../utility/navigate';
 import { useSelector } from 'react-redux';
-import { ADD_DAY, CHANGE_DAY_NAME, CHANGE_PLAN_NAME, CHANGE_PROGRESSION, REMOVE_DAY } from '../../store/slice/slice';
+import { CHANGE_PLAN_NAME, CHANGE_PROGRESSION } from '../../store/slice/slice';
 import { RootState } from '../../../../store/store';
 import { useDispatch } from '../../../../utility/hooks';
 import { TextInput } from '../../../../components/TextInput/TextInput';
 import Dropdown from '../../../../components/Dropdown/Dropdown';
+import LinearProgression from '../../components/LinearProgression/LinearProgression';
 
 const ManualPlanGeneralScreen = () => {
   const dispatch = useDispatch();
   const plan = useSelector((state: RootState) => state.manualCreator.plan);
   const [nameError, setNameError] = useState(false);
-  const [dayErrors, setDayErrors] = useState<{ [key: string]: boolean }>({});
+  const [validationDayErrors, setValidationDayErrors] = useState<{ [key: string]: boolean }>({});
   const [progressionError, setProgressionError] = useState(false);
 
   const handleNext = () => {
@@ -46,7 +46,7 @@ const ManualPlanGeneralScreen = () => {
       setProgressionError(false);
     }
 
-    setDayErrors(newDayErrors);
+    setValidationDayErrors(newDayErrors);
 
     if (valid) {
       navigate('ManualCreatorScreen');
@@ -56,11 +56,6 @@ const ManualPlanGeneralScreen = () => {
   const handlePlanNameChange = (e: string) => {
     dispatch(CHANGE_PLAN_NAME(e));
     setNameError(false);
-  };
-
-  const handleDayNameChange = ({ id, name }: { id: string; name: string }) => {
-    dispatch(CHANGE_DAY_NAME({ id, name }));
-    setDayErrors(prev => ({ ...prev, [id]: false }));
   };
 
   const handleProgressionChange = (progression: string) => {
@@ -91,28 +86,7 @@ const ManualPlanGeneralScreen = () => {
               error={progressionError ? 'Progression type must be selected.' : ''}
             />
           </View>
-          <View style={styles.daysList}>
-            <Typography variant="h2">Create training days</Typography>
-            {plan.days.map(day => (
-              <TextInput
-                key={day.id}
-                value={day.name}
-                onChangeText={e => handleDayNameChange({ id: day.id, name: e })}
-                placeholder="Day name"
-                error={dayErrors[day.id] ? 'Day must have name.' : ''}
-                rightComponent={
-                  plan.days.length > 1 && (
-                    <TouchableOpacity onPress={() => dispatch(REMOVE_DAY(day.id))}>
-                      <Icon name="trash" size={32} style={styles.icon} />
-                    </TouchableOpacity>
-                  )
-                }
-              ></TextInput>
-            ))}
-          </View>
-          <Button onPress={() => dispatch(ADD_DAY())}>
-            <Typography variant="h3">+ Add day</Typography>
-          </Button>
+          <LinearProgression initDayErrors={validationDayErrors} />
         </ScrollView>
         <Button onPress={handleNext}>
           <Typography variant="h2">Next</Typography>

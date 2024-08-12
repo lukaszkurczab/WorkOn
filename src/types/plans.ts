@@ -8,10 +8,17 @@ export interface WorkoutPlan {
   allowedUsers: string[];
   authorId: string;
   days: Day[];
+  waves: Wave[];
 }
 
 export interface Day {
   id: string;
   name: string;
   exercises: Exercise[];
+}
+
+export interface Wave {
+  id: string;
+  name: string;
+  days: string[];
 }
