@@ -41,6 +41,7 @@ const manualCreatorSlice = createSlice({
     CREATE_NEW_PLAN: (state, action: PayloadAction<{ userId: string }>) => {
       const planId = uuidv4();
       const dayId = uuidv4();
+      const waveId = uuidv4();
       state.error = '';
       state.plan = {
         id: planId,
@@ -56,7 +57,13 @@ const manualCreatorSlice = createSlice({
             exercises: [],
           },
         ],
-        waves: [],
+        waves: [
+          {
+            id: waveId,
+            name: '',
+            days: [dayId],
+          },
+        ],
       };
     },
     CHANGE_PLAN_NAME: (state, action: PayloadAction<string>) => {
@@ -78,8 +85,13 @@ const manualCreatorSlice = createSlice({
       state.plan.progression = action.payload;
     },
     REMOVE_DAY: (state, action: PayloadAction<string>) => {
+      const dayIdToRemove = action.payload;
+
       if (state.plan.days.length > 1) {
-        state.plan.days = state.plan.days.filter(day => day.id !== action.payload);
+        state.plan.days = state.plan.days.filter(day => day.id !== dayIdToRemove);
+        state.plan.waves.forEach(wave => {
+          wave.days = wave.days.filter(dayId => dayId !== dayIdToRemove);
+        });
       } else {
         state.error = 'Plan must have at least one day.';
       }
@@ -159,7 +171,13 @@ const manualCreatorSlice = createSlice({
     },
     ADD_WAVE: state => {
       const waveId = uuidv4();
-      state.plan.waves.push({ id: waveId, name: '', days: [] });
+      const dayId = uuidv4();
+      state.plan.days.push({
+        id: dayId,
+        name: '',
+        exercises: [],
+      });
+      state.plan.waves.push({ id: waveId, name: '', days: [dayId] });
     },
     REMOVE_WAVE: (state, action: PayloadAction<string>) => {
       state.plan.waves = state.plan.waves.filter(wave => wave.id !== action.payload);
@@ -170,10 +188,16 @@ const manualCreatorSlice = createSlice({
         wave.name = action.payload.waveName;
       }
     },
-    ASSIGN_DAY_TO_WAVE: (state, action: PayloadAction<{ waveId: string; dayId: string }>) => {
+    ASSIGN_DAY_TO_WAVE: (state, action: PayloadAction<{ waveId: string }>) => {
       const wave = state.plan.waves.find(w => w.id === action.payload.waveId);
-      if (wave && !wave.days.includes(action.payload.dayId)) {
-        wave.days.push(action.payload.dayId);
+      const dayId = uuidv4();
+      state.plan.days.push({
+        id: dayId,
+        name: '',
+        exercises: [],
+      });
+      if (wave) {
+        wave.days.push(dayId);
       }
     },
   },

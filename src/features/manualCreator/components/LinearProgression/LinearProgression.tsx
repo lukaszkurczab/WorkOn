@@ -42,7 +42,7 @@ const LinearProgression = ({ initDayErrors }: LinearProgressionProps) => {
                 </TouchableOpacity>
               )
             }
-          ></TextInput>
+          />
         ))}
       </View>
       <Button onPress={() => dispatch(ADD_DAY())} style={{ marginTop: 16 }}>

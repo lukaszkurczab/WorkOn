@@ -12,6 +12,7 @@ import { useDispatch } from '../../../../utility/hooks';
 import { TextInput } from '../../../../components/TextInput/TextInput';
 import Dropdown from '../../../../components/Dropdown/Dropdown';
 import LinearProgression from '../../components/LinearProgression/LinearProgression';
+import WaveProgression from '../../components/WaveProgression/WaveProgression';
 
 const ManualPlanGeneralScreen = () => {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const ManualPlanGeneralScreen = () => {
   return (
     <Layout showNavigation={false} showHeader={false}>
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={{ gap: 16 }}>
+        <ScrollView contentContainerStyle={{ gap: 16 }} showsVerticalScrollIndicator={false}>
           <View>
             <Typography variant="h2">Name your plan</Typography>
             <TextInput
@@ -86,7 +87,8 @@ const ManualPlanGeneralScreen = () => {
               error={progressionError ? 'Progression type must be selected.' : ''}
             />
           </View>
-          <LinearProgression initDayErrors={validationDayErrors} />
+          {plan.progression === 'Linear progression' && <LinearProgression initDayErrors={validationDayErrors} />}
+          {plan.progression === 'Wave progression' && <WaveProgression initDayErrors={validationDayErrors} />}
         </ScrollView>
         <Button onPress={handleNext}>
           <Typography variant="h2">Next</Typography>
