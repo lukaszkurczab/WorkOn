@@ -14,7 +14,7 @@ export interface WorkoutPlan {
 export interface Day {
   id: string;
   name: string;
-  exercises: Exercise[];
+  exercises: PlanExercise[];
 }
 
 export interface Wave {

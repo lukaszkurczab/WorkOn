@@ -7,11 +7,6 @@ import {
 } from '../../../../api/users';
 import { SearchHistoryItem, UserPublicData } from '../../../../types/users';
 
-interface AddSearchHistoryItemData {
-  userId: string;
-  searchHistoryItem: SearchHistoryItem;
-}
-
 interface RemoveSearchHistoryItemData {
   userId: string;
   itemId: string;

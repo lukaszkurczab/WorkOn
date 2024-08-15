@@ -1,29 +1,37 @@
 import { BASE_URL } from '../../env';
-
 import { WorkoutPlan } from '../types/plans';
 import { getToken } from '../utility/secureStore';
 
-export const fetchPlans = async (): Promise<WorkoutPlan[]> => {
+export const fetchAllPlans = async (): Promise<WorkoutPlan[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/plans`);
+    const accessToken = await getToken('accessToken');
+    const response = await fetch(`${BASE_URL}/plans`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching plans:', error);
+    console.error('Error fetching all plans:', error);
     throw error;
   }
 };
 
-export const addPlan = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<void> => {
+export const addPlan = async (data: { userId: string; newPlan: WorkoutPlan }): Promise<WorkoutPlan> => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/plans`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data.newPlan, userId: data.userId }),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -58,10 +66,12 @@ export const updatePlan = async (data: { id: string; updatedPlan: WorkoutPlan })
 
 export const deletePlan = async (id: string): Promise<{ message: string }> => {
   try {
+    const accessToken = await getToken('accessToken');
     const response = await fetch(`${BASE_URL}/plans/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     if (!response.ok) {

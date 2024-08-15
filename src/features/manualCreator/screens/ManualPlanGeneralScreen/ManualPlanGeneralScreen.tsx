@@ -81,7 +81,7 @@ const ManualPlanGeneralScreen = () => {
             <Typography variant="h2">Progression type</Typography>
             <Dropdown
               label="Progression type"
-              data={['Linear progression', 'Wave progression', 'Periodization']}
+              data={['Linear progression', 'Wave progression']}
               onSelect={handleProgressionChange}
               renderItem={item => <Typography variant="h3">{item}</Typography>}
               error={progressionError ? 'Progression type must be selected.' : ''}
