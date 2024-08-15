@@ -18,7 +18,7 @@ const initialState: ManualCreatorState = {
     id: '',
     name: '',
     publicType: 'public',
-    progression: '',
+    progression: 'Linear progression',
     allowedUsers: [],
     authorId: '',
     days: [],
@@ -47,7 +47,7 @@ const manualCreatorSlice = createSlice({
         id: planId,
         name: '',
         publicType: 'private',
-        progression: '',
+        progression: 'Linear progression',
         allowedUsers: [],
         authorId: action.payload.userId,
         days: [
@@ -81,7 +81,7 @@ const manualCreatorSlice = createSlice({
         state.plan.days[index].exercises = action.payload.newOrder;
       }
     },
-    CHANGE_PROGRESSION: (state, action: PayloadAction<string>) => {
+    CHANGE_PROGRESSION: (state, action: PayloadAction<'Linear progression' | 'Wave progression'>) => {
       state.plan.progression = action.payload;
     },
     REMOVE_DAY: (state, action: PayloadAction<string>) => {

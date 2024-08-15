@@ -11,11 +11,19 @@ interface DropdownProps<T> {
   onSelect: (item: T) => void;
   renderItem: (item: T) => React.ReactNode;
   error?: string;
+  defaultValue?: T | null;
 }
 
-const Dropdown = <T extends unknown>({ label, data, onSelect, renderItem, error }: DropdownProps<T>) => {
+const Dropdown = <T extends unknown>({
+  label,
+  data,
+  onSelect,
+  renderItem,
+  error,
+  defaultValue = null,
+}: DropdownProps<T>) => {
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState<T | null>(null);
+  const [selected, setSelected] = useState<T | null>(defaultValue);
 
   const handleSelect = (item: T) => {
     setSelected(item);

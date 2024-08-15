@@ -49,6 +49,7 @@ const PlansListScreen = () => {
           isActive={activeMenu === plan.id}
           onMenuToggle={() => handleMenuToggle(plan.id)}
           onOutsidePress={handleOutsidePress}
+          variant="user"
         />
       ))}
       <Button onPress={handleAddPlan}>

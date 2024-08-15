@@ -4,7 +4,7 @@ export interface WorkoutPlan {
   id: string;
   name: string;
   publicType: 'public' | 'private';
-  progression: string;
+  progression: 'Wave progression' | 'Linear progression';
   allowedUsers: string[];
   authorId: string;
   days: Day[];
@@ -14,7 +14,7 @@ export interface WorkoutPlan {
 export interface Day {
   id: string;
   name: string;
-  exercises: PlanExercise[];
+  exercises: Exercise[];
 }
 
 export interface Wave {

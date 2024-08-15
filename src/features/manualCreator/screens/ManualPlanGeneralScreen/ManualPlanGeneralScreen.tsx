@@ -59,7 +59,7 @@ const ManualPlanGeneralScreen = () => {
     setNameError(false);
   };
 
-  const handleProgressionChange = (progression: string) => {
+  const handleProgressionChange = (progression: 'Linear progression' | 'Wave progression') => {
     dispatch(CHANGE_PROGRESSION(progression));
     setProgressionError(false);
   };
@@ -82,6 +82,7 @@ const ManualPlanGeneralScreen = () => {
             <Dropdown
               label="Progression type"
               data={['Linear progression', 'Wave progression']}
+              defaultValue="Linear progression"
               onSelect={handleProgressionChange}
               renderItem={item => <Typography variant="h3">{item}</Typography>}
               error={progressionError ? 'Progression type must be selected.' : ''}

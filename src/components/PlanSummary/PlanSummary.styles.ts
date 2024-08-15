@@ -1,9 +1,10 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { backgroundColor, blue, primaryColor } from '../../../../styles/colors';
+import { backgroundColor, blue, primaryColor } from '../../styles/colors';
 
 const { height: screenHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  container: {},
   text: {
     alignSelf: 'center',
     color: backgroundColor,
@@ -65,23 +66,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  viewIcon: {
+    height: 40,
+    justifyContent: 'center',
+    paddingHorizontal: 8,
+  },
   selectedExerciseText: {
     color: backgroundColor,
   },
   editWrapper: {
     gap: 1,
     backgroundColor: backgroundColor,
+    paddingTop: 1,
   },
-  listText: {
-    color: backgroundColor,
-    paddingHorizontal: 16,
-  },
-  listHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: primaryColor,
-    marginBottom: 8,
+  listContainer: {
+    gap: 8,
+    marginVertical: 16,
   },
 });
 

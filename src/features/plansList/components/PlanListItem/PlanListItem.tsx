@@ -8,24 +8,33 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 type PlanListItemProps = {
   plan: WorkoutPlan;
-  onEdit: () => void;
-  onDelete: () => void;
-  isActive: boolean;
-  onMenuToggle: () => void;
-  onOutsidePress: () => void;
+  variant: 'public' | 'user';
+  onEdit?: () => void;
+  onDelete?: () => void;
+  isActive?: boolean;
+  onMenuToggle?: () => void;
+  onOutsidePress?: () => void;
 };
 
-const PlanListItem = ({ plan, onEdit, onDelete, isActive, onMenuToggle, onOutsidePress }: PlanListItemProps) => {
+const PlanListItem = ({
+  plan,
+  variant,
+  onEdit,
+  onDelete,
+  isActive,
+  onMenuToggle,
+  onOutsidePress,
+}: PlanListItemProps) => {
   const menuRef = useRef(null);
 
   const handleEdit = () => {
-    onMenuToggle();
-    onEdit();
+    onMenuToggle!();
+    onEdit!();
   };
 
   const handleDelete = () => {
-    onMenuToggle();
-    onDelete();
+    onMenuToggle!();
+    onDelete!();
   };
 
   const handleSelectPlan = (plan: WorkoutPlan) => {
@@ -43,21 +52,23 @@ const PlanListItem = ({ plan, onEdit, onDelete, isActive, onMenuToggle, onOutsid
             </Typography>
           </View>
         </TouchableOpacity>
-        <View style={{ position: 'relative' }}>
-          <TouchableOpacity style={styles.iconWrapper} onPress={onMenuToggle}>
-            <Icon name="ellipsis-v" size={24} style={styles.icon} />
-          </TouchableOpacity>
-          {isActive && (
-            <View ref={menuRef} style={styles.dropdownMenu}>
-              <TouchableOpacity onPress={handleEdit}>
-                <Text style={styles.menuItem}>Edit</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleDelete}>
-                <Text style={styles.menuItem}>Delete</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
+        {variant === 'user' && (
+          <View style={{ position: 'relative' }}>
+            <TouchableOpacity style={styles.iconWrapper} onPress={onMenuToggle}>
+              <Icon name="ellipsis-v" size={24} style={styles.icon} />
+            </TouchableOpacity>
+            {isActive && (
+              <View ref={menuRef} style={styles.dropdownMenu}>
+                <TouchableOpacity onPress={handleEdit}>
+                  <Text style={styles.menuItem}>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleDelete}>
+                  <Text style={styles.menuItem}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

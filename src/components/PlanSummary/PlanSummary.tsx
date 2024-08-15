@@ -1,17 +1,18 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Typography } from '../../../../components/Typography/Typography';
+import { Typography } from '../../components/Typography/Typography';
 import { ScrollView } from 'react-native-gesture-handler';
-import styles from './SummarySection.styles';
-import { useSelector } from '../../../../utility/hooks';
-import { RootState } from '../../../../store/store';
-import ExerciseSummarySection from '../ExerciseSummarySection/ExerciseSummarySection';
+import styles from './PlanSummary.styles';
+import ExerciseSummarySection from '../ExerciseSummary/ExerciseSummary';
+import { WorkoutPlan } from '../../types/plans';
 
-const SummarySection = () => {
-  const plan = useSelector((state: RootState) => state.manualCreator.plan);
-  const isWaveProgression = plan.progression === 'Wave progression';
+interface SummarySectionProps {
+  plan: WorkoutPlan;
+  progressionType: 'Wave progression' | 'Linear progression';
+}
 
-  if (isWaveProgression) {
+const SummarySection = ({ plan, progressionType }: SummarySectionProps) => {
+  if (progressionType === 'Wave progression') {
     return (
       <View style={{ width: '100%' }}>
         <ScrollView style={styles.listContainer} showsVerticalScrollIndicator={false}>

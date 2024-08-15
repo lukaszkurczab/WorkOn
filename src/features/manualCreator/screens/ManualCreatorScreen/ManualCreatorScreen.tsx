@@ -14,6 +14,7 @@ import { navigate } from '../../../../utility/navigate';
 import Modal from '../../../../components/Modal/Modal';
 import { Typography } from '../../../../components/Typography/Typography';
 import Button from '../../../../components/Button/Button';
+import PlanSummary from '../../../../components/PlanSummary/PlanSummary';
 
 const ManualCreatorScreen = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const ManualCreatorScreen = () => {
       <SelectedExercisesSection key={`selected-${index}`} day={day} />,
       <ExercisesEditSection key={`edit-${index}`} day={day} />,
     ]),
-    <SummarySection key="summary" />,
+    <PlanSummary key="summary" plan={plan} progressionType={plan.progression} />,
   ];
 
   const handleExit = () => {

@@ -11,32 +11,19 @@ import { RootStackParamList, navigate } from '../../../../utility/navigate';
 import { useDispatch } from '../../../../utility/hooks';
 import { EDIT_PLAN } from '../../../manualCreator/store/slice/slice';
 import { RouteProp, useRoute } from '@react-navigation/native';
+import PlanSummary from '../../../../components/PlanSummary/PlanSummary';
+import Page404 from '../../../../components/Page404/Page404';
 
 type PlanDetailsScreenRouteProp = RouteProp<RootStackParamList, 'PlanDetailsScreen'>;
 
 const PlanDetailsScreen = () => {
   const route = useRoute<PlanDetailsScreenRouteProp>();
   if (!route.params || !route.params.plan) {
-    return (
-      <Layout>
-        <Typography variant="h2">No plan data provided.</Typography>
-      </Layout>
-    );
+    return <Page404 />;
   }
   const dispatch = useDispatch();
   const editable = route.params.editable ?? true;
   const plan = route.params.plan;
-  const [items, setItems] = useState<{ id: string; component: React.ReactNode }[]>([]);
-
-  useEffect(() => {
-    if (plan != null) {
-      const newItems = plan.days.map((day: Day) => ({
-        id: day.id,
-        component: <CarouselItem name={day.name} exercises={day.exercises} id={day.id} />,
-      }));
-      setItems(newItems);
-    }
-  }, [plan]);
 
   const handleEditPress = () => {
     dispatch(EDIT_PLAN(plan));
@@ -46,7 +33,7 @@ const PlanDetailsScreen = () => {
   return (
     <Layout headerText={plan ? plan.name : 'WorkOn'}>
       <View style={styles.container}>
-        {items.length > 0 && <Carousel items={items} height={520} />}
+        <PlanSummary plan={plan} progressionType={plan.progression} />
         {editable && (
           <View style={styles.buttonsWrapper}>
             <Button onPress={handleEditPress}>

@@ -4,6 +4,7 @@ import { Typography } from '../../../../components/Typography/Typography';
 import { getAllPlans } from '../../store/actions/actions';
 import { RootState } from '../../../../store/store';
 import { useDispatch, useSelector } from '../../../../utility/hooks';
+import PlanListItem from '../PlanListItem/PlanListItem';
 
 const PublicPlans: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,7 @@ const PublicPlans: React.FC = () => {
         <>
           {publicPlans && publicPlans.length > 0
             ? publicPlans.map(publicPlan => (
-                <View key={publicPlan.id}>
-                  <Typography variant="h3">{publicPlan.name}</Typography>
-                </View>
+                <PlanListItem key={publicPlan.id} variant="public" plan={publicPlan}></PlanListItem>
               ))
             : null}
         </>

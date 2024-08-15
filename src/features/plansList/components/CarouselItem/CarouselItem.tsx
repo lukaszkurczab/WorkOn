@@ -6,7 +6,7 @@ import Button from '../../../../components/Button/Button';
 import { exercisesList } from '../../../../assets/exercises/_exercise';
 import styles from './CarouselItem.styles';
 import FontAwsome5Icon from 'react-native-vector-icons/FontAwesome5';
-import { backgroundColor, gray, red } from '../../../../styles/colors';
+import { backgroundColor, gray } from '../../../../styles/colors';
 import CarouselItemSerie from '../CarouselItemSerie/CarouselItemSerie';
 import { navigate } from '../../../../utility/navigate';
 import { useGetExerciseData } from '../../../../utility/hooks';

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Typography } from '../../../../components/Typography/Typography';
-import styles from './ExerciseSummarySection.styles';
-import { backgroundColor, gray } from '../../../../styles/colors';
-import { Exercise } from '../../../../types/exercises';
+import { Typography } from '../../components/Typography/Typography';
+import styles from './ExerciseSummary.styles';
+import { backgroundColor, gray } from '../../styles/colors';
+import { Exercise } from '../../types/exercises';
+import { useGetExerciseData } from '../../utility/hooks';
 
 type ExerciseSummarySectionProps = {
   exercise: Exercise;
@@ -11,12 +12,11 @@ type ExerciseSummarySectionProps = {
 
 const ExerciseSummarySection = ({ exercise }: ExerciseSummarySectionProps) => {
   const [showDetails, setShowDetails] = useState(false);
-
   return (
     <View>
       <TouchableOpacity style={styles.listHeader} onPress={() => setShowDetails(!showDetails)}>
         <Typography variant="h3" style={styles.listText}>
-          {exercise.name}
+          {useGetExerciseData(exercise.id).name}
         </Typography>
       </TouchableOpacity>
       {showDetails && (
