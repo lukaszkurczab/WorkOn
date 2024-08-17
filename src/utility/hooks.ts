@@ -4,6 +4,11 @@ import 'react-native-get-random-values';
 import uuid from 'react-native-uuid';
 import { exercisesList } from '../assets/exercises/_exercise';
 import { Exercise, ExerciseData } from '../types/exercises';
+import jwt from 'jsonwebtoken';
+import { jwtDecode } from 'jwt-decode';
+import LZString from 'lz-string';
+
+const tokenizationKey = '0646f3efc4c0c9f931187c0da093bdc554e215e3dd203d91b6eacb7d8be0d65f';
 
 export const useFormatTime = (time: number) => {
   const hours = Math.floor(time / 3600);
@@ -129,6 +134,20 @@ export const useFormatDate = (dateInput: string | Date): string => {
 
 export const useGenerateID = (): string => {
   return uuid.v4().toString();
+};
+
+export const useTokenizeData = (data: any): string => {
+  const jsonString = JSON.stringify(data);
+  const compressedPlan = LZString.compressToBase64(jsonString);
+
+  return compressedPlan;
+};
+
+export const useUntokenizeData = (token: string): any => {
+  const decompressedPlan = LZString.decompressFromBase64(token);
+  const originalPlan = JSON.parse(decompressedPlan);
+
+  return originalPlan;
 };
 
 export const useDispatch = () => useReduxDispatch<AppDispatch>();

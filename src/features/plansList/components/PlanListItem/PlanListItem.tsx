@@ -5,6 +5,8 @@ import { Typography } from '../../../../components/Typography/Typography';
 import styles from './PlanListItem.styles';
 import { navigate } from '../../../../utility/navigate';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useTokenizeData } from '../../../../utility/hooks';
+import * as Clipboard from 'expo-clipboard';
 
 type PlanListItemProps = {
   plan: WorkoutPlan;
@@ -41,6 +43,10 @@ const PlanListItem = ({
     navigate('PlanDetailsScreen', { plan: plan, editable: true });
   };
 
+  const handleCopy = async () => {
+    await Clipboard.setStringAsync('hello world');
+  };
+
   return (
     <TouchableWithoutFeedback onPress={onOutsidePress}>
       <View style={styles.container}>
@@ -52,6 +58,13 @@ const PlanListItem = ({
             </Typography>
           </View>
         </TouchableOpacity>
+        {variant === 'public' && (
+          <View style={{ position: 'relative' }}>
+            <TouchableOpacity style={styles.iconWrapper} onPress={() => handleCopy()}>
+              <Icon name="ellipsis-v" size={24} style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+        )}
         {variant === 'user' && (
           <View style={{ position: 'relative' }}>
             <TouchableOpacity style={styles.iconWrapper} onPress={onMenuToggle}>
