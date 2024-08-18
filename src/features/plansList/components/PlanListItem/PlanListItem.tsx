@@ -5,8 +5,8 @@ import { Typography } from '../../../../components/Typography/Typography';
 import styles from './PlanListItem.styles';
 import { navigate } from '../../../../utility/navigate';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useTokenizeData } from '../../../../utility/hooks';
-import * as Clipboard from 'expo-clipboard';
+//import { useTokenizeData } from '../../../../utility/hooks';
+//import * as Clipboard from 'expo-clipboard';
 
 type PlanListItemProps = {
   plan: WorkoutPlan;
@@ -44,7 +44,7 @@ const PlanListItem = ({
   };
 
   const handleCopy = async () => {
-    await Clipboard.setStringAsync('hello world');
+    //await Clipboard.setStringAsync('hello world');
   };
 
   return (
