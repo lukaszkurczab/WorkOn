@@ -31,7 +31,8 @@ const initialState: TrainingState = {
     publicType: 'public',
     allowedUsers: [],
     authorId: '',
-    progression: '',
+    progression: 'Linear progression',
+    waves: [],
   },
   selectedTraining: {
     id: '',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { navigate } from '../../../../utility/navigate';
 import Layout from '../../../../components/Layout/Layout';
@@ -18,6 +18,13 @@ const SelectTrainingScreen = () => {
   const selectedPlan = useSelector((state: RootState) => state.training.selectedPlan);
   const selectedTraining = useSelector((state: RootState) => state.training.selectedTraining);
   const publicType = useSelector((state: RootState) => state.user.settings.defaultHistoryPublicType);
+
+  useEffect(() => {
+    if (!selectedPlan.days[0]) {
+      dispatch(SELECT_PLAN(plans[0]));
+      dispatch(SELECT_TRAINING({ ...plans[0].days[0] }));
+    }
+  }, []);
 
   const selectPlan = (plan: WorkoutPlan) => {
     dispatch(SELECT_PLAN(plan));
