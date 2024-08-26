@@ -1,9 +1,9 @@
-import { BASE_URL } from '../../env';
-
 import { WorkoutPlan } from '../types/plans';
 import { HistoryItem } from '../types/history';
 import { getToken } from '../utility/secureStore';
 import { SearchHistoryItem } from '../types/users';
+
+const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
 
 export const addHistoryItemToUser = async (userData: { userId: string; historyItem: HistoryItem }) => {
   try {

@@ -4,6 +4,9 @@
   },
   "build": {
     "development": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "http://192.168.122.169:4000"
+      },
       "developmentClient": true,
       "distribution": "internal",
       "android": {
@@ -26,7 +29,8 @@
     },
     "production": {
       "env": {
-        "APP_NAME": "WorkOn"
+        "APP_NAME": "WorkOn",
+        "EXPO_PUBLIC_BASE_URL": "https://workon-backend.azurewebsites.net"
       },
       "channel": "production"
     }

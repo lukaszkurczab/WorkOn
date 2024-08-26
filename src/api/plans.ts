@@ -1,6 +1,7 @@
-import { BASE_URL } from '../../env';
 import { WorkoutPlan } from '../types/plans';
 import { getToken } from '../utility/secureStore';
+
+const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
 
 export const fetchAllPlans = async (): Promise<WorkoutPlan[]> => {
   try {
