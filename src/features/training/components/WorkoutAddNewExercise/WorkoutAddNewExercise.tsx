@@ -11,7 +11,7 @@ import ExerciseImage from '../../../../components/ExerciseImage/ExerciseImage';
 import { backgroundColor, gray } from '../../../../styles/colors';
 import SeriesEditSection from '../../../../components/SeriesEditSection/SeriesEditSection';
 import { useDispatch, useGenerateID } from '../../../../utility/hooks';
-import { LEAVE_ADD_EXERCISE, SELECT_EXERCISE } from '../../store/slice/slice';
+import { LEAVE_ADD_EXERCISE, SELECT_EXERCISE, ADD_EXERCISE } from '../../store/slice/slice';
 
 const WorkoutAddNewExercise = () => {
   const dispatch = useDispatch();
@@ -46,6 +46,7 @@ const WorkoutAddNewExercise = () => {
   };
 
   const handleConfirm = () => {
+    dispatch(ADD_EXERCISE({ ...selectedExercise }));
     dispatch(SELECT_EXERCISE({ ...selectedExercise!, ...selectedExerciseData }));
   };
 

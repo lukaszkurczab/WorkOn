@@ -81,6 +81,9 @@ const trainingSlice = createSlice({
       state.seriesIndex = 0;
       state.lastActivity = Date.now();
     },
+    ADD_EXERCISE: (state, action) => {
+      state.unfinishedExercises.push(action.payload);
+    },
     START_TRAINING: (
       state,
       action: PayloadAction<{ id: string; name: string; exercises: Exercise[]; publicType: 'public' | 'private' }>
@@ -204,5 +207,6 @@ export const {
   START_TRAINING,
   NAVIGATE_TO_ADD_EXERCISE,
   LEAVE_ADD_EXERCISE,
+  ADD_EXERCISE,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;
