@@ -49,6 +49,7 @@ const selectStep = (step: string) => {
     });
 
     updatedPlan.days[selectedTrainingIndex] = {
+      ...updatedPlan.days[selectedTrainingIndex],
       exercises: [...updatedExercises],
     };
 

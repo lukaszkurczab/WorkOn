@@ -5,7 +5,7 @@
   "build": {
     "development": {
       "env": {
-        "EXPO_PUBLIC_BASE_URL": "http://192.168.122.169:4000"
+        "EXPO_PUBLIC_BASE_URL": "http://192.168.1.100:4000"
       },
       "developmentClient": true,
       "distribution": "internal",
@@ -25,14 +25,21 @@
       "ios": {
         "simulator": true
       },
-      "channel": "preview"
+      "channel": "preview",
+      "env": {
+        "APP_NAME": "WorkOn",
+        "EXPO_PUBLIC_BASE_URL": "https://workon-backend.azurewebsites.net"
+      }
     },
     "production": {
       "env": {
         "APP_NAME": "WorkOn",
         "EXPO_PUBLIC_BASE_URL": "https://workon-backend.azurewebsites.net"
       },
-      "channel": "production"
+      "channel": "production",
+      "android": {
+        "buildType": "apk"
+      }
     }
   },
   "submit": {

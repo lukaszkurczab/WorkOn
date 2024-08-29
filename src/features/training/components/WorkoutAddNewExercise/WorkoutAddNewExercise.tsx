@@ -13,11 +13,7 @@ import SeriesEditSection from '../../../../components/SeriesEditSection/SeriesEd
 import { useDispatch, useGenerateID } from '../../../../utility/hooks';
 import { LEAVE_ADD_EXERCISE, SELECT_EXERCISE } from '../../store/slice/slice';
 
-type WorkoutAddNewExerciseProps = {
-  handleClose: () => void;
-};
-
-const WorkoutAddNewExercise = ({ handleClose }: WorkoutAddNewExerciseProps) => {
+const WorkoutAddNewExercise = () => {
   const dispatch = useDispatch();
   const [searchedText, setSearchedText] = useState('');
   const [selectedExercise, setSelectedExercise] = useState<Exercise>();
