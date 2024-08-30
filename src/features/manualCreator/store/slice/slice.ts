@@ -66,6 +66,21 @@ const manualCreatorSlice = createSlice({
         ],
       };
     },
+    IMPORT_PLAN: (state, action: PayloadAction<{ plan: WorkoutPlan; userId: string }>) => {
+      const planId = uuidv4();
+      const { userId, plan } = action.payload;
+      state.error = '';
+      state.plan = {
+        id: planId,
+        name: plan.name,
+        publicType: 'private',
+        progression: plan.progression,
+        allowedUsers: [],
+        authorId: userId,
+        days: [...plan.days],
+        waves: [...plan.waves],
+      };
+    },
     CHANGE_PLAN_NAME: (state, action: PayloadAction<string>) => {
       state.plan.name = action.payload;
     },
@@ -228,6 +243,7 @@ export const {
   CHANGE_PROGRESSION,
   CHANGE_EXERCISES_ORDER,
   SET_SHOW_NAVIGATION,
+  IMPORT_PLAN,
 } = manualCreatorSlice.actions;
 
 export default manualCreatorSlice.reducer;

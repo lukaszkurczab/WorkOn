@@ -26,7 +26,7 @@ const ListItem = (item: Exercise) => {
   return (
     <View style={styles.listItem}>
       <Typography variant="h3" style={styles.listText}>
-        {item.name}
+        {item.name || useGetExerciseData(item.id).name}
       </Typography>
       <TouchableOpacity onPress={() => handlePreviewExercise()} style={styles.viewIcon}>
         <FontAwesome5Icon name="eye" size={14} />

@@ -5,17 +5,16 @@ import { Typography } from '../../../../components/Typography/Typography';
 import styles from './PlanListItem.styles';
 import { navigate } from '../../../../utility/navigate';
 import Icon from 'react-native-vector-icons/FontAwesome';
-//import { useTokenizeData } from '../../../../utility/hooks';
-//import * as Clipboard from 'expo-clipboard';
 
 type PlanListItemProps = {
   plan: WorkoutPlan;
   variant: 'public' | 'user';
   onEdit?: () => void;
   onDelete?: () => void;
-  isActive?: boolean;
-  onMenuToggle?: () => void;
-  onOutsidePress?: () => void;
+  onImport?: (plan: WorkoutPlan) => void;
+  isActive: boolean;
+  onMenuToggle: () => void;
+  onOutsidePress: () => void;
 };
 
 const PlanListItem = ({
@@ -23,6 +22,7 @@ const PlanListItem = ({
   variant,
   onEdit,
   onDelete,
+  onImport,
   isActive,
   onMenuToggle,
   onOutsidePress,
@@ -39,12 +39,14 @@ const PlanListItem = ({
     onDelete!();
   };
 
-  const handleSelectPlan = (plan: WorkoutPlan) => {
-    navigate('PlanDetailsScreen', { plan: plan, editable: true });
+  const handleImport = (plan: WorkoutPlan) => {
+    onMenuToggle!();
+    onImport!(plan);
   };
 
-  const handleCopy = async () => {
-    //await Clipboard.setStringAsync('hello world');
+  const handleSelectPlan = (plan: WorkoutPlan) => {
+    onOutsidePress();
+    navigate('PlanDetailsScreen', { plan: plan, editable: true });
   };
 
   return (
@@ -60,9 +62,16 @@ const PlanListItem = ({
         </TouchableOpacity>
         {variant === 'public' && (
           <View style={{ position: 'relative' }}>
-            <TouchableOpacity style={styles.iconWrapper} onPress={() => handleCopy()}>
+            <TouchableOpacity style={styles.iconWrapper} onPress={onMenuToggle}>
               <Icon name="ellipsis-v" size={24} style={styles.icon} />
             </TouchableOpacity>
+            {isActive && (
+              <View ref={menuRef} style={styles.dropdownMenu}>
+                <TouchableOpacity onPress={() => handleImport(plan)}>
+                  <Text style={styles.menuItem}>Import</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
         )}
         {variant === 'user' && (

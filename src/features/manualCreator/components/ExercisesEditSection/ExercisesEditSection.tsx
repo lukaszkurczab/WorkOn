@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import styles from './ExercisesEditSection.styles';
 import { Day } from '../../../../types/plans';
 import ExerciseEditSection from '../ExerciseEditSection/ExerciseEditSection';
+import { useGetExerciseData } from '../../../../utility/hooks';
 
 type ExercisesEditSectionProps = {
   day: Day;
@@ -19,7 +20,7 @@ const ExercisesEditSection = ({ day }: ExercisesEditSectionProps) => {
           <View key={exercise.id} style={{ gap: 8, marginBottom: 16 }}>
             <View style={styles.listItem}>
               <Typography variant="h3" style={styles.listText}>
-                {exercise.name}
+                {exercise.name || useGetExerciseData(exercise.id).name}
               </Typography>
             </View>
             <ExerciseEditSection dayId={day.id} exercise={exercise} />
