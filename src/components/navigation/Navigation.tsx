@@ -10,8 +10,8 @@ const Navigation: React.FC = () => {
       <TouchableOpacity onPress={() => navigate('MainScreen')}>
         <Icon name="home" style={styles.buttonIcon} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigate('CalendarScreen')}>
-        <Icon name="calendar" style={styles.buttonIcon} />
+      <TouchableOpacity onPress={() => navigate('ChatListScreen')}>
+        <Icon name="comments" style={styles.buttonIcon} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigate('UserSearchScreen')}>
         <Icon name="users" style={styles.buttonIcon} />

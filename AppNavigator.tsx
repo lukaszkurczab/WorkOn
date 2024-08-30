@@ -34,6 +34,7 @@ import ChangeUsernameScreen from './src/features/userProfile/screens/ChangeUsern
 import ManualPlanGeneralScreen from './src/features/manualCreator/screens/ManualPlanGeneralScreen/ManualPlanGeneralScreen';
 import UserSearchScreen from './src/features/usersSearch/screens/UserSearchScreen/UserSearchScreen';
 import UserPublicProfileScreen from './src/features/usersSearch/screens/UserPublicProfileScreen/UserPublicProfileScreen';
+import ChatListScreen from './src/features/chat/screens/ChatList/ChatList';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -126,6 +127,7 @@ const AppNavigator = () => {
         <Stack.Screen name="ManualPlanGeneralScreen" component={ManualPlanGeneralScreen} />
         <Stack.Screen name="UserSearchScreen" component={UserSearchScreen} />
         <Stack.Screen name="UserPublicProfileScreen" component={UserPublicProfileScreen} />
+        <Stack.Screen name="ChatListScreen" component={ChatListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

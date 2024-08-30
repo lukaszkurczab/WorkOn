@@ -27,6 +27,7 @@ export type RootStackParamList = {
   ManualPlanGeneralScreen: undefined;
   UserSearchScreen: undefined;
   UserPublicProfileScreen: { userId: string; searchHistoryItem: SearchHistoryItem };
+  ChatListScreen: undefined;
 };
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();
