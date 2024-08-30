@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Image, ScrollView } from 'react-native';
-import styles from './ExerciseDetailsScreen.styles';
+import { View, ScrollView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../../../utility/navigate';
 import { Typography } from '../../../../components/Typography/Typography';
 import Layout from '../../../../components/Layout/Layout';
 import ExerciseImage from '../../../../components/ExerciseImage/ExerciseImage';
+import Page404 from '../../../../components/Page404/Page404';
 
 type ExerciseDetailsScreenRouteProp = RouteProp<RootStackParamList, 'ExerciseDetailsScreen'>;
 
@@ -13,11 +13,7 @@ const ExerciseDetailsScreen = () => {
   const route = useRoute<ExerciseDetailsScreenRouteProp>();
 
   if (!route.params || !route.params.exercise) {
-    return (
-      <View>
-        <Typography variant="h2">No exercise data provided.</Typography>
-      </View>
-    );
+    return <Page404 />;
   }
 
   const exercise = route.params.exercise;

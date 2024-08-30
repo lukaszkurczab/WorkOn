@@ -34,7 +34,6 @@ const PublicPlans: React.FC = () => {
 
   return (
     <View>
-      <Typography variant="h3">Public Plans</Typography>
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (

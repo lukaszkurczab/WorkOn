@@ -71,8 +71,11 @@ const CarouselScreen = () => {
           desc={
             'Browse our database of training plans and choose the one that suits you best. This mode will also allow you to import a plan sent to you by a trainer or a friend. Just remember that each plan should be adapted to your capabilities.'
           }
-          buttonText={'Not ready'}
-          onSelect={() => {}}
+          buttonText={'Select'}
+          onSelect={() => {
+            dispatch(CREATE_NEW_PLAN({ userId }));
+            navigate('PlansListScreen', { showNawigation: false, startTab: 'public' });
+          }}
         />
       ),
     },

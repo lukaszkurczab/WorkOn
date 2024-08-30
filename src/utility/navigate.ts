@@ -13,7 +13,7 @@ export type RootStackParamList = {
   SelectTrainingScreen: undefined;
   TrainingScreen: undefined;
   WorkoutSummaryScreen: { workout: HistoryItem; previousScreen?: string } | any;
-  PlansListScreen: undefined;
+  PlansListScreen: { showNavigation?: boolean; startTab?: string };
   PlanDetailsScreen: { plan: WorkoutPlan; editable: boolean } | any;
   ExerciseAtlasScreen: undefined;
   ExerciseDetailsScreen: { exercise: ExerciseData } | any;
