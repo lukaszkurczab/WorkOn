@@ -5,6 +5,7 @@ import { WorkoutPlan } from '../../../../types/plans';
 import { HistoryItem } from '../../../../types/history';
 
 interface TrainingState {
+  activeTraining: boolean;
   selectedPlan: WorkoutPlan;
   selectedTraining: {
     id: string;
@@ -19,11 +20,13 @@ interface TrainingState {
   selectedExercise: Exercise;
   seriesIndex: number;
   restStart: Date;
+  restTime: number;
   lastActivity: number | null;
   sendingTraining: boolean;
 }
 
 const initialState: TrainingState = {
+  activeTraining: false,
   selectedPlan: {
     id: '',
     name: '',
@@ -61,6 +64,7 @@ const initialState: TrainingState = {
   },
   seriesIndex: 0,
   restStart: new Date(),
+  restTime: 0,
   lastActivity: null,
   sendingTraining: false,
 };
@@ -88,6 +92,7 @@ const trainingSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; name: string; exercises: Exercise[]; publicType: 'public' | 'private' }>
     ) => {
+      state.activeTraining = true;
       state.startTime = Date.now();
       state.step = 'select';
       state.seriesIndex = 0;
@@ -103,6 +108,7 @@ const trainingSlice = createSlice({
         exercises: [],
       };
       state.lastActivity = Date.now();
+      state.restTime = 0;
     },
     END_SERIE: (state, action: PayloadAction<Series>) => {
       const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
@@ -135,6 +141,7 @@ const trainingSlice = createSlice({
           state.step = 'select';
         }
         state.restStart = new Date();
+        state.restTime = 0;
       } else {
         const newExercise = {
           id: state.selectedExercise.id,
@@ -154,6 +161,7 @@ const trainingSlice = createSlice({
     END_REST: state => {
       state.step = 'exercise';
       state.lastActivity = Date.now();
+      state.restTime = 0;
     },
     END_TRAINING: state => {
       state.step = 'select';
@@ -164,6 +172,7 @@ const trainingSlice = createSlice({
         time: Date.now() - state.startTime,
       };
       state.lastActivity = null;
+      state.activeTraining = false;
     },
     END_EXERCISE: state => {
       const exerciseIndex = state.unfinishedExercises.findIndex(exercise => exercise.id === state.selectedExercise.id);
@@ -179,6 +188,9 @@ const trainingSlice = createSlice({
     },
     LEAVE_ADD_EXERCISE: state => {
       state.step = 'select';
+    },
+    UPDATE_REST_TIME: state => {
+      state.restTime = state.restTime + 1;
     },
   },
   extraReducers: builder => {
@@ -208,5 +220,6 @@ export const {
   NAVIGATE_TO_ADD_EXERCISE,
   LEAVE_ADD_EXERCISE,
   ADD_EXERCISE,
+  UPDATE_REST_TIME,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;

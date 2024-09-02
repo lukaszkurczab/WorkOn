@@ -5,7 +5,7 @@ import { useDispatch } from '../../../../utility/hooks';
 import { useEffect, useState } from 'react';
 import styles from './WorkoutRest.styles';
 import { RootState } from '../../../../store/store';
-import { END_REST, END_EXERCISE } from '../../store/slice/slice';
+import { END_REST, END_EXERCISE, UPDATE_REST_TIME } from '../../store/slice/slice';
 import Button from '../../../../components/Button/Button';
 import { Typography } from '../../../../components/Typography/Typography';
 import { navigate } from '../../../../utility/navigate';
@@ -43,17 +43,21 @@ const WorkoutRest = () => {
   const dispatch = useDispatch();
   const exercise = useSelector((state: RootState) => state.training.selectedExercise);
   const restStart = useSelector((state: RootState) => state.training.restStart);
+  const restTime = useSelector((state: RootState) => state.training.restTime);
   const seriesIndex = useSelector((state: RootState) => state.training.seriesIndex);
   const seriesNumber = useSelector((state: RootState) => state.training.selectedExercise.series.length);
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(restTime % 60);
+  const [minutes, setMinutes] = useState(Math.floor(restTime / 60));
 
   useEffect(() => {
     const interval = setInterval(() => {
       const currentTime = Number(new Date());
-      const restTime = Math.floor((currentTime - Number(new Date(restStart))) / 1000);
-      setSeconds(restTime % 60);
-      setMinutes(Math.floor(restTime / 60));
+      const restTimeOnBackground = Math.floor((currentTime - Number(new Date(restStart))) / 1000);
+      dispatch(UPDATE_REST_TIME());
+      if (restTimeOnBackground > restTime) {
+        setSeconds(restTimeOnBackground % 60);
+        setMinutes(Math.floor(restTimeOnBackground / 60));
+      }
     }, 1000);
 
     return () => clearInterval(interval);
