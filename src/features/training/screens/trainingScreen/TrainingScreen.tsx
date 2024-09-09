@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import WorkoutSelectExercise from '../../components/WorkoutSelectExercise/WorkoutSelectExercise';
@@ -8,7 +8,7 @@ import { RootState } from '../../../../store/store';
 import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
-import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
+import { updatePlanExercise, useDispatch, useNotification } from '../../../../utility/hooks';
 import { navigate } from '../../../../utility/navigate';
 import WorkoutAddNewExercise from '../../components/WorkoutAddNewExercise/WorkoutAddNewExercise';
 
@@ -71,6 +71,45 @@ const selectStep = (step: string) => {
 
 const TrainingScreen = () => {
   const step = useSelector((state: RootState) => state.training.step);
+  const selectedExercise = useSelector((state: RootState) => state.training.selectedExercise);
+  const seriesIndex = useSelector((state: RootState) => state.training.seriesIndex);
+
+  useEffect(() => {
+    switch (step) {
+      case 'select':
+        useNotification({
+          title: 'Selecte exercise',
+          body: 'Back and select exercise',
+          notificationId: 'training',
+          shouldPlaySound: false,
+        });
+        break;
+      case 'exercise':
+        useNotification({
+          title: selectedExercise.name,
+          body: `${selectedExercise.series[seriesIndex].reps} x ${selectedExercise.series[seriesIndex].weight}kg`,
+          notificationId: 'training',
+          shouldPlaySound: false,
+        });
+        break;
+      case 'add':
+        useNotification({
+          title: 'Selecte exercise',
+          body: 'Back and select exercise',
+          notificationId: 'training',
+          shouldPlaySound: false,
+        });
+        break;
+      case 'rest':
+        useNotification({
+          title: 'Rest',
+          body: '10sec',
+          notificationId: 'training',
+          shouldPlaySound: false,
+        });
+        break;
+    }
+  }, [step]);
 
   return (
     <Layout showHeader={false} showNavigation={false}>

@@ -10,6 +10,7 @@ import { DECODE_USER_DATA } from './src/store/slice/userSlice';
 import { getUserData } from './src/store/actions/userActions';
 import { RootState } from './src/store/store';
 import { useDispatch } from './src/utility/hooks';
+import * as Notifications from 'expo-notifications';
 
 import LoginScreen from './src/features/login/screens/LoginScreen/LoginScreen';
 import RegisterScreen from './src/features/login/screens/RegisterScreen/RegisterScreen';
@@ -35,6 +36,7 @@ import ManualPlanGeneralScreen from './src/features/manualCreator/screens/Manual
 import UserSearchScreen from './src/features/usersSearch/screens/UserSearchScreen/UserSearchScreen';
 import UserPublicProfileScreen from './src/features/usersSearch/screens/UserPublicProfileScreen/UserPublicProfileScreen';
 import ChatListScreen from './src/features/chat/screens/ChatList/ChatList';
+import { Platform } from 'react-native';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -43,6 +45,38 @@ const AppNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList>('LoginScreen');
   const trainingActivity = useSelector((state: RootState) => state.training.lastActivity);
+
+  async function registerForPushNotificationsAsync() {
+    let token: string;
+
+    if (Platform.OS === 'android') {
+      await Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FFFFFF',
+      });
+    }
+
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+
+    return token;
+  }
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+  }, []);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
