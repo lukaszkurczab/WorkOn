@@ -2,7 +2,6 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
-#import <React/RCTPushNotificationManager.h> // Import required for push notifications
 
 @implementation AppDelegate
 
@@ -45,29 +44,19 @@
 // Explicitly define remote notification delegates to ensure compatibility with some third-party libraries
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken]; // Added for push notifications
   return [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 // Explicitly define remote notification delegates to ensure compatibility with some third-party libraries
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error]; // Added for push notifications
   return [super application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 // Explicitly define remote notification delegates to ensure compatibility with some third-party libraries
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-  [RCTPushNotificationManager didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler]; // Added for push notifications
   return [super application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
-}
-
-// Required for localNotification event
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-  [RCTPushNotificationManager didReceiveLocalNotification:notification]; // Added for local notifications
-  return [super application:application didReceiveLocalNotification:notification];
 }
 
 @end
