@@ -8,9 +8,10 @@ import { RootState } from '../../../../store/store';
 import Layout from '../../../../components/Layout/Layout';
 import WorkoutExercise from '../../components/WorkoutExercise/WorkoutExercise';
 import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
-import { updatePlanExercise, useDispatch, useNotification } from '../../../../utility/hooks';
+import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
 import { navigate } from '../../../../utility/navigate';
 import WorkoutAddNewExercise from '../../components/WorkoutAddNewExercise/WorkoutAddNewExercise';
+import { useNotification } from '../../../../utility/notification';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
@@ -81,23 +82,25 @@ const TrainingScreen = () => {
           title: 'Selecte exercise',
           body: 'Back and select exercise',
           notificationId: 'training',
-          shouldPlaySound: false,
+          channelId: 'training',
         });
+        console.log('select');
         break;
       case 'exercise':
         useNotification({
           title: selectedExercise.name,
           body: `${selectedExercise.series[seriesIndex].reps} x ${selectedExercise.series[seriesIndex].weight}kg`,
           notificationId: 'training',
-          shouldPlaySound: false,
+          channelId: 'training',
         });
+        console.log('exercise');
         break;
       case 'add':
         useNotification({
           title: 'Selecte exercise',
           body: 'Back and select exercise',
           notificationId: 'training',
-          shouldPlaySound: false,
+          channelId: 'training',
         });
         break;
       case 'rest':
@@ -106,7 +109,9 @@ const TrainingScreen = () => {
           body: '10sec',
           notificationId: 'training',
           shouldPlaySound: false,
+          shouldSetBadge: false,
         });
+        console.log('rest');
         break;
     }
   }, [step]);

@@ -4,7 +4,6 @@ import 'react-native-get-random-values';
 import uuid from 'react-native-uuid';
 import { exercisesList } from '../assets/exercises/_exercise';
 import { Exercise, ExerciseData } from '../types/exercises';
-import * as Notifications from 'expo-notifications';
 
 export const useFormatTime = (time: number) => {
   const hours = Math.floor(time / 3600);
@@ -133,37 +132,3 @@ export const useGenerateID = (): string => {
 
 export const useDispatch = () => useReduxDispatch<AppDispatch>();
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
-
-export const useNotification = ({
-  title,
-  body,
-  notificationId,
-  shouldShowAlert = true,
-  shouldPlaySound = true,
-  shouldSetBadge = true,
-}: {
-  title: string;
-  body: string;
-  notificationId: string;
-  shouldShowAlert?: boolean;
-  shouldPlaySound?: boolean;
-  shouldSetBadge?: boolean;
-}) => {
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: shouldShowAlert,
-      shouldPlaySound: shouldPlaySound,
-      shouldSetBadge: shouldSetBadge,
-    }),
-  });
-
-  Notifications.dismissNotificationAsync(notificationId);
-
-  Notifications.scheduleNotificationAsync({
-    content: {
-      title: title,
-      body: body,
-    },
-    trigger: null,
-  });
-};

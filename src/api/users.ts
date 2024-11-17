@@ -106,6 +106,7 @@ export const registerUser = async (userData: { username: string; email: string; 
 
 export const loginUser = async (userData: { email: string; password: string }) => {
   try {
+    console.log(BASE_URL);
     const response = await fetch(`${BASE_URL}/users/login`, {
       method: 'POST',
       headers: {
@@ -119,7 +120,7 @@ export const loginUser = async (userData: { email: string; password: string }) =
     }
     return await response.json();
   } catch (error) {
-    console.error('Error logging in:', error);
+    console.error('Error logging in:', error, BASE_URL);
     throw error;
   }
 };

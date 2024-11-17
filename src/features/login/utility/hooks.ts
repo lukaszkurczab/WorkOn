@@ -70,6 +70,7 @@ export const useLogin = () => {
       dispatch(getUserData(response.accessToken));
       navigate('MainScreen');
     } catch (error) {
+      console.log(error);
       setGeneralError('Invalid email or password');
     } finally {
       setIsLoading(false);

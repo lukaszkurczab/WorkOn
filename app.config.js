@@ -31,6 +31,9 @@ module.exports = {
   },
   ios: {
     bundleIdentifier: 'io.workon.development',
+    entitlements: {
+      'aps-environment': 'development',
+    },
   },
   owner: 'lkurczab',
   updates: {
