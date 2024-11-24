@@ -11,7 +11,6 @@ import { addHistoryItem, updateUserPlan } from '../../store/actions/actions';
 import { updatePlanExercise, useDispatch } from '../../../../utility/hooks';
 import { navigate } from '../../../../utility/navigate';
 import WorkoutAddNewExercise from '../../components/WorkoutAddNewExercise/WorkoutAddNewExercise';
-import { useNotification } from '../../../../utility/notification';
 
 const selectStep = (step: string) => {
   const dispatch = useDispatch();
@@ -74,47 +73,6 @@ const TrainingScreen = () => {
   const step = useSelector((state: RootState) => state.training.step);
   const selectedExercise = useSelector((state: RootState) => state.training.selectedExercise);
   const seriesIndex = useSelector((state: RootState) => state.training.seriesIndex);
-
-  useEffect(() => {
-    switch (step) {
-      case 'select':
-        useNotification({
-          title: 'Selecte exercise',
-          body: 'Back and select exercise',
-          notificationId: 'training',
-          channelId: 'training',
-        });
-        console.log('select');
-        break;
-      case 'exercise':
-        useNotification({
-          title: selectedExercise.name,
-          body: `${selectedExercise.series[seriesIndex].reps} x ${selectedExercise.series[seriesIndex].weight}kg`,
-          notificationId: 'training',
-          channelId: 'training',
-        });
-        console.log('exercise');
-        break;
-      case 'add':
-        useNotification({
-          title: 'Selecte exercise',
-          body: 'Back and select exercise',
-          notificationId: 'training',
-          channelId: 'training',
-        });
-        break;
-      case 'rest':
-        useNotification({
-          title: 'Rest',
-          body: '10sec',
-          notificationId: 'training',
-          shouldPlaySound: false,
-          shouldSetBadge: false,
-        });
-        console.log('rest');
-        break;
-    }
-  }, [step]);
 
   return (
     <Layout showHeader={false} showNavigation={false}>

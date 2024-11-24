@@ -39,4 +39,5 @@ module.exports = {
   updates: {
     url: 'https://u.expo.dev/a89380d1-fc6c-4188-9a42-e32498c9ea88',
   },
+  plugins: ['expo-secure-store'],
 };

@@ -35,7 +35,6 @@ import ManualPlanGeneralScreen from './src/features/manualCreator/screens/Manual
 import UserSearchScreen from './src/features/usersSearch/screens/UserSearchScreen/UserSearchScreen';
 import UserPublicProfileScreen from './src/features/usersSearch/screens/UserPublicProfileScreen/UserPublicProfileScreen';
 import ChatListScreen from './src/features/chat/screens/ChatList/ChatList';
-import { registerForPushNotificationsAsync } from './src/utility/notification';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -44,10 +43,6 @@ const AppNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList>('LoginScreen');
   const trainingActivity = useSelector((state: RootState) => state.training.lastActivity);
-
-  useEffect(() => {
-    registerForPushNotificationsAsync();
-  }, []);
 
   useEffect(() => {
     const checkLoginStatus = async () => {

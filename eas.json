@@ -5,7 +5,7 @@
   "build": {
     "development": {
       "env": {
-        "EXPO_PUBLIC_BASE_URL": "http://192.168.1.100:8080"
+        "EXPO_PUBLIC_BASE_URL": "http://192.168.1.13:8080"
       },
       "developmentClient": true,
       "distribution": "internal",
